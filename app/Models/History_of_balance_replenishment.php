@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Support_task extends Model
+class History_of_balance_replenishment extends Model
 {
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'theme',
-        'message',
-        'status'
+        'payment_methods',
+        'amount_of_payment',
+        'payment_number',
+        'comment'
+
     ];
 
     public function user()
@@ -20,4 +22,3 @@ class Support_task extends Model
         return $this->belongsTo(User::class);
     }
 }
-

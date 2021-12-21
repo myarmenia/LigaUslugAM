@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTarifsTable extends Migration
+class CreateCarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTarifsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tarifs', function (Blueprint $table) {
-            $table->id()->from(1000);
-            $table->string('name');
-            $table->longText('detailes');
-            $table->integer('price');
-            $table->string('parametr');
+        Schema::create('cars', function (Blueprint $table) {
+            $table->id()->from(100000);
+            $table->bigInteger('card_id')->unsigned();
+            $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('model');
+            $table->string('car_numbers');
             $table->string('status');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateTarifsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarifs');
+        Schema::dropIfExists('cars');
     }
 }

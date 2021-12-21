@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTerminalLocationsTable extends Migration
+class CreateContractsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTerminalLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('terminal_locations', function (Blueprint $table) {
-            $table->id()->from(1000);
-            $table->string('ip');
-            $table->string('name');
-            $table->string('address');
+        Schema::create('contracts', function (Blueprint $table) {
+            $table->id()->from(100000);
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('number');
-            $table->boolean('status');
+            $table->date('date_and');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateTerminalLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('terminal_locations');
+        Schema::dropIfExists('contracts');
     }
 }

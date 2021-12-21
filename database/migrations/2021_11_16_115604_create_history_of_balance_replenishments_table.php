@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupportTasksTable extends Migration
+class CreateHistoryOfBalanceReplenishmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateSupportTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('support_tasks', function (Blueprint $table) {
+        Schema::create('history_of_balance_replenishments', function (Blueprint $table) {
             $table->id()->from(1000);
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->mediumText('theme');
-            $table->mediumText('message');
-            $table->string('status');
+            $table->string('payment_methods');
+            $table->bigInteger('amount_of_payment');
+            $table->string('payment_number');
+            $table->string('comment');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateSupportTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('support_tasks');
+        Schema::dropIfExists('history_of_balance_replenishments');
     }
 }

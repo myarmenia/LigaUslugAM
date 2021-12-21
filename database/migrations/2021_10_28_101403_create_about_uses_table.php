@@ -15,7 +15,8 @@ class CreateAboutUsesTable extends Migration
     {
         Schema::create('about_uses', function (Blueprint $table) {
             $table->id()->from(1000);
-            $table->longText('text');
+            $table->string('title');
+            $table->longText('content');
             $table->timestamps();
         });
     }

@@ -9,10 +9,15 @@ class Terminal_location extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'terminal_id',
+        'ip',
         'name',
-        'long',
-        'lat',
+        'address',
+        'number',
+        'status'
 
     ];
+    public function safety_system()
+    {
+        return $this->hasOne(Safety_system::class);
+    }
 }

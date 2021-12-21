@@ -22,8 +22,9 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
-        'compony',
-        'phone',
+        'type_registration',
+        'compony_name',
+        'balance',
         'role'
     ];
 
@@ -46,22 +47,38 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function payments_card()
-    {
-        return $this->hasOne(Payments_card::class);
-    }
-    // public function tarif_user()
-    // {
-    //     return $this->hasOne(Payments_card::class);
-    // }
-    public function tarif()
-    {
-        return $this->belongsTo(Tarif::class, Tarif_user::class);
-    }
+
     public function card()
     {
-        return $this->hasOne(Card::class);
+        return $this->hasMany(Card::class);
     }
+
+    public function phone_number()
+    {
+        return $this->hasOne(Phone_number::class);
+    }
+
+
+    public function support_task()
+    {
+        return $this->hasMany(Support_task::class);
+    }
+
+    public function contracts()
+    {
+        return $this->hasMany(Contracts::class);
+    }
+
+    public function history_of_balance_replenishment()
+    {
+        return $this->hasMany(History_of_balance_replenishment::class);
+    }
+
+    public function history_of_card_replenishment()
+    {
+        return $this->hasMany(History_of_card_replenishment::class);
+    }
+
     public function job()
     {
         return $this->hasMany(Job::class);

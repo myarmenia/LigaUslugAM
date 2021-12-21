@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Support_task extends Model
+class History_of_card_replenishment extends Model
 {
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'theme',
-        'message',
-        'status'
+        'card_id',
+        'sum'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-}
 
+    public function card()
+    {
+        return $this->belongsTo(Card::class);
+    }
+}
