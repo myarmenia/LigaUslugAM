@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Events\NewMessage;
 use App\Events\RejectTaskExecutor;
+use App\Events\RejectTaskExecutorNotSelected;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -302,7 +303,7 @@ class   TaskController extends Controller
 
 
                             $notifyExecutorForTaskNotSelected->users->notify(new RejectTaskExecutorNotification($clickontask_rejected_executor));
-
+                            event(new RejectTaskExecutorNotSelected($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
                         }
                         else{
                              // changing status after selecting executor when executor_profile_id is equal request executor_profile_id  in  clickontask table  status into inprocess
@@ -368,7 +369,7 @@ class   TaskController extends Controller
                 $executor=ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
                 // working websocket event
 
-                event(new RejectTaskExecutor($executor->usersphp ,['task_id'=>$value['task_id'],'executor_name'=>$executor->users->email]));
+                event(new RejectTaskExecutor($executor->users->id ,['task_id'=>$value['task_id'],'executor_name'=>$executor->users->email]));
                 $message=[
                               'body' => 'Уважаемый Исполнитель, спасибо за заявку, но заказчик уже выбрал Исполнителя',
                     'enrollmentText' => 'Перейди по ссылке',

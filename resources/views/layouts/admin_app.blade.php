@@ -608,10 +608,14 @@
             Echo.channel('messageforadmin')
             .listen('.messageforadmin12', (e)=>{
                 console.log(e)
-                let notific=parseInt(document.getElementById('admin_unreadnotification').innerHTML)
-                 notific+=1
-                document.getElementById('admin_unreadnotification').innerHTML=notific+"+"
-                console.log(<?php $k=admin_unreadnotification_call_back(); echo $k; ?>)
+
+                // let notific=parseInt(document.getElementById('admin_unreadnotification').innerHTML)
+                // console.log(notific)
+                //  notific+=1
+                 let d='<?php echo admin_unreadnotification_call_back() ?>'
+                // document.getElementById('admin_unreadnotification').innerHTML=notific+"+"
+                console.log(d)
+                // admin_unreadnotification_call_back()
             })
 
             // Echo.private('App.Models.User.' +55)
@@ -627,6 +631,9 @@
 
 
             // });
+            // function  admin_unreadnotification_call_back(){
+
+            // }
     </script>
 
 

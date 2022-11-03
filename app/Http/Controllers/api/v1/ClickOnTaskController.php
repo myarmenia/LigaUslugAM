@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\NotifyEmployerExecutorClickOnTask;
 use App\Http\Controllers\Controller;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
@@ -62,6 +63,8 @@ class ClickOnTaskController extends Controller
                     $updated_executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
                             $employer=User::where('id',$click->user_id)->first();
                             $employer->notify(new NotifiyEmployer($clickontask));
+                            // ---------------------
+                            event(new NotifyEmployerExecutorClickOnTask($employer->id,['clickontask'=>$clickontask]));
                             return response()->json(['message'=>'success']);
                 }else{
                     return response()->json(['message'=>'Вы не можете подать заявку на эту работу, потому что вашего баланса недостаточно']);

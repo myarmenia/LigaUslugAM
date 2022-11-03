@@ -10,18 +10,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RequestCallBack
+class RejectTaskExecutorNotSelected
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $insert;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($insert)
+    public $id;
+    public $message;
+    public function __construct($id,$message)
     {
-        $this->insert = $insert;
+        // $this->id=$id;
     }
 
     /**
@@ -31,6 +33,6 @@ class RequestCallBack
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('channel-name');
+        return new PrivateChannel('channel-name');
     }
 }

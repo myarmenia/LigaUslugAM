@@ -10,18 +10,23 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RequestCallBack
-{
+class NotifyEmployerExecutorClickOnTask implements ShouldBroadcast
+
+ {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $insert;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($insert)
+    public $id;
+    public $clickontask;
+    public function __construct($id,$clickontask)
     {
-        $this->insert = $insert;
+        $this->id=$id;
+        $this->clickontask=$clickontask;
+
     }
 
     /**
@@ -31,6 +36,11 @@ class RequestCallBack
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('channel-name');
+        return  new Channel('notifyemployerexecutorclickontask.' .$this->id);
+    }
+
+    public function broadcastAs()
+    {
+        return  'notifyemployerfornewclick';
     }
 }

@@ -60,11 +60,11 @@ class CallbackController extends Controller
            if($insert){
 
             //    eventy grancas e EventServiceProvider-um
-               event(new RequestCallBack($insert));
-               if(new RequestCallBack($insert)){
+           $a=event(new RequestCallBack($insert));
+            if($a){
                 event(new CallBackToAdmin($insert));
                 return response()->json(['message'=>'Спасибо за оставленный звонок, наши сотрудники свяжутся с вами']);
-               }
+            }
 
 
            }else{

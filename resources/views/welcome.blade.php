@@ -129,17 +129,20 @@
                 </div>
             </div>
         </div>
+
         <script src="{{ asset('js/app.js')}}"></script>
         <script>
+
             //   Echo.channel('home')
             //     .listen('NewMessage', (e)=>{
             //         console.log(e)
             //     })
-                Echo.channel('rejecttaskexecutor.361')
-                .listen('.rejec', (e)=>{
-                    console.log(e)
-                })
-
+            // -------reject executor start-----------
+                // Echo.channel('rejecttaskexecutor.36')
+                // .listen('.rejec', (e)=>{
+                //     console.log(e)
+                // })
+            // -------reject executor end------------
         //     Echo.channel('messageforadmin')
         // .listen('.messageforadmin12', (e)=>{
         //     console.log(e)
@@ -158,6 +161,18 @@
 
 
                 // });
+                // we write this  for frontend and evrytime we get Auth id
+
+                // ----- notify employer executor click on task  start---------------
+                    Echo.channel('notifyemployerexecutorclickontask.34')
+                    .listen('.notifyemployerfornewclick', (e)=>{
+                        console.log(e)
+                    })
+                // ----- notify employer executor click on task end---------------
+                Echo.channel('notifyemployerexecutorclickontask.34')
+                    .listen('.notifyemployerfornewclick', (e)=>{
+                        console.log(e)
+                    })
         </script>
 
     </body>
