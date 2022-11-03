@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+// Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+//     return (int) $user->id === (int) $id;
+// });
+
+// Chanelum grum enq private -i jamanak
+Broadcast::channel('home', function () {
+    return true;
 });
+
+Broadcast::channel('rejecttaskexecutor.{id}', function ($user,$id) {
+    return true;
+});
+Broadcast::channel('App.Models.User.{id}',function($user,$id){
+    return $user->id===$id;
+});
+
+
+Broadcast::channel('messageforadmin', function () {
+    return true;
+});
+

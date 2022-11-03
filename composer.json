@@ -5,17 +5,27 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": ">=7.3",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "beyondcode/laravel-websockets": "*",
+        "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
+        "glorand/laravel-model-settings": "^4.4",
         "guzzlehttp/guzzle": "^7.0.1",
+        "laravel-validation-rules/phone": "^1.6",
         "laravel/framework": "^8.65",
+        "laravel/passport": "^10.2",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "laravelcollective/html": "^6.3",
+        "pusher/pusher-php-server": "~3.0",
+        "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
+        "laravel/ui": "^3.4",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"
@@ -25,7 +35,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files":["app/helpers.php"]
     },
     "autoload-dev": {
         "psr-4": {
@@ -34,8 +45,7 @@
     },
     "scripts": {
         "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi"

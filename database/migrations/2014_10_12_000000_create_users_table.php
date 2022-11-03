@@ -14,17 +14,30 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id()->from(1000000);
+            $table->id();
+            $table->string('role')->default('0');
             $table->string('name');
-            $table->string('surname');
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('type_registration');
-            $table->string('compony_name')->nullable();
-            $table->bigInteger('balance')->nullable();
-            $table->string('role');
-            $table->string('remember_token')->nullable();
+            $table->rememberToken();
+            $table->string('img_path')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('region')->nullable();
+            $table->string('country_name')->nullable();
+            $table->string('address')->nullable();
+            $table->date('about_me')->nullable();
+            $table->string('phonenumber')->nullable();
+            $table->string('phone_status')->default('not verified');
+            $table->string('fasebook_link')->nullable();
+            $table->string('instagram_link')->nullable();
+            $table->string('geting_notification')->default(0);
+            $table->integer('employer_avg_rating')->nullable();
+            $table->integer('employer_review_count')->nullable();
+            $table->string('status')->default('Пасив');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

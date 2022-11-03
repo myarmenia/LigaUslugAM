@@ -1,0 +1,16 @@
+console.developers.com
+select project
+credentals
+create credentials
+OAuth client ID
+CONFIGURE CONSENT SCREEN
+External
+create
+lracnel app name, user support email, app logo, developer contact information , save and continue
+credentals
+create OAuth client Id
+application type
+callback route
+
+https://freelancehunt.com/
+

@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\GiveQuestion;
+use App\Events\RequestCallBack;
+use App\Listeners\GiveQuestionAdmin;
+use App\Listeners\GivQuestionAdmin;
+use App\Listeners\SendCallBackNotification as ListenersSendCallBackNotification;
+use App\Listeners\SendNewUserNotification;
+use App\Notifications\SendCallBackNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,7 +24,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+            SendNewUserNotification::class
         ],
+        // eventy grancum enq EventServiseProviderum wor heto listen anenq  te ur petq e uxarkenq notificatian
+        RequestCallBack::class =>[
+           ListenersSendCallBackNotification::class
+        ],
+        // GiveQuestion::class =>[
+        //     GiveQuestionAdmin::class
+        //  ]
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\DeadlineCron::class,
     ];
 
     /**
@@ -24,7 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('deadline:cron')->everyMinute();
+        $schedule->command('newjob:cron')->dailyAt('8:00');
+        $schedule->command('deletenotappliedtask:cron')->everyMinute();
+
     }
 
     /**

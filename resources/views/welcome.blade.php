@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : '' }}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -128,5 +129,36 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script>
+            //   Echo.channel('home')
+            //     .listen('NewMessage', (e)=>{
+            //         console.log(e)
+            //     })
+                Echo.channel('rejecttaskexecutor.361')
+                .listen('.rejec', (e)=>{
+                    console.log(e)
+                })
+
+        //     Echo.channel('messageforadmin')
+        // .listen('.messageforadmin12', (e)=>{
+        //     console.log(e)
+        // })
+
+                // Echo.private('App.Models.User.' +55)
+                //     .notification((RejectTaskExecutorNotification) => {
+                //       console.log(notification.message);
+
+                //     //   this.allNotifications.push(notification);
+                // });
+                // Echo.private('App.Models.User.' +userId)
+                //     .notification((NotifyAsTaskExecutor) => {
+                //         this.notifications.push(notification);
+                //         console.log(notification.task);
+
+
+                // });
+        </script>
+
     </body>
 </html>
