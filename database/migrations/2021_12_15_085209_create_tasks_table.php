@@ -32,12 +32,12 @@ class CreateTasksTable extends Migration
             $table->integer('price_to');
             $table->string('views')->nullable();
             $table->bigInteger('executor_profile_id')->unsigned()->nullable();
-            $table->foreign('executor_profile_id')->references('id')->on('executor_profiles');
+            // $table->foreign('executor_profile_id')->references('id')->on('executor_profiles');
             $table->string('executor_material_price')->nullable();
             $table->string('executor_work_price')->nullable();
             $table->bigInteger('executor_total_price')->nullable();
             $table->string('executor_completed_task')->default(false);
-          
+
             $table->string('status')->default('false');
             $table->timestamps();
         });
