@@ -10,7 +10,7 @@ use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Events\NewMessage;
-
+use App\Events\RejectTaskExecutor;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 
 Route::get('/a', function () {
-    event(new NewMessage([12]));
+    event(new RejectTaskExecutor(361,['name'=>'test']));
 });
 
 Auth::routes();
