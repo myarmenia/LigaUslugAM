@@ -173,6 +173,10 @@
                     .listen('.notifyemployerfornewclick', (e)=>{
                         console.log(e)
                     })
+                Echo.channel('rejecttaskexecutornotselected.34')
+                .listen('.rejectexecutornotbeselected', (e)=>{
+                    console.log(e)
+                })
         </script>
 
     </body>

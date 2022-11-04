@@ -10,8 +10,8 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RejectTaskExecutorNotSelected
-{
+class RejectTaskExecutorNotSelected implements ShouldBroadcast
+ {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
@@ -23,7 +23,8 @@ class RejectTaskExecutorNotSelected
     public $message;
     public function __construct($id,$message)
     {
-        // $this->id=$id;
+        $this->id=$id;
+        $this->message=$message;
     }
 
     /**
@@ -33,6 +34,11 @@ class RejectTaskExecutorNotSelected
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return  new Channel('rejecttaskexecutornotselected.' .$this->id);
+    }
+
+    public function broadcastAs()
+    {
+        return  'rejectexecutornotbeselected';
     }
 }
