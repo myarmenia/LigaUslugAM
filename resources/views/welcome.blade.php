@@ -164,30 +164,30 @@
                 // we write this  for frontend and evrytime we get Auth id
 
                 // ----- notify employer executor click on task  start---------------
-                    Echo.channel('notifyemployerexecutorclickontask.34')
-                    .listen('.notifyemployerfornewclick', (e)=>{
-                        console.log(e)
-                    })
+                    // Echo.channel('notifyemployerexecutorclickontask.34')
+                    // .listen('.notifyemployerfornewclick', (e)=>{
+                    //     console.log(e)
+                    // })
     // ---------------- notify employer executor click on task end---------------
     // ---------------- notify executor   be selected  start----------------------
-                Echo.channel('selected_executor_click_on_task.35')
-                    .listen('.selected_executor', (e)=>{
-                        console.log(e)
-                    })
+                // Echo.channel('selected_executor_click_on_task.35')
+                //     .listen('.selected_executor', (e)=>{
+                //         console.log(e)
+                //     })
     //-------------- notify executor be selected  end------------------------------
     //-------------- notify executor not be selected  start---------------------------
-                Echo.channel('rejecttaskexecutornotselected.36')
-                .listen('.rejectexecutornotbeselected', (e)=>{
-                    console.log(e)
-                })
+                // Echo.channel('rejecttaskexecutornotselected.36')
+                // .listen('.rejectexecutornotbeselected', (e)=>{
+                //     console.log(e)
+                // })
     //-------------- notify executor not be selected  end ---------------------------------
     //---------------- notify executor for getting rating start---------------------------
-     Echo.channel('ratingforexecutor_chanal.36')
-                .listen('.ratingforexecutor', (e)=>{
-                    console.log(e)
-                })
+    //  Echo.channel('ratingforexecutor_chanal.36')
+    //             .listen('.ratingforexecutor', (e)=>{
+    //                 console.log(e)
+    //             })
     //-----------------notify executor for getting rating end ---------------------------------
-    Echo.channel('notification_chanal.36')
+    Echo.channel('notification_chanal.35')
                 .listen('.notification', (e)=>{
                     console.log(e)
                 })

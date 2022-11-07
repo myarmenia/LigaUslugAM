@@ -329,6 +329,7 @@ class   TaskController extends Controller
                     // working notification part
                     $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
                     // event(new NotifyAsTaskExecutorEvent( $executor->users->id,$selected_executor_click_on_task));
+                    // dd($executor->users->id);
                     event(new NotificationEvent($executor->users->id,['selected_executor_click_on_task'=>$selected_executor_click_on_task]));
                     return response()->json(['message'=>'success'],200);
 

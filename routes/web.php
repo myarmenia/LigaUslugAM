@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Events\NewMessage;
 use App\Events\RejectTaskExecutor;
+use App\Events\NotificationEvent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('/a', function () {
-    event(new RejectTaskExecutor(361,['name'=>'test']));
+    event(new NotificationEvent(72,['name'=>'test']));
 });
 
 Auth::routes();
