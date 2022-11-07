@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\api\v1;
+
+use App\Events\NotificationEvent;
+use App\Events\NotifyExecutorForGettingRatingEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,6 +71,9 @@ class ReitingController extends Controller
                     $ratingforexecutor=Reiting::with('tasks.users','tasks.executor_profiles.users')->where('task_id',$request->task_id)->first();
                     $executor = ExecutorProfile::where('id',$task->executor_profile_id)->first();
                     $executor->users->notify(new NotifyExecutorForGettingRating($ratingforexecutor));
+                    event(new NotifyExecutorForGettingRatingEvent($executor->users->id, $ratingforexecutor));
+                    event(new NotificationEvent($executor->users->id,['ratingforexecutor'=>$ratingforexecutor]));
+
                 }else{
 
                     $ratingforemployer=Reiting::with('tasks.executor_profiles.users')->where('task_id',$request->task_id)->first();

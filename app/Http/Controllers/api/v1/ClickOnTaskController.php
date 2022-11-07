@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\NotificationEvent;
 use App\Events\NotifyEmployerExecutorClickOnTask;
 use App\Http\Controllers\Controller;
 use App\Models\ClickOnTask;
@@ -64,7 +65,9 @@ class ClickOnTaskController extends Controller
                             $employer=User::where('id',$click->user_id)->first();
                             $employer->notify(new NotifiyEmployer($clickontask));
                             // ---------------------
-                            event(new NotifyEmployerExecutorClickOnTask($employer->id,['clickontask'=>$clickontask]));
+
+                            // event(new NotifyEmployerExecutorClickOnTask($employer->id,['clickontask'=>$clickontask]));
+                            event(new NotificationEvent($employer->id,['clickontask'=>$clickontask]));
                             return response()->json(['message'=>'success']);
                 }else{
                     return response()->json(['message'=>'Вы не можете подать заявку на эту работу, потому что вашего баланса недостаточно']);

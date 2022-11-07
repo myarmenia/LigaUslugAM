@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Events\NewMessage;
+use App\Events\NotificationEvent;
+use App\Events\NotifyAsTaskExecutor as EventsNotifyAsTaskExecutor;
+use App\Events\NotifyAsTaskExecutorEvent;
 use App\Events\RejectTaskExecutor;
 use App\Events\RejectTaskExecutorNotSelected;
 use App\Http\Controllers\Controller;
@@ -303,7 +306,8 @@ class   TaskController extends Controller
 
 
                             $notifyExecutorForTaskNotSelected->users->notify(new RejectTaskExecutorNotification($clickontask_rejected_executor));
-                            event(new RejectTaskExecutorNotSelected($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
+                            // event(new RejectTaskExecutorNotSelected($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
+                            event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
                         }
                         else{
                              // changing status after selecting executor when executor_profile_id is equal request executor_profile_id  in  clickontask table  status into inprocess
@@ -324,8 +328,8 @@ class   TaskController extends Controller
                     $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
                     // working notification part
                     $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
-
-
+                    // event(new NotifyAsTaskExecutorEvent( $executor->users->id,$selected_executor_click_on_task));
+                    event(new NotificationEvent($executor->users->id,['selected_executor_click_on_task'=>$selected_executor_click_on_task]));
                     return response()->json(['message'=>'success'],200);
 
 
@@ -381,6 +385,7 @@ class   TaskController extends Controller
                 ];
 
                 $executor->users->notify(new RejectTaskExecutorNotification($click_on_task));
+                event(new NotificationEvent($executor->users->id,['click_on_task'=>$click_on_task]));
                 // Notification::send($executor->users,new RejectTaskExecutorNotification($message));
                   $call_method = $this->respondedExecutor();
 
