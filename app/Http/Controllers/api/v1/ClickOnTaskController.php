@@ -67,7 +67,7 @@ class ClickOnTaskController extends Controller
                             // ---------------------
 
                             // event(new NotifyEmployerExecutorClickOnTask($employer->id,['clickontask'=>$clickontask]));
-                            event(new NotificationEvent($employer->id,['clickontask'=>$clickontask]));
+                            event(new NotificationEvent($employer->id,['clickontask'=>$clickontask, 'type'=>'App\Notifications\NotifiyEmployer']));
                             return response()->json(['message'=>'success']);
                 }else{
                     return response()->json(['message'=>'Вы не можете подать заявку на эту работу, потому что вашего баланса недостаточно']);

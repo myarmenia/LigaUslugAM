@@ -27,9 +27,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/a', function () {
-    event(new NotificationEvent(72,['name'=>'test']));
-});
+// Route::get('/a', function () {
+//     event(new NotificationEvent(72,['name'=>'test']));
+// });
 
 Auth::routes();
 

@@ -36,6 +36,8 @@ use App\Notifications\NotifyExecutorForNewJob;
 use App\Notifications\RejectTaskExecutorNotification;
 use Illuminate\Http\File;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 
 use function PHPUnit\Framework\assertNotNull;
 
@@ -307,7 +309,7 @@ class   TaskController extends Controller
 
                             $notifyExecutorForTaskNotSelected->users->notify(new RejectTaskExecutorNotification($clickontask_rejected_executor));
                             // event(new RejectTaskExecutorNotSelected($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
-                            event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
+                            event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor,'type'=>'App\Notifications\RejectTaskExecutorNotification']));
                         }
                         else{
                              // changing status after selecting executor when executor_profile_id is equal request executor_profile_id  in  clickontask table  status into inprocess
@@ -328,9 +330,15 @@ class   TaskController extends Controller
                     $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
                     // working notification part
                     $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
-                    // event(new NotifyAsTaskExecutorEvent( $executor->users->id,$selected_executor_click_on_task));
-                    // dd($executor->users->id);
-                    event(new NotificationEvent($executor->users->id,['selected_executor_click_on_task'=>$selected_executor_click_on_task]));
+                    // dd($a);
+                    event(new NotifyAsTaskExecutorEvent( $executor->users->id,$selected_executor_click_on_task));
+
+                    event(new NotificationEvent($executor->users->id,
+                    [
+                    'selected_executor_click_on_task'=>$selected_executor_click_on_task,
+                    'type'=>'App\Notifications\NotifyAsTaskExecutor'
+                    ]
+                    ));
                     return response()->json(['message'=>'success'],200);
 
 

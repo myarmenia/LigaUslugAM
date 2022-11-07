@@ -187,7 +187,7 @@
     //                 console.log(e)
     //             })
     //-----------------notify executor for getting rating end ---------------------------------
-    Echo.channel('notification_chanal.72')
+    Echo.channel('notification_chanal.36')
                 .listen('.notification', (e)=>{
                     console.log(e)
                 })
