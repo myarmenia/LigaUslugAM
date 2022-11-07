@@ -32,6 +32,7 @@ Route::get('/a', function () {
 });
 
 Auth::routes();
+
 Route::get('/clear-cache', function() {
         //   $run = Artisan::call('migrate');
         //   $run = Artisan::call('passport:install');
