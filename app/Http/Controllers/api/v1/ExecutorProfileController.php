@@ -183,7 +183,7 @@ class ExecutorProfileController extends Controller
         if($request->has('region_and_address')){
 
             foreach($request->region_and_address as $value){
-                dd($value);
+                // dd($value);
 
 
                 foreach($value['personal_address'] as $item){
@@ -201,9 +201,10 @@ class ExecutorProfileController extends Controller
                 // dd($value['working_region'][0]['working_rayons']);
                 foreach($value['working_region'] as $item){
 
-dd($item);
+
                     foreach($item['working_rayons'] as $key=>$data){
-                        dd($data['working_rayon']);
+
+
                         $executorprofile=ExecutorWorkingRegion::create([
                             'executor_profile_id'=>$executor_profiles->id,
                             "executorwork_region" => $item['executorwork_region'],

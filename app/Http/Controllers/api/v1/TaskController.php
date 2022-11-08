@@ -348,6 +348,10 @@ class   TaskController extends Controller
                     // event(new NewMessage(['task_id'=>$value['task_id']]));
 
                     $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
+
+
+                    $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
+
                     // working notification part
                     $message= [
                         'task_id' =>$selected_executor_click_on_task->task_id,
@@ -365,9 +369,6 @@ class   TaskController extends Controller
                          'status' => $selected_executor_click_on_task->tasks->status,
 
                     ];
-
-                    $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
-                
                     event(new NotificationEvent($executor->users->id,
                     [
                     'selected_executor_click_on_task'=>$message,

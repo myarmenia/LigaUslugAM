@@ -19,6 +19,7 @@ class ExecutorWorkingRegionResource extends JsonResource
             'id'=>$this->id,
             // 'executor_profile_id'=>$this->executor_profile_id,
             'executorwork_region'=>$this->executorwork_region,
+            'working_rayon'=>$this->working_rayon,
         ];
     }
 }

@@ -11,6 +11,7 @@ class ExecutorWorkingRegion extends Model
     protected $fillable = [
         'executor_profile_id',
         'executorwork_region',
+        'working_rayon',
 
     ];
     public function executor_profiles(){
