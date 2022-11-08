@@ -33,6 +33,7 @@ use App\Notifications\NotifyEmployerExecutorCompletedTask;
 use App\Notifications\NotifyExecutorEmployerCompletedTask;
 use App\Notifications\NotifyExecutorForMeeting;
 use App\Notifications\NotifyExecutorForNewJob;
+use App\Notifications\NotifyExecutorForNewJobEveryTime;
 use App\Notifications\RejectTaskExecutorNotification;
 use Illuminate\Http\File;
 use Illuminate\Notifications\Notification;
@@ -135,6 +136,25 @@ class   TaskController extends Controller
 
 
         $show_new_task=Task::with('users')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location"]);
+        $deadlineday = date('Y-m-d',strtotime('-1 day'));
+
+        // $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
+        $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
+// dd($task->category_name);
+        //  $executor_categories = ExecutorCategory::whereIn('category_name',$check_categories)->pluck('executor_profile_id');
+        $executor_categories = ExecutorCategory::where('category_name',$task->category_name)->pluck('executor_profile_id');
+
+         $user_ides=ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
+
+
+         $user=User::whereIn('id',$user_ides)->get();
+         foreach($user as $item){
+            //  $check_executor_categories=$item->executor_profiles->executor_categories->pluck('category_name');
+            //  $data= Task::where('created_at','>=',$deadlineday)->whereIn('category_name', $check_executor_categories)->get();
+
+             $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
+             event(new NotificationEvent($item->id,['new_task'=>$show_new_task,'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime']));
+         }
 
         return response()->json($show_new_task);
     }

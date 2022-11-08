@@ -101,6 +101,7 @@ Route::prefix('/user')->group( function(){
         Route::post('/update-executor-personal-data',[ExecutorProfileController::class,'updateExecutorPersonalData']);
         Route::post('/region-address',[ExecutorProfileController::class,'regionAddress']);
         Route::post('/user-region-address',[ProfileController::class,'userRegionAddress']);
+
         // ----------------------executor selected Locality name --------------------------------
         Route::post('/locality',[LocalityNameController::class,'index']);
         Route::post('/profession-and-experience',[ExecutorProfileController::class,'professionAndExperience']);
@@ -150,6 +151,8 @@ Route::prefix('/user')->group( function(){
         Route::post('/notification/get',[NotificationController::class,'get']);
         Route::post('/notification/read',[NotificationController::class,'read']);
         Route::delete('/notification/{id}/delete',[NotificationController::class,'destroy']);
+        // =======
+        Route::get('/unread_notification_count',[NotificationController::class,'unreadNotificationCount']);
 
 
         // executor which applied for work
@@ -195,6 +198,7 @@ Route::prefix('/pages')->group(function(){
     Route::get('/header',[HeaderController::class,'index']);
     Route::get('/header/{id}',[ShowProfileController::class,'show']);
     Route::get('/regions',[RegionController::class,'index']);
+    Route::get('/regions_and_rayons',[RegionController::class,'regionsAndRayons']);
     Route::get('/rayons',[RayonController::class,'index']);
     Route::post('/locality',[LocalityController::class,'index']);
     Route::post('/callback',[CallbackController::class,'store']);

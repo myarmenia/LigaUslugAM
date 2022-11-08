@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Rayon;
 use App\Models\Region;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,11 @@ class RegionController extends Controller
     {
         $region=Region::all()->makeHidden(["created_at","updated_at"]);
         return response()->json(['message'=>$region]);
+    }
+    public function regionsAndRayons(){
+        $region_and_rayons=Region::where('id','>',0)->with('rayons')->get();
+        // dd($region_and_rayons);
+        return response()->json(['message'=>$region_and_rayons]);
     }
 
     /**

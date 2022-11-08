@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
@@ -36,5 +37,12 @@ class NotificationController extends Controller
         return response()->json(['message'=>'Уведомление удалено']);
 
 
+    }
+    public function unreadNotificationCount(){
+
+       $unread_notification_count=Auth::user()->unreadNotifications()->count();
+   
+        event(new NotificationEvent(Auth::id(),['unread_notification_count'=>$unread_notification_count]));
+        return $unread_notification_count;
     }
 }

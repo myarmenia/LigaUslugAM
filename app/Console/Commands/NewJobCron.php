@@ -44,7 +44,7 @@ class NewJobCron extends Command
     {
         // return 0;
         date_default_timezone_set('Europe/Moscow');
-        $deadlineday = date('Y-m-d',strtotime('-1 day'));
+       $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
        $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
 

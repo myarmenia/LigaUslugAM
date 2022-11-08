@@ -13,4 +13,7 @@ class Region extends Model
     public function countries(){
         return $this->hasMany(Country::class);
     }
+    public function rayons(){
+        return $this->hasMany(Rayon::class);
+    }
 }

@@ -32,7 +32,8 @@ class ExecutorProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function
+    index()
     {
 
 
@@ -174,19 +175,20 @@ class ExecutorProfileController extends Controller
 
 
     public function regionAddress(Request $request){
+
         $user_id=Auth::user()->id;
+
+
         $executor_profiles=ExecutorProfile::where('user_id',$user_id)->first();
         if($request->has('region_and_address')){
 
             foreach($request->region_and_address as $value){
+                dd($value);
+
 
                 foreach($value['personal_address'] as $item){
 
-                    // $executorprofile=ExecutorProfile::where('user_id',$user_id)->update([
-                    //      "region" => $item['region'],
-                    //     "address" => $item['address'],
-                    //     "country_name" => $item['country_name'],
-                    // ]);
+
                      $executorprofile=User::where('id',Auth::id())->update([
                              "region" => $item['region'],
                             "address" => $item['address'],
@@ -196,12 +198,19 @@ class ExecutorProfileController extends Controller
 
 
                 $executorworkingregion=ExecutorWorkingRegion::where('executor_profile_id',$executor_profiles->id)->delete();
+                // dd($value['working_region'][0]['working_rayons']);
                 foreach($value['working_region'] as $item){
-                    $executorprofile=ExecutorWorkingRegion::create([
-                        'executor_profile_id'=>$executor_profiles->id,
-                        "executorwork_region" => $item['executorwork_region'],
 
-                    ]);
+dd($item);
+                    foreach($item['working_rayons'] as $key=>$data){
+                        dd($data['working_rayon']);
+                        $executorprofile=ExecutorWorkingRegion::create([
+                            'executor_profile_id'=>$executor_profiles->id,
+                            "executorwork_region" => $item['executorwork_region'],
+                            "working_rayon"=>$data['working_rayon']
+
+                        ]);
+                    }
                 };
             }
             // checking data for  model settings
@@ -216,7 +225,10 @@ class ExecutorProfileController extends Controller
             $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
 
             return ExecutorProfileResource::collection($show_executor_profile);
-
+            // "working_region":[
+            //     {"executorwork_region":"italy"},
+            //     {"executorwork_region":"italy1"}
+            //     ]
         }
     }
 

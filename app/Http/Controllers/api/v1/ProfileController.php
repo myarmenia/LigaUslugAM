@@ -14,7 +14,7 @@ class ProfileController extends Controller
 {
     public function show(){
 
-        $user=User::with('reitings')->where('id',Auth::id())->get();
+        $user=User::with('reitings','reitings.executor_profiles.users')->where('id',Auth::id())->get();
         return response()->json(['user'=>$user]);
     }
 

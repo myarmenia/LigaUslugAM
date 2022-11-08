@@ -41,11 +41,7 @@ class NotifyExecutorForNewJob extends Notification
      */
     public function toMail($notifiable)
     {
-        // return (new MailMessage)
-        //             ->line('Новые задания от ligauslug.ru.')
-        //             // ->action('Notification Action', url('/http://ligauslug.ru/'))
-        //                 ->attach('images/logo_footer.png')
-        //             ->line('Спасибо, что выбрали нас!');
+       
         return (new MailMessage)->view('Mails.newjob',['newjob'=>$this->ditails,'logo'=>'/images/logo_footer.png']);
     }
 
