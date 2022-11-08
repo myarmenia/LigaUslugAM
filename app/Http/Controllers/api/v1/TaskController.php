@@ -270,7 +270,7 @@ class   TaskController extends Controller
         }
 
     }
-
+    public $selected_executor_click_on_task;
     public function selectTaskExecutor(Request $request){
 
 
@@ -349,13 +349,28 @@ class   TaskController extends Controller
 
                     $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
                     // working notification part
-                    $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
-                    // dd($a);
-                    event(new NotifyAsTaskExecutorEvent( $executor->users->id,$selected_executor_click_on_task));
+                    $message= [
+                        'task_id' =>$selected_executor_click_on_task->task_id,
+                        'user_id' => $selected_executor_click_on_task->tasks->user_id,
+                       'employer' => $selected_executor_click_on_task->tasks->users->name,
+                     'task_title' => $selected_executor_click_on_task->tasks->title,
+            'executor_profile_id' => $selected_executor_click_on_task->executor_profile_id,
+                  'executor_name' => $selected_executor_click_on_task->executor_profiles->users->name,
+             'service_price_from' => $selected_executor_click_on_task->service_price_from,
+               'service_price_to' => $selected_executor_click_on_task->service_price_to,
+                           'cost' => $selected_executor_click_on_task->cost,
+                 'startdate_from' => $selected_executor_click_on_task->startdate_from,
+                  'start_date_to' => $selected_executor_click_on_task->start_date_to,
+              'offer_to_employer' => $selected_executor_click_on_task->offer_to_employer,
+                         'status' => $selected_executor_click_on_task->tasks->status,
 
+                    ];
+
+                    $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
+                
                     event(new NotificationEvent($executor->users->id,
                     [
-                    'selected_executor_click_on_task'=>$selected_executor_click_on_task,
+                    'selected_executor_click_on_task'=>$message,
                     'type'=>'App\Notifications\NotifyAsTaskExecutor'
                     ]
                     ));
