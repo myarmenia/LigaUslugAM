@@ -39,7 +39,6 @@ class ProfileController extends Controller
 
 
         if($update_user_avatar){
-
             $settings = $user->user_settings();
             $settings['img_path']=1;
             $user->settings()->apply((array)$settings);
