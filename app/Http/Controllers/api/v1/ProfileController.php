@@ -19,7 +19,6 @@ class ProfileController extends Controller
     }
 
     public function updateAvatar(Request $request){
-        dd($request->img_path);
         $user=Auth::user();
 
 
