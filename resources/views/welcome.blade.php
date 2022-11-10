@@ -191,6 +191,10 @@
                 .listen('.notification', (e)=>{
                     console.log(e)
                 })
+    //             Echo.private('App.Models.User.36')
+    // .notification((notification) => {
+    //     console.log(notification.message);
+    // });
         </script>
 
 

@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -22,9 +23,11 @@ class NotifyAsTaskExecutor extends Notification implements ShouldBroadcast
      *
      * @return void
      */
+
     public function __construct(ClickOnTask $selected_executor_click_on_task)
     {
         $this->selected_executor_click_on_task = $selected_executor_click_on_task;
+
     }
 
     /**
@@ -84,16 +87,7 @@ class NotifyAsTaskExecutor extends Notification implements ShouldBroadcast
 
         ];
     }
-    public function toBroadcast($notifiable)
-    {
-        return [
-            'data'=>[
 
-                'task'=> "hel"
-            ]
-
-        ];
-    }
 
     /**
      * Get the array representation of the notification.

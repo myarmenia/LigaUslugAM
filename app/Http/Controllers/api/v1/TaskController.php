@@ -369,12 +369,15 @@ class   TaskController extends Controller
                          'status' => $selected_executor_click_on_task->tasks->status,
 
                     ];
+                    $dd=DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+
                     event(new NotificationEvent($executor->users->id,
                     [
-                    'selected_executor_click_on_task'=>$message,
+                    '$data'=>$dd,
                     'type'=>'App\Notifications\NotifyAsTaskExecutor'
                     ]
                     ));
+                    // return response()->json(['message'=>$dd],200);
                     return response()->json(['message'=>'success'],200);
 
 

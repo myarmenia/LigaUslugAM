@@ -23,9 +23,9 @@ use App\Events\NotificationEvent;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Route::get('/a', function () {
 //     event(new NotificationEvent(72,['name'=>'test']));
