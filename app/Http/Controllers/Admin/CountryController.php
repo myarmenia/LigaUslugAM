@@ -16,6 +16,8 @@ class CountryController extends Controller
      */
     public function index()
     {
+       
+
         return view('admin.country.index');
     }
 
@@ -27,9 +29,9 @@ class CountryController extends Controller
     public function create()
 
     {
-        // dd(1111);
+
         $regions=Region::all();
-        // dd($regions);
+
 
         return view('admin.country.add_country',compact('regions'));
     }

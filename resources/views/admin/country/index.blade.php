@@ -17,6 +17,7 @@
                             {{ session()->get('message_error') }}
                         </div>
                     @endif
+
                         <form role="form" method="POST" action="{{route('country.store')}}" enctype="multipart/form-data"  style="width:70%;margin:0 auto">
                             @csrf
 
