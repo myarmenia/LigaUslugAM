@@ -154,16 +154,11 @@ class   TaskController extends Controller
 
              $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
              event(new NotificationEvent($item->id,['new_task'=>$show_new_task,'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime']));
-             $dd=DB::table('notifications')->where('notifiable_id',  $item)->orderBy('created_at','desc')->get();
+
 
              $dd=DB::table('notifications')->where('notifiable_id',  $item->id)->orderBy('created_at','desc')->get();
-
-             event(new NotificationEvent( $item->id,
-             [
-             '$data'=>$dd,
-             'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime'
-             ]
-             ));
+            $database=json_decode($dd);
+             event(new NotificationEvent( $item->id,$database));
             }
 
         return response()->json($show_new_task);
@@ -340,6 +335,9 @@ class   TaskController extends Controller
                             $notifyExecutorForTaskNotSelected->users->notify(new RejectTaskExecutorNotification($clickontask_rejected_executor));
                             // event(new RejectTaskExecutorNotSelected($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
                             event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor,'type'=>'App\Notifications\RejectTaskExecutorNotification']));
+                            $dd=DB::table('notifications')->where('notifiable_id', $notifyExecutorForTaskNotSelected->users->id)->orderBy('created_at','desc')->get();
+                            $database=json_decode($dd);
+                            event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,$database));
                         }
                         else{
                              // changing status after selecting executor when executor_profile_id is equal request executor_profile_id  in  clickontask table  status into inprocess
@@ -365,9 +363,10 @@ class   TaskController extends Controller
                     // working notification part
 
                     $dd=DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+                    $database=json_decode($dd);
 
-                    event(new NotificationEvent($executor->users->id,$dd));
-                  
+                    event(new NotificationEvent($executor->users->id,$database));
+
                     return response()->json(['message'=>'success'],200);
 
 
@@ -425,8 +424,8 @@ class   TaskController extends Controller
                 $executor->users->notify(new RejectTaskExecutorNotification($click_on_task));
 
                 $dd=DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
-
-                event(new NotificationEvent($executor->users->id,$dd));
+                $database=json_decode($dd);
+                event(new NotificationEvent($executor->users->id,$database));
 
                 // Notification::send($executor->users,new RejectTaskExecutorNotification($message));
                   $call_method = $this->respondedExecutor();
