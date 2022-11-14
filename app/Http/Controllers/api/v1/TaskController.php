@@ -156,9 +156,9 @@ class   TaskController extends Controller
              event(new NotificationEvent($item->id,['new_task'=>$show_new_task,'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime']));
              $dd=DB::table('notifications')->where('notifiable_id',  $item)->orderBy('created_at','desc')->get();
 
-             $dd=DB::table('notifications')->where('notifiable_id',  $item)->orderBy('created_at','desc')->get();
+             $dd=DB::table('notifications')->where('notifiable_id',  $item->id)->orderBy('created_at','desc')->get();
 
-             event(new NotificationEvent( $item,
+             event(new NotificationEvent( $item->id,
              [
              '$data'=>$dd,
              'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime'
@@ -284,7 +284,7 @@ class   TaskController extends Controller
     public function selectTaskExecutor(Request $request){
 
 
-        $selected_executor_click_on_task='';
+        // $selected_executor_click_on_task='';
 
         if($request->has('select_task_executor')){
 
@@ -349,7 +349,7 @@ class   TaskController extends Controller
                             ]);
 
                             $selected_executor_click_on_task = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$value['task_id'],'executor_profile_id'=>$value['executor_profile_id']])->first();
-
+                            // $this->selected_executor_click_on_task=$selected_executor_click_on_task;
                         }
                     }
 
@@ -363,31 +363,11 @@ class   TaskController extends Controller
                     $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
 
                     // working notification part
-                    $message= [
-                        'task_id' =>$selected_executor_click_on_task->task_id,
-                        'user_id' => $selected_executor_click_on_task->tasks->user_id,
-                       'employer' => $selected_executor_click_on_task->tasks->users->name,
-                     'task_title' => $selected_executor_click_on_task->tasks->title,
-            'executor_profile_id' => $selected_executor_click_on_task->executor_profile_id,
-                  'executor_name' => $selected_executor_click_on_task->executor_profiles->users->name,
-             'service_price_from' => $selected_executor_click_on_task->service_price_from,
-               'service_price_to' => $selected_executor_click_on_task->service_price_to,
-                           'cost' => $selected_executor_click_on_task->cost,
-                 'startdate_from' => $selected_executor_click_on_task->startdate_from,
-                  'start_date_to' => $selected_executor_click_on_task->start_date_to,
-              'offer_to_employer' => $selected_executor_click_on_task->offer_to_employer,
-                         'status' => $selected_executor_click_on_task->tasks->status,
 
-                    ];
                     $dd=DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
 
-                    event(new NotificationEvent($executor->users->id,
-                    [
-                    '$data'=>$dd,
-                    'type'=>'App\Notifications\NotifyAsTaskExecutor'
-                    ]
-                    ));
-                    // return response()->json(['message'=>$dd],200);
+                    event(new NotificationEvent($executor->users->id,$dd));
+                  
                     return response()->json(['message'=>'success'],200);
 
 
@@ -443,7 +423,11 @@ class   TaskController extends Controller
                 ];
 
                 $executor->users->notify(new RejectTaskExecutorNotification($click_on_task));
-                event(new NotificationEvent($executor->users->id,['click_on_task'=>$click_on_task]));
+
+                $dd=DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+
+                event(new NotificationEvent($executor->users->id,$dd));
+
                 // Notification::send($executor->users,new RejectTaskExecutorNotification($message));
                   $call_method = $this->respondedExecutor();
 

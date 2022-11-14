@@ -187,14 +187,15 @@
     //                 console.log(e)
     //             })
     //-----------------notify executor for getting rating end ---------------------------------
-    Echo.channel('notification_chanal.36')
-                .listen('.notification', (e)=>{
-                    console.log(e)
-                })
     //             Echo.private('App.Models.User.36')
     // .notification((notification) => {
     //     console.log(notification.message);
     // });
+    Echo.channel('notification_chanal.36')
+                .listen('.notification', (e)=>{
+                    console.log(e)
+                })
+
         </script>
 
 
