@@ -203,6 +203,8 @@ Route::prefix('/pages')->group(function(){
     Route::post('/locality',[LocalityController::class,'index']);
     Route::post('/callback',[CallbackController::class,'store']);
     Route::post('/givequestiontoadmin',[GiveQuestionController::class,'store']);
+    // porz kadastry hamar
+    Route::post('/upload_file_test',[GiveQuestionController::class,'uploadFileTest']);
 });
 
 

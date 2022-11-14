@@ -154,7 +154,17 @@ class   TaskController extends Controller
 
              $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
              event(new NotificationEvent($item->id,['new_task'=>$show_new_task,'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime']));
-         }
+             $dd=DB::table('notifications')->where('notifiable_id',  $item)->orderBy('created_at','desc')->get();
+
+             $dd=DB::table('notifications')->where('notifiable_id',  $item)->orderBy('created_at','desc')->get();
+
+             event(new NotificationEvent( $item,
+             [
+             '$data'=>$dd,
+             'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime'
+             ]
+             ));
+            }
 
         return response()->json($show_new_task);
     }

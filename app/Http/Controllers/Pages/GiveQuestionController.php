@@ -55,6 +55,9 @@ class GiveQuestionController extends Controller
             return response()->json(['message'=>'Спасибо за сообщение, наши сотрудники свяжутся с вами']);
         }
     }
+    public function uploadFileTest(Request $request){
+        dd($request->image);
+    }
 
     /**
      * Display the specified resource.
