@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\ExecutorProfile;
+use App\Models\ExecutorWorkingRegion;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,8 @@ class ExecutorProfileResource extends JsonResource
                                 "address" => $this->address,
                         "profile_persent" => $this->percent_settings(),
                                    "user" => new UserForExecutorProfileResource($this->users),
-               "executor_working_regions" => ExecutorWorkingRegionResource::collection($this->executor_working_regions),
+            //    "executor_working_regions" => ExecutorWorkingRegionResource::collection($this->executor_working_regions),
+            "executor_working_regions" => $this->get_executor_working_region(),
                     "executor_categories" => ExecutorCategoryResource::collection($this->executor_categories),
                  "executor_subcategories" => ExecutorSubCategoryResource::collection($this->executor_subcategories),
       "executor_profile_work_experiences" => ExecutorProfileWorkExperienceResource::collection($this->executor_profile_work_experiences),
@@ -57,6 +59,23 @@ class ExecutorProfileResource extends JsonResource
 
         ]);
         return  $tokos;
+    }
+    public function get_executor_working_region(){
+        $show_executor_profile = ExecutorProfile::where('user_id',Auth::id())->first();
+
+        $show_executor_working_region=[];
+        $regions = ExecutorWorkingRegion::where('executor_profile_id',$show_executor_profile->id)->distinct('executorwork_region')->pluck('executorwork_region');
+        foreach($regions as $item){
+            $punkt_arr=[];
+           $get_item_punkt= ExecutorWorkingRegion::where(['executor_profile_id'=>$show_executor_profile->id,'executorwork_region'=>$item])->get();
+           foreach($get_item_punkt as $data){
+
+            array_push($punkt_arr, $data->working_rayon);
+            };
+            $show_executor_working_region[$item]=$punkt_arr;
+        }
+        return $show_executor_working_region;
+
     }
 
 }

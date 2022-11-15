@@ -52,7 +52,9 @@ class ExecutorProfileController extends Controller
             return new ExecutorProfileResource( $create_executor_profiles);
 
         }else{
-
+            // $show_executor_profile = ExecutorProfile::where('user_id',Auth::id())->first();
+            // $regions = ExecutorWorkingRegion::where('executor_profile_id',$show_executor_profile->id)->distinct('executorwork_region')->pluck('executorwork_region');
+            // dd($regions);
             $show_executor_profile = ExecutorProfile::where('user_id',$user)->get();
             return ExecutorProfileResource::collection($show_executor_profile);
         }
@@ -183,8 +185,6 @@ class ExecutorProfileController extends Controller
         if($request->has('region_and_address')){
 
             foreach($request->region_and_address as $value){
-                // dd($value);
-
 
                 foreach($value['personal_address'] as $item){
 
@@ -198,7 +198,7 @@ class ExecutorProfileController extends Controller
 
 
                 $executorworkingregion=ExecutorWorkingRegion::where('executor_profile_id',$executor_profiles->id)->delete();
-                // dd($value['working_region'][0]['working_rayons']);
+
                 foreach($value['working_region'] as $item){
 
 
@@ -226,10 +226,7 @@ class ExecutorProfileController extends Controller
             $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
 
             return ExecutorProfileResource::collection($show_executor_profile);
-            // "working_region":[
-            //     {"executorwork_region":"italy"},
-            //     {"executorwork_region":"italy1"}
-            //     ]
+
         }
     }
 

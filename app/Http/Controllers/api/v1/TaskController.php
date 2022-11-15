@@ -158,8 +158,10 @@ class   TaskController extends Controller
 
              $dd=DB::table('notifications')->where('notifiable_id',  $item->id)->orderBy('created_at','desc')->get();
             $database=json_decode($dd);
-             event(new NotificationEvent( $item->id,$database));
+             event(new NotificationEvent( $item->id, $database));
             }
+
+            
 
         return response()->json($show_new_task);
     }
