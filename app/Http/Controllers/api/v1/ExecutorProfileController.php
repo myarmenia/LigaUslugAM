@@ -294,6 +294,7 @@ class ExecutorProfileController extends Controller
 
     }
     public function educationAndCertificates(Request $request){
+        // dd($request->executor_education_certificates);
         $user_id = Auth::user()->id;
         $executor_profiles = ExecutorProfile::where('user_id',$user_id)->first();
 
@@ -332,6 +333,7 @@ class ExecutorProfileController extends Controller
             foreach($request->executor_education_certificates as  $items)
             {
                         $certificate_base = $items['certificate_base'];
+                        // dd($certificate_base);
                           // first explode as "," (data:image/jpeg;base64,)
                           $certificate_base_explode = explode(",", $certificate_base);
                         // second we explode  as ";"(data:image/jpeg)

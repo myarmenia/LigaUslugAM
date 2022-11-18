@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class NotificationController extends Controller
 {
@@ -22,8 +23,12 @@ class NotificationController extends Controller
     }
     public function read(Request $request)
     {
+       
             Auth::user()->unreadNotifications()->find($request->id)->markAsRead();
-            return 'success';
+            $dd=DB::table('notifications')->where('notifiable_id',  Auth::id())->orderBy('created_at','desc')->get();
+            $database=json_decode($dd);
+
+            return response()->json(['notification'=>$database]);
 
     }
 
@@ -41,7 +46,7 @@ class NotificationController extends Controller
     public function unreadNotificationCount(){
 
        $unread_notification_count=Auth::user()->unreadNotifications()->count();
-   
+
         event(new NotificationEvent(Auth::id(),['unread_notification_count'=>$unread_notification_count]));
         return $unread_notification_count;
     }
