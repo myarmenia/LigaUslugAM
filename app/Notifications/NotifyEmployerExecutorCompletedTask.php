@@ -48,7 +48,6 @@ class NotifyEmployerExecutorCompletedTask extends Notification
     public function toMail($notifiable)
     {
 
-
         return (new MailMessage)->subject('Исполнитель завершил задание')->view('Mails.notifyemployerexecutorcompletedtask',['task'=> $this->task,'logo'=>'/images/logo_footer.png']);
     }
     public function toDatabase($notifiable)

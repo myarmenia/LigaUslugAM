@@ -57,6 +57,7 @@ class NotifyAsTaskExecutor extends Notification implements ShouldBroadcast
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Вас выбрали исполнителем на задачу')
                     ->greeting('Уважаемый(ая) коллега!')
                     ->line('Вы были выбраны для выполнения '.$this->selected_executor_click_on_task->tasks->title.' задачи.')
                     ->action('Перейди по ссылке', url('http://ligauslug.ru/'))

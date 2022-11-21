@@ -56,6 +56,7 @@ class RejectTaskExecutorNotification extends Notification  implements ShouldBroa
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Заказчик выбрал нужного специалиста')
                     ->line('Уважаемый Исполнитель, спасибо за  ваш отклик на заказ "'.$this->click_on_task->tasks->title.'", в этот раз клиент выбрал нужного специалиста.')
                     ->action('Перейти по ссылке', url('http://ligauslug.ru/orders'))
                     ->line('Спасибо за заявку');
@@ -95,5 +96,5 @@ class RejectTaskExecutorNotification extends Notification  implements ShouldBroa
  * @param  mixed  $notifiable
  * @return BroadcastMessage
  */
-   
+
 }
