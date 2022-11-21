@@ -429,7 +429,7 @@ class   TaskController extends Controller
 
            return response()->json(['message'=>$responded_executor]);
        }else{
-           return response()->json(['message' => "Никто не подавал заявки на ваши задания"]);
+           return response()->json(['message' => null]);
        }
 
    }
