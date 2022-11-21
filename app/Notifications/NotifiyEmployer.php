@@ -53,7 +53,7 @@ class NotifiyEmployer extends Notification
     {
         return (new MailMessage)
                     ->subject('На ваше задание есть отклики специалистов')
-                    ->greeting('simon'.$this->clickontask->tasks->users->name.',')
+                    ->greeting($this->clickontask->tasks->users->name.',')
                     ->line('На ваше задание появился новый отклик. Ознакомьтесь с предложением и выберите пожалуйста специалиста для выполнения вашего задания.')
                     ->action('Перейти по ссылке', url('/http://ligauslug.ru/'))
                     ->line('Заранее спасибо вам.');
