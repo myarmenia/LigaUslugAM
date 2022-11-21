@@ -35,6 +35,7 @@ use App\Notifications\NotifyExecutorForMeeting;
 use App\Notifications\NotifyExecutorForNewJob;
 use App\Notifications\NotifyExecutorForNewJobEveryTime;
 use App\Notifications\RejectTaskExecutorNotification;
+use App\Notifications\НовыеПроектыНаБиржеЛигаУслуг;
 use Illuminate\Http\File;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
@@ -145,6 +146,7 @@ class   TaskController extends Controller
             foreach($user as $item){
                 // =======notification section start ==================
                 $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
+                $item->notify(new НовыеПроектыНаБиржеЛигаУслуг($item->id,$show_new_task));
                 // =======creating socket for event ==================
                 $user_notification = DB::table('notifications')->where('notifiable_id',  $item->id)->orderBy('created_at','desc')->get();
                 $database = json_decode($user_notification);
