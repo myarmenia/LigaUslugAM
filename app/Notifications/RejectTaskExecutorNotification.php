@@ -38,7 +38,7 @@ class RejectTaskExecutorNotification extends Notification  implements ShouldBroa
      */
     public function via($notifiable)
     {
-       
+
         if($this->click_on_task->executor_profiles->users->geting_notification==1){
 
             return ['mail','database'];
@@ -75,14 +75,6 @@ class RejectTaskExecutorNotification extends Notification  implements ShouldBroa
                         ];
     }
 
-    // 'task_id',
-    //     'executor_profile_id',
-    //     'service_price_from',
-    //     'service_price_to',
-    //     'cost',
-    //     'startdate_from',
-    //     'start_date_to',
-    //     'offer_to_employer'
 
     /**
      * Get the array representation of the notification.
@@ -103,11 +95,5 @@ class RejectTaskExecutorNotification extends Notification  implements ShouldBroa
  * @param  mixed  $notifiable
  * @return BroadcastMessage
  */
-    // public function toBroadcast($notifiable): BroadcastMessage
-    // {
-    //     return new RejectTaskExecutorNotification([
-    //             'user_name' => $this->message['user_name'],
-    //         'user_email' => $this->message['user_email'],
-    //     ]);
-    // }
+   
 }

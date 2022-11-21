@@ -41,6 +41,7 @@
                         <th scope="col" class="text-center">Фото</th>
                         {{-- <th scope="col" class="text-center"> Ссылки на личные страницы</th> --}}
                         {{-- <th scope="col"> Показать</th> --}}
+                        <th scope="col">Дата регистрации пользователя</th>
                         <th scope="col">Удалить</th>
                     </tr>
                     </thead>
@@ -59,6 +60,7 @@
                                 <img src="{{ asset('admin/img/img_user')}}/{{$avatar}}"   width="100">
                                 {{-- <img src="{{asset('admin/img/img_user') }}/{{ $items->img_path }}" width="100"> --}}
                             </td>
+                            <td scope="col">{{$items->created_at }}</td>
                             {{-- <td scope="col">
                                 <p>{{ $items->fasebook_link }}</p>
                                 <p>{{ $items->instagram_link }}</p>

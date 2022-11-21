@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifyExecutorForGettingRatingEvent implements ShouldBroadcast
+class UnreadNotificationCountEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,11 +20,11 @@ class NotifyExecutorForGettingRatingEvent implements ShouldBroadcast
      * @return void
      */
     public $id;
-    public $ratingforexecutor;
-    public function __construct($id, $ratingforexecutor)
+    public $unread_notification_count;
+    public function __construct($id,$unread_notification_count)
     {
         $this->id=$id;
-        $this->ratingforexecutor=$ratingforexecutor;
+        $this->unread_notification_count=$unread_notification_count;
     }
 
     /**
@@ -34,11 +34,10 @@ class NotifyExecutorForGettingRatingEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return  new Channel('ratingforexecutor_chanal.' . $this->id);
+        return new Channel('unreadnotificationcount_chanal.' . $this->id);
     }
-
     public function broadcastAs()
     {
-        return  'ratingforexecutor';
+        return  'unreadnotificationcount';
     }
 }

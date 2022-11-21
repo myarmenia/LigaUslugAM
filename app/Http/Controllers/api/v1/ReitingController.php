@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Events\NotificationEvent;
-use App\Events\NotifyExecutorForGettingRatingEvent;
+use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Notifications\NotifyEmployerForGettingRating;
 use App\Notifications\NotifyExecutorForGettingRating;
 use App\Notifications\RatingForCompletedTask;
+use Illuminate\Support\Facades\DB;
 use LDAP\Result;
 
 class ReitingController extends Controller
@@ -26,7 +27,6 @@ class ReitingController extends Controller
         $user = Auth::user()->id;
        $check = Reiting::where(['task_id'=>$request->task_id])->first();
         $task = Task::where('id',$request->task_id)->first();
-        // dump($check->task_id);
 
             if($user == $task->user_id){
                     $rating = 'employer_star_count_to_executor';
@@ -71,8 +71,13 @@ class ReitingController extends Controller
                     $ratingforexecutor=Reiting::with('tasks.users','tasks.executor_profiles.users')->where('task_id',$request->task_id)->first();
                     $executor = ExecutorProfile::where('id',$task->executor_profile_id)->first();
                     $executor->users->notify(new NotifyExecutorForGettingRating($ratingforexecutor));
-                    event(new NotifyExecutorForGettingRatingEvent($executor->users->id, $ratingforexecutor));
-                    event(new NotificationEvent($executor->users->id,['ratingforexecutor'=>$ratingforexecutor]));
+
+                    $user_notification = DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+                    $database = json_decode($user_notification);
+                    event(new NotificationEvent($executor->users->id, $database));
+
+                    $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                    event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
 
                 }else{
 
@@ -80,12 +85,18 @@ class ReitingController extends Controller
 
                     $task->users->notify(new NotifyEmployerForGettingRating($ratingforemployer));
 
+                    $user_notification = DB::table('notifications')->where('notifiable_id', $task->users->id)->orderBy('created_at','desc')->get();
+                    $database = json_decode($user_notification);
+                    event(new NotificationEvent($task->users->id, $database));
+
+                    $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                    event(new UnreadNotificationCountEvent($task->users->id, $unread_notification_count));
+
                 }
 
 
 
-                return response()->json([
-                    'message' =>'Спасибо за оценку и отзив'], 404);
+                return response()->json(['message' =>'Спасибо за оценку и отзив'], 200);
 
             }else{
 
@@ -114,20 +125,32 @@ class ReitingController extends Controller
 
                         $ratingforexecutor=Reiting::with('tasks.users','tasks.executor_profiles.users')->where('task_id',$request->task_id)->first();
                         $executor = ExecutorProfile::where('id',$task->executor_profile_id)->first();
-                        // $executor->users->notify(new RatingForCompletedTask($reiting,$task));
-
 
                         $executor->users->notify(new NotifyExecutorForGettingRating($ratingforexecutor));
+                        $user_notification = DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+                        $database = json_decode($user_notification);
+                        event(new NotificationEvent($executor->users->id, $database));
+
+                        $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                        
+                        event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
+
+
                     }else{
 
                         $ratingforemployer=Reiting::with('tasks.executor_profiles.users')->where('task_id',$request->task_id)->first();
 
                         $task->users->notify(new NotifyEmployerForGettingRating($ratingforemployer));
 
+                        $user_notification = DB::table('notifications')->where('notifiable_id', $task->users->id)->orderBy('created_at','desc')->get();
+                        $database = json_decode($user_notification);
+                        event(new NotificationEvent($task->users->id, $database));
+
+                        $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                        event(new UnreadNotificationCountEvent($task->users->id, $unread_notification_count));
                     }
 
                     return new ReitingResource($reiting);
-
             };
 
 

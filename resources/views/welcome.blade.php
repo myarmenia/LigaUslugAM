@@ -195,6 +195,10 @@
                 .listen('.notification', (e)=>{
                     console.log(e)
                 })
+    Echo.channel('unreadnotificationcount_chanal.36')
+    .listen('.unreadnotificationcount', (e)=>{
+        console.log(e)
+    })
 
         </script>
 

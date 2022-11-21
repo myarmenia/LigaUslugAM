@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
     <div class="row d-flex justify-content-center" >
-        <div class="col-md-10 bg-white">
+        <div class="col-md-12 bg-white">
             <div class="panel-body">
 
                 @if(session()->has('message'))
@@ -36,6 +36,10 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Имя заказчика</th>
+                        <th scope="col">Фамилия заказчика</th>
+                        <th scope="col">Регион</th>
+                        <th scope="col">Населённый пункт</th>
+                        <th scope="col">Адрес</th>
                         <th scope="col"> Имя заказa</th>
                         <th scope="col">Эл. адрес</th>
                         <th scope="col">Телефонный номер</th>
@@ -50,6 +54,10 @@
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td scope = "col">{{ $items->users->name }}</td>
+                            <td scope = "col">{{ $items->users->last_name }}</td>
+                            <td scope = "col">{{ $items->users->region }}</td>
+                            <td scope = "col">{{ $items->users->country_name }}</td>
+                            <td scope = "col">{{ $items->users->address }}</td>
                             <td scope = "col">{{ $items->title }}</td>
                             <td scope="col">{{$items->users->email }}</td>
                             <td scope="col">{{$items->users->phonenumber }}</td>

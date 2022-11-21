@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Events\NotificationEvent;
-use App\Events\NotifyEmployerExecutorClickOnTask;
+use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
@@ -14,11 +14,12 @@ use App\Models\TransactionApi;
 use App\Models\User;
 use App\Notifications\NotifiyEmployer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClickOnTaskController extends Controller
 {
     public function clickOnTask(Request $request){
-        $user_id=Auth::user()->id;
+        $user_id = Auth::user()->id;
         $check_status = User::where('id',$user_id)->first();
         if($check_status->status =="Пасив"){
             return response()->json(['message'=>'Вы не можете подать заявку на эту работу, пока ваш статус пассивный.']);
@@ -26,8 +27,7 @@ class ClickOnTaskController extends Controller
 
 
                 $click = Task::where('id',$request->task_id)->first();
-                $attach_click_price=Subcategory::where('subcategory_name',$click->subcategory_name)->first();
-                // dump( $attach_click_price);
+                $attach_click_price = Subcategory::where('subcategory_name',$click->subcategory_name)->first();
                 $click_price = $attach_click_price->price;
                 $check_balance=ExecutorProfile::where('user_id',$user_id)->first();
 
@@ -37,24 +37,27 @@ class ClickOnTaskController extends Controller
                     if($second_time_click){
                         return response()->json(['message'=>'Вы уже откликнулись на этот заказ.']);
                     }
+                    if($request->service_price_to<$request->service_price_from){
+                        return response()->json(['message'=>'Стоимость услуги До не может быть меньше, чем От.']);
+                    }
                         $clickontask=ClickOnTask::create([
                             'task_id' => $request->task_id,
-                'executor_profile_id' => $check_balance->id,
-                'service_price_from' => $request->service_price_from,
-                'service_price_to' => $request->service_price_to,
+                            'executor_profile_id' => $check_balance->id,
+                            'service_price_from' => $request->service_price_from,
+                            'service_price_to' => $request->service_price_to,
                             'cost' => $request->cost,
-                    'startdate_from' => $request->startdate_from,
-                    'start_date_to' => $request->start_date_to,
-                'offer_to_employer' => $request->offer_to_employer
+                            'startdate_from' => $request->startdate_from,
+                            'start_date_to' => $request->start_date_to,
+                            'offer_to_employer' => $request->offer_to_employer
                     ]);
 
                         // inserting subcategory  price into the  transaction_api table  when the  executor click on task, getting  subcategory  price which is the price of applaying  the task
 
                         $balance=TransactionApi::create([
-                        'executor_profile_id' => $check_balance->id,
-                        'transaction_name' => "Отклик",
-                    'transaction_description' => $attach_click_price->subcategory_name,
-                                    'account' => $attach_click_price->price,
+                          'executor_profile_id' => $check_balance->id,
+                          'transaction_name' => "Отклик",
+                          'transaction_description' => $attach_click_price->subcategory_name,
+                          'account' => $attach_click_price->price,
                     ]);
                     // updateing executor  balance after
 
@@ -63,11 +66,14 @@ class ClickOnTaskController extends Controller
                     ]);
                     $updated_executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
                             $employer=User::where('id',$click->user_id)->first();
-                            $employer->notify(new NotifiyEmployer($clickontask));
-                            // ---------------------
 
-                            // event(new NotifyEmployerExecutorClickOnTask($employer->id,['clickontask'=>$clickontask]));
-                            event(new NotificationEvent($employer->id,['clickontask'=>$clickontask, 'type'=>'App\Notifications\NotifiyEmployer']));
+                            $employer->notify(new NotifiyEmployer($clickontask));
+                            // ---------------------creating event for socket-------------------------
+                            $user_notification=DB::table('notifications')->where('notifiable_id',  $employer->id)->orderBy('created_at','desc')->get();
+                            $database=json_decode($user_notification);
+                            event(new NotificationEvent($employer->id, $database));
+                            $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                            event(new UnreadNotificationCountEvent($employer->id, $unread_notification_count));
                             return response()->json(['message'=>'success']);
                 }else{
                     return response()->json(['message'=>'Вы не можете подать заявку на эту работу, потому что вашего баланса недостаточно']);

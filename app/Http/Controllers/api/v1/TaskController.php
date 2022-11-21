@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Events\NewMessage;
 use App\Events\NotificationEvent;
 use App\Events\NotifyAsTaskExecutor as EventsNotifyAsTaskExecutor;
 use App\Events\NotifyAsTaskExecutorEvent;
 use App\Events\RejectTaskExecutor;
 use App\Events\RejectTaskExecutorNotSelected;
+use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -120,8 +120,6 @@ class   TaskController extends Controller
 
          }
 
-
-
         if ($request->hasfile('task_img')) {
             foreach($request->file('task_img') as $file)
             {
@@ -134,42 +132,34 @@ class   TaskController extends Controller
             }
         }
 
-
         $show_new_task=Task::with('users')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location"]);
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
-        // $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
-// dd($task->category_name);
-        //  $executor_categories = ExecutorCategory::whereIn('category_name',$check_categories)->pluck('executor_profile_id');
+
         $executor_categories = ExecutorCategory::where('category_name',$task->category_name)->pluck('executor_profile_id');
 
-         $user_ides=ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
+        $user_ides = ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
 
+        $user = User::whereIn('id',$user_ides)->get();
+            foreach($user as $item){
+                // =======notification section start ==================
+                $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
+                // =======creating socket for event ==================
+                $user_notification = DB::table('notifications')->where('notifiable_id',  $item->id)->orderBy('created_at','desc')->get();
+                $database = json_decode($user_notification);
+                event(new NotificationEvent( $item->id, $database));
+                $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                event(new UnreadNotificationCountEvent( $item->id, $unread_notification_count));
 
-         $user=User::whereIn('id',$user_ides)->get();
-         foreach($user as $item){
-            //  $check_executor_categories=$item->executor_profiles->executor_categories->pluck('category_name');
-            //  $data= Task::where('created_at','>=',$deadlineday)->whereIn('category_name', $check_executor_categories)->get();
-
-             $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
-             event(new NotificationEvent($item->id,['new_task'=>$show_new_task,'type'=>'App\Notifications\NotifyExecutorForNewJobEveryTime']));
-
-
-             $dd=DB::table('notifications')->where('notifiable_id',  $item->id)->orderBy('created_at','desc')->get();
-            $database=json_decode($dd);
-             event(new NotificationEvent( $item->id, $database));
             }
-
-            
-
         return response()->json($show_new_task);
     }
 
     public function completedTasks(){
         $user=Auth::user()->id;
 
-        $finished_task=Task::with('reitings')->with('executor_profiles','executor_profiles.users','problem_messages')->where(['user_id'=>$user,'status'=>'completed'])->get();
+        $finished_task=Task::with('reitings')->with('executor_profiles','executor_profiles.users','problem_messages')->where(['user_id'=>$user,'status'=>'completed'])->orderBy('id','desc')->get();
 
       // $finishedTaskEndpoint= UserResource::collection($finished_task);
       //  return response()->json($finishedTaskEndpoint);
@@ -238,6 +228,13 @@ class   TaskController extends Controller
                 $task = Task::with('users','executor_profiles.users')->where('id',$items['task_id'])->first();
 
                 $task->executor_profiles->users->notify(new NotifyExecutorEmployerCompletedTask($task));
+                 // =======creating socket for event ==================
+                 $user_notification = DB::table('notifications')->where('notifiable_id',  $task->executor_profiles->users->id)->orderBy('created_at','desc')->get();
+                 $database = json_decode($user_notification);
+                 event(new NotificationEvent($task->executor_profiles->users->id, $database));
+
+                 $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                 event(new UnreadNotificationCountEvent($task->executor_profiles->users->id, $unread_notification_count));
                 return response()->json($task);
             }
             else if($task->status =='completed'){
@@ -250,41 +247,11 @@ class   TaskController extends Controller
         }
 
     }
-    public function respondedExecutor(){
-         $user_id = Auth::user()->id;
-         $task = Task::with(['click_on_tasks'=>function($q){
-                 $q->where('status','false');
-            }])->where(['user_id'=>$user_id,'executor_profile_id'=>null])->get();
-        $arr=[];
-        foreach($task as $items){
-
-            if($items->click_on_tasks->isNotEmpty() == true){
-                array_push($arr,$items->id);
-            };
-        }
 
 
-
-        if(count($arr)>0){
-            $showrespondedtask =Task::with(['click_on_tasks'=>function($q){
-                        $q->where('status','false');
-                        }])->whereIn('id',$arr)->orderBy('id','desc')->get();
-            $responded_executor = RespondedExecutorResource::collection($showrespondedtask);
-
-            return response()->json($responded_executor);
-        }else{
-            return response()->json(['message' => "Никто не подавал заявки на ваши задания"]);
-        }
-
-    }
-    public $selected_executor_click_on_task;
     public function selectTaskExecutor(Request $request){
 
-
-        // $selected_executor_click_on_task='';
-
         if($request->has('select_task_executor')){
-
 
             foreach($request->select_task_executor as $value){
                 $updatetask=Task::where('id',$value['task_id'])->update([
@@ -297,8 +264,6 @@ class   TaskController extends Controller
 
                     $task = Task::where('id',$value['task_id'])->first();
 
-                    //deletin task id from  click-on task table
-                    // $click_on_task = ClickOnTask::where(['executor_profile_id'=>$value['executor_profile_id'],'task_id'=>$value['task_id']])->delete();
                     $click_on_task = ClickOnTask::where('task_id',$value['task_id'])->get();
 
                     foreach($click_on_task as $items){
@@ -332,14 +297,15 @@ class   TaskController extends Controller
                             $clickontask_rejected_executor = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$value['task_id'],'status'=>'rejected'
                             ])->first();
 
-
-
                             $notifyExecutorForTaskNotSelected->users->notify(new RejectTaskExecutorNotification($clickontask_rejected_executor));
-                            // event(new RejectTaskExecutorNotSelected($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor]));
-                            event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,['clickontask_rejected_executor'=>$clickontask_rejected_executor,'type'=>'App\Notifications\RejectTaskExecutorNotification']));
-                            $dd=DB::table('notifications')->where('notifiable_id', $notifyExecutorForTaskNotSelected->users->id)->orderBy('created_at','desc')->get();
-                            $database=json_decode($dd);
+
+                            $user_notification = DB::table('notifications')->where('notifiable_id', $notifyExecutorForTaskNotSelected->users->id)->orderBy('created_at','desc')->get();
+                            $database = json_decode($user_notification);
                             event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,$database));
+
+                            $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                            event(new UnreadNotificationCountEvent( $notifyExecutorForTaskNotSelected->users->id, $unread_notification_count));
+
                         }
                         else{
                              // changing status after selecting executor when executor_profile_id is equal request executor_profile_id  in  clickontask table  status into inprocess
@@ -349,28 +315,26 @@ class   TaskController extends Controller
                             ]);
 
                             $selected_executor_click_on_task = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$value['task_id'],'executor_profile_id'=>$value['executor_profile_id']])->first();
-                            // $this->selected_executor_click_on_task=$selected_executor_click_on_task;
+
                         }
                     }
 
-
                     // working websocket event
-                    // event(new NewMessage(['task_id'=>$value['task_id']]));
 
                     $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
-
 
                     $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
 
                     // working notification part
 
-                    $dd=DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
-                    $database=json_decode($dd);
+                    $user_notification = DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+                    $database=json_decode($user_notification);
 
                     event(new NotificationEvent($executor->users->id,$database));
+                    $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                    event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
 
-                    return response()->json(['message'=>'success'],200);
-
+                    return response()->json(['message'=>'success'], 200);
 
                 }
             }
@@ -393,8 +357,7 @@ class   TaskController extends Controller
 
                 $task = Task::where('id',$value['task_id'])->first();
 
-                //deletin task id from  click-on task table
-                // $click_on_task = ClickOnTask::where(['executor_profile_id'=>$value['executor_profile_id'],'task_id'=>$value['task_id']])->delete();
+
                  $click_on_task = ClickOnTask::where(['executor_profile_id'=>$value['executor_profile_id'],'task_id'=>$value['task_id']])->update([
                     'status'=>'rejected']);
                 $click_on_task = ClickOnTask::with('tasks','tasks.users')->where(['executor_profile_id'=>$value['executor_profile_id'],'task_id'=>$value['task_id']])->first();
@@ -412,7 +375,7 @@ class   TaskController extends Controller
                 $executor=ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
                 // working websocket event
 
-                event(new RejectTaskExecutor($executor->users->id ,['task_id'=>$value['task_id'],'executor_name'=>$executor->users->email]));
+                // event(new RejectTaskExecutor($executor->users->id ,['task_id'=>$value['task_id'],'executor_name'=>$executor->users->email]));
                 $message=[
                               'body' => 'Уважаемый Исполнитель, спасибо за заявку, но заказчик уже выбрал Исполнителя',
                     'enrollmentText' => 'Перейди по ссылке',
@@ -424,18 +387,50 @@ class   TaskController extends Controller
                 ];
 
                 $executor->users->notify(new RejectTaskExecutorNotification($click_on_task));
+                $call_method = $this->respondedExecutor();
 
-                $dd=DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
-                $database=json_decode($dd);
+                $user_notification = DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+                $database=json_decode($user_notification);
                 event(new NotificationEvent($executor->users->id,$database));
 
+                $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
+
+
                 // Notification::send($executor->users,new RejectTaskExecutorNotification($message));
-                  $call_method = $this->respondedExecutor();
+
 
                 return response()->json(['message'=>$message],200);
             }
         }
     }
+//======= y заказчика Откликнувшиеся исполнители===============
+    public function respondedExecutor(){
+        $user_id = Auth::user()->id;
+        $task = Task::with(['click_on_tasks'=>function($q){
+                $q->where('status','false');
+           }])->where(['user_id'=>$user_id,'executor_profile_id'=>null])->get();
+       $arr=[];
+       foreach($task as $items){
+
+           if($items->click_on_tasks->isNotEmpty() == true){
+               array_push($arr,$items->id);
+           };
+       }
+
+       if(count($arr)>0){
+           $showrespondedtask =Task::with(['click_on_tasks'=>function($q){
+                       $q->where('status','false');
+                       }])->whereIn('id',$arr)->orderBy('id','desc')->get();
+           $responded_executor = RespondedExecutorResource::collection($showrespondedtask);
+
+           return response()->json($responded_executor);
+       }else{
+           return response()->json(['message' => "Никто не подавал заявки на ваши задания"]);
+       }
+
+   }
+
     public function showAllTaskToExecutor(){
         $user_id=Auth::id();
         $executor=ExecutorProfile::where('user_id', $user_id)->first();
@@ -530,16 +525,17 @@ class   TaskController extends Controller
         return response()->json(['click-on-special-task'=> $task]);
 
     }
+    // =========== у исполнитела === Заказы в работе == когда Завершить заказ ============
+
     public function materialWorkPrice(Request $request){
 
         $user=Auth::user()->id;
 
-        $executor=ExecutorProfile::where('user_id',Auth::id())->first();
-        if($request->executor_completed_task==1){
-            $task=Task::where(['id'=>$request->task_id,'executor_profile_id'=>$executor->id]);
+        $executor = ExecutorProfile::where('user_id',Auth::id())->first();
+        if($request->executor_completed_task == 1){
+            $task = Task::where(['id'=>$request->task_id,'executor_profile_id'=>$executor->id]);
 
-
-            $task= $task->update([
+            $task = $task->update([
 
                 'executor_completed_task'=>1
             ]);
@@ -547,17 +543,32 @@ class   TaskController extends Controller
                 if($request->has('executor_material_price') && $request->has('executor_work_price')){
                     if($request->executor_material_price!=null && $request->executor_work_price!=null){
 
-                        $task=Task::where(['id'=>$request->task_id,'executor_profile_id'=>$executor->id])->update([
-                            'executor_material_price'=>$request->executor_material_price,
-                            'executor_work_price'=>$request->executor_work_price,
-                            'executor_total_price'=>$request->executor_material_price*1+$request->executor_work_price*1
+                        $task_update=Task::where(['id' => $request->task_id,'executor_profile_id' => $executor->id])->update([
+                            'executor_material_price' => $request->executor_material_price,
+                            'executor_work_price' => $request->executor_work_price,
+                            'executor_total_price' => $request->executor_material_price*1+$request->executor_work_price*1
                         ]);
+                        if($task_update){
+
+                            $task = Task::with('users','executor_profiles','executor_profiles.users')->where('id',$request->task_id)->first();
+                            $task->users->notify(new NotifyEmployerExecutorCompletedTask($task));
+
+                            $user_notification = DB::table('notifications')->where('notifiable_id',$task->users->id)->orderBy('created_at','desc')->get();
+                            $database=json_decode($user_notification);
+                            event(new NotificationEvent($task->users->id, $database));
+
+                            $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                            event(new UnreadNotificationCountEvent($task->users->id, $unread_notification_count));
+
+
+                        }
+
                     }
                 }
             }
 
-            $task=Task::with('users','executor_profiles','executor_profiles.users')->where('id',$request->task_id)->first();
-            $task->users->notify(new NotifyEmployerExecutorCompletedTask($task));
+
+
 
 
         }
