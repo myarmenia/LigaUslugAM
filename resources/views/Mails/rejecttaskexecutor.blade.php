@@ -11,9 +11,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 col-xs-12  mb-3">
-                   <h3> 'Уважаемый(ая) Исполнитель, </h3>
+                   <h3> Уважаемый(ая) Исполнитель, </h3>
 
-                   <p class="m-2">спасибо за  ваш отклик на заказ " {{ $click_on_task }}", в этот раз клиент выбрал нужного специалиста.</p>
+                   <p class="m-2">Спасибо за ваш отклик на заказ "{{ $click_on_task }}", в этот раз клиент выбрал нужного специалиста.</p>
 
                     <h5>С уважением</h5>
                     <div  style="height:70px;width:300px;display:flex;align-items:center">
