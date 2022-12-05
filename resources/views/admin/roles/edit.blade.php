@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
+    <div class="row my-5">
+        <div class="col-lg-12 my-5  margin-tb">
             <div class="pull-left">
                 <h2>Изменить роль</h2>
             </div>

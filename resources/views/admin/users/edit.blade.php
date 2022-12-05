@@ -4,8 +4,8 @@
 @section('content')
 <div class="container">
 
-        <div class="row">
-            <div class="col-lg-12 margin-tb bg-white p-5">
+        <div class="row my-5">
+            <div class="col-lg-12 my-5 margin-tb bg-white p-5">
                 <div class="pull-left">
                     <h2 class="my-3">Редактировать пользователя </h2>
                 </div>
