@@ -47,7 +47,7 @@
                     <tbody>
                     @foreach($all_letter as $items)
                         <tr>
-                            <td>{{ $items->id }}</td>
+                            <td>{{ $int++ }}</td>
                             {{-- <td scope = "col">{{ $items->user_id  }}</td> --}}
                             <td scope = "col">{{ $items->users->name }}</td>
                             <td scope="col">{{$items->email }}</td>

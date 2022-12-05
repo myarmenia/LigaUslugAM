@@ -13,11 +13,17 @@ class SupportsLetterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request )
     {
+        if($request['page']==null){
+            $int=1;
+
+        }else{
+            $int=$request['page']*100-100+1;
+        }
         $all_letter = Support::with('users')->orderBy('id','desc')->paginate(10);
-       
-        return view('admin.all_supports_letter',compact('all_letter'));
+
+        return view('admin.all_supports_letter',compact('all_letter','int'));
     }
 
     /**
