@@ -57,8 +57,8 @@
                         @endphp --}}
 
                     @foreach( $all_subcategory as $items)
-                        {{-- <tr>
-                            <td>{{ $items->id }}</td>
+                        <tr>
+                            <td>{{ $int++ }}</td>
                             <td>{!! $items->categories->category_name!!}</td>
                             <td>{!! $items->subcategory_name !!}</td>
                             <td>{!! $items->price !!}</td>
@@ -70,8 +70,8 @@
                                         <button type="submit" class="btn" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
-                        </tr> --}}
-                        @foreach ($items->subcategories as  $subcategory)
+                        </tr>
+                        {{-- @foreach ($items->subcategories as  $subcategory)
                         <tr>
                             <td>1</td>
                             <td>{{$subcategory->categories->category_name}}</td>
@@ -87,7 +87,7 @@
                             </td>
                         </tr>
 
-                        @endforeach
+                        @endforeach --}}
 
                     @endforeach
                     </tbody>

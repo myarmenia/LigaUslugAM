@@ -15,15 +15,22 @@ class SubcategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
 
-        // $all_subcategory = Subcategory::paginate(120);
-        $all_subcategory=Category::with('subcategories')->paginate(5);
+        $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(120);
+        if($request['page']=='null'){
+            $int=1;
+        }else{
+            $int=$request['page']*120-120+1;
+        }
+        // dd($request['page']);
+        // $all_subcategory=Category::with('subcategories')->paginate(5);
 
 
 
-        return view('admin.all_subcategory',compact('all_subcategory'));
+        return view('admin.all_subcategory',compact('all_subcategory','int'));
     }
 
     /**
