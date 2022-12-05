@@ -6,8 +6,8 @@
  <section id="main-content">
     <section class="wrapper ">
       <!--overview start-->
-     <div class="row justify-content-center">
-        <div class="col-lg-6 bg-white" >
+     <div class="row justify-content-center mt-5">
+        <div class="col-lg-6 bg-white mt-5" >
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}

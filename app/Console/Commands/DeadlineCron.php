@@ -57,10 +57,11 @@ class DeadlineCron extends Command
                     $items->update([
                         'deadline_notify_status' => 1
                     ]);
+                    //  \Log::info( '-------' );
             }
         }
 
-            // \Log::info( '-------' );
+
             // php -d register_argc_argv=On /home1/nveram/api.nver.am/artisan deadline:cron 1>> /dev/null 2>&1
 
     }

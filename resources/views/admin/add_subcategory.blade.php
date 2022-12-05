@@ -3,10 +3,10 @@
 
 @section('content')
 
- <div class="row  ">
-        <div class="col-lg-8" >
+ <div class="row justify-content-center mt-5 w-100">
+        <div class="col-lg-6 mt-5" >
             <div class="panel-body">
-                <div class="card mx-4" style="background:#fff">
+                <div class="card mx-4 bg-whight">
                         @if(session()->has('message'))
                             <div class="alert alert-success">
                                 {{ session()->get('message') }}

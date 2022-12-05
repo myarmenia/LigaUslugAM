@@ -524,7 +524,7 @@ class   TaskController extends Controller
     }
    public function showClikTask(Request $request){
 
-        $task=Task::with('users','executor_profiles','image_tasks','click_on_tasks','reitings')->find($request->id);
+        $task=Task::with('users','executor_profiles','image_tasks','click_on_tasks','click_on_tasks.executor_profiles.users','reitings')->find($request->id);
         return response()->json(['click-on-special-task'=> $task]);
 
     }

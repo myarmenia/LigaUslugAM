@@ -3,9 +3,9 @@
 
 
 @section('content')
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center" >
-        <div class="col-md-10 bg-white">
+<div class="container">
+    <div class="row d-flex justify-content-center mt-5" >
+        <div class="col-lg-12 col-md-10 bg-white mt-5">
             <div class="panel-body">
 
                 @if(session()->has('message'))

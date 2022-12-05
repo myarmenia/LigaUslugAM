@@ -18,7 +18,11 @@ class SubcategoryController extends Controller
     public function index()
     {
 
-        $all_subcategory = Subcategory::paginate(120);
+        // $all_subcategory = Subcategory::paginate(120);
+        $all_subcategory=Category::with('subcategories')->paginate(5);
+
+
+
         return view('admin.all_subcategory',compact('all_subcategory'));
     }
 
