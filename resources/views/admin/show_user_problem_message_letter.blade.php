@@ -7,8 +7,8 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row  justify-content-center ">
-        <div class="col-md-6 bg-white">
+    <div class="row my-5 justify-content-center ">
+        <div class="col-md-6 my-5 p-2  bg-white">
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}
@@ -30,7 +30,7 @@
             </div>
             @endif
 
-                <h3 class="p-2 py-3">{{$show_special_message->tasks->users->name}}</h3>
+                <h3 class="m-5 py-3">{{$show_special_message->tasks->users->name}}</h3>
                 <div class="p-3 bg-white">{{$show_special_message->problem_description}}</div>
 
                 <form method = "Post" action="{{route('sopport-feedback-problem-message')}}" class="my-5" >

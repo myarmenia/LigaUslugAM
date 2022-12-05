@@ -20,7 +20,7 @@ class SupportletterProblemMessageController extends Controller
      */
     public function index()
     {
-        $problem_message = ProblemMessage::with('tasks','tasks.users','tasks.executor_profiles')->where('status','not_answered')->orderBy('id','desc')->paginate(1);
+        $problem_message = ProblemMessage::with('tasks','tasks.users','tasks.executor_profiles')->where('status','not_answered')->orderBy('id','desc')->paginate(20);
 
         return view('admin.all_supports_letter_problem_message',compact('problem_message'));
     }

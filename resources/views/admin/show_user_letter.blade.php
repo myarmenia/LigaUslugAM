@@ -7,8 +7,9 @@
 
 @section('content')
 <div class="container">
-    <div class="row  justify-content-center ">
-        <div class="col-md-6 bg-white">
+    <div class="row  my-5  justify-content-center ">
+        <div class="col-md-6 my-5 p-2 bg-white">
+           
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}
