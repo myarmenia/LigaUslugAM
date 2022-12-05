@@ -6,15 +6,16 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('content')
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center ">
-        <div class="col-md-8" >
+<div class="container">
+    <div class="row d-flex my-5   justify-content-center ">
+        <div class="col-md-8 my-5" >
+        
             <table class="table table-bordered bg-white">
             <tbody>
                 <tr>
                     <td colspan="3" class="text-center"><h3 class="font-weight-bolder">{{ $executor_profile->users->name }} {{ $executor_profile->users->last_name }}</h3></td>
                 </tr>
-             
+
             <tr>
                 <td rowspan="6" style="height:200px;width:200px" >
                     @php
