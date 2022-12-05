@@ -3,11 +3,9 @@
 
 
 @section('content')
-
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center" >
-        <div class="col-md-12 bg-white">
-            <div class="panel-body">
+     <div class="container">
+        <div class="row">
+            <div class="panel-body justify-content-center my-5">
 
                 @if(session()->has('message'))
                     <div class="alert alert-success text-center">
@@ -30,7 +28,7 @@
                     </ul>
                 </div>
                 @endif
-                    <h3 class="my-3 font-weight-bold">Все заказчики</h3>
+                    <h3 class="my-5 font-weight-bold">Все заказчики</h3>
                 <table class="table table-bordered table-striped" >
                     <thead>
                     <tr>
@@ -50,7 +48,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                     @foreach($employer as $items)
+                    @foreach($employer as $items)
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td scope = "col">{{ $items->users->name }}</td>
@@ -82,10 +80,7 @@
                 <div class="pagination">
                     {{$employer->links()}}
                 </div>
-
             </div>
         </div>
     </div>
-</div>
-
 @endsection('content')

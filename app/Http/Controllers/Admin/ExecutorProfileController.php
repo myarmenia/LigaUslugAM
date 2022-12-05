@@ -17,10 +17,10 @@ class ExecutorProfileController extends Controller
     public function index(Request $request)
 
     {
-        $paginate=1;
+        $paginate=10;
         $i=$request['page'] ? ($request['page']-1)*$paginate : 0;
 
-        $all_executor=ExecutorProfile::orderBy('region','desc')->paginate(10);
+        $all_executor=ExecutorProfile::orderBy('region','desc')->paginate($paginate);
 
         return view('admin.all_executor',compact('all_executor','i'));
     }

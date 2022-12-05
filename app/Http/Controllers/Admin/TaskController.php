@@ -54,16 +54,7 @@ class TaskController extends Controller
 
         $show_task = Task::where('id',$id)->first();
         $executor=ExecutorProfile::where('id',$show_task->executor_profile_id)->first();
-    //   if(empty($show_task->executor_profile_id)){
-    //       dd("yes");
-    //   }else{
-    //       dd("no");
-    //   }
-        // $show_task_for_admin = new  FullTaskDescriptionForAdminResource($show_task);
-        // dd($show_task ->users->name);
-        // foreach($show_task_for_admin as $key=> $items){
-        //     dd($items->title);
-        // }
+   
         return view('admin.show_task',compact('show_task','executor'));
     }
 

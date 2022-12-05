@@ -2,10 +2,10 @@
 
 
 @section('content')
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center" >
-        <div class="col-md-10 bg-white">
-            <div class="panel-body">
+<div class="container">
+    <div class="row d-flex justify-content-center  my-5" >
+        <div class="col-md-10 bg-white my-5">
+            <div class="panel-body ">
 
                 @if(session()->has('message'))
                     <div class="alert alert-success">

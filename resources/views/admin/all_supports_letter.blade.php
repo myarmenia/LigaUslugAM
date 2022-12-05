@@ -2,10 +2,10 @@
 
 
 @section('content')
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center" >
+<div class="container">
+    <div class="row d-flex justify-content-center">
         <div class="col-md-10 bg-white">
-            <div class="panel-body">
+            <div class="panel-body justify-content-center my-5 p-2">
 
                 @if(session()->has('message'))
                     <div class="alert alert-success">
@@ -28,7 +28,7 @@
                     </ul>
                 </div>
                 @endif
-                    <h3 class="my-3 font-weight-bold">Все письма</h3>
+                    <h3 class="my-5 font-weight-bold p-2" >Все письма</h3>
                     @if (count($all_letter)<1)
                         <div class="p-3 h4">На данный момент писем нет</div>
                 @else

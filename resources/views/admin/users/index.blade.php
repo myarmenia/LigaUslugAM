@@ -4,9 +4,9 @@
 @section('content')
 <div class="container">
         <div class="row">
-            <div class="col-lg-12 margin-tb bg-white p-5">
+            <div class="col-lg-12 margin-tb my-3  p-5">
                 <div class="pull-left">
-                    <h2>Пользователи с ролями</h2>
+                    <h2 class="font-weight-bold my-3  pt-3">Пользователи с ролями</h2>
                 </div>
                 <div class="pull-right my-2">
                     <a class="btn btn-success" href="{{ route('users.create') }}">Создать нового пользователя с  ролью </a>

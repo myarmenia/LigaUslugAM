@@ -3,11 +3,11 @@
 
 @section('content')
 <section id="main-content">
-    <section class="wrapper ">
+    <section class="wrapper">
       <!--overview start-->
-      <div class="row  p-3 justify-content-center">
-        <div class="col-lg-5 bg-white">
-            <div class="panel-body mx-4">
+      <div class="row  my-5 justify-content-center">
+        <div class="col-lg-5 my-5 bg-white">
+            <div class="panel-body m-4">
 
                 @if(session()->has('message'))
                     <div class="alert alert-success">
@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 @endif
-                    <h3 class="my-3">Все Заказы</h3>
+                    <h3 class="my-5">Все Заказы</h3>
                     @if (count($task)<1)
                         <div class="p-3"> На данный момент нет задач․</div>
                     @else

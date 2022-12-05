@@ -13,7 +13,7 @@
 
 @section('content')
 <section id="main-content">
-    <section class="wrapper" >
+    <section class="wrapper">
       <!--overview start-->
       <div class="row justify-content-center mt-5">
         <div class="col-lg-6 bg-white mt-5">
@@ -58,6 +58,7 @@
 
                     @foreach( $all_subcategory as $items)
                         <tr>
+                            {{-- {{dd($int)}} --}}
                             <td>{{ $int++ }}</td>
                             <td>{!! $items->categories->category_name!!}</td>
                             <td>{!! $items->subcategory_name !!}</td>

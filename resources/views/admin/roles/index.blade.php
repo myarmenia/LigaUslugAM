@@ -5,9 +5,9 @@
 <div class="container">
 <div class="row">
 
-        <div class="col-lg-12 margin-tb">
+        <div class="col-lg-12 my-5 margin-tb">
             <div class="pull-left">
-                <h2>Управление ролями</h2>
+                <h2 class="font-weight-bold my-3  pt-3">Управление ролями</h2>
             </div>
             <div class="pull-right my-3">
             @can('role-create')

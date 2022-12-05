@@ -4,8 +4,8 @@
 @section('content')
 
 <div class="row  justify-content-center">
-    <div class="col-lg-8" >
-        <div class="panel-body">
+    <div class="col-lg-8 my-5" >
+        <div class="panel-body my-5">
             <div class="card px-5" style="background:#fff">
                     @if(session()->has('message'))
                         <div class="alert alert-success">

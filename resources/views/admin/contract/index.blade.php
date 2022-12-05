@@ -3,22 +3,18 @@
 
 @section('content')
 <div class="container">
-        <div class="row">
-
-
-
-
-            <div class="col-lg-8 margin-tb bg-white p-5">
+        <div class="row my-5">
+            <div class="col-lg-8 margin-tb bg-white p-5 my-5">
                 @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                         Были некоторые проблемы с вашим вводом.<br><br>
-                    <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                </div>
-            @endif
+                    <div class="alert alert-danger">
+                            Были некоторые проблемы с вашим вводом.<br><br>
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                 <p class="text-center">{{ $message }}</p>

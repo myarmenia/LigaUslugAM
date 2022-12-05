@@ -4,7 +4,7 @@
 @section('content')
 
  <div class="row  justify-content-center mt-5">
-        <div class="col-lg-8 mt-5">
+        <div class="col-lg-8 my-5 py-3">
             <div class="panel-body">
                 <div class="card bg-wight" >
                         @if(session()->has('message'))

@@ -2,10 +2,10 @@
 
 
 @section('content')
-<div class="container-fluid">
-    <div class="row p-3 justify-content-center" >
-        <div class="col-12 bg-white">
-            <div class="panel-body">
+<div class="container">
+    <div class="row my-5 justify-content-center " >
+        <div class="col-lg-12 ">
+            <div class="panel-body justify-content-center my-5 p-2 ">
 
                 @if(session()->has('message'))
                     <div class="alert alert-success">
@@ -28,7 +28,7 @@
                     </ul>
                 </div>
                 @endif
-                    <h3 class="my-3 font-weight-bold">Все исполнители</h3>
+                    <h3 class="my-5 font-weight-bold">Все исполнители</h3>
                     @if (count($all_executor)<1)
                         <div class="p-3 h4">На данный момент исполнителей нет</div>
                     @else

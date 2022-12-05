@@ -19,14 +19,16 @@ class SubcategoryController extends Controller
     public function index(Request $request)
     {
 
-        $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(120);
-        if($request['page']=='null'){
+        $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(100);
+
+        if($request['page']==null){
             $int=1;
+
         }else{
-            $int=$request['page']*120-120+1;
+            $int=$request['page']*100-100+1;
         }
-        // dd($request['page']);
-        // $all_subcategory=Category::with('subcategories')->paginate(5);
+
+       
 
 
 
