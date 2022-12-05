@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row d-flex my-5   justify-content-center ">
         <div class="col-md-8 my-5" >
-        
+
             <table class="table table-bordered bg-white">
             <tbody>
                 <tr>
@@ -144,7 +144,7 @@
                 <td colspan=2>
                     @foreach ($executor_profile->executor_education_certificates as $items)
 
-                    <img src="{{asset('admin/img/img_executor_certificate')}}/{{$items->certificate }}">
+                    <img src="{{asset('admin/img/img_executor_certificate')}}/{{$items->certificate }}"  class="mr-2" width="100px">
                     @endforeach
                 </td>
             </tr>
