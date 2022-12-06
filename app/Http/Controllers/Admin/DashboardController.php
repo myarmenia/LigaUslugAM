@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,13 +26,9 @@ class DashboardController extends Controller
 
             return view('auth.login');
        }
-        //   $unreadnotificationcount = Auth::user()->unreadNotifications->count();
-        //              $notification = Auth::user()->unreadNotifications;
-
-
-
-        // return view('layouts.admin_app')->with($unreadnotificationcount,'unreadnotificationcount');
-       return view('admin.index');
+       $task=Task::orderBy('id','desc')->paginate(10);
+       return view('admin.all_task',compact('task'));
+    //    return view('admin.index');
 
     }
 

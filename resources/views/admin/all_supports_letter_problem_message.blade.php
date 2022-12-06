@@ -36,7 +36,7 @@
                 <table class="table table-bordered table-striped" >
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">№</th>
                         <th scope="col">Имя задание</th>
                         <th scope="col">Имя заказчика</th>
                         <th scope="col">Эл. адрес</th>

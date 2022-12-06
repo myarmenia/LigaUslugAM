@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="container">
-<div class="row">
-    <div class="col-lg-12 margin-tb bg-white p-5">
+<div class="row my-5">
+    <div class="col-lg-12 my-5 margin-tb bg-white p-5">
         <div class="pull-left my-3">
             <h2>Уведомление об обратном звонке</h2>
         </div>
@@ -28,8 +28,8 @@
                     <th scope="col">№</th>
                     <th scope="col">Имя</th>
                     <th scope="col">Номер телефона</th>
-                    <th scope="col">Выбранный день</th>
-                    <th scope="col">Выбранное время</th>
+                    {{-- <th scope="col">Выбранный день</th>
+                    <th scope="col">Выбранное время</th> --}}
                 </tr>
                 </thead>
                 <tbody>
@@ -42,8 +42,8 @@
                        <td>{{ $count++ }}</td>
                        <td scope = "col">{{ $key->data['name'] }}</td>
                         <td scope = "col">{{ $key->data['phone_number'] }}</td>
-                        <td scope="col">{{$key->data['selected_date'] }}</td>
-                        <td scope="col">{{$key->data['selected_time'] }}</td>
+                        {{-- <td scope="col">{{$key->data['selected_date'] }}</td>
+                        <td scope="col">{{$key->data['selected_time'] }}</td> --}}
                         {{-- <td scope="col">{{$key->read_at }}</td> --}}
                         <td><a  href = "{{ route('callback.show', $key->id )}}"> Показать </a></td>
                     </tr>

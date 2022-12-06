@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="container">
-<div class="row">
-    <div class="col-lg-12 margin-tb bg-white p-5">
+<div class="row my-5">
+    <div class="col-lg-12  my-5 margin-tb bg-white p-5">
         <div class="pull-left my-3">
             <h2>Новые зарегистрированные пользователи</h2>
         </div>
@@ -25,8 +25,8 @@
              <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Имя исполнителя</th>
+                    <th scope="col">№</th>
+                    <th scope="col">Имя пользователя</th>
                     <th scope="col">Эл. адрес</th>
                     <th scope="col">Действие</th>
                 </tr>
@@ -42,7 +42,7 @@
                        <td>{{ $count++}}</td>
                         <td scope = "col">{{ $key->data['name'] }}</td>
                         <td scope="col">{{$key->data['email'] }}</td>
-              
+
                         <td><a  href = "{{ route('notification.show', $key->id )}}"> Показать </a></td>
 
                             {{-- <form role="form"  action="{{ route('user.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">

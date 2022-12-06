@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="container">
-<div class="row">
-    <div class="col-lg-12 margin-tb bg-white p-5">
+<div class="row my-5">
+    <div class="col-lg-12  my-5 margin-tb bg-white p-5">
         <div class="pull-left my-3">
             <h2>Уведомление</h2>
         </div>
@@ -25,7 +25,7 @@
              <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">№</th>
                     <th scope="col">Имя исполнителя</th>
                     <th scope="col">Эл. адрес</th>
                     <th scope="col">Посмотрен</th>
@@ -37,8 +37,6 @@
                 </thead>
                 <tbody>
 
-
-
                     <tr>
                        <td>{{ $notification_read->id }}</td>
                         <td scope = "col">{{ $notification_read->data['name'] }}</td>
@@ -48,10 +46,6 @@
 
                 </tbody>
             </table>
-
-
-
-
         </div>
     </div>
 

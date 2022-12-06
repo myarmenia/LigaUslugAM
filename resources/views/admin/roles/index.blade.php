@@ -11,7 +11,7 @@
             </div>
             <div class="pull-right my-3">
             @can('role-create')
-                <a class="btn btn-success" href="{{ route('roles.create') }}"> Создать новую рольe</a>
+                <a class="btn btn-success" href="{{ route('roles.create') }}"> Создать новую роль</a>
             @endcan
             </div>
         </div>
@@ -27,7 +27,7 @@
 
 <table class="table table-bordered">
   <tr>
-     <th>No</th>
+     <th>№</th>
      <th>Имя</th>
      <th width="400px">Действие</th>
   </tr>

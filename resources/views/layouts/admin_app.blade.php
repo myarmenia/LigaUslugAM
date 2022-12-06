@@ -399,16 +399,16 @@
                                     </div>
                                 @endif
                                 @if(admin_unreadnotification_users_give_question()!=0)
-                                <div class="d-flex align-items-center p-3 notify">
-                                    <div>
-                                        <div class="icon-circle bg-success p-3">
+                                    <div class="d-flex align-items-center p-3 notify">
+                                        <div>
+                                            <div class="icon-circle bg-success p-3">
 
-                                            <i class="fas fa-envelope fa-fw text-white"></i>
+                                                <i class="fas fa-envelope fa-fw text-white"></i>
+                                            </div>
                                         </div>
+                                        <div class="ml-2"> <a href="{{route('user-question.index')}}">Заданные вопросы<span class="badge badge-danger badge-counter mx-2">{{admin_unreadnotification_users_give_question()}}+</span></a></div>
                                     </div>
-                                    <div class="ml-2"> <a href="{{route('user-question.index')}}">Заданные вопросы<span class="badge badge-danger badge-counter mx-2">{{admin_unreadnotification_users_give_question()}}+</span></a></div>
-                                </div>
-                            @endif
+                                @endif
                             </div>
                         </li>
 
@@ -502,19 +502,18 @@
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a> --}}
-                                <div class="dropdown-divider"></div>
+                                {{-- <div class="dropdown-divider"></div> --}}
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                    {{-- <i class="fas fa-sign-out-alt fa-sm fa-fw  text-gray-400"></i> --}}
                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </a>
                             </div>
                         </li>
