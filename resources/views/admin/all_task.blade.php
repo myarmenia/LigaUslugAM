@@ -39,7 +39,7 @@
                     <table class="table table-bordered table-striped" >
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">№</th>
                             <th scope="col">Название заказа</th>
 
                             <th scope="col" class="text-center">Показать заказ </th>

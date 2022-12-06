@@ -24,7 +24,7 @@
                     <table class="table table-bordered">
                     <tr>
                     <th>No</th>
-                    <th>Имя исполнителя</th>
+                    <th>Имя пользователя</th>
                     <th>	Эл. адрес</th>
                     <th>Роль</th>
                     <th width="">Действие</th>

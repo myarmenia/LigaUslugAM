@@ -94,7 +94,6 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Добавить категорию:</h6>
                         <a class="collapse-item" href="{{route('category.index')}}">Все категории</a>
                         <a class="collapse-item" href="{{route('category.create')}}">Добавить категорию</a>
 
@@ -109,7 +108,7 @@
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Подкатегория</h6>
+
                         <a class="collapse-item" href="{{route('subcategory.index')}}">Все подкатегория</a>
                         <a class="collapse-item" href="{{route('subcategory.create')}}">Добавить подкатегорию</a>
 
@@ -124,7 +123,6 @@
                 </a>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Все заказы</h6>
                         <a class="collapse-item" href="{{route('task.index')}}">Все заказы</a>
 
 
@@ -139,7 +137,6 @@
                 </a>
                 <div id="collapseFifth" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Пользователи</h6>
                         <a class="collapse-item" href="{{route('user.index')}}">Все Пользователи</a>
                     </div>
                 </div>
@@ -152,7 +149,7 @@
                 </a>
                 <div id="collapseEleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Все заказчики</h6>
+
                         <a class="collapse-item" href="{{ route('employer.index')}}">Все заказчики</a>
 
 
@@ -167,7 +164,7 @@
                 </a>
                 <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Исполнители</h6>
+
                         <a class="collapse-item" href="{{route('executor.index')}}">Все исполнители</a>
                     </div>
                 </div>
@@ -176,11 +173,11 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSеven"
                     aria-expanded="true" aria-controls="collapseSеven">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Письма поддержки</span>
+                    <span>Служба поддержки</span>
                 </a>
                 <div id="collapseSеven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Все письма</h6>
+
                         <a class="collapse-item" href="{{route('letters.index')}}">Все письмa<br> для службы поддержки</a>
                         <a class="collapse-item" href="{{route('problem-message')}}">Все письмa <br>для модератора</a>
                     </div>
@@ -195,7 +192,7 @@
                 </a>
                 <div id="collapseeight" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Администраторы</h6>
+
                         <a class="collapse-item" href="{{route('users.index')}}">Администраторы</a>
                     </div>
                 </div>
@@ -208,7 +205,6 @@
                 </a>
                 <div id="collapsenine" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Управление ролями</h6>
                         <a class="collapse-item" href="{{route('roles.index')}}">Управление ролями</a>
                     </div>
                 </div>
@@ -221,7 +217,6 @@
                 </a>
                 <div id="collapseten" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Форма договора</h6>
                         <a class="collapse-item" href="{{route('contract.index')}}">Форма договора</a>
                     </div>
                 </div>
@@ -495,7 +490,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -506,7 +501,7 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
-                                </a>
+                                </a> --}}
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                    {{-- <i class="fas fa-sign-out-alt fa-sm fa-fw  text-gray-400"></i> --}}
@@ -543,7 +538,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy;  Webex2021</span>
+                        <span>Copyright &copy;  Webex2022</span>
                     </div>
                 </div>
             </footer>

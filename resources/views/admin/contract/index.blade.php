@@ -27,7 +27,7 @@
                 @endif
 
                 <div class="pull-left">
-                    <h3 class="my-3">Загрузить форма договора</h3>
+                    <h3 class="my-3">Загрузить форму договора</h3>
                 </div>
                 <form role="form" method="POST" action="{{route('contract.store')}}" enctype="multipart/form-data">
                     @csrf

@@ -101,9 +101,9 @@ class CategoryController extends Controller
             ]);
             if($update_category){
 
-                return redirect()->back()->with('message','Подтема обновлена ');
+                return redirect()->back()->with('message','Категория обновлена ');
             }else{
-                return redirect()->back()->with('message_error','Подтема необновлена ');
+                return redirect()->back()->with('message_error','Категория необновлена ');
             }
 
 

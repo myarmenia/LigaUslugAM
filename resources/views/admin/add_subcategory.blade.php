@@ -21,7 +21,7 @@
                             @csrf
 
                             <div class="form-group my-5">
-                                <label for="tema_id"><h4 class="font-weight-bold my-2"> Виберите название категорию </h4></label>
+                                <label for="tema_id"><h4 class="font-weight-bold my-2"> Виберите название категории</h4></label>
                                     <select name="category_id" id="tema_id" class="form-control p-2">
                                     <optgroup label="Виберите название категории">
                                         @foreach($category as $k=>$v)

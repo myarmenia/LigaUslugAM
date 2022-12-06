@@ -25,9 +25,9 @@
              <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">№</th>
                     <th scope="col">Имя</th>
-                    <th scope="col">Обратный номер телефона</th>
+                    <th scope="col">Номер телефона</th>
                     <th scope="col">Выбранный день</th>
                     <th scope="col">Выбранное время</th>
                 </tr>

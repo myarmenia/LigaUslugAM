@@ -33,7 +33,7 @@
                 <table class="table table-bordered table-striped" >
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">№</th>
                         <th scope="col">Имя пользователя</th>
                         <th scope="col">Фамилия пользователя</th>
                         <th scope="col">Эл. адрес</th>

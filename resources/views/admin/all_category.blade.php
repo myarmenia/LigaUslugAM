@@ -33,7 +33,7 @@
             <table class="table table-bordered table-striped" >
                 <thead>
                 <tr>
-                    <th scope="col" style="width:100px">ID</th>
+                    <th scope="col" style="width:100px">№</th>
                     <th scope="col" style="width:250px">Название категории</th>
 
                     <th scope="col" class= "text-center" colspan=2>Редактировать</th>

@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Подтвердить Пароль:</strong>
+                        <strong>Подтвердитe Пароль:</strong>
                         {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
                     </div>
                 </div>
