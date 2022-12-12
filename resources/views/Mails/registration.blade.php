@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 col-xs-12  mb-3">
-                   <h3>Уважаемый(ая) {{$user->name.' '.$user->last_name}}</h3>
+                   {{-- <h3>Уважаемый(ая) {{$user->name.' '.$user->last_name}}</h3> --}}
                     <p class="m-2"> Вы успешно зарегистрировались на сервисе Лига Услуг</p>
 
                     <h5>С уважением</h5>
@@ -20,7 +20,7 @@
                     </div>
 
                 </div>
-                <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="{{route('verification.resend')}}" style="color:white;text-decoration:none">email verifed</a></button></div>
+                <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="" style="color:white;text-decoration:none">email verifed</a></button></div>
 
                 {{-- <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="http://ligauslug.ru/" style="color:white;text-decoration:none">Перейти по ссылке</a></button></div> --}}
 

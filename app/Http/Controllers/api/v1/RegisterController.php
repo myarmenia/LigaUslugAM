@@ -48,12 +48,16 @@ class RegisterController extends Controller
         $request['remember_token'] = Str::random(10);
         $user = User::create($request->toArray());
 
-        // event(new Registered($user));
-        $user->notify(new NotifyNewUserRegistration($user));
+        event(new Registered($user));
+        // $user->notify(new NotifyNewUserRegistration($user));
 
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-        // $user->notify(new UserRegistrationAdmin($user));
+        $email=$request->email;
+    //     Mail::send('Mails.registration',['token'=>$token,'email'=>$email,'user'=>$user],function (Message $message) use ($email){
+    //         $message->to($email);
+    //         $message->subject('Регистрация нового пользователя');
+    // });
 
         // $response = ['user'=>$user,'token' => $token];
         $response = ['message' => 'Проверьте свою электронную почту!'];
