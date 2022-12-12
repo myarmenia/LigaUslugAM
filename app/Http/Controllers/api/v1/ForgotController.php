@@ -34,11 +34,11 @@ class ForgotController extends Controller
                 // in resources we create Mails folder  in
                 Mail::send('Mails.forgot',['token'=>$token,'email'=>$email],function (Message $message) use ($email){
                         $message->to($email);
-                        $message->subject('Reset your password');
+                        $message->subject('Восстановление пароля');
                 });
                 return response([
 
-                    'message'=>'Check your email!'
+                    'message'=>'Проверти вашу почту'
                 ]);
 
             }catch(\Exception $exception){

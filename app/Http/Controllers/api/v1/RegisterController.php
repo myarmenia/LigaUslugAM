@@ -9,11 +9,13 @@ use Illuminate\Auth\Events\Registered;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use App\Notifications\NotifyNewUserRegistration;
 use App\Notifications\UserRegistrationAdmin;
+use Illuminate\Mail\Message;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 use LVR\Phone\Phone;
@@ -25,10 +27,7 @@ use LVR\Phone\Digits;
 class RegisterController extends Controller
 
 {
-//     public function __construct()
-// {
-//     $this->middleware('client');
-// }
+
 
     public function register (Request $request) {
         $validator = Validator::make($request->all(), [
@@ -49,7 +48,9 @@ class RegisterController extends Controller
         $request['remember_token'] = Str::random(10);
         $user = User::create($request->toArray());
 
-        event(new Registered($user));
+        // event(new Registered($user));
+        $user->notify(new NotifyNewUserRegistration($user));
+
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         // $user->notify(new UserRegistrationAdmin($user));

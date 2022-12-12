@@ -109,7 +109,7 @@ class ProfileController extends Controller
 
         $geting_notification=$request->geting_notification;
         $updatenotification=User::where('id',$user_id)->update(['geting_notification'=>$geting_notification]);
-        return response(['message'=>'Вы успешно обновили свой увидомления по заказам']);
+        return response(['message'=>'Вы успешно обновили свои увидомления по заказам']);
     }
     public function userRegionAddress(Request $request){
         $user_id=Auth::user()->id;
@@ -123,9 +123,11 @@ class ProfileController extends Controller
     public function destroy($id){
 
         // $user = User::find( Auth::id());
-        $delete_user = User::where('id',Auth::id())->delete();
+        $delete_user = User::where('id',Auth::id())->with('executor_profiles')->delete();
+        $kk=ExecutorProfile::where('user_id',Auth::id())->with('executor_profile_work_experiences','tasks','executor_working_regions','executor_portfolios','executor_portfolio_links','executor_educations','executor_education_certificates','click_on_tasks','executor_categories','executor_subcategories','chats')->delete();
 
-        // $user->delete();
+
+         // $user->delete();
 
         return response()->json(["message"=>"deleted"]);
     }

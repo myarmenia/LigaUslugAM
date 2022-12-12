@@ -41,7 +41,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'email' => 'The :attribute must be a valid email address.',
+    'email' => ':attribute должен быть действующим адресом электронной почты.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
@@ -120,7 +120,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => ':attribute уже используется.',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -153,6 +153,17 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => 'пароль',
+        'name' => 'Имя',
+        'username' => 'Имя',
+        'family_name' => 'отчество',
+        'second_name' => 'фамилия',
+        'phone_number' => 'телефон',
+        'email'=>'Эл. адрес',
+        'textarea'=>'текстовая область',
+        'text'=>'текстовая область',
+
+      ],
 
 ];
