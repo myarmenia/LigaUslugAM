@@ -32,7 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phonenumber',
     ];
 
-
+// ----------------------------
     public function tasks(){
         return $this->hasMany(Task::class);
     }
@@ -95,7 +95,7 @@ class User extends Authenticatable implements MustVerifyEmail
             }
             return false;
         }
-        
+
         public function reitings(){
             return $this->hasMany(Reiting::class);
         }
