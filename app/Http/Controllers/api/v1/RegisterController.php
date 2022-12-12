@@ -48,8 +48,8 @@ class RegisterController extends Controller
         $request['remember_token'] = Str::random(10);
         $user = User::create($request->toArray());
 
-        // event(new Registered($user));
-        $user->notify(new NotifyNewUserRegistration($user));
+        event(new Registered($user));
+        // $user->notify(new NotifyNewUserRegistration($user));
 
 
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
