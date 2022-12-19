@@ -131,6 +131,8 @@ Route::prefix('/user')->group( function(){
         Route::post('/reject-task-executor',[TaskController::class,'rejectTaskExecutor']);
         // show all task to executor Не выбранные заказы
         Route::get('/show-all-tasks-to-executor',[TaskController::class,'showAllTaskToExecutor']);
+        // write spacial route for socket getting count of show-all-tasks-to-executor  Не выбранные заказы
+        Route::get('/show-all-tasks-to-executor-count',[TaskController::class,'showAllTaskToExecutorCount']);
         Route::post('/click-on-special-task',[TaskController::class,'showClikTask']);
         // Route::get('/click-on-special-task/{$id}',[TaskController::class,'show']);
         // filter section start        Route::get('/show-all-tasks-to-executor',[TaskController::class,'showAllTaskToExecutor']);

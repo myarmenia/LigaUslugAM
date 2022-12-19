@@ -7,6 +7,7 @@ use App\Events\NotifyAsTaskExecutor as EventsNotifyAsTaskExecutor;
 use App\Events\NotifyAsTaskExecutorEvent;
 use App\Events\RejectTaskExecutor;
 use App\Events\RejectTaskExecutorNotSelected;
+use App\Events\ShowAllTasksCountToExecutorEvent;
 use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -466,8 +467,33 @@ class   TaskController extends Controller
                                  ['executor_profile_id','=',Null],
                                  ['user_id','!=', $user_id]
                                  ])->with('users')->with('image_tasks')->orderBy('id','desc')->get();
+        $notSelectedTaskCountforexecutor=count($task);
 
-        return response()->json(['Tasks'=>$task]);
+      
+        return response()->json(['task_length'=>$notSelectedTaskCountforexecutor,'Tasks'=>$task]);
+    }
+    public function showAllTaskToExecutorCount(){
+        $user_id=Auth::id();
+        $executor=ExecutorProfile::where('user_id', $user_id)->first();
+        $executor_category=ExecutorCategory::where('executor_profile_id',$executor->id)->pluck('category_name');
+
+        $task=Task::whereIn('category_name',$executor_category)
+                    ->where([
+                            ['executor_profile_id','=',Null],
+                            ['user_id','!=', $user_id]
+                            ])->with('users')->with('image_tasks')->orderBy('id','desc')->pluck('id');
+       $click_on_task=ClickOnTask::whereIn('task_id',$task)->where([[ 'executor_profile_id','=',$executor->id],['status','=',false]])->pluck('task_id');
+         $task=Task::whereIn('category_name',$executor_category)
+                         ->whereNotIn('id',$click_on_task)
+                         ->where([
+                                 ['executor_profile_id','=',Null],
+                                 ['user_id','!=', $user_id]
+                                 ])->with('users')->with('image_tasks')->orderBy('id','desc')->get();
+        $notSelectedTaskCountforexecutor=count($task);
+
+        event(new ShowAllTasksCountToExecutorEvent( $executor->users->id,$notSelectedTaskCountforexecutor));
+        return response()->json(['task_length'=>$notSelectedTaskCountforexecutor]);
+
     }
 
 

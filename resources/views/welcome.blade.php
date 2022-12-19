@@ -199,6 +199,10 @@
     .listen('.unreadnotificationcount', (e)=>{
         console.log(e)
     })
+    Echo.channel('showAllTaskCountforexecutor_chanal.35')
+    .listen('.showAllTaskCountforexecutor', (e)=>{
+        console.log(e)
+    })
 
         </script>
 
