@@ -65,7 +65,7 @@
             <tr>
               <td colspan=3>
                     @foreach ($executor_profile->executor_working_regions as $items)
-                                <p>{{$items->executorwork_region}}</p>
+                                <p>{{$items->working_rayon}}</p>
                     @endforeach
                 </td>
             </tr>

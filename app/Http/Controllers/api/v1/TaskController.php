@@ -50,6 +50,21 @@ class   TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $from;
+    public $to;
+    public $status;
+    public function  getList(Request $request){
+        $this->from=$request->from;
+        $this->to=$request->to;
+        $this->status=$request->status;
+        $task=Task::where('user_id',Auth::id())->where(function($query) use ($request){
+
+                // $query->orWhere([
+                //         ['p', '>=', $this-> task_price['price_from']],
+                //         ['price_to',   '<=', $this->task_price['price_to']],
+                //     ]);
+        });
+    }
 
     public function createNewTask(CheckTaskValidation $request){
 

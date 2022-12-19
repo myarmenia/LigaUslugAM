@@ -189,7 +189,7 @@
             </div>
             <div class="tab-pane fade executor"  id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                @if(empty($show_task->executor_profile_id))
-                    <div class="mg-2 p-5 bg-white"><h4 class="text-center">В настоящее время у задание нет исполнителя.</h4></div>
+                    <div class="mg-2 p-5 bg-white"><h4 class="text-center">В настоящее время у задания нет исполнителя.</h4></div>
 
                 @else
 

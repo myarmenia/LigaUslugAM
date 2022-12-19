@@ -181,6 +181,8 @@ Route::prefix('/user')->group( function(){
         Route::post('/get-phone-number',[SmsController::class,'GetPhoneNumber']);
         Route::post('/phone-number-verification',[SmsController::class,'getSms']);
 
+        Route::post('/task_list', [TaskController::class,'getList']);
+
     });
 
 
