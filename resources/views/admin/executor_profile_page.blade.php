@@ -64,9 +64,13 @@
             </tr>
             <tr>
               <td colspan=3>
+
                     @foreach ($executor_profile->executor_working_regions as $items)
-                                <span class="bg-light m-2 p-2">{{$items->working_rayon}}</span>
+                                <p class="d-inline-block bg-light m-2 p-2 " >{{$items->working_rayon}}</p>
                     @endforeach
+
+
+
                 </td>
             </tr>
             <tr>
