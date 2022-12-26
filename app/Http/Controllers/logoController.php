@@ -1,38 +1,31 @@
 <?php
 namespace App\Http\Controllers;
-use app\Services;
+
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Mail;
+use App\Mail\MyDemoMail;
+use Illuminate\Support\Facades\Mail as FacadesMail;
+
 // use Illuminate\Support\Facades\App;
 
 // require_once 'App\Services\AnimalService';
 
 
-use Illuminate\Http\Request;
-
 class logoController extends Controller
 {
-    protected AnimalService $animalService;
 
-    public function __construct()
-    {
 
-        $this->middleware('permission:add-child', ['only' => ['create']]);
-        $this->updateService = new updateService();
-    }
     public function index(){
-    // $animals=[
-    //         { "type":"dog",
-    //           "age":  10
-    //         },
-    //          {
-    //           "type": "dog",
-    //           "age" : 1}
-    //         ];
-    // dd(json_decode($animals,true));
-        $animals = new AnimalService();
-        // $animals->name="Dog";
-        dd($animals);
+         $file=public_path('pdf/new.pdf');
 
-        // return view('Mails.newjob');
+        $myEmail = 'armine.khachatryan1982@gmail.com';
+     
+        	Mail::to($myEmail)->send(new MyDemoMail( $file));
+        dd("Mail Send Successfully");
+
+    	// Mail::to($myEmail)->send(new MyDemoMail());
+        // dd("Mail Send Successfully");
 
     }
 }
