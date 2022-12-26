@@ -117,7 +117,7 @@ Route::prefix('/user')->group( function(){
         Route::get('/in-process-task',[TaskController::class,'inProcessTask']);
         //employer created tasks which executor not applied
         Route::get('/not-applied-task',[TaskController::class,'notAppliedTask']);
-        //
+        //employer created tasks which executor  applied
         Route::get('/responded-executor',[TaskController::class,'respondedExecutor']);
         Route::post('/employer-watched-click',[ClickOnTaskController::class,'employerWatchedClick']);
 

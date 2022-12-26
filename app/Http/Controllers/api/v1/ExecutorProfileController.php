@@ -63,6 +63,7 @@ class ExecutorProfileController extends Controller
 
 
     public function updateExecutorPersonalData (Request $request){
+
         $user_id=Auth::user()->id;
         $users=User::where('id',Auth::id())->update($request->all());
         $user = User::where('id',$user_id)->first();
@@ -333,7 +334,7 @@ class ExecutorProfileController extends Controller
             foreach($request->executor_education_certificates as  $items)
             {
                         $certificate_base = $items['certificate_base'];
-                       
+
                           // first explode as "," (data:image/jpeg;base64,)
                           $certificate_base_explode = explode(",", $certificate_base);
                         // second we explode  as ";"(data:image/jpeg)
