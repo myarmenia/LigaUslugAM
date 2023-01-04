@@ -50,15 +50,15 @@
 
                 @else
 
-                        <table class="table table-bordered">
+                    <table class="table table-bordered">
                         <tr>
                             <th>No</th>
                             <th>Имя файла </th>
                             <th width="">Действие</th>
                         </tr>
-                        @foreach($contract as $items)
+                        @foreach($contract as $key=>$items)
                         <tr>
-                            <td>1</td>
+                            <td>{{++$key}}</td>
                             <td><a href="{{('/admin/contract')}}/{{ $items->contract_path}}" target="_blank">{{ $items->contract_path}}</a></td>
                             <td>
                                 <form role="form"  action="{{ route('contract.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
@@ -80,7 +80,7 @@
                             </td> --}}
                             @endforeach
                         </tr>
-                        </table>
+                    </table>
                 @endif
 
                     {{-- {!! $data->render() !!} --}}

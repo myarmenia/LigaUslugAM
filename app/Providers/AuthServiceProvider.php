@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
@@ -24,8 +26,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
+        // $this->registerPolicies();
 
-        Passport::routes();
+        // Passport::routes();
+        VerifyEmail::toMailUsing(function ($notifiable, $url){
+            return (new MailMessage)
+            ->subject('Подтвердите адрес электронной почты')
+            ->line('Нажмите кнопку ниже, чтобы подтвердить свой адрес электронной почты.')
+            ->action('Подтвердите адрес электронной почты',$url);
+        });
     }
 }

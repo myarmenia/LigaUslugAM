@@ -46,11 +46,15 @@ class ContractController extends Controller
 
 
                 $file = $request->file('contract_path');
-                $filename ='contract.'.$file->getClientOriginalName();
-                $name = "contract.".$file->extension();
-                $file->move(public_path('admin/contract'),$name);
+                // $filename ='contract.'.$file->getClientOriginalName();
+                $filename =$file->getClientOriginalName();
+                // dd($filename);
+                // $name = "contract.".$file->extension();
+                $name = $file->extension();
+
+                $file->move(public_path('admin/contract'),$filename);
                 $upload = Contract::create([
-                  "contract_path" =>$name
+                  "contract_path" =>$filename
                 ]);
                   if($upload){
                       return redirect()->back()->with('success','Файл был успешно загружен');

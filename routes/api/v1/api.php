@@ -121,10 +121,9 @@ Route::prefix('/user')->group( function(){
         Route::get('/responded-executor',[TaskController::class,'respondedExecutor']);
         Route::post('/employer-watched-click',[ClickOnTaskController::class,'employerWatchedClick']);
 
-
-
         Route::post('meeting-with-responded-executor',[TaskController::class,'meetingWithRespondedExecutor']);
-
+        // employer click on special task
+        // Route::get('tasks/{id}',[TaskController::class,'']);
 
         //selecting task executor
         Route::post('/select-task-executor',[TaskController::class,'selectTaskExecutor']);
@@ -185,6 +184,7 @@ Route::prefix('/user')->group( function(){
 
         Route::post('/task_list', [TaskController::class,'getList']);
 
+
     });
 
 
@@ -192,9 +192,9 @@ Route::prefix('/user')->group( function(){
 
     Route::post('/aplliedWork',[AppliedWorkController::class,'aplliedWork'])->middleware('auth:api');
 
-
-
     Route::get('/send-testenrollment',[TestEnrollmentController::class,'sendTestNotification'])->middleware('auth:api');
+
+
 });
 
 Route::prefix('/pages')->group(function(){
