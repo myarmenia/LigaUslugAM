@@ -32,8 +32,7 @@ class ExecutorProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function
-    index()
+    public function index()
     {
 
 
@@ -67,22 +66,32 @@ class ExecutorProfileController extends Controller
         $user_id=Auth::user()->id;
         $users=User::where('id',Auth::id())->update($request->all());
         $user = User::where('id',$user_id)->first();
+
              $settings = Auth::user()->user_settings();
+
                if($user->gender==null){
                    $settings['gender'] = 0;
+                   $user->settings()->apply((array)$settings);
                }else{
+
                    $settings['gender'] = 1;
+                   $user->settings()->apply((array)$settings);
                }
                if($user->birth_date==null){
                    $settings['birth_date'] = 0;
+                   $user->settings()->apply((array)$settings);
                }else{
                    $settings['birth_date'] = 1;
+                   $user->settings()->apply((array)$settings);
                }
                if($user->about_me==null){
                    $settings['about_me'] = 0;
+                   $user->settings()->apply((array)$settings);
                }else{
                    $settings['about_me'] = 1;
+                   $user->settings()->apply((array)$settings);
                }
+
 
 
                 $user = User::where('id',$user_id);
@@ -192,8 +201,8 @@ class ExecutorProfileController extends Controller
 
                      $executorprofile=User::where('id',Auth::id())->update([
                              "region" => $item['region'],
-                            "address" => $item['address'],
                             "country_name" => $item['country_name'],
+                            "address" => $item['address'],
                         ]);
                 };
 
@@ -217,21 +226,49 @@ class ExecutorProfileController extends Controller
             }
             // checking data for  model settings
             $settings = Auth::user()->user_settings();
-            $settings['region'] = 1;
-            $settings['address'] = 1;
-            $settings['executorwork_region'] = 1;
-            Auth::user()->settings()->apply((array)$settings);
+                $user=User::where('id',Auth::id())->first();
+                if($user->region==null){
+                    $settings['region'] = 0;
+                }else{
+                    $settings['region'] = 1;
+                }
+                if($user->address==null){
+                    $settings['address'] = 0;
+                }else{
+                    $settings['address'] = 1;
+                }
+                $executor=ExecutorProfile::where('user_id',Auth::id())->first();
+                $executor_working_region_isset=ExecutorWorkingRegion::where('executor_profile_id', $executor->id)->first();
+                if($executor_working_region_isset){
+
+                    $settings['executorwork_region'] = 1;
+                }else{
+
+                    $settings['executorwork_region'] = 0;
+                }
+
 
 
 
             $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
-
+            // dd($settings);
             return ExecutorProfileResource::collection($show_executor_profile);
 
         }
     }
 
-
+    // {"executorwork_region":"Новосибирская область",
+    //     "working_rayons":[
+    //                         {
+    //                             "id":1,
+    //                             "working_rayon":"Абанский район"
+    //                         },
+    //                         {
+    //                          "id":3,
+    //                          "working_rayon":"Балахтинский район"
+    //                          }
+    //                       ]
+    //     }
 
     public function portfolioBase(Request $request){
         $user_id = Auth::user()->id;
@@ -388,6 +425,7 @@ class ExecutorProfileController extends Controller
 
      }
     public  function asInApplication(){
+
                   $user_id = Auth::user()->id;
         $executor_profiles = ExecutorProfile::where('user_id',$user_id)->first();
       $executor_categories = $executor_profiles->executor_categories->makeHidden([ "id","executor_profile_id","created_at", "updated_at"]);

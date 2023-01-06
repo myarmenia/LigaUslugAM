@@ -35,6 +35,7 @@ use App\Http\Controllers\api\v1\SmsController;
 use App\Http\Controllers\api\v1\TestEnrollmentController;
 use App\Http\Controllers\Pages\CallbackController;
 use App\Http\Controllers\Pages\ExecutorProfileController as PagesExecutorProfileController;
+use App\Http\Controllers\Pages\FindExecutorController;
 use App\Http\Controllers\Pages\GiveQuestionController;
 use App\Http\Controllers\Pages\LocalityController;
 use App\Http\Controllers\Pages\RayonController;
@@ -209,6 +210,8 @@ Route::prefix('/pages')->group(function(){
     Route::post('/givequestiontoadmin',[GiveQuestionController::class,'store']);
     // porz kadastry hamar
     Route::post('/upload_file_test',[GiveQuestionController::class,'uploadFileTest']);
+
+    Route::get('/subcategory/{subcategoryName}/show',[FindExecutorController::class,'show']);
 });
 
 

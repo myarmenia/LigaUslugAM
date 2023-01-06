@@ -45,9 +45,6 @@ class ProfileController extends Controller
         }
 
 
-
-
-
         $response = ['message' => 'Вы успешно обновили аватар своего профиля!!','img_name'=>$filename,'url'=>'https://backend.ligauslug.ru/admin/img/img_user/'];
         return response()->json($response);
 
