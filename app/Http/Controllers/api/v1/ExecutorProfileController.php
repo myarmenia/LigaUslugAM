@@ -339,7 +339,7 @@ class ExecutorProfileController extends Controller
     }
     public function educationAndCertificates(Request $request){
 
-        // dd($request->executor_education_certificates);
+        // dd($request->executor_educations[0]['education_place']);
         $user_id = Auth::user()->id;
 
         $settings = Auth::user()->user_settings();
@@ -347,19 +347,38 @@ class ExecutorProfileController extends Controller
         $executor_profiles = ExecutorProfile::where('user_id',$user_id)->first();
 
         if($request->has('executor_educations')){
+
             $executor_education =ExecutorEducation::where('executor_profile_id',$executor_profiles->id)->first();
 
             if($executor_education){
 
+                if($request->executor_educations[0]['education_place']==null){
+                    $validator = Validator::make($request->all(), [
+                        'education_place' =>'required',
+                    ]);
 
-                 foreach($request->executor_educations as $value){
+                    if ($validator->fails()) {
 
-                     $createExecutorEducations=ExecutorEducation::where('executor_profile_id',  $executor_profiles->id)->update([
-                                         'education_type' => $value['education_type'],
-                                        'education_place' => $value['education_place']
 
-                                ]);
+                          return response()->json(['errors'=>$validator->errors()], 404);
+                    }
+                   
+
+
+
+
                 }
+                foreach($request->executor_educations as $value){
+
+                    $createExecutorEducations=ExecutorEducation::where('executor_profile_id',  $executor_profiles->id)->update([
+                                        'education_type' => $value['education_type'],
+                                       'education_place' => $value['education_place']
+
+                               ]);
+                }
+
+
+
 
 
             }else{
