@@ -264,7 +264,9 @@ class ExecutorProfileController extends Controller
 
 
     public function portfolioBase(Request $request){
+
         $user_id = Auth::user()->id;
+        // dd($user_id);
         if($request->has('executor_portfolios')){
             $executor_profiles = ExecutorProfile::where('user_id',$user_id)->first();
 
@@ -293,23 +295,27 @@ class ExecutorProfileController extends Controller
             }
         }
         if($request->has('executor_portfolio_links')){
+
+            // dd($request->executor_portfolio_links[0]);
+
             $executor_portfolio_delete=ExecutorPortfolioLink::where('executor_profile_id',$executor_profiles->id)->delete();
+            if($request->executor_portfolio_links[0]['portfolio_link']!=null){
+                foreach($request->executor_portfolio_links as  $items)
+                {
+                        $createExecutorPortfolioLink = ExecutorPortfolioLink::create([
+                            'executor_profile_id' => $executor_profiles->id,
+                                 'portfolio_link' => $items['portfolio_link'],
 
-            foreach($request->executor_portfolio_links as  $items)
-            {
-
-                    $createExecutorPortfolioLink = ExecutorPortfolioLink::create([
-                        'executor_profile_id' => $executor_profiles->id,
-                             'portfolio_link' => $items['portfolio_link'],
-
-                    ]);
+                        ]);
+                }
             }
+
 
         }
         // checking data for  model settings
         $user=User::where('id',Auth::id())->first();
         $settings = Auth::user()->user_settings();
-        $executorportfolio = ExecutorPortfolio:: where('executor_profile_id',$executor_profiles->id)->first();
+        $executorportfolio = ExecutorPortfolio::where('executor_profile_id',$executor_profiles->id)->first();
         if( $executorportfolio){
             $settings['portfolio_pic'] = 1;
             $user->settings()->apply((array)$settings);
