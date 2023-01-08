@@ -312,18 +312,18 @@ class ExecutorProfileController extends Controller
         $executorportfolio = ExecutorPortfolio:: where('executor_profile_id',$executor_profiles->id)->first();
         if( $executorportfolio){
             $settings['portfolio_pic'] = 1;
-            $user->settings()->settings()->apply((array)$settings);
+            $user->settings()->apply((array)$settings);
         }else{
             $settings['portfolio_pic'] = 0;
-            $user->settings()->settings()->apply((array)$settings);
+            $user->settings()->apply((array)$settings);
         }
         $executorportfoliolink =  ExecutorPortfolioLink:: where('executor_profile_id',$executor_profiles->id)->first();
         if( $executorportfoliolink){
             $settings['portfolio_link'] = 1;
-            $user->settings()->settings()->apply((array)$settings);
+            $user->settings()->apply((array)$settings);
         }else{
             $settings['portfolio_link'] = 0;
-            $user->settings()->settings()->apply((array)$settings);
+            $user->settings()->apply((array)$settings);
         }
         // Auth::user()->settings()->apply((array)$settings);
 // dd($settings);
