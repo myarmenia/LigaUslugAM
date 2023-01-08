@@ -37,6 +37,8 @@ class ExecutorProfileController extends Controller
 
 
         $user=Auth::user()->id;
+        $settings = Auth::user()->user_settings();
+        // dd($settings);
         $show_user=User::where('id',$user)->first();
 
         $executor_profiles=ExecutorProfile::with('reiting')->where('user_id',$user)->first();
@@ -111,14 +113,17 @@ class ExecutorProfileController extends Controller
     }
 
     public function professionAndExperience(Request $request){
-
+        // dd(444);
         $user_id=Auth::user()->id;
+        $settings = Auth::user()->user_settings();
+        // dd($settings);
         $executor_profiles=ExecutorProfile::where('user_id',$user_id)->first();
 
         if($request->has('profession_and_experience')){
             foreach($request->profession_and_experience as $value){
                 $createExecutorCategory=ExecutorCategory::where('executor_profile_id',$executor_profiles->id)->delete();
                 foreach($value['executor_categories']  as $item){
+                    // var_dump($item);
                     $createExecutorCategory=ExecutorCategory::create([
                                     'executor_profile_id'=>$executor_profiles->id,
                                     'category_name'=>$item['category_name'],
@@ -152,7 +157,7 @@ class ExecutorProfileController extends Controller
 
                 // checking if executor has a category or subcategory  or working place  if there is one record then settings turned 0 to 1
 
-                    $settings = Auth::user()->user_settings();
+
                     $executorcategory =ExecutorCategory:: where('executor_profile_id',$executor_profiles->id)->first();
                     if($executorcategory){
                         $settings['category_name'] = 1;
@@ -172,7 +177,7 @@ class ExecutorProfileController extends Controller
                         $settings['working_place'] = 0;
                     }
                     Auth::user()->settings()->apply((array)$settings);
-
+                    //  dd($settings);
 
 
 
@@ -233,6 +238,7 @@ class ExecutorProfileController extends Controller
                     $settings['region'] = 1;
                 }
                 if($user->address==null){
+
                     $settings['address'] = 0;
                 }else{
                     $settings['address'] = 1;
@@ -246,29 +252,16 @@ class ExecutorProfileController extends Controller
 
                     $settings['executorwork_region'] = 0;
                 }
-
-
-
-
+            Auth::user()->settings()->apply((array)$settings);
+//   dd($settings);
             $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
-            // dd($settings);
+
             return ExecutorProfileResource::collection($show_executor_profile);
 
         }
     }
 
-    // {"executorwork_region":"Новосибирская область",
-    //     "working_rayons":[
-    //                         {
-    //                             "id":1,
-    //                             "working_rayon":"Абанский район"
-    //                         },
-    //                         {
-    //                          "id":3,
-    //                          "working_rayon":"Балахтинский район"
-    //                          }
-    //                       ]
-    //     }
+
 
     public function portfolioBase(Request $request){
         $user_id = Auth::user()->id;
@@ -314,6 +307,7 @@ class ExecutorProfileController extends Controller
 
         }
         // checking data for  model settings
+        $settings = Auth::user()->user_settings();
         $executorportfolio = ExecutorPortfolio:: where('executor_profile_id',$executor_profiles->id)->first();
         if( $executorportfolio){
             $settings['portfolio_pic'] = 1;
@@ -326,14 +320,19 @@ class ExecutorProfileController extends Controller
         }else{
             $settings['portfolio_link'] = 0;
         }
-
+        Auth::user()->settings()->apply((array)$settings);
+// dd($settings);
         $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
         return ExecutorProfileResource::collection($show_executor_profile);
 
     }
     public function educationAndCertificates(Request $request){
+
         // dd($request->executor_education_certificates);
         $user_id = Auth::user()->id;
+
+        $settings = Auth::user()->user_settings();
+        // dd($settings['education_type']);
         $executor_profiles = ExecutorProfile::where('user_id',$user_id)->first();
 
         if($request->has('executor_educations')){
@@ -409,16 +408,23 @@ class ExecutorProfileController extends Controller
 
         }
         // checking data for  model settings
+        // dd($settings);
         $executoreducation = ExecutorEducation:: where('executor_profile_id',$executor_profiles->id)->first();
         if($executoreducation){
              $settings['education_type'] = 1;
             $settings['education_place'] = 1;
+        }else{
+            $settings['education_type'] = 0;
+            $settings['education_place'] = 0;
         }
         $executoreducationcertificate =  ExecutorEducationCertificate::where('executor_profile_id',$executor_profiles->id)->first();
         if($executoreducationcertificate){
             $settings['certificate'] = 1;
+        }else{
+            $settings['certificate'] = 0;
         }
-
+         Auth::user()->settings()->apply((array)$settings);
+    //    dd($settings);
         $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
         return ExecutorProfileResource::collection($show_executor_profile);
 

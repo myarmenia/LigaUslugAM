@@ -77,10 +77,13 @@ class User extends Authenticatable implements MustVerifyEmail
 // making settings for users, for that we install glorand laravel package, and then checking if i there any data in settings column  if not we apply
         public function user_settings(){
                 $user = Auth::user();
+
             $settings = $user->settings()->get();
+// dd($settings);
             if(!$settings){
                 $settings = User::settings_array();
             }
+            // dd( $settings);
             return $settings;
         }
 

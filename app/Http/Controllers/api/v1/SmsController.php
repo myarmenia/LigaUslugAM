@@ -74,20 +74,20 @@ class SmsController extends Controller
                     $user=User::where('id',$user_id)->update([
                         "phone_status"=>"verified"
                     ]);
-                    if($user){
+               
                         $check_phone_number_verified=User::where('id',Auth::id())->first();
                         if($check_phone_number_verified->phone_status=="verified"){
                             $settings = Auth::user()->user_settings();
 
                             $settings['phone_status'] = 1;
                             // dd($settings);
-
-
+                            $check_phone_number_verified->settings()->apply((array)$settings);
+                            return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
                         }
 
 
-                        return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
-                    }
+
+
                 }else{
                     return response()->json(['message'=>"Ваш номер не подтвержден"]);
                 }
