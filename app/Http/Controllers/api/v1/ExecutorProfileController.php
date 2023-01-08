@@ -307,20 +307,25 @@ class ExecutorProfileController extends Controller
 
         }
         // checking data for  model settings
+        $user=User::where('id',Auth::id())->first();
         $settings = Auth::user()->user_settings();
         $executorportfolio = ExecutorPortfolio:: where('executor_profile_id',$executor_profiles->id)->first();
         if( $executorportfolio){
             $settings['portfolio_pic'] = 1;
+            $user->settings()->settings()->apply((array)$settings);
         }else{
             $settings['portfolio_pic'] = 0;
+            $user->settings()->settings()->apply((array)$settings);
         }
         $executorportfoliolink =  ExecutorPortfolioLink:: where('executor_profile_id',$executor_profiles->id)->first();
         if( $executorportfoliolink){
             $settings['portfolio_link'] = 1;
+            $user->settings()->settings()->apply((array)$settings);
         }else{
             $settings['portfolio_link'] = 0;
+            $user->settings()->settings()->apply((array)$settings);
         }
-        Auth::user()->settings()->apply((array)$settings);
+        // Auth::user()->settings()->apply((array)$settings);
 // dd($settings);
         $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
         return ExecutorProfileResource::collection($show_executor_profile);

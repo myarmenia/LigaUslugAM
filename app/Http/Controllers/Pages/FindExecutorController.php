@@ -50,7 +50,7 @@ class FindExecutorController extends Controller
     {
 
         $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
-        dd($findExecutorId);
+        // dd($findExecutorId);
         $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users')->get();
         dd($findExecutor);
     }
