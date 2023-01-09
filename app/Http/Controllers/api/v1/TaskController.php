@@ -469,7 +469,7 @@ class   TaskController extends Controller
                                  ])->with('users')->with('image_tasks')->orderBy('id','desc')->get();
         $notSelectedTaskCountforexecutor=count($task);
 
-      
+
         return response()->json(['task_length'=>$notSelectedTaskCountforexecutor,'Tasks'=>$task]);
     }
     public function showAllTaskToExecutorCount(){
@@ -565,7 +565,7 @@ class   TaskController extends Controller
     }
    public function showClikTask(Request $request){
 
-        $task=Task::with('users','executor_profiles','image_tasks','click_on_tasks','click_on_tasks.executor_profiles.users','reitings')->find($request->id);
+        $task=Task::with('users','executor_profiles.users','image_tasks','click_on_tasks','click_on_tasks.executor_profiles.users','reitings')->find($request->id);
         return response()->json(['click-on-special-task'=> $task]);
 
     }

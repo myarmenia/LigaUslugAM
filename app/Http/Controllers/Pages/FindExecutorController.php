@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\ExecutorProfile;
 use App\Models\ExecutorSubcategory;
+use App\Models\ExecutorWorkingRegion;
 use Illuminate\Http\Request;
 
 class FindExecutorController extends Controller
@@ -50,9 +51,30 @@ class FindExecutorController extends Controller
     {
 
         $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
-        // dd($findExecutorId);
-        $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users')->get();
-        dd($findExecutor);
+
+        $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users')->paginate(1);
+        return response()->json(['message'=>$findExecutor]);
+    }
+    public function filter(Request $request){
+        $subcategory_array=[];
+        foreach($request->executor_subcategory as $item){
+            array_push($subcategory_array,$item);
+        }
+
+        // $working_region=ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
+        // $matched_executor = ExecutorProfile::whereIn('id',$working_region);
+
+        //     $working_region=ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
+        //     $findExecutorId = ExecutorSubcategory::whereIn('subcategory_name',$subcategory_array)->pluck('executor_profile_id');
+        //     $matched_executor= $matched_executor->whereIn('id',$findExecutorId)->paginate(1);
+
+            $findExecutorId = ExecutorSubcategory::whereIn('subcategory_name',$subcategory_array)->pluck('executor_profile_id');
+            $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId);
+            $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
+            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
+
+            return response()->json(['executor'=>$matched_executor],200);
+
     }
 
     /**

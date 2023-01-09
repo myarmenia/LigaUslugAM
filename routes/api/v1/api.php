@@ -134,8 +134,8 @@ Route::prefix('/user')->group( function(){
         // write spacial route for socket getting count of show-all-tasks-to-executor  Не выбранные заказы
         Route::get('/show-all-tasks-to-executor-count',[TaskController::class,'showAllTaskToExecutorCount']);
         Route::post('/click-on-special-task',[TaskController::class,'showClikTask']);
-        // Route::get('/click-on-special-task/{$id}',[TaskController::class,'show']);
-        // filter section start        Route::get('/show-all-tasks-to-executor',[TaskController::class,'showAllTaskToExecutor']);
+
+
 
 
         Route::get('/as-in-application',[ExecutorProfileController::class,'asInApplication']);
@@ -211,7 +211,9 @@ Route::prefix('/pages')->group(function(){
     // porz kadastry hamar
     Route::post('/upload_file_test',[GiveQuestionController::class,'uploadFileTest']);
 
+    // not auth user can click on subcategory  and find matched subcategory executor
     Route::get('/subcategory/{subcategoryName}/show',[FindExecutorController::class,'show']);
+    Route::post('/filter-executor',[FindExecutorController::class,'filter']);
 });
 
 
