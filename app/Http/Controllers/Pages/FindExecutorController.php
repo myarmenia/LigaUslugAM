@@ -51,17 +51,19 @@ class FindExecutorController extends Controller
      */
     public function show($category_id,$subcategoryName)
     {
-        // dd($subcategoryName);
-        // $find_category=Category::where('id',$category_id)->with('subcategories')->first();
+
         $find_subcategory_category=Subcategory::where('subcategory_name',$subcategoryName)->first();
         if( $find_subcategory_category->category_id==$category_id){
+            $category_subcategory=Category::where('id',$category_id)->with('subcategories')->first();
+            // dd($category_subcategory);
+
             $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
 
             $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users')->paginate(1);
             if($findExecutor->total()==0){
                 return response()->json(['message'=>"Специалисты по данным параметрам не найдены"]);
             }else{
-                return response()->json(['message'=>$findExecutor]);
+                return response()->json(['message'=>$findExecutor,'subcategory'=>$category_subcategory]);
             }
 
         }else{
