@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\ExecutorProfile;
 use App\Models\ExecutorSubcategory;
 use App\Models\ExecutorWorkingRegion;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class FindExecutorController extends Controller
@@ -47,16 +49,23 @@ class FindExecutorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($subcategoryName)
+    public function show($category_id,$subcategoryName)
     {
+        // dd($subcategoryName);
+        // $find_category=Category::where('id',$category_id)->with('subcategories')->first();
+        $find_subcategory_category=Subcategory::where('subcategory_name',$subcategoryName)->first();
+        if( $find_subcategory_category->category_id==$category_id){
+            $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
 
-        $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
+            $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users')->paginate(1);
+            if($findExecutor->total()==0){
+                return response()->json(['message'=>"Специалисты по данным параметрам не найдены"]);
+            }else{
+                return response()->json(['message'=>$findExecutor]);
+            }
 
-        $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users')->paginate(1);
-        if($findExecutor->total()==0){
-            return response()->json(['message'=>"Специалисты по данным параметрам не найдены"]);
         }else{
-            return response()->json(['message'=>$findExecutor]);
+            return response()->json(['message'=>"Эта подкатегорий не соответствует данной категории"]);
         }
 
     }
