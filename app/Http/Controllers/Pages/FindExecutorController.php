@@ -59,7 +59,7 @@ class FindExecutorController extends Controller
 
             $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
 
-            $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users')->paginate(1);
+            $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users','executor_categories')->paginate(1);
             if($findExecutor->total()==0){
                 return response()->json(['message'=>"Специалисты по данным параметрам не найдены"]);
             }else{
@@ -77,17 +77,12 @@ class FindExecutorController extends Controller
             array_push($subcategory_array,$item);
         }
 
-        // $working_region=ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
-        // $matched_executor = ExecutorProfile::whereIn('id',$working_region);
 
-        //     $working_region=ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
-        //     $findExecutorId = ExecutorSubcategory::whereIn('subcategory_name',$subcategory_array)->pluck('executor_profile_id');
-        //     $matched_executor= $matched_executor->whereIn('id',$findExecutorId)->paginate(1);
 
             $findExecutorId = ExecutorSubcategory::whereIn('subcategory_name',$subcategory_array)->pluck('executor_profile_id');
             $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId);
             $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
-            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
+            $matched_executor = $matched_executor->whereIn('id',$working_region)->with('executor_profiles.users')->paginate(1);
 
             return response()->json(['executor'=>$matched_executor,'selected_subcategories'=>$request->executor_subcategory,'selected_region'=>$request->region],200);
 
