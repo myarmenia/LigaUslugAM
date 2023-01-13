@@ -63,7 +63,7 @@ class FindExecutorController extends Controller
             if($findExecutor->total()==0){
                 return response()->json(['message'=>"Специалисты по данным параметрам не найдены"]);
             }else{
-                return response()->json(['message'=>$findExecutor,'subcategory'=>$category_subcategory]);
+                return response()->json(['message'=>$findExecutor,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
             }
 
         }else{
@@ -89,7 +89,7 @@ class FindExecutorController extends Controller
             $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
             $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
 
-            return response()->json(['executor'=>$matched_executor],200);
+            return response()->json(['executor'=>$matched_executor,'selected_subcategories'=>$request->executor_subcategory,'selected_region'=>$request->region],200);
 
     }
 
