@@ -80,7 +80,7 @@ class FindExecutorController extends Controller
 
 
             $findExecutorId = ExecutorSubcategory::whereIn('subcategory_name',$subcategory_array)->pluck('executor_profile_id');
-            $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId)->with('users');
+            $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId)->with('users','executor_categories');
             $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
             $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
 
