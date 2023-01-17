@@ -24,6 +24,7 @@ use App\Models\ClickOnTask;
 use App\Models\ExecutorCategory;
 use App\Models\ExecutorProfile;
 use App\Models\ImageTask;
+use App\Models\specialTaskExecutor;
 use App\Models\Subcategory;
 use App\Models\Task;
 use App\Models\TransactionApi;
@@ -148,8 +149,16 @@ class   TaskController extends Controller
                 ]);
             }
         }
+        if($request->has('executor_id')){
+        //   dd($request->executor_id);
+            $offertask=specialTaskExecutor::create([
+                'task_id'=>$task->id,
+                'executor_id'=>$request->executor_id
+            ]);
+        }
 
-        $show_new_task=Task::with('users')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location"]);
+
+        $show_new_task=Task::with('users','image_tasks','special_task_executors')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location"]);
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');

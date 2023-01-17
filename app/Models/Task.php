@@ -64,6 +64,9 @@ class Task extends Model
     public function problem_messages(){
         return $this->hasMany(ProblemMessage::class);
     }
+    public function special_task_executors(){
+        return $this->hasMany(specialTaskExecutor::class);
+    }
 
 
 }

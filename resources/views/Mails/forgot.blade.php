@@ -1,3 +1,3 @@
-Изменить ваш пароль <a href="http://ligauslug.ru/reset/?email={{$email}}&token={{$token}}">тут</a>
+Для смены пароля нажмите  <a href="http://ligauslug.ru/reset/?email={{$email}}&token={{$token}}">ЗДЕСЬ</a>
 
 

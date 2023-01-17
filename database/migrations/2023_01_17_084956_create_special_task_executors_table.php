@@ -17,8 +17,9 @@ class CreateSpecialTaskExecutorsTable extends Migration
             $table->id();
             $table->bigInteger('task_id')->unsigned();
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('executor_id');
-            // $table->string('')
+            $table->bigInteger('executor_id')->unsigned();
+            $table->foreign('executor_id')->references('id')->on('executor_profiles')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('status')->default('not confirmed');
             $table->timestamps();
         });
     }

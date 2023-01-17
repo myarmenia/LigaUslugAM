@@ -21,7 +21,7 @@ class ExecutorProfile extends Model
     public function users(){
         return $this->belongsTo(User::class,'user_id');
     }
-   
+
     public function tasks(){
         return $this->hasMany(Task::class);
     }
@@ -63,5 +63,9 @@ class ExecutorProfile extends Model
     public  function chats(){
         return $this->hasMany(Chat::class);
     }
+    public  function special_task_executors(){
+        return $this->hasMany(specialTaskExecutor::class);
+    }
+
 
 }
