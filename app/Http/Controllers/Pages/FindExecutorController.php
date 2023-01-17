@@ -71,23 +71,38 @@ class FindExecutorController extends Controller
         }
 
     }
-    public function filter(Request $request){
-        $subcategory_array=[];
-        foreach($request->executor_subcategory as $item){
-            array_push($subcategory_array,$item);
-        }
+    // public function filter(Request $request){
+    //     $subcategory_array=[];
+    //     foreach($request->executor_subcategory as $item){
+    //         array_push($subcategory_array,$item);
+    //     }
 
 
+
+    //         $findExecutorId = ExecutorSubcategory::whereIn('subcategory_name',$subcategory_array)->pluck('executor_profile_id');
+    //         $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId)->with('users','executor_categories');
+    //         $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
+    //         $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
+    //         $category=Category::where('id',$request->category_id)->first();
+
+    //         return response()->json(['executor'=>$matched_executor,'selected_subcategories'=>$request->executor_subcategory,'selected_region'=>$request->region,'category'=>$category],200);
+
+    // }
+    public function filter($category_id,$region,$executor_subcategory){
+        $subcategory_array=explode("_",$executor_subcategory);
 
             $findExecutorId = ExecutorSubcategory::whereIn('subcategory_name',$subcategory_array)->pluck('executor_profile_id');
-            $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId)->with('users','executor_categories');
-            $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$request->region)->pluck('executor_profile_id');
-            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
-            $category=Category::where('id',$request->category_id)->first();
 
-            return response()->json(['executor'=>$matched_executor,'selected_subcategories'=>$request->executor_subcategory,'selected_region'=>$request->region,'category'=>$category],200);
+            $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId)->with('users','executor_categories');
+
+            $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$region)->pluck('executor_profile_id');
+            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
+            $category=Category::where('id',$category_id)->first();
+
+            return response()->json(['executor'=>$matched_executor,'selected_subcategories'=>$subcategory_array,'selected_region'=>$region,'category'=>$category],200);
 
     }
+
 
     /**
      * Show the form for editing the specified resource.
