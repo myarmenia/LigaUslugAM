@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             RayonSeeder::class,
             CreateAdminUserSeeder::class,
+            CountriesSeeder::class,
             // ReitingSeeder::class,
             // ExecutorProfileSeeder::class,
             // ExecutorCategorySeeder::class,
