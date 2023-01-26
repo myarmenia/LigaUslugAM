@@ -25,10 +25,10 @@ class SpecialTaskController extends Controller
         $special_task='';
          if($type == 'employer'){
             $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id');
-            $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks')->get();
+            $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->get();
         }else if($type == 'executor'){
 
-            $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks')->get();
+            $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->get();
         }
 
 
