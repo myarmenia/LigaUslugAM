@@ -155,14 +155,16 @@ class   TaskController extends Controller
                 'task_id'=>$task->id,
                 'executor_id'=>$request->executor_id
             ]);
-            // dd($task);
-            // $task=Task::where('id',$task->id)->update(['status'=>'not confirmed']);
-            // $task->save();
+
+            Task::where('id',$task->id)->update(['status'=>'not confirmed']);
+            
+
 
         }
 
 
-        $show_new_task=Task::with('users','image_tasks','special_task_executors')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location"]);
+        $show_new_task=Task::with('users','image_tasks','special_task_executors')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
+// dd($show_new_task);
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
