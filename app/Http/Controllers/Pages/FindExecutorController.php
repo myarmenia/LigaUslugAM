@@ -71,7 +71,7 @@ class FindExecutorController extends Controller
         }
 
     }
-    
+
     public function filter($category_id,$region,$executor_subcategory){
         $subcategory_array=explode("_",$executor_subcategory);
 
@@ -80,7 +80,7 @@ class FindExecutorController extends Controller
             $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId)->with('users','executor_categories');
 
             $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$region)->pluck('executor_profile_id');
-            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(1);
+            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(10);
             $category=Category::where('id',$category_id)->with('subcategories')->get();
 
             return response()->json(['executor'=>$matched_executor,'selected_subcategories'=>$subcategory_array,'selected_region'=>$region,'category'=>$category],200);

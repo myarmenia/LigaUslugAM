@@ -32,6 +32,7 @@ use App\Http\Controllers\api\v1\MessageForSupportController;
 use App\Http\Controllers\GetStatusTinkoffTransactionController;
 use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\SmsController;
+use App\Http\Controllers\api\v1\SpecialTaskController;
 use App\Http\Controllers\api\v1\TestEnrollmentController;
 use App\Http\Controllers\Pages\CallbackController;
 use App\Http\Controllers\Pages\ExecutorProfileController as PagesExecutorProfileController;
@@ -184,6 +185,8 @@ Route::prefix('/user')->group( function(){
         Route::post('/phone-number-verification',[SmsController::class,'getSms']);
 
         Route::post('/task_list', [TaskController::class,'getList']);
+
+        Route::get('/special-task-for/{type}',[SpecialTaskController::class,'index']);
 
 
     });
