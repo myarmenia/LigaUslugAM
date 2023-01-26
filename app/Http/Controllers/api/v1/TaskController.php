@@ -155,6 +155,10 @@ class   TaskController extends Controller
                 'task_id'=>$task->id,
                 'executor_id'=>$request->executor_id
             ]);
+            // dd($task);
+            // $task=Task::where('id',$task->id)->update(['status'=>'not confirmed']);
+            // $task->save();
+
         }
 
 
