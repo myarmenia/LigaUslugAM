@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 use App\Events\NewMessage;
 use App\Events\RejectTaskExecutor;
 use App\Events\NotificationEvent;
+use App\Http\Controllers\NotificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,7 +111,8 @@ Route::group(['middleware' => ['auth']], function() {
 });
 Route::get('email_log',[logoController::class,'index']);
 
-
+Route::get('push-notification', [NotificationController::class, 'index']);
+Route::post('sendNotification', [NotificationController::class, 'sendNotification'])->name('send.notification');
 
 
 

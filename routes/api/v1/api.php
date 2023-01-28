@@ -217,6 +217,7 @@ Route::prefix('/pages')->group(function(){
     // not auth user can click on subcategory  and find matched subcategory executor
     Route::get('/subcategory/{categoryId}/{subcategoryName}/show',[FindExecutorController::class,'show']);
     Route::get('/filter-executor/{category_id}/{region}/{executor_subcategory}',[FindExecutorController::class,'filter']);
+    
 });
 
 
