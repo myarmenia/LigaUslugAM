@@ -157,7 +157,7 @@ class   TaskController extends Controller
             ]);
 
             Task::where('id',$task->id)->update(['status'=>'not confirmed']);
-            
+
 
 
         }
@@ -580,7 +580,7 @@ class   TaskController extends Controller
     }
    public function showClikTask(Request $request){
 
-        $task=Task::with('users','executor_profiles.users','image_tasks','click_on_tasks','click_on_tasks.executor_profiles.users','reitings','problem_messages')->find($request->id);
+        $task=Task::with('users','executor_profiles.users','image_tasks','click_on_tasks','click_on_tasks.executor_profiles.users','reitings','problem_messages','special_task_executors.executor_profiles.users')->find($request->id);
         return response()->json(['click-on-special-task'=> $task]);
 
     }
