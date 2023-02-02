@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ExecutorProfile;
 use App\Models\specialTaskExecutor;
 use App\Models\Task;
-use App\Notifications\RejectEmployerForSpecialTask;
+use App\Notifications\NotifyEmployerExecutorRejectedSpecialTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,12 +39,16 @@ class SpecialTaskController extends Controller
     public function rejectEmployerForSpecialTask(Request $request){
 
         // dd($request->all());
-        $task=Task::where('id',$request->task_id)->with('users')->get();
-        $delete_task=Task::where('id',$request->task_id)->delete();
-        if($delete_task){
-            $delete_spesial_task=specialTaskExecutor::where('task_id',$request->task_id)->delete();
-            // $executor->users->notify(new RejectEmployerForSpecialTask($click_on_task));
+        $task = Task::where('id',$request->task_id)->with('users')->first();
 
+
+        $delete_task = Task::where('id',$request->task_id)->delete();
+        if($delete_task){
+            $special_task = specialTaskExecutor::where('task_id',$request->task_id)->with('tasks.users')->first();
+      
+
+            $task->users->notify(new NotifyEmployerExecutorRejectedSpecialTask($special_task));
+            $special_task->delete();
         }
         return response()->json(['message'=>'Персональный заказ отклонён']);
 
