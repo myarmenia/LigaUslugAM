@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ExecutorProfile;
 use App\Models\specialTaskExecutor;
 use App\Models\Task;
+use App\Notifications\RejectEmployerForSpecialTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,15 +26,28 @@ class SpecialTaskController extends Controller
         $special_task='';
          if($type == 'employer'){
             $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id');
-            $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->get();
+            $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
         }else if($type == 'executor'){
 
-            $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->get();
+            $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
         }
 
 
 
         return response()->json(['special_task'=>$special_task]);
+    }
+    public function rejectEmployerForSpecialTask(Request $request){
+
+        // dd($request->all());
+        $task=Task::where('id',$request->task_id)->with('users')->get();
+        $delete_task=Task::where('id',$request->task_id)->delete();
+        if($delete_task){
+            $delete_spesial_task=specialTaskExecutor::where('task_id',$request->task_id)->delete();
+            // $executor->users->notify(new RejectEmployerForSpecialTask($click_on_task));
+
+        }
+        return response()->json(['message'=>'Персональный заказ отклонён']);
+
     }
 
     /**
