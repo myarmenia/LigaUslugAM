@@ -34,7 +34,7 @@ class NotifyExecutorForNewJobEveryTime extends Notification
      */
     public function via($notifiable)
     {
-        // $user=User::where('id',$this->user_id)->first();
+        $user=User::where('id',$this->user_id)->first();
 
         // if($user->geting_notification == 1){
 
