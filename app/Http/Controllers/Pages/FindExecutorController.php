@@ -59,7 +59,7 @@ class FindExecutorController extends Controller
 
             $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
 
-            $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users','executor_categories')->paginate(1);
+            $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users','executor_categories')->paginate(10);
             if($findExecutor->total()==0){
                 return response()->json(['message'=>"Специалисты по данным параметрам не найдены"]);
             }else{

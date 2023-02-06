@@ -45,7 +45,7 @@ class SpecialTaskController extends Controller
         $delete_task = Task::where('id',$request->task_id)->delete();
         if($delete_task){
             $special_task = specialTaskExecutor::where('task_id',$request->task_id)->with('tasks.users')->first();
-      
+
 
             $task->users->notify(new NotifyEmployerExecutorRejectedSpecialTask($special_task));
             $special_task->delete();
@@ -53,6 +53,13 @@ class SpecialTaskController extends Controller
         return response()->json(['message'=>'Персональный заказ отклонён']);
 
     }
+    // public function selectSpecialTaskExecutor(Request $request){
+    //     $updatetask=Task::where('id',$request->task_id)->update([
+    //         'executor_profile_id' => $request->executor_profile_id,
+    //                      'status' => "inprocess",
+    //     ]);
+
+    // }
 
     /**
      * Show the form for creating a new resource.

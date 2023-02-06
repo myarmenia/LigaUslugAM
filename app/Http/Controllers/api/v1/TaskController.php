@@ -296,6 +296,7 @@ class   TaskController extends Controller
                 if($updatetask){
 
                     $task = Task::where('id',$value['task_id'])->first();
+                   
 
                     $click_on_task = ClickOnTask::where('task_id',$value['task_id'])->get();
 

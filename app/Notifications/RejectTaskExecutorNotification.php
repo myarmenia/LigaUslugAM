@@ -62,16 +62,16 @@ class RejectTaskExecutorNotification extends Notification  implements ShouldBroa
 
     public function toDatabase($notifiable)
     {
-                        return
-                               [
-                                    'task_id' => $this->click_on_task->task_id,
-                                    'task_title' => $this->click_on_task->tasks->title,
-                                    'employer_name' => $this->click_on_task->tasks->users->name,
-                                    'employer_lastName' => $this->click_on_task->tasks->users->last_name,
-                                    'executor_profile_id' => $this->click_on_task->executor_profile_id,
-                                    'status' => $this->click_on_task->status,
+                return
+                        [
+                            'task_id' => $this->click_on_task->task_id,
+                            'task_title' => $this->click_on_task->tasks->title,
+                            'employer_name' => $this->click_on_task->tasks->users->name,
+                            'employer_lastName' => $this->click_on_task->tasks->users->last_name,
+                            'executor_profile_id' => $this->click_on_task->executor_profile_id,
+                            'status' => $this->click_on_task->status,
 
-                        ];
+                ];
     }
 
 
