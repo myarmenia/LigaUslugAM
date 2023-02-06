@@ -158,13 +158,11 @@ class   TaskController extends Controller
 
             Task::where('id',$task->id)->update(['status'=>'not confirmed']);
 
-
-
         }
 
 
         $show_new_task=Task::with('users','image_tasks','special_task_executors')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
-// dd($show_new_task);
+
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
@@ -296,7 +294,7 @@ class   TaskController extends Controller
                 if($updatetask){
 
                     $task = Task::where('id',$value['task_id'])->first();
-                   
+
 
                     $click_on_task = ClickOnTask::where('task_id',$value['task_id'])->get();
 
@@ -468,17 +466,24 @@ class   TaskController extends Controller
 
     public function showAllTaskToExecutor(){
         $user_id=Auth::id();
+
         $executor=ExecutorProfile::where('user_id', $user_id)->first();
         $executor_category=ExecutorCategory::where('executor_profile_id',$executor->id)->pluck('category_name');
+        // -----select task where not in special task executors
+        $special_task_executor_table=specialTaskExecutor::where('executor_id',$executor->id)->pluck('task_id');
+  
+
 
         $task=Task::whereIn('category_name',$executor_category)
+                    ->whereNotIn('id',$special_task_executor_table)
                     ->where([
                             ['executor_profile_id','=',Null],
                             ['user_id','!=', $user_id]
                             ])->with('users')->with('image_tasks')->orderBy('id','desc')->pluck('id');
+
        $click_on_task=ClickOnTask::whereIn('task_id',$task)->where([[ 'executor_profile_id','=',$executor->id],['status','=',false]])->pluck('task_id');
          $task=Task::whereIn('category_name',$executor_category)
-                         ->whereNotIn('id',$click_on_task)
+                         ->whereNotIn('id',$special_task_executor_table)
                          ->where([
                                  ['executor_profile_id','=',Null],
                                  ['user_id','!=', $user_id]
