@@ -40,6 +40,11 @@ class ClickOnTaskController extends Controller
                     if($request->service_price_to<$request->service_price_from){
                         return response()->json(['message'=>'Стоимость услуги До не может быть меньше, чем От.']);
                     }
+                    $task=Task::where('id',$request->task_id)->first();
+                    if($task->status=='not confirmed'){
+                        $task->status='false';
+                        $task->save();
+                    }
                         $clickontask=ClickOnTask::create([
                             'task_id' => $request->task_id,
                             'executor_profile_id' => $check_balance->id,

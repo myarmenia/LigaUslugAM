@@ -162,12 +162,26 @@ class   TaskController extends Controller
 
 
         $show_new_task=Task::with('users','image_tasks','special_task_executors')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
-
+// dd($show_new_task[0]->id);
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
 
         $executor_categories = ExecutorCategory::where('category_name',$task->category_name)->pluck('executor_profile_id');
+
+
+        if($request->has('executor_id')){
+            // dd($request->executor_id);
+            $exec_prof=ExecutorProfile::where('id',$request->executor_id)->with('users')->first();
+            // $user=User::where('id',$exec_prof->us)
+            // dd($exec_prof->users);
+            $exec_prof->users->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
+            $special_executor_profile=specialTaskExecutor::where('task_id',$show_new_task[0]->id)->with('executor_profiles.users')->get();
+
+            // dd($special_executor_profile->executor_profiles->users->id);
+            // dd($special_executor_profile->executor_profiles->users->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task)));
+
+        }
 
         $user_ides = ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
 
@@ -177,7 +191,7 @@ class   TaskController extends Controller
                 $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
 
                 // =======creating socket for event ==================
-                $user_notification = DB::table('notifications')->where('notifiable_id',  $item->id)->orderBy('created_at','desc')->get();
+                $user_notification = DB::table('notifications')->where('notifiable_id',$item->id)->orderBy('created_at','desc')->get();
                 $database = json_decode($user_notification);
                 event(new NotificationEvent( $item->id, $database));
                 $unread_notification_count = Auth::user()->unreadNotifications()->count();
@@ -471,7 +485,7 @@ class   TaskController extends Controller
         $executor_category=ExecutorCategory::where('executor_profile_id',$executor->id)->pluck('category_name');
         // -----select task where not in special task executors
         $special_task_executor_table=specialTaskExecutor::where('executor_id',$executor->id)->pluck('task_id');
-  
+
 
 
         $task=Task::whereIn('category_name',$executor_category)
