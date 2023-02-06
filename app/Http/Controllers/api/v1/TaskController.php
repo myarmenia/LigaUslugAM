@@ -175,8 +175,8 @@ class   TaskController extends Controller
             $exec_prof=ExecutorProfile::where('id',$request->executor_id)->with('users')->first();
             // $user=User::where('id',$exec_prof->us)
             // dd($exec_prof->users);
-            $exec_prof->users->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
-            $special_executor_profile=specialTaskExecutor::where('task_id',$show_new_task[0]->id)->with('executor_profiles.users')->get();
+            // $exec_prof->users->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
+            // $special_executor_profile=specialTaskExecutor::where('task_id',$show_new_task[0]->id)->with('executor_profiles.users')->get();
 
             // dd($special_executor_profile->executor_profiles->users->id);
             // dd($special_executor_profile->executor_profiles->users->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task)));
