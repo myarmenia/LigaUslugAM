@@ -34,6 +34,7 @@
                 <td style="width:200px" >Эл. адрес</td>
                 <td>{{ $executor_profile->users->email }}</td>
             </tr>
+
             <tr>
                 <td style="width:200px" >Регион</td>
                 <td>{{ $executor_profile->region }}</td>
@@ -42,13 +43,21 @@
                 <td style="width:200px" >Населенный пункт / Город</td>
                 <td>{{ $executor_profile->country_name }}</td>
             </tr>
+
             <tr>
                 <td style="width:200px" >Адрес</td>
                 <td>{{ $executor_profile->address }}</td>
             </tr>
             <tr>
+                <td style="width:200px" >Баланс</td>
+                <td colspan=2>
+                    <p class="font-weight-bolder">{{ $executor_profile->balance ?? 'Нету баланса'}}</p>
+
+                </td>
+            </tr>
+            <tr>
                 <td style="width:200px" >Ссылки на личные страницы</td>
-                <td>
+                <td colspan=2>
                     <p>{{ $executor_profile->users->fasebook_link }}</p>
                     <p>{{ $executor_profile->users->instagram_link }}</p>
                 </td>
