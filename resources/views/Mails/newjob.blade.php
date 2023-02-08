@@ -5,8 +5,8 @@
     </head>
     <body>
         <div class="container">
-            {{-- <img src="{{ $message->embed(public_path().'/images/logo_footer.png') }}" style="width:70px;display:block;"> --}}
-            {{-- <div  style="height:70px;width:300px;display:flex;align-items:center">
+            <img src="{{ $message->embed(public_path().'/images/logo_footer.png') }}" style="width:70px;display:block;">
+             <div  style="height:70px;width:300px;display:flex;align-items:center">
 
                 <span style="font-weight: bolder;font-size:20px;display:block;margin-top:10px">Лига услуг</span>
             </div>
@@ -24,7 +24,7 @@
 
                     </div>
                 @endforeach
-            </div> --}}
+            </div>
 
         </div>
     </body>

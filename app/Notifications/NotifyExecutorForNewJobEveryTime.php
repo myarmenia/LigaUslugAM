@@ -34,7 +34,7 @@ class NotifyExecutorForNewJobEveryTime extends Notification
      */
     public function via($notifiable)
     {
-        $user=User::where('id',$this->user_id)->first();
+        // $user=User::where('id',$this->user_id)->first();
 
         // if($user->geting_notification == 1){
 
@@ -54,7 +54,7 @@ class NotifyExecutorForNewJobEveryTime extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
+                    ->line('aaaaaaaaaaaaaaa.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }

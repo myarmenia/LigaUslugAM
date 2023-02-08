@@ -54,7 +54,7 @@ class ClickOnTaskController extends Controller
                             'startdate_from' => $request->startdate_from,
                             'start_date_to' => $request->start_date_to,
                             'offer_to_employer' => $request->offer_to_employer
-                    ]);
+                        ]);
 
                         // inserting subcategory  price into the  transaction_api table  when the  executor click on task, getting  subcategory  price which is the price of applaying  the task
 

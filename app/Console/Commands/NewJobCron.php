@@ -60,7 +60,7 @@ class NewJobCron extends Command
 
             // \Log::info($data);
             $item->notify(new NotifyExecutorForNewJob($data));
-            \Log::info( $user);
+            \Log::info( 'armine');
 
         }
 

@@ -36,6 +36,7 @@ use App\Notifications\NotifyExecutorEmployerCompletedTask;
 use App\Notifications\NotifyExecutorForMeeting;
 use App\Notifications\NotifyExecutorForNewJob;
 use App\Notifications\NotifyExecutorForNewJobEveryTime;
+use App\Notifications\NotifyExecutorForSpecialTask;
 use App\Notifications\RejectTaskExecutorNotification;
 
 use Illuminate\Http\File;
@@ -160,9 +161,10 @@ class   TaskController extends Controller
 
         }
 
+        // $show_new_task=Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->first();
 
-        $show_new_task=Task::with('users','image_tasks','special_task_executors')->with('image_tasks')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
-// dd($show_new_task[0]->id);
+        $show_new_task=Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
+// dd($show_new_task[0]->special_task_executors->executor_profiles->users->name);
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
@@ -172,15 +174,12 @@ class   TaskController extends Controller
 
         if($request->has('executor_id')){
             // dd($request->executor_id);
-            $exec_prof=ExecutorProfile::where('id',$request->executor_id)->with('users')->first();
-            // $user=User::where('id',$exec_prof->us)
+            $executor_prof=ExecutorProfile::where('id',$request->executor_id)->first();
+            // $user=User::where('id', $executor_prof->user_id)->first()
             // dd($exec_prof->users);
-            // $exec_prof->users->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
-            // $special_executor_profile=specialTaskExecutor::where('task_id',$show_new_task[0]->id)->with('executor_profiles.users')->get();
 
-            // dd($special_executor_profile->executor_profiles->users->id);
-            // dd($special_executor_profile->executor_profiles->users->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task)));
-
+            $executor_prof->users->notify(new NotifyExecutorForSpecialTask($executor_prof->user_id,$show_new_task[0]));
+            return response()->json($show_new_task);
         }
 
         $user_ides = ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
