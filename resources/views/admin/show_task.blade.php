@@ -82,7 +82,19 @@
                               <tr>
                                 <th scope="row">10</th>
                                 <td> Статус</td>
-                                <td>{{ $show_task->status}} </td>
+                                <td>
+                                    @php
+                                        if($show_task->status=='false'){
+                                            echo 'Нет откликов';
+                                        }
+                                        else if($show_task->status=='inprocess'){
+                                            echo 'В работе';
+                                        }else{
+                                            echo "Завершенные";
+                                        }
+
+                                    @endphp
+                                </td>
                               </tr>
 
                         </tbody>
