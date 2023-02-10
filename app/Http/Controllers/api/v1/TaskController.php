@@ -151,7 +151,7 @@ class   TaskController extends Controller
             }
         }
         if($request->has('executor_id')){
-        //   dd($request->executor_id);
+
             $offertask=specialTaskExecutor::create([
                 'task_id'=>$task->id,
                 'executor_id'=>$request->executor_id
@@ -161,10 +161,10 @@ class   TaskController extends Controller
 
         }
 
-        // $show_new_task=Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->first();
+
 
         $show_new_task=Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
-// dd($show_new_task[0]->special_task_executors->executor_profiles->users->name);
+
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
@@ -173,12 +173,15 @@ class   TaskController extends Controller
 
 
         if($request->has('executor_id')){
-            // dd($request->executor_id);
-            $executor_prof=ExecutorProfile::where('id',$request->executor_id)->first();
-            // $user=User::where('id', $executor_prof->user_id)->first()
-            // dd($exec_prof->users);
 
+            $executor_prof=ExecutorProfile::where('id',$request->executor_id)->first();
             $executor_prof->users->notify(new NotifyExecutorForSpecialTask($executor_prof->user_id,$show_new_task[0]));
+             // =======creating socket for event ==================
+             $executor_notification = DB::table('notifications')->where('notifiable_id', $executor_prof->users->id)->orderBy('created_at','desc')->get();
+             $database = json_decode($executor_notification);
+             event(new NotificationEvent( $executor_prof->users->id, $database));
+             $unread_notification_count = Auth::user()->unreadNotifications()->count();
+             event(new UnreadNotificationCountEvent( $executor_prof->users->id, $unread_notification_count));
             return response()->json($show_new_task);
         }
 

@@ -191,15 +191,15 @@
     // .notification((notification) => {
     //     console.log(notification.message);
     // });
-    Echo.channel('notification_chanal.36')
+    Echo.channel('notification_chanal.136')
                 .listen('.notification', (e)=>{
                     console.log(e)
                 })
-    Echo.channel('unreadnotificationcount_chanal.36')
+    Echo.channel('unreadnotificationcount_chanal.136')
     .listen('.unreadnotificationcount', (e)=>{
         console.log(e)
     })
-    Echo.channel('showAllTaskCountforexecutor_chanal.35')
+    Echo.channel('showAllTaskCountforexecutor_chanal.136')
     .listen('.showAllTaskCountforexecutor', (e)=>{
         console.log(e)
     })
