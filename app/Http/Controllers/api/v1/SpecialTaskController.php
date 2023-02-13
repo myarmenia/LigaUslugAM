@@ -45,22 +45,24 @@ class SpecialTaskController extends Controller
         $task = Task::where('id',$request->task_id)->with('users')->first();
 
 
-        $delete_task = Task::where('id',$request->task_id)->delete();
-        if($delete_task){
+
+        // if($delete_task){
             $special_task = specialTaskExecutor::where('task_id',$request->task_id)->with('tasks.users')->first();
 
 
             $task->users->notify(new NotifyEmployerExecutorRejectedSpecialTask($special_task));
                // =======creating socket for event ==================
-               $employer_notification = DB::table('notifications')->where('notifiable_id', $task->users->id)->orderBy('created_at','desc')->get();
+               $employer_notification = DB::table('notifications')->where('notifiable_id', $task->user_id)->orderBy('created_at','desc')->get();
+
                $database = json_decode($employer_notification);
-               event(new NotificationEvent($task->users->id, $database));
+               event(new NotificationEvent($task->user_id, $database));
                $unread_notification_count = Auth::user()->unreadNotifications()->count();
-               event(new UnreadNotificationCountEvent( $task->users->id, $unread_notification_count));
+               event(new UnreadNotificationCountEvent( $task->user_id, $unread_notification_count));
 
 
             $special_task->delete();
-        }
+            $delete_task = Task::where('id',$request->task_id)->delete();
+        // }
         return response()->json(['message'=>'Персональный заказ отклонён']);
 
     }

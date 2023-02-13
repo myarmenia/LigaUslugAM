@@ -21,6 +21,7 @@ class NotifyEmployerExecutorRejectedSpecialTask extends Notification
     public $special_task;
     public function __construct(specialTaskExecutor $special_task)
     {
+     
         $this->special_task=$special_task;
         // dd($this->special_task);
     }
