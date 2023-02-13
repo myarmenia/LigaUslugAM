@@ -181,7 +181,7 @@ class   TaskController extends Controller
              $database = json_decode($executor_notification);
              event(new NotificationEvent( $executor_prof->users->id, $database));
              $unread_notification_count = Auth::user()->unreadNotifications()->count();
-             event(new UnreadNotificationCountEvent( $executor_prof->users->id, $unread_notification_count));
+             event(new UnreadNotificationCountEvent( $executor_prof->user_id, $unread_notification_count));
             return response()->json($show_new_task);
         }
 
@@ -352,6 +352,7 @@ class   TaskController extends Controller
                             event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,$database));
 
                             $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                            // dd($unread_notification_count);
                             event(new UnreadNotificationCountEvent( $notifyExecutorForTaskNotSelected->users->id, $unread_notification_count));
 
                         }
@@ -442,6 +443,7 @@ class   TaskController extends Controller
                 event(new NotificationEvent($executor->users->id,$database));
 
                 $unread_notification_count = Auth::user()->unreadNotifications()->count();
+                dd($unread_notification_count);
                 event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
 
 

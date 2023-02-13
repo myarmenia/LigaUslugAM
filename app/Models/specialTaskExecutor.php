@@ -19,7 +19,5 @@ class specialTaskExecutor extends Model
     public function executor_profiles(){
         return $this->belongsTo(ExecutorProfile::class,'executor_id');
     }
-    // public function executor_profiles(){
-    //     return $this->hasMany(ExecutorProfile::class);
-    // }
+   
 }
