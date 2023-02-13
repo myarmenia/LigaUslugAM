@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\NotificationEvent;
+use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use App\Models\ExecutorProfile;
 use App\Models\specialTaskExecutor;
@@ -9,6 +11,7 @@ use App\Models\Task;
 use App\Notifications\NotifyEmployerExecutorRejectedSpecialTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SpecialTaskController extends Controller
 {
@@ -48,6 +51,14 @@ class SpecialTaskController extends Controller
 
 
             $task->users->notify(new NotifyEmployerExecutorRejectedSpecialTask($special_task));
+               // =======creating socket for event ==================
+               $employer_notification = DB::table('notifications')->where('notifiable_id', $task->users->id)->orderBy('created_at','desc')->get();
+               $database = json_decode($employer_notification);
+               event(new NotificationEvent($task->users->id, $database));
+               $unread_notification_count = Auth::user()->unreadNotifications()->count();
+               event(new UnreadNotificationCountEvent( $task->users->id, $unread_notification_count));
+
+
             $special_task->delete();
         }
         return response()->json(['message'=>'Персональный заказ отклонён']);

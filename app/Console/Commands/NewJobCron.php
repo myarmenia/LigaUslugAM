@@ -33,6 +33,7 @@ class NewJobCron extends Command
     public function __construct()
     {
         parent::__construct();
+        date_default_timezone_set('Europe/Moscow');
     }
 
     /**
@@ -43,7 +44,7 @@ class NewJobCron extends Command
     public function handle()
     {
         // return 0;
-        date_default_timezone_set('Europe/Moscow');
+
        $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
        $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
@@ -60,9 +61,10 @@ class NewJobCron extends Command
 
             // \Log::info($data);
             $item->notify(new NotifyExecutorForNewJob($data));
-            \Log::info( 'armine');
+            // \Log::info( $user_ides);
 
         }
+        \Log::info( $user_ides);
 
 
     }
