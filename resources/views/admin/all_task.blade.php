@@ -34,6 +34,23 @@
                     @if (count($task)<1)
                         <div class="p-3"> На данный момент нет задач․</div>
                     @else
+                    <div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputCity"></label>
+                              <input type="text" class="form-control" id="inputCity">
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="inputState"></label>
+                              <select id="inputState" class="form-control">
+                                <option selected>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                              </select>
+                            </div>
+
+                          </div>
+                    </div>
 
 
                     <table class="table table-bordered table-striped" >

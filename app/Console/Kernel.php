@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('deadline:cron')->everyMinute();
-        $schedule->command('newjob:cron')->dailyAt('8:00');
+        $schedule->command('newjob:cron')->dailyAt('9:55');
         $schedule->command('deletenotappliedtask:cron')->everyMinute();
 
     }
