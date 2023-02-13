@@ -186,7 +186,7 @@ class   TaskController extends Controller
         }
 
         $user_ides = ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
-
+dd($user_ides);
         $user = User::whereIn('id',$user_ides)->get();
             foreach($user as $item){
                 // =======notification section start ==================
