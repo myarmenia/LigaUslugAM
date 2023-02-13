@@ -20,7 +20,7 @@
                     </div>
 
                 </div>
-                <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="https://ligauslug.ru/orders" style="color:white;text-decoration:none">Перейти по ссылке</a></button></div>
+                <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="https://ligauslug.ru/order_about_page/{{$show_new_task->id}}" style="color:white;text-decoration:none">Перейти по ссылке</a></button></div>
 
             </div>
         </div>
