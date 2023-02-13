@@ -186,8 +186,9 @@ class   TaskController extends Controller
         }
 
         $user_ides = ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
-dd($user_ides);
-        $user = User::whereIn('id',$user_ides)->get();
+// dd($user_ides);
+        $user = User::where('id','!=',Auth::id())
+        ->whereIn('id',$user_ides)->get();
             foreach($user as $item){
                 // =======notification section start ==================
                 $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
