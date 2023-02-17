@@ -33,6 +33,7 @@ use App\Http\Controllers\GetStatusTinkoffTransactionController;
 use App\Http\Controllers\api\v1\NotificationController;
 use App\Http\Controllers\api\v1\SmsController;
 use App\Http\Controllers\api\v1\SpecialTaskController;
+use App\Http\Controllers\api\v1\TaskSectionCountController;
 use App\Http\Controllers\api\v1\TestEnrollmentController;
 use App\Http\Controllers\Pages\CallbackController;
 use App\Http\Controllers\Pages\ExecutorProfileController as PagesExecutorProfileController;
@@ -192,6 +193,8 @@ Route::prefix('/user')->group( function(){
         // reject employer for spesial task
         Route::post('/reject-employer-for-special-task',[SpecialTaskController::class,'rejectEmployerForSpecialTask']);
         // Route::post('/select-special-task-executor',[SpecialTaskController::class,'selectSpecialTaskExecutor']);
+        // ============
+        Route::get('/task-section-count/{type}',[TaskSectionCountController::class,'index']);
     });
 
 

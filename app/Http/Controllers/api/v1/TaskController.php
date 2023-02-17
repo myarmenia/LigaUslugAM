@@ -183,7 +183,9 @@ class   TaskController extends Controller
             $executor_prof->users->notify(new NotifyExecutorForSpecialTask($executor_prof->user_id,$show_new_task[0]));
              // =======creating socket for event ==================
              $executor_notification = DB::table('notifications')->where('notifiable_id', $executor_prof->users->id)->orderBy('created_at','desc')->get();
+      
              $database = json_decode($executor_notification);
+
              event(new NotificationEvent( $executor_prof->users->id, $database));
              $unread_notification_count = Auth::user()->unreadNotifications()->count();
              event(new UnreadNotificationCountEvent( $executor_prof->user_id, $unread_notification_count));

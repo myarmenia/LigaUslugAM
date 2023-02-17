@@ -204,30 +204,30 @@
         console.log(e)
     })
     // --------employer task action
-    Echo.channel('employernotappliedtaskcount_chanal.34')
-    .listen('.employernotappliedtaskcount', (e)=>{
-        console.log(e)
-    })
+    // Echo.channel('employernotappliedtaskcount_chanal.34')
+    // .listen('.employernotappliedtaskcount', (e)=>{
+    //     console.log(e)
+    // })
     Echo.channel('SectionTaskCount_chanal.34')
     .listen('.SectionTaskCount', (e)=>{
         console.log(e)
     })
-    Echo.channel('respondedexecutor_chanal.34')
-    .listen('.respondedexecutor', (e)=>{
-        console.log(e)
-    })
-    Echo.channel('InProcessTask_chanal.34')
-    .listen('.InProcessTask', (e)=>{
-        console.log(e)
-    })
-    Echo.channel('CompletedTaskCount_chanal.34')
-    .listen('.CompletedTaskCount', (e)=>{
-        console.log(e)
-    })
-    Echo.channel('SpecialTaskCount_chanal.34')
-    .listen('.SpecialTaskCount', (e)=>{
-        console.log(e)
-    })
+    // Echo.channel('respondedexecutor_chanal.34')
+    // .listen('.respondedexecutor', (e)=>{
+    //     console.log(e)
+    // })
+    // Echo.channel('InProcessTask_chanal.34')
+    // .listen('.InProcessTask', (e)=>{
+    //     console.log(e)
+    // })
+    // Echo.channel('CompletedTaskCount_chanal.34')
+    // .listen('.CompletedTaskCount', (e)=>{
+    //     console.log(e)
+    // })
+    // Echo.channel('SpecialTaskCount_chanal.34')
+    // .listen('.SpecialTaskCount', (e)=>{
+    //     console.log(e)
+    // })
 
 
 

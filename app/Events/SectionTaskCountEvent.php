@@ -19,12 +19,16 @@ class SectionTaskCountEvent implements ShouldBroadcast
      *
      * @return void
      */
+
+    public $arr;
     public $id;
-    public $count;
-    public function __construct($id,$count)
+
+    public function __construct(string $id, array $arr)
     {
         $this->id = $id;
-        $this->count = $count;
+        $this->arr = $arr;
+
+        // $this->count = $count;
     }
 
     /**
@@ -34,7 +38,7 @@ class SectionTaskCountEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return  new Channel('SectionTaskCount_chanal.' . $this->id);
+        return  new Channel('SectionTaskCount_chanal.' .$this->id);
     }
     public function broadcastAs()
     {
