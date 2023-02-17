@@ -34,7 +34,7 @@ class TaskSectionCountController extends Controller
         ];
         // dd($arr);
 
-        // event(new SectionTaskCountEvent($user_id,$arr));
+        event(new SectionTaskCountEvent($user_id,$arr));
 
         return response()->json($arr);
 

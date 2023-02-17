@@ -27,8 +27,9 @@ class SectionTaskCountEvent implements ShouldBroadcast
     {
         $this->id = $id;
         $this->arr = $arr;
+        dd($this->arr);
 
-        // $this->count = $count;
+
     }
 
     /**
