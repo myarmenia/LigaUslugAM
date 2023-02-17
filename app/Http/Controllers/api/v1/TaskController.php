@@ -218,7 +218,7 @@ class   TaskController extends Controller
 
       // $finishedTaskEndpoint= UserResource::collection($finished_task);
       //  return response()->json($finishedTaskEndpoint);
-     
+
       return response()->json($finished_task);
     }
     public function completedTasksForExecutor(){
@@ -243,11 +243,9 @@ class   TaskController extends Controller
         }
 
         $task=Task::whereIn('id',$array)->orderBy('id','desc')->with('image_tasks')->get();
+        dd($task);
 
-
-
-
-        return response()->json($task);
+        // return response()->json($task);
 
     }
 
