@@ -33,13 +33,11 @@ class SpecialTaskController extends Controller
 
             $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
 
-            event(new SpecialTaskCountEvent( Auth::user()->id, count($special_task)));
-            event(new SectionTaskCountEvent( Auth::user()->id, count($special_task)));
+
         }else if($type == 'executor'){
 
             $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
-            event(new SpecialTaskCountEvent( Auth::user()->id, count($special_task)));
-            event(new SectionTaskCountEvent( Auth::user()->id, count($special_task)));
+          
         }
 
 

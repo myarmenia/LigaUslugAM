@@ -183,7 +183,7 @@ class   TaskController extends Controller
             $executor_prof->users->notify(new NotifyExecutorForSpecialTask($executor_prof->user_id,$show_new_task[0]));
              // =======creating socket for event ==================
              $executor_notification = DB::table('notifications')->where('notifiable_id', $executor_prof->users->id)->orderBy('created_at','desc')->get();
-      
+
              $database = json_decode($executor_notification);
 
              event(new NotificationEvent( $executor_prof->users->id, $database));
@@ -218,8 +218,7 @@ class   TaskController extends Controller
 
       // $finishedTaskEndpoint= UserResource::collection($finished_task);
       //  return response()->json($finishedTaskEndpoint);
-      event(new CompletedTaskEvent( Auth::user()->id, count($finished_task)));
-      event(new SectionTaskCountEvent( Auth::user()->id, count($finished_task)));
+     
       return response()->json($finished_task);
     }
     public function completedTasksForExecutor(){
@@ -245,8 +244,8 @@ class   TaskController extends Controller
 
         $task=Task::whereIn('id',$array)->orderBy('id','desc')->with('image_tasks')->get();
 
-        event(new EmployerNotAppliedTaskCountEvent( Auth::user()->id, count($task)));
-        event(new SectionTaskCountEvent( Auth::user()->id, count($task)));
+
+
 
         return response()->json($task);
 
@@ -256,14 +255,12 @@ class   TaskController extends Controller
         $user = Auth::user()->id;
         $inprocess = Task::with('problem_messages')->with('executor_profiles.users')->with('image_tasks')->where(['user_id'=>$user,'status'=>'inprocess'])->orderBy('id','desc')->get();
         if($inprocess->isNotEmpty()){
-            event(new InProcessTaskEvent( Auth::user()->id, count($inprocess)));
-            event(new SectionTaskCountEvent( Auth::user()->id, count($inprocess)));
+
 
             return response()->json(['tasks'=>$inprocess]);
 
         }else{
-            event(new InProcessTaskEvent( Auth::user()->id, count($inprocess)));
-            event(new SectionTaskCountEvent( Auth::user()->id, count($inprocess)));
+
             return response()->json(['message'=>"У вас нет задач в процессе"]);
         };
 
@@ -493,8 +490,7 @@ class   TaskController extends Controller
                        }])->whereIn('id',$arr)->orderBy('id','desc')->get();
            $responded_executor = RespondedExecutorResource::collection($showrespondedtask);
 
-            event(new RespondedExecutorEvent(Auth::user()->id,count($showrespondedtask)));
-            event(new SectionTaskCountEvent( Auth::user()->id, count($showrespondedtask)));
+
 
            return response()->json(['message'=>$responded_executor]);
        }else{
