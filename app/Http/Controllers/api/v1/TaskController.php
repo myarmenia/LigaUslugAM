@@ -243,9 +243,9 @@ class   TaskController extends Controller
         }
 
         $task=Task::whereIn('id',$array)->orderBy('id','desc')->with('image_tasks')->get();
-        dd($task);
+        // dd($task);
 
-        // return response()->json($task);
+        return response()->json($task);
 
     }
 

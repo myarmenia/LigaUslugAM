@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 class TaskCountService {
     public static function notappliedtask(string $user_id){
 
-
         $finished_task = Task::where(['user_id'=>$user_id,'status'=>'false'])->orderBy('id','desc')->get();
         $array=[];
         foreach($finished_task as $items){
@@ -24,8 +23,7 @@ class TaskCountService {
 
         $task=Task::whereIn('id',$array)->orderBy('id','desc')->with('image_tasks')->get();
 
-        // event(new EmployerNotAppliedTaskCountEvent( Auth::user()->id, count($task)));
-        // event(new SectionTaskCountEvent( Auth::user()->id, count($task)));
+      
 
         return count($task);
 

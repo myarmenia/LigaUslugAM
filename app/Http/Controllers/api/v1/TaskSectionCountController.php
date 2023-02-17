@@ -20,6 +20,7 @@ class TaskSectionCountController extends Controller
 
         $user_id = Auth::user()->id;
         $notappliedtaskservice = TaskCountService::notappliedtask($user_id);
+
         $respondedtaskService = TaskCountService::respondedExecutor($user_id);
         $inprocesstaskservice = TaskCountService::inProcessTask($user_id);
         $completedtaskservice = TaskCountService::completedTasks($user_id);
@@ -31,12 +32,12 @@ class TaskSectionCountController extends Controller
             'inprocesstask' => $inprocesstaskservice,
             'specialtask'=> $specialtaskcountservice
         ];
-        // dd(json_encode($arr));
+        // dd($arr);
 
-        event(new SectionTaskCountEvent($user_id,$arr));
+        // event(new SectionTaskCountEvent($user_id,$arr));
 
-        // return response()->json($arr);
-        // dd($specialTaskcount);
+        return response()->json($arr);
+
     }
 
     /**
