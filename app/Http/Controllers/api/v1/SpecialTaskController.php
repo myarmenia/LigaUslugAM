@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Events\NotificationEvent;
+use App\Events\SectionTaskCountEvent;
+use App\Events\SpecialTaskCountEvent;
 use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use App\Models\ExecutorProfile;
@@ -24,15 +26,20 @@ class SpecialTaskController extends Controller
 
     {
 
-
         $executor=ExecutorProfile::where('user_id',Auth::id())->first();
         $special_task='';
          if($type == 'employer'){
-            $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id');
+            $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
+
             $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
+
+            event(new SpecialTaskCountEvent( Auth::user()->id, count($special_task)));
+            event(new SectionTaskCountEvent( Auth::user()->id, count($special_task)));
         }else if($type == 'executor'){
 
             $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
+            event(new SpecialTaskCountEvent( Auth::user()->id, count($special_task)));
+            event(new SectionTaskCountEvent( Auth::user()->id, count($special_task)));
         }
 
 

@@ -59,7 +59,7 @@ class NewJobCron extends Command
             $check_executor_categories=$item->executor_profiles->executor_categories->pluck('category_name');
             $data= Task::where('created_at','>=',$deadlineday)->whereIn('category_name', $check_executor_categories)->get();
 
-            \Log::info($data);
+            // \Log::info($data);
             $item->notify(new NotifyExecutorForNewJob($data));
             // \Log::info( $user_ides);
 

@@ -1,6 +1,5 @@
 @extends('layouts.admin_app')
 
-
 @section('content')
 <div class="container">
         <div class="row my-5">
@@ -82,10 +81,20 @@
                         </tr>
                     </table>
                 @endif
+                <textarea name="upload"></textarea>
 
                     {{-- {!! $data->render() !!} --}}
                 </div>
             </div>
 
     </div>
+    <script>
+        CKEDITOR.replace('upload')
+
+   </script>
+
+    @section('script')
+
+    @endsection
+
 @endsection

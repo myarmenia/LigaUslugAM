@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
@@ -26,6 +27,8 @@
   {{-- jquery link --}}
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{{asset('https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js')}}"></script>
+
 </head>
 <style>
     .notify:hover{
@@ -593,6 +596,7 @@
     <script src="{{ asset('admin/js/main.js')}}"></script>
     <script src="{{ asset('js/app.js')}}"></script>
     <script>
+
         //   Echo.channel('home')
         //     .listen('NewMessage', (e)=>{
         //         console.log(e)
