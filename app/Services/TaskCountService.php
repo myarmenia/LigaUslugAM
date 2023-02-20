@@ -45,7 +45,7 @@ class TaskCountService {
            $showrespondedtask =Task::with(['click_on_tasks'=>function($q){
                        $q->where('status','false');
                        }])->whereIn('id',$arr)->orderBy('id','desc')->get();
-      
+
 
             return count($showrespondedtask);
 
@@ -79,6 +79,7 @@ class TaskCountService {
         $executor=ExecutorProfile::where('user_id',$user_id)->first();
         $special_task='';
          if($type == 'employer'){
+            
             $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
 
             $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();

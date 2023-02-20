@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Events\NotificationEvent;
+use App\Events\SectionTaskCountEvent;
 use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use App\Models\ClickOnTask;
@@ -14,6 +15,7 @@ use App\Models\TransactionApi;
 use App\Models\User;
 use App\Notifications\NotifiyEmployer;
 use App\Services\ExecutorTaskCountService;
+use App\Services\TaskCountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -80,6 +82,23 @@ class ClickOnTaskController extends Controller
                             event(new NotificationEvent($employer->id, $database));
                             $unread_notification_count = Auth::user()->unreadNotifications()->count();
                             event(new UnreadNotificationCountEvent($employer->id, $unread_notification_count));
+// ==================================== show to  employer that executor click on task 
+                            $notappliedtaskservice = TaskCountService::notappliedtask($employer->id);
+                            $respondedtaskService = TaskCountService::respondedExecutor($employer->id);
+                            $inprocesstaskservice = TaskCountService::inProcessTask($employer->id);
+                            $completedtaskservice = TaskCountService::completedTasks($employer->id);
+                            $specialtaskcountservice = TaskCountService::specialTaskcount('employer',$employer->id);
+                            $arr=[
+                                'user_id' => $employer->id,
+                                'notappliedtask' => $notappliedtaskservice,
+                                'respondedtask' => $respondedtaskService,
+                                'inprocesstask' => $inprocesstaskservice,
+                                'completedtask' => $completedtaskservice,
+                                'specialtask'=> $specialtaskcountservice
+                            ];
+                            event(new SectionTaskCountEvent($employer->id,$arr));
+
+
                             return response()->json(['message'=>'success']);
                 }else{
                     return response()->json(['message'=>'Вы не можете подать заявку на эту работу, потому что вашего баланса недостаточно']);

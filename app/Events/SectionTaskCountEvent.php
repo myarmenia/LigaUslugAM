@@ -25,7 +25,9 @@ class SectionTaskCountEvent implements ShouldBroadcast
 
     public function __construct(string $id, array $arr)
     {
+
         $this->id = $id;
+    
         $this->arr = $arr;
         // dd($this->arr);
 

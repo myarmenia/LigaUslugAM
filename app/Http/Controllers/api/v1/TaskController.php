@@ -44,6 +44,7 @@ use App\Notifications\NotifyExecutorForNewJobEveryTime;
 use App\Notifications\NotifyExecutorForSpecialTask;
 use App\Notifications\RejectTaskExecutorNotification;
 use App\Services\ExecutorTaskCountService;
+use App\Services\TaskCountService;
 use Illuminate\Http\File;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
@@ -176,6 +177,21 @@ class   TaskController extends Controller
 
         $executor_categories = ExecutorCategory::where('category_name',$task->category_name)->pluck('executor_profile_id');
 
+        $user_id = Auth::user()->id;
+        $notappliedtaskservice = TaskCountService::notappliedtask($user_id);
+        $respondedtaskService = TaskCountService::respondedExecutor($user_id);
+        $inprocesstaskservice = TaskCountService::inProcessTask($user_id);
+        $completedtaskservice = TaskCountService::completedTasks($user_id);
+        $specialtaskcountservice = TaskCountService::specialTaskcount('employer',$user_id);
+        $arr=[
+            'user_id' => $user_id,
+            'notappliedtask' => $notappliedtaskservice,
+            'respondedtask' => $respondedtaskService,
+            'inprocesstask' => $inprocesstaskservice,
+            'completedtask' => $completedtaskservice,
+            'specialtask'=> $specialtaskcountservice
+        ];
+
 
         if($request->has('executor_id')){
 
@@ -189,6 +205,14 @@ class   TaskController extends Controller
              event(new NotificationEvent( $executor_prof->users->id, $database));
              $unread_notification_count = Auth::user()->unreadNotifications()->count();
              event(new UnreadNotificationCountEvent( $executor_prof->user_id, $unread_notification_count));
+
+             event(new SectionTaskCountEvent($user_id,$arr));
+
+
+
+
+
+
             return response()->json($show_new_task);
         }
 
@@ -207,7 +231,12 @@ class   TaskController extends Controller
                 $unread_notification_count = Auth::user()->unreadNotifications()->count();
                 event(new UnreadNotificationCountEvent( $item->id, $unread_notification_count));
 
+                event(new SectionTaskCountEvent($user_id,$arr));
+
+
             }
+
+
         return response()->json($show_new_task);
     }
 
@@ -264,7 +293,7 @@ class   TaskController extends Controller
 
     }
     public function tasksInProgressForExecutor(){
-        
+
         $inprocess=ExecutorTaskCountService::tasksinprogressforexecutor(Auth::id());
 
         return response()->json(['tasks'=>$inprocess]);
@@ -395,6 +424,25 @@ class   TaskController extends Controller
                     event(new NotificationEvent($executor->users->id,$database));
                     $unread_notification_count = Auth::user()->unreadNotifications()->count();
                     event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
+
+                    // ======show employer  inproces task count
+                    $user_id = Auth::user()->id;
+                    $notappliedtaskservice = TaskCountService::notappliedtask(Auth::user()->id);
+                    $respondedtaskService = TaskCountService::respondedExecutor(Auth::user()->id);
+                    $inprocesstaskservice = TaskCountService::inProcessTask(Auth::user()->id);
+                    $completedtaskservice = TaskCountService::completedTasks(Auth::user()->id);
+                    $specialtaskcountservice = TaskCountService::specialTaskcount('employer',Auth::user()->id);
+                    $arr=[
+                        'user_id' => $user_id,
+                        'notappliedtask' => $notappliedtaskservice,
+                        'respondedtask' => $respondedtaskService,
+                        'inprocesstask' => $inprocesstaskservice,
+                        'completedtask' => $completedtaskservice,
+                        'specialtask'=> $specialtaskcountservice
+                    ];
+
+                    event(new SectionTaskCountEvent($user_id,$arr));
+
 
                     return response()->json(['message'=>'success'], 200);
 
@@ -605,17 +653,22 @@ class   TaskController extends Controller
 
     public function materialWorkPrice(Request $request){
 
+
         $user=Auth::user()->id;
 
         $executor = ExecutorProfile::where('user_id',Auth::id())->first();
+
+
         if($request->executor_completed_task == 1){
-            $task = Task::where(['id'=>$request->task_id,'executor_profile_id'=>$executor->id]);
 
-            $task = $task->update([
+            $task = Task::where(['id'=>$request->task_id,'executor_profile_id'=>$executor->id])->first();
 
-                'executor_completed_task'=>1
-            ]);
+            $task->executor_completed_task=1;
+            $task->save();
+
+
             if($task){
+
                 if($request->has('executor_material_price') && $request->has('executor_work_price')){
                     if($request->executor_material_price!=null && $request->executor_work_price!=null){
 
@@ -624,7 +677,8 @@ class   TaskController extends Controller
                             'executor_work_price' => $request->executor_work_price,
                             'executor_total_price' => $request->executor_material_price*1+$request->executor_work_price*1
                         ]);
-                        if($task_update){
+                        // if($task_update){
+
 
                             $task = Task::with('users','executor_profiles','executor_profiles.users')->where('id',$request->task_id)->first();
                             $task->users->notify(new NotifyEmployerExecutorCompletedTask($task));
@@ -636,18 +690,37 @@ class   TaskController extends Controller
                             $unread_notification_count = Auth::user()->unreadNotifications()->count();
                             event(new UnreadNotificationCountEvent($task->users->id, $unread_notification_count));
 
+                            // ====show employer
 
-                        }
+                            $user_id = $task->users->id;
+                            // dd($task->users->id);
+                            $notappliedtaskservice = TaskCountService::notappliedtask($task->users->id);
+                            $respondedtaskService = TaskCountService::respondedExecutor($task->users->id);
+                            $inprocesstaskservice = TaskCountService::inProcessTask($task->users->id);
+                            $completedtaskservice = TaskCountService::completedTasks($task->users->id);
+                            $specialtaskcountservice = TaskCountService::specialTaskcount('employer',$task->users->id);
+                            $arr=[
+                                'user_id' => $task->users->id,
+                                'notappliedtask' => $notappliedtaskservice,
+                                'respondedtask' => $respondedtaskService,
+                                'inprocesstask' => $inprocesstaskservice,
+                                'completedtask' => $completedtaskservice,
+                                'specialtask'=> $specialtaskcountservice
+                            ];
+
+
+                            event(new SectionTaskCountEvent($user_id,$arr));
+
+
+
+                        // }
 
                     }
                 }
             }
 
-
-
-
-
         }
+
             $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
             $inprocess = Task::with('users')->with('image_tasks')->where(['executor_profile_id'=>$executor->id,'status'=>'inprocess'])->orderBy('id','desc')->get();
             return response()->json(['tasks'=>$inprocess]);

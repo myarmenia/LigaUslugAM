@@ -33,7 +33,7 @@ class TaskSectionCountController extends Controller
             'completedtask' => $completedtaskservice,
             'specialtask'=> $specialtaskcountservice
         ];
-        // dd($arr);
+     
 
         event(new SectionTaskCountEvent($user_id,$arr));
 
