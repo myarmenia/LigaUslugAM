@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Events\SectionTaskCountEvent;
 use App\Http\Controllers\Controller;
+use App\Services\ExecutorTaskCountService;
 use App\Services\TaskCountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,6 @@ class TaskSectionCountController extends Controller
 
         $user_id = Auth::user()->id;
         $notappliedtaskservice = TaskCountService::notappliedtask($user_id);
-
         $respondedtaskService = TaskCountService::respondedExecutor($user_id);
         $inprocesstaskservice = TaskCountService::inProcessTask($user_id);
         $completedtaskservice = TaskCountService::completedTasks($user_id);
@@ -30,6 +30,7 @@ class TaskSectionCountController extends Controller
             'notappliedtask' => $notappliedtaskservice,
             'respondedtask' => $respondedtaskService,
             'inprocesstask' => $inprocesstaskservice,
+            'completedtask' => $completedtaskservice,
             'specialtask'=> $specialtaskcountservice
         ];
         // dd($arr);
@@ -37,6 +38,29 @@ class TaskSectionCountController extends Controller
         event(new SectionTaskCountEvent($user_id,$arr));
 
         return response()->json($arr);
+
+    }
+    public function executor($type){
+       $user_id = Auth::id();
+       $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor( $user_id );
+       $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $user_id );
+       $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $user_id );
+
+        $arr=[
+            'user_id' => $user_id,
+            'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+            'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+            'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice)
+
+            // 'inprocesstask' => $inprocesstaskservice,
+            // 'completedtask' => $completedtaskservice,
+            // 'specialtask'=> $specialtaskcountservice
+        ];
+        // // dd($arr);
+
+        // event(new SectionTaskCountEvent($user_id,$arr));
+
+        // return response()->json($arr);
 
     }
 

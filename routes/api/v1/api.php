@@ -195,6 +195,7 @@ Route::prefix('/user')->group( function(){
         // Route::post('/select-special-task-executor',[SpecialTaskController::class,'selectSpecialTaskExecutor']);
         // ============
         Route::get('/task-section-count/{type}',[TaskSectionCountController::class,'index']);
+        Route::get('/executor-task-section-count/{type}',[TaskSectionCountController::class,'executor']);
     });
 
 

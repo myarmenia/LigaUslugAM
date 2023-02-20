@@ -13,6 +13,7 @@ use App\Models\Task;
 use App\Models\TransactionApi;
 use App\Models\User;
 use App\Notifications\NotifiyEmployer;
+use App\Services\ExecutorTaskCountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -89,12 +90,15 @@ class ClickOnTaskController extends Controller
 
     public function respondedTaskForExecutor()
     {
-        $user_id=Auth::user()->id;
-        $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
+        // $user_id=Auth::user()->id;
+        $responded_task_for_Executor=ExecutorTaskCountService::respondedtaskforexecutor(Auth::id());
+        // dd($responded_task_for_Executor);
 
-      //   $responded_task_for_Executor =  ClickOnTask::where(['executor_profile_id'=>$executor->id, 'status'=>'false'])->pluck('task_id');
-       $responded_task_for_Executor =  ClickOnTask::with('tasks','tasks.users','tasks.image_tasks')->where(['executor_profile_id'=>$executor->id, 'status'=>'false'])->orderBy('id','desc')->get();
-      // $tasks=Task::whereIn( 'id',$responded_task_for_Executor)->with('users','image_tasks')->get();
+    //     $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
+
+    //   //   $responded_task_for_Executor =  ClickOnTask::where(['executor_profile_id'=>$executor->id, 'status'=>'false'])->pluck('task_id');
+    //    $responded_task_for_Executor =  ClickOnTask::with('tasks','tasks.users','tasks.image_tasks')->where(['executor_profile_id'=>$executor->id, 'status'=>'false'])->orderBy('id','desc')->get();
+    //   // $tasks=Task::whereIn( 'id',$responded_task_for_Executor)->with('users','image_tasks')->get();
 
 
           return response()->json(['ClickOnTask'=>  $responded_task_for_Executor]);

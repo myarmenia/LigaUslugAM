@@ -43,7 +43,7 @@ use App\Notifications\NotifyExecutorForNewJob;
 use App\Notifications\NotifyExecutorForNewJobEveryTime;
 use App\Notifications\NotifyExecutorForSpecialTask;
 use App\Notifications\RejectTaskExecutorNotification;
-
+use App\Services\ExecutorTaskCountService;
 use Illuminate\Http\File;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
@@ -264,9 +264,9 @@ class   TaskController extends Controller
 
     }
     public function tasksInProgressForExecutor(){
-        $user_id=Auth::user()->id;
-        $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
-        $inprocess = Task::with('users')->with('image_tasks')->where(['executor_profile_id'=>$executor->id,'status'=>'inprocess'])->orderBy('id','desc')->get();
+        
+        $inprocess=ExecutorTaskCountService::tasksinprogressforexecutor(Auth::id());
+
         return response()->json(['tasks'=>$inprocess]);
     }
     /**
@@ -498,33 +498,11 @@ class   TaskController extends Controller
    }
 
     public function showAllTaskToExecutor(){
-        $user_id=Auth::id();
 
-        $executor=ExecutorProfile::where('user_id', $user_id)->first();
-        $executor_category=ExecutorCategory::where('executor_profile_id',$executor->id)->pluck('category_name');
-        // -----select task where not in special task executors
-        $special_task_executor_table=specialTaskExecutor::where('executor_id',$executor->id)->pluck('task_id');
+        $showalltasktoexecutor=ExecutorTaskCountService::showalltasktoexecutor(Auth::id());
 
+        return response()->json( $showalltasktoexecutor);
 
-
-        $task=Task::whereIn('category_name',$executor_category)
-                    ->whereNotIn('id',$special_task_executor_table)
-                    ->where([
-                            ['executor_profile_id','=',Null],
-                            ['user_id','!=', $user_id]
-                            ])->with('users')->with('image_tasks')->orderBy('id','desc')->pluck('id');
-
-       $click_on_task=ClickOnTask::whereIn('task_id',$task)->where([[ 'executor_profile_id','=',$executor->id],['status','=',false]])->pluck('task_id');
-         $task=Task::whereIn('category_name',$executor_category)
-                         ->whereNotIn('id',$special_task_executor_table)
-                         ->where([
-                                 ['executor_profile_id','=',Null],
-                                 ['user_id','!=', $user_id]
-                                 ])->with('users')->with('image_tasks')->orderBy('id','desc')->get();
-        $notSelectedTaskCountforexecutor=count($task);
-
-
-        return response()->json(['task_length'=>$notSelectedTaskCountforexecutor,'Tasks'=>$task]);
     }
     public function showAllTaskToExecutorCount(){
         $user_id=Auth::id();
@@ -545,7 +523,7 @@ class   TaskController extends Controller
                                  ])->with('users')->with('image_tasks')->orderBy('id','desc')->get();
         $notSelectedTaskCountforexecutor=count($task);
 
-        event(new ShowAllTasksCountToExecutorEvent( $executor->users->id,$notSelectedTaskCountforexecutor));
+        event(new ShowAllTasksCountToExecutorEvent($executor->users->id,$notSelectedTaskCountforexecutor));
         return response()->json(['task_length'=>$notSelectedTaskCountforexecutor]);
 
     }

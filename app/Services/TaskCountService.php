@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TaskCountService {
+    public $count;
     public static function notappliedtask(string $user_id){
 
         $finished_task = Task::where(['user_id'=>$user_id,'status'=>'false'])->orderBy('id','desc')->get();
@@ -23,14 +24,12 @@ class TaskCountService {
 
         $task=Task::whereIn('id',$array)->orderBy('id','desc')->with('image_tasks')->get();
 
-      
-
         return count($task);
 
     }
     public static function respondedExecutor(string $user_id){
 
-        // $user_id = Auth::user()->id;
+
         $task = Task::with(['click_on_tasks'=>function($q){
                 $q->where('status','false');
            }])->where(['user_id'=>$user_id,'executor_profile_id'=>null])->get();
@@ -46,10 +45,7 @@ class TaskCountService {
            $showrespondedtask =Task::with(['click_on_tasks'=>function($q){
                        $q->where('status','false');
                        }])->whereIn('id',$arr)->orderBy('id','desc')->get();
-        //    $responded_executor = RespondedExecutorResource::collection($showrespondedtask);
-
-        //     event(new RespondedExecutorEvent(Auth::user()->id,count($showrespondedtask)));
-        //     event(new SectionTaskCountEvent( Auth::user()->id, count($showrespondedtask)));
+      
 
             return count($showrespondedtask);
 
@@ -73,6 +69,7 @@ class TaskCountService {
     public static function completedTasks(string $user_id){
 
         $finished_task=Task::with('reitings')->with('executor_profiles','executor_profiles.users','problem_messages')->where(['user_id'=>$user_id,'status'=>'completed'])->orderBy('id','desc')->get();
+
         return count($finished_task);
 
     }

@@ -37,7 +37,7 @@ class SpecialTaskController extends Controller
         }else if($type == 'executor'){
 
             $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
-          
+
         }
 
 
@@ -71,13 +71,7 @@ class SpecialTaskController extends Controller
         return response()->json(['message'=>'Персональный заказ отклонён']);
 
     }
-    // public function selectSpecialTaskExecutor(Request $request){
-    //     $updatetask=Task::where('id',$request->task_id)->update([
-    //         'executor_profile_id' => $request->executor_profile_id,
-    //                      'status' => "inprocess",
-    //     ]);
-
-    // }
+   
 
     /**
      * Show the form for creating a new resource.
