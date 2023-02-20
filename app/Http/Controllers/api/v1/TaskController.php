@@ -183,14 +183,14 @@ class   TaskController extends Controller
         $inprocesstaskservice = TaskCountService::inProcessTask($user_id);
         $completedtaskservice = TaskCountService::completedTasks($user_id);
         $specialtaskcountservice = TaskCountService::specialTaskcount('employer',$user_id);
-        // $arr=[
-        //     'user_id' => $user_id,
-        //     'notappliedtask' => $notappliedtaskservice,
-        //     'respondedtask' => $respondedtaskService,
-        //     'inprocesstask' => $inprocesstaskservice,
-        //     'completedtask' => $completedtaskservice,
-        //     'specialtask'=> $specialtaskcountservice
-        // ];
+        $arr=[
+            'user_id' => $user_id,
+            'notappliedtask' => $notappliedtaskservice,
+            'respondedtask' => $respondedtaskService,
+            'inprocesstask' => $inprocesstaskservice,
+            'completedtask' => $completedtaskservice,
+            'specialtask'=> $specialtaskcountservice
+        ];
 
 
         if($request->has('executor_id')){
@@ -206,7 +206,7 @@ class   TaskController extends Controller
              $unread_notification_count = Auth::user()->unreadNotifications()->count();
              event(new UnreadNotificationCountEvent( $executor_prof->user_id, $unread_notification_count));
 
-            //  event(new SectionTaskCountEvent($user_id,$arr));
+             event(new SectionTaskCountEvent($user_id,$arr));
 
 
 
@@ -231,7 +231,7 @@ class   TaskController extends Controller
                 $unread_notification_count = Auth::user()->unreadNotifications()->count();
                 event(new UnreadNotificationCountEvent( $item->id, $unread_notification_count));
 
-                // event(new SectionTaskCountEvent($user_id,$arr));
+                event(new SectionTaskCountEvent($user_id,$arr));
 
 
             }
