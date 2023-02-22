@@ -35,5 +35,33 @@
 
       </div>
     </div>
+    <script>
+         Echo.channel('notification_chanal.65')
+                .listen('.notification', (e)=>{
+                    console.log(e)
+                })
+    Echo.channel('unreadnotificationcount_chanal.65')
+    .listen('.unreadnotificationcount', (e)=>{
+        console.log(e)
+    })
+    Echo.channel('showAllTaskCountforexecutor_chanal.65')
+    .listen('.showAllTaskCountforexecutor', (e)=>{
+        console.log(e)
+    })
+    // --------employer task action
+    // Echo.channel('employernotappliedtaskcount_chanal.34')
+    // .listen('.employernotappliedtaskcount', (e)=>{
+    //     console.log(e)
+    // })
+    Echo.channel('SectionTaskCount_chanal.34')
+    .listen('.SectionTaskCount', (e)=>{
+        console.log(e)
+    })
+
+    Echo.channel('ExecutorSectionTaskCount_chanal.136')
+    .listen('.ExecutorSectionTaskCount', (e)=>{
+        console.log(e)
+    })
+    </script>
 
 @endsection('content')
