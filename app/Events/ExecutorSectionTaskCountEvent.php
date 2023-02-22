@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class SectionTaskCountEvent implements ShouldBroadcast
+class ExecutorSectionTaskCountEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,16 +19,13 @@ class SectionTaskCountEvent implements ShouldBroadcast
      *
      * @return void
      */
-
-    public $arr;
+    public $exec_arr;
     public $id;
-
-    public function __construct(string $id, array $arr)
+    public function __construct($id,$exec_arr)
     {
-
         $this->id = $id;
-        $this->arr = $arr;
 
+        $this->exec_arr = $exec_arr;
     }
 
     /**
@@ -38,10 +35,10 @@ class SectionTaskCountEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return  new Channel('SectionTaskCount_chanal.' .$this->id);
+        return  new Channel('ExecutorSectionTaskCount_chanal.' .$this->id);
     }
     public function broadcastAs()
     {
-        return  'SectionTaskCount';
+        return  'ExecutorSectionTaskCount';
     }
 }

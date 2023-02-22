@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,9 +27,10 @@ class DashboardController extends Controller
 
             return view('auth.login');
        }
-       $task=Task::orderBy('id','desc')->paginate(10);
-       return view('admin.all_task',compact('task'));
-    //    return view('admin.index');
+  
+    $all_category = Category:: paginate(20);
+
+    return view('admin.all_category',compact('all_category'));
 
     }
 

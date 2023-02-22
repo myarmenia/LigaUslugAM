@@ -33,7 +33,7 @@ class TaskSectionCountController extends Controller
             'completedtask' => $completedtaskservice,
             'specialtask'=> $specialtaskcountservice
         ];
-     
+
 
         event(new SectionTaskCountEvent($user_id,$arr));
 
@@ -42,11 +42,11 @@ class TaskSectionCountController extends Controller
     }
     public function executor($type){
        $user_id = Auth::id();
-       $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor( $user_id );
+       $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($user_id );
        $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $user_id );
        $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $user_id );
 
-        $arr=[
+        $exec_arr=[
             'user_id' => $user_id,
             'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
             'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
@@ -60,7 +60,7 @@ class TaskSectionCountController extends Controller
 
         // event(new SectionTaskCountEvent($user_id,$arr));
 
-        // return response()->json($arr);
+        return response()->json($exec_arr);
 
     }
 

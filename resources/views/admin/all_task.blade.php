@@ -6,7 +6,9 @@
     <section class="wrapper">
       <!--overview start-->
       <div class="row  my-5 justify-content-center">
-        <div class="col-lg-5 my-5 bg-white">
+
+        <div class="col-lg-8 my-5 bg-white">
+
             <div class="panel-body m-4">
 
                 @if(session()->has('message'))
@@ -35,21 +37,39 @@
                         <div class="p-3"> На данный момент нет задач․</div>
                     @else
                     <div>
+
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                               <label for="inputCity"></label>
-                              <input type="text" class="form-control" id="inputCity">
+                              <input type="text" class="form-control"  value='' id="searchtask_name">
                             </div>
                             <div class="form-group col-md-4">
-                              <label for="inputState"></label>
-                              <select id="inputState" class="form-control">
-                                <option selected>1</option>
-                                <option>2</option>
-                                <option>3</option>
+                              <label for=""></label>
+                              <select  class="form-control" id="category_name">
+                                    @foreach ($category as $item)
+                                            <option value="{{$item->category_name}}">{{$item->category_name}}</option>
+                                    @endforeach
                               </select>
                             </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputState"></label>
+                                <select id="task_status" class="form-control">
+                                  <option>Статус заказа</option>
+                                  <option value="not confirmed">не подтверждён</option>
+                                  <option value="false">false</option>
+                                  <option value="inprocess">в процессе</option>
+                                  <option value="finished">finished</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group d-flex justify-content-around  align-items-center col-md-6"  style="height:80px">
+                                <label class="form-group font-weight-bold" > Период заказа </label><br>
+                                <label class="form-group font-weight-bold" for=""> От <input type='date' id="date_from"></label><br>
+                                <label class="form-group font-weight-bold" for=""> До <input type='date' id="date_to"></label><br>
+                            </div>
+                        </div>
 
-                          </div>
                     </div>
 
 
@@ -100,5 +120,9 @@
     </section>
 
   </section>
+
+
+    <script src="{{asset('/admin/js/back/tasks/all_task.js')}}"></script>
+
 
 @endsection('content')

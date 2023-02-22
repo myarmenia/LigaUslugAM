@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FullTaskDescriptionForAdminResource;
+use App\Models\Category;
 use App\Models\ExecutorProfile;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -17,8 +18,35 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task=Task::orderBy('id','desc')->paginate(10);
-        return view('admin.all_task',compact('task'));
+        $category = Category::all();
+        // $task = Task::orderBy('id','desc')->paginate(10);
+        $task = $this->filter(null, null, null, null, null);
+        return view('admin.all_task',compact('task','category'));
+    }
+    public function filter($searchtask_name=null, $category_name=null, $task_status=null, $date_from=null, $date_to=null){
+
+        $task = Task::where('id','>',0);
+
+        if($searchtask_name!=null){
+
+        }
+        if($category_name!=null){
+
+        }
+        if($task_status!=null){
+
+        }
+        if($date_from!=null){
+
+        }
+        if($date_to!=null){
+
+        }
+        $task = $task->orderBy('id','desc')->paginate(10);
+
+        return $task;
+
+
     }
 
     /**
@@ -54,7 +82,7 @@ class TaskController extends Controller
 
         $show_task = Task::where('id',$id)->first();
         $executor=ExecutorProfile::where('id',$show_task->executor_profile_id)->first();
-   
+
         return view('admin.show_task',compact('show_task','executor'));
     }
 

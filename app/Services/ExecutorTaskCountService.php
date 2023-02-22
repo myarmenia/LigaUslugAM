@@ -15,7 +15,6 @@ class ExecutorTaskCountService{
 
     public  static function showalltasktoexecutor($user_id){
 
-
         $executor=ExecutorProfile::where('user_id', $user_id)->first();
         $executor_category=ExecutorCategory::where('executor_profile_id',$executor->id)->pluck('category_name');
         // dd($executor_category);
@@ -40,7 +39,16 @@ class ExecutorTaskCountService{
                                 ])->with('users')->with('image_tasks')->orderBy('id','desc')->get();
         $notSelectedTaskCountforexecutor=count($task);
 
-        return ['task_length' => $notSelectedTaskCountforexecutor,'Tasks' => $task];
+
+
+
+
+
+
+
+            return ['task_length' => $notSelectedTaskCountforexecutor,'Tasks' => $task];
+
+
     }
     public static  function respondedtaskforexecutor($user_id)
     {

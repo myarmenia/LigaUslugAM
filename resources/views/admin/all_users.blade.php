@@ -42,7 +42,7 @@
                         {{-- <th scope="col" class="text-center"> Ссылки на личные страницы</th> --}}
                         {{-- <th scope="col"> Показать</th> --}}
                         <th scope="col">Дата регистрации пользователя</th>
-                        <th scope="col">Удалить</th>
+                        {{-- <th scope="col">Удалить</th> --}}
                     </tr>
                     </thead>
                     <tbody>
@@ -61,19 +61,14 @@
                                 {{-- <img src="{{asset('admin/img/img_user') }}/{{ $items->img_path }}" width="100"> --}}
                             </td>
                             <td scope="col">{{$items->created_at }}</td>
-                            {{-- <td scope="col">
-                                <p>{{ $items->fasebook_link }}</p>
-                                <p>{{ $items->instagram_link }}</p>
-                            </td> --}}
-                            {{-- <td><a  href = "{{ route('user.show', $items->id )}}">Показать </a></td> --}}
 
-                            <td>
+                            {{-- <td>
                                 <form role="form"  action="{{ route('user.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
                                     @csrf
                                     @method('DELETE')
                                         <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
                                 </form>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                     </tbody>
