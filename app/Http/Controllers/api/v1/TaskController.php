@@ -216,8 +216,8 @@ class   TaskController extends Controller
              $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($executor_prof->users->id );
              $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $executor_prof->users->id );
              $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $executor_prof->users->id );
-             $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor( $user_id );
-             $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$user_id );
+             $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor( $executor_prof->users->id );
+             $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$executor_prof->users->id );
 
              $exec_arr=[
                 'user_id' => $executor_prof->users->id,
@@ -248,6 +248,29 @@ class   TaskController extends Controller
                 event(new NotificationEvent( $item->id, $database));
                 $unread_notification_count = Auth::user()->unreadNotifications()->count();
                 event(new UnreadNotificationCountEvent( $item->id, $unread_notification_count));
+
+
+                // for all executor
+                $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($item->id);
+                $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor($item->id );
+                $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $item->id );
+                $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor($item->id);
+                $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$item->id);
+
+                $exec_arr=[
+                   'user_id' => $item->id,
+                   'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+                   'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+                   'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
+                   'completedtaskexecutor'  => count($completedtaskexecutorservice),
+                   'specialtaskexecutor'=> count($specialtaskexecutorservice)
+               ];
+
+
+               event(new ExecutorSectionTaskCountEvent($item->id,$exec_arr));
+
+
+
 
             }
             event(new SectionTaskCountEvent($user_id,$arr));
