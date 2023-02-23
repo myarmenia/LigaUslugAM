@@ -16,11 +16,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $category = Category::all();
         // $task = Task::orderBy('id','desc')->paginate(10);
-        $task = $this->filter(null, null, null, null, null);
+        $task = $this->filter(null, null, null, null, null)->paginate(10);
         return view('admin.all_task',compact('task','category'));
     }
     public function filter($searchtask_name=null, $category_name=null, $task_status=null, $date_from=null, $date_to=null){
@@ -42,7 +42,7 @@ class TaskController extends Controller
         if($date_to!=null){
 
         }
-        $task = $task->orderBy('id','desc')->paginate(10);
+        $task = $task->orderBy('id','desc');
 
         return $task;
 

@@ -213,30 +213,23 @@ class   TaskController extends Controller
 
              event(new SectionTaskCountEvent($user_id,$arr));
 
+             $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($executor_prof->users->id );
+             $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $executor_prof->users->id );
+             $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $executor_prof->users->id );
+             $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor( $user_id );
+             $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$user_id );
+
+             $exec_arr=[
+                'user_id' => $executor_prof->users->id,
+                'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+                'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+                'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
+                'completedtaskexecutor'  => count($completedtaskexecutorservice),
+                'specialtaskexecutor'=> count($specialtaskexecutorservice)
+            ];
 
 
-
-            //  $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($executor_prof->users->id );
-            //  $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $executor_prof->users->id );
-            //  $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $executor_prof->users->id );
-
-            //   $exec_arr=[
-            //       'user_id' => $executor_prof->users->id ,
-            //       'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
-            //       'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
-            //       'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice)
-
-            //       // 'inprocesstask' => $inprocesstaskservice,
-            //       // 'completedtask' => $completedtaskservice,
-            //       // 'specialtask'=> $specialtaskcountservice
-            //   ];
-            //   dd($$exec_arr);
-            //  event(new ExecutorSectionTaskCountEvent($executor_prof->users->id,$exec_arr));
-
-
-
-
-
+            event(new ExecutorSectionTaskCountEvent($executor_prof->users->id,$exec_arr));
 
             return response()->json($show_new_task);
         }
@@ -274,9 +267,9 @@ class   TaskController extends Controller
       return response()->json($finished_task);
     }
     public function completedTasksForExecutor(){
-        $user_id=Auth::user()->id;
-        $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
-        $executorcompletedtask= Task::with('users')->with('image_tasks','reitings')->where(['executor_profile_id'=>$executor->id,'status'=>'completed'])->get();
+
+
+        $executorcompletedtask=ExecutorTaskCountService::completedtasksforexecutor(Auth::user()->id);
 
         return response()->json(['tasks'=>$executorcompletedtask]);
     }

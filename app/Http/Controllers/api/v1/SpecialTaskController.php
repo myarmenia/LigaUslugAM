@@ -28,11 +28,10 @@ class SpecialTaskController extends Controller
 
         $executor=ExecutorProfile::where('user_id',Auth::id())->first();
         $special_task='';
-         if($type == 'employer'){
+        if($type == 'employer'){
             $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
 
             $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
-
 
         }else if($type == 'executor'){
 
@@ -71,7 +70,7 @@ class SpecialTaskController extends Controller
         return response()->json(['message'=>'Персональный заказ отклонён']);
 
     }
-   
+
 
     /**
      * Show the form for creating a new resource.

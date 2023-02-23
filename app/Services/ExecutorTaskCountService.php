@@ -65,7 +65,25 @@ class ExecutorTaskCountService{
 
         return $inprocess;
     }
+    public static function completedtasksforexecutor($user_id){
 
+      $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
+      $executorcompletedtask= Task::with('users')->with('image_tasks','reitings')->where(['executor_profile_id'=>$executor->id,'status'=>'completed'])->get();
+        return $executorcompletedtask;
+    }
+    public static function specialtaskexecutor($type,$user_id){
+        $executor=ExecutorProfile::where('user_id',Auth::id())->first();
+        $special_task='';
+        if($type == 'employer'){
+            $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
 
+            $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
+
+        }else if($type == 'executor'){
+            $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
+
+        }
+        return $special_task;
+    }
 
 }
