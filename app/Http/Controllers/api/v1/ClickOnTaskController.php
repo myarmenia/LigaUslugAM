@@ -69,7 +69,7 @@ class ClickOnTaskController extends Controller
                     ]);
                     // updateing executor  balance after
 
-                    $update_executor_profile_balance=ExecutorProfile::where('user_id',Auth::user()->id)->update([
+                    $update_executor_profile_balance = ExecutorProfile::where('user_id',Auth::user()->id)->update([
                         'balance'=>$check_balance->balance-$click_price
                     ]);
                     $updated_executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
@@ -82,7 +82,7 @@ class ClickOnTaskController extends Controller
                             event(new NotificationEvent($employer->id, $database));
                             $unread_notification_count = Auth::user()->unreadNotifications()->count();
                             event(new UnreadNotificationCountEvent($employer->id, $unread_notification_count));
-// ==================================== show to  employer that executor click on task 
+// ==================================== show to  employer that executor click on task
                             $notappliedtaskservice = TaskCountService::notappliedtask($employer->id);
                             $respondedtaskService = TaskCountService::respondedExecutor($employer->id);
                             $inprocesstaskservice = TaskCountService::inProcessTask($employer->id);

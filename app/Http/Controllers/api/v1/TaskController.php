@@ -686,22 +686,22 @@ class   TaskController extends Controller
 
         $showalltasktoexecutor=ExecutorTaskCountService::showalltasktoexecutor(Auth::id());
 
-          $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor(Auth::id() );
-          $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( Auth::id() );
-          $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( Auth::id());
+        //   $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor(Auth::id() );
+        //   $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( Auth::id() );
+        //   $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( Auth::id());
 
-              $exec_arr=[
-                  'user_id' => Auth::id() ,
-                  'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
-                  'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
-                  'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice)
+        //       $exec_arr=[
+        //           'user_id' => Auth::id() ,
+        //           'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+        //           'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+        //           'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice)
 
-                  // 'inprocesstask' => $inprocesstaskservice,
-                  // 'completedtask' => $completedtaskservice,
-                  // 'specialtask'=> $specialtaskcountservice
-              ];
+        //           // 'inprocesstask' => $inprocesstaskservice,
+        //           // 'completedtask' => $completedtaskservice,
+        //           // 'specialtask'=> $specialtaskcountservice
+        //       ];
 
-             event(new ExecutorSectionTaskCountEvent(Auth::id(),$exec_arr));
+        //      event(new ExecutorSectionTaskCountEvent(Auth::id(),$exec_arr));
 
 
         return response()->json( $showalltasktoexecutor);
