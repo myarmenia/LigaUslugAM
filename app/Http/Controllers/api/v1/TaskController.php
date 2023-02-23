@@ -252,24 +252,8 @@ class   TaskController extends Controller
 
 
                 // for all executor
-                $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($item->id);
-                $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor($item->id );
-                $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $item->id );
-                $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor($item->id);
-                $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$item->id);
-
-                $exec_arr=[
-                   'user_id' => $item->id,
-                   'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
-                   'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
-                   'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
-                   'completedtaskexecutor'  => count($completedtaskexecutorservice),
-                   'specialtaskexecutor'=> count($specialtaskexecutorservice)
-               ];
-
-
-               event(new ExecutorSectionTaskCountEvent($item->id,$exec_arr));
-
+               
+               $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',$item->id);
 
 
 
