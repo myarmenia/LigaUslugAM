@@ -1,6 +1,7 @@
 <?php
 namespace  App\Services;
 
+use App\Events\ExecutorSectionTaskCountEvent;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorCategory;
 use App\Models\ExecutorProfile;
@@ -9,7 +10,6 @@ use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
 class ExecutorTaskCountService{
-
 
 
 
@@ -84,6 +84,27 @@ class ExecutorTaskCountService{
 
         }
         return $special_task;
+    }
+    public static function get($type,$user_id){
+        $showalltasktoexecutorservice=self::showalltasktoexecutor($user_id);
+        $respondedtaskforexecutorservice = self::respondedtaskforexecutor( $user_id );
+        $tasksinprogressforexecutorservice = self::tasksinprogressforexecutor( $user_id );
+        $completedtaskexecutorservice = self::completedtasksforexecutor( $user_id );
+        $specialtaskexecutorservice = self::specialtaskexecutor('executor',$user_id );
+
+            $exec_arr=[
+            'user_id' => $user_id,
+            'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+            'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+            'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
+            'completedtaskexecutor'  => count($completedtaskexecutorservice),
+            'specialtaskexecutor'=> count($specialtaskexecutorservice)
+        ];
+
+        event(new ExecutorSectionTaskCountEvent($user_id,$exec_arr));
+
+        return   $exec_arr;
+
     }
 
 }

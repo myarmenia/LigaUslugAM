@@ -213,24 +213,25 @@ class   TaskController extends Controller
 
              event(new SectionTaskCountEvent($user_id,$arr));
 
-             $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($executor_prof->users->id );
-             $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $executor_prof->users->id );
-             $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $executor_prof->users->id );
-             $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor( $executor_prof->users->id );
-             $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$executor_prof->users->id );
+            //  $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($executor_prof->users->id );
+            //  $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $executor_prof->users->id );
+            //  $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $executor_prof->users->id );
+            //  $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor( $executor_prof->users->id );
+            //  $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$executor_prof->users->id );
 
-             $exec_arr=[
-                'user_id' => $executor_prof->users->id,
-                'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
-                'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
-                'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
-                'completedtaskexecutor'  => count($completedtaskexecutorservice),
-                'specialtaskexecutor'=> count($specialtaskexecutorservice)
-            ];
+            //  $exec_arr=[
+            //     'user_id' => $executor_prof->users->id,
+            //     'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+            //     'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+            //     'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
+            //     'completedtaskexecutor'  => count($completedtaskexecutorservice),
+            //     'specialtaskexecutor'=> count($specialtaskexecutorservice)
+            // ];
 
 
-            event(new ExecutorSectionTaskCountEvent($executor_prof->users->id,$exec_arr));
-
+            // event(new ExecutorSectionTaskCountEvent($executor_prof->users->id,$exec_arr));
+            $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',$user_id);
+            // dd($get_executor_tasks_section_count);
             return response()->json($show_new_task);
         }
 
@@ -377,54 +378,160 @@ class   TaskController extends Controller
     }
 
 
+    // public function selectTaskExecutor(Request $request){
+
+    //     // if($request->has('select_task_executor')){
+
+    //         foreach($request->select_task_executor as $value){
+    //             $updatetask=Task::where('id',$value['task_id'])->update([
+    //                 'executor_profile_id' => $value['executor_profile_id'],
+    //                              'status' => "inprocess",
+    //             ]);
+    //             $check_task_status=Task::where('id',$value['task_id'])->first();
+
+    //             if($updatetask){
+
+    //                 $task = Task::where('id',$value['task_id'])->first();
+
+
+    //                 $click_on_task = ClickOnTask::where('task_id',$value['task_id'])->get();
+
+    //                 foreach($click_on_task as $items){
+
+    //                     if($items['executor_profile_id']!= $value['executor_profile_id']){
+
+    //                         $click=Task::where('id',$value['task_id'])->first();
+
+    //                         $attach_click_price=Subcategory::where('subcategory_name',$click->subcategory_name)->first();
+
+    //                         $click_price = $attach_click_price->price;
+
+    //                         $finding_executor_for_returning_click_money = ExecutorProfile::where('id', $items['executor_profile_id'])->first();
+
+    //                         $executor_balance=$finding_executor_for_returning_click_money->balance;
+    //                         $total_sum=$click_price+$executor_balance;
+    //                         $returning_price = ExecutorProfile::where('id',$items['executor_profile_id'])->update([
+    //                             'balance' => $total_sum
+    //                         ]);
+    //                         // changing status after selecting executor in  clickontask table  status  rejected
+
+    //                         $not_selected_executor_status = ClickOnTask::where([
+    //                                 ['task_id','=',$value['task_id'] ],
+    //                                 ['executor_profile_id','!=', $value['executor_profile_id']]
+    //                             ])->update([
+    //                                 "status" => "rejected"
+    //                             ]);
+
+    //                          $notifyExecutorForTaskNotSelected = ExecutorProfile::where('id',$items['executor_profile_id'])->first();
+
+    //                         $clickontask_rejected_executor = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$value['task_id'],'status'=>'rejected'
+    //                         ])->first();
+
+    //                         $notifyExecutorForTaskNotSelected->users->notify(new RejectTaskExecutorNotification($clickontask_rejected_executor));
+
+    //                         $user_notification = DB::table('notifications')->where('notifiable_id', $notifyExecutorForTaskNotSelected->users->id)->orderBy('created_at','desc')->get();
+    //                         $database = json_decode($user_notification);
+    //                         event(new NotificationEvent($notifyExecutorForTaskNotSelected->users->id,$database));
+
+    //                         $unread_notification_count = Auth::user()->unreadNotifications()->count();
+    //                         // dd($unread_notification_count);
+    //                         event(new UnreadNotificationCountEvent( $notifyExecutorForTaskNotSelected->users->id, $unread_notification_count));
+
+    //                     }
+    //                     else{
+    //                          // changing status after selecting executor when executor_profile_id is equal request executor_profile_id  in  clickontask table  status into inprocess
+
+    //                         $update_status = ClickOnTask::where(['task_id'=>$value['task_id'],'executor_profile_id'=>$value['executor_profile_id']])->update([
+    //                             'status'=>"inprocess"
+    //                         ]);
+
+    //                         $selected_executor_click_on_task = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$value['task_id'],'executor_profile_id'=>$value['executor_profile_id']])->first();
+
+    //                     }
+    //                 }
+
+    //                 // working websocket event
+
+    //                 $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
+
+    //                 $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
+
+    //                 // working notification part
+
+    //                 $user_notification = DB::table('notifications')->where('notifiable_id', $executor->users->id)->orderBy('created_at','desc')->get();
+    //                 $database=json_decode($user_notification);
+
+    //                 event(new NotificationEvent($executor->users->id,$database));
+    //                 $unread_notification_count = Auth::user()->unreadNotifications()->count();
+    //                 event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
+
+    //                 // ======show employer  inproces task count
+    //                 $user_id = Auth::user()->id;
+    //                 $notappliedtaskservice = TaskCountService::notappliedtask(Auth::user()->id);
+    //                 $respondedtaskService = TaskCountService::respondedExecutor(Auth::user()->id);
+    //                 $inprocesstaskservice = TaskCountService::inProcessTask(Auth::user()->id);
+    //                 $completedtaskservice = TaskCountService::completedTasks(Auth::user()->id);
+    //                 $specialtaskcountservice = TaskCountService::specialTaskcount('employer',Auth::user()->id);
+    //                 $arr=[
+    //                     'user_id' => $user_id,
+    //                     'notappliedtask' => $notappliedtaskservice,
+    //                     'respondedtask' => $respondedtaskService,
+    //                     'inprocesstask' => $inprocesstaskservice,
+    //                     'completedtask' => $completedtaskservice,
+    //                     'specialtask'=> $specialtaskcountservice
+    //                 ];
+
+    //                 event(new SectionTaskCountEvent($user_id,$arr));
+
+
+    //                 return response()->json(['message'=>'success'], 200);
+
+    //             }
+    //         }
+    //     }
+
+    // }
     public function selectTaskExecutor(Request $request){
 
-        if($request->has('select_task_executor')){
 
-            foreach($request->select_task_executor as $value){
-                $updatetask=Task::where('id',$value['task_id'])->update([
-                    'executor_profile_id' => $value['executor_profile_id'],
-                                 'status' => "inprocess",
-                ]);
-                $check_task_status=Task::where('id',$value['task_id'])->first();
+        $check_task=Task::where('id',$request->task_id)->first();
+            if($check_task){
+                $check_task->executor_profile_id= $request->executor_profile_id;
+                $check_task->status="inprocess";
+                $check_task->save();
 
-                if($updatetask){
+                if($check_task->status=="inprocess"){
+                    $task = Task::where('id',$request->task_id)->first();
 
-                    $task = Task::where('id',$value['task_id'])->first();
-
-
-                    $click_on_task = ClickOnTask::where('task_id',$value['task_id'])->get();
-
+                    $click_on_task = ClickOnTask::where('task_id',$request->task_id)->get();
                     foreach($click_on_task as $items){
+                        if($items->executor_profile_id!= $request->executor_profile_id){
 
-                        if($items['executor_profile_id']!= $value['executor_profile_id']){
-
-                            $click=Task::where('id',$value['task_id'])->first();
+                            $click=Task::where('id',$request->task_id)->first();
 
                             $attach_click_price=Subcategory::where('subcategory_name',$click->subcategory_name)->first();
 
                             $click_price = $attach_click_price->price;
 
-                            $finding_executor_for_returning_click_money = ExecutorProfile::where('id', $items['executor_profile_id'])->first();
+                            $finding_executor_for_returning_click_money = ExecutorProfile::where('id', $items->executor_profile_id)->first();
 
                             $executor_balance=$finding_executor_for_returning_click_money->balance;
                             $total_sum=$click_price+$executor_balance;
-                            $returning_price = ExecutorProfile::where('id',$items['executor_profile_id'])->update([
+                            $returning_price = ExecutorProfile::where('id',$items->executor_profile_id)->update([
                                 'balance' => $total_sum
                             ]);
                             // changing status after selecting executor in  clickontask table  status  rejected
 
                             $not_selected_executor_status = ClickOnTask::where([
-                                    ['task_id','=',$value['task_id'] ],
-                                    ['executor_profile_id','!=', $value['executor_profile_id']]
+                                    ['task_id','=', $request->task_id],
+                                    ['executor_profile_id','!=', $request->executor_profile_id]
                                 ])->update([
                                     "status" => "rejected"
                                 ]);
 
                              $notifyExecutorForTaskNotSelected = ExecutorProfile::where('id',$items['executor_profile_id'])->first();
 
-                            $clickontask_rejected_executor = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$value['task_id'],'status'=>'rejected'
-                            ])->first();
+                            $clickontask_rejected_executor = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$request->task_id,'status'=>'rejected'])->first();
 
                             $notifyExecutorForTaskNotSelected->users->notify(new RejectTaskExecutorNotification($clickontask_rejected_executor));
 
@@ -435,23 +542,21 @@ class   TaskController extends Controller
                             $unread_notification_count = Auth::user()->unreadNotifications()->count();
                             // dd($unread_notification_count);
                             event(new UnreadNotificationCountEvent( $notifyExecutorForTaskNotSelected->users->id, $unread_notification_count));
-
                         }
                         else{
                              // changing status after selecting executor when executor_profile_id is equal request executor_profile_id  in  clickontask table  status into inprocess
 
-                            $update_status = ClickOnTask::where(['task_id'=>$value['task_id'],'executor_profile_id'=>$value['executor_profile_id']])->update([
+                            $update_status = ClickOnTask::where(['task_id'=>$request->task_id,'executor_profile_id'=>$request->executor_profile_id])->update([
                                 'status'=>"inprocess"
                             ]);
 
-                            $selected_executor_click_on_task = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$value['task_id'],'executor_profile_id'=>$value['executor_profile_id']])->first();
-
+                            $selected_executor_click_on_task = ClickOnTask::with('executor_profiles.users')->where(['task_id'=>$request->task_id,'executor_profile_id'=>$request->executor_profile_id])->first();
                         }
                     }
 
                     // working websocket event
 
-                    $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$value['executor_profile_id'])->first();
+                    $executor = ExecutorProfile::Select('user_id')->with('users')->where('id',$request->executor_profile_id)->first();
 
                     $executor->users->notify(new NotifyAsTaskExecutor($selected_executor_click_on_task));
 
@@ -483,11 +588,33 @@ class   TaskController extends Controller
                     event(new SectionTaskCountEvent($user_id,$arr));
 
 
+                    // for executor
+
+                    $user_id = $executor->users->id;
+                    $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($executor->users->id );
+                    $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $executor->users->id );
+                    $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor($executor->users->id );
+                    $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor($executor->users->id );
+                    $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor('executor',$executor->users->id );
+
+                     $exec_arr=[
+                         'user_id' => $user_id,
+                         'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+                         'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+                         'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
+                         'completedtaskexecutor'  => count($completedtaskexecutorservice),
+                         'specialtaskexecutor'=> count($specialtaskexecutorservice)
+                     ];
+                    //  dd($exec_arr);
+
+                     event(new SectionTaskCountEvent($executor->users->id,$exec_arr));
+
+
+
                     return response()->json(['message'=>'success'], 200);
 
                 }
             }
-        }
 
     }
 

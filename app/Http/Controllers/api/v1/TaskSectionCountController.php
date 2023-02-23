@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\ExecutorSectionTaskCountEvent;
 use App\Events\SectionTaskCountEvent;
 use App\Http\Controllers\Controller;
 use App\Services\ExecutorTaskCountService;
@@ -43,24 +44,26 @@ class TaskSectionCountController extends Controller
     public function executor($type){
 
        $user_id = Auth::id();
-       $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($user_id );
-       $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $user_id );
-       $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $user_id );
-       $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor( $user_id );
-       $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor($type,$user_id );
+    //    $showalltasktoexecutorservice = ExecutorTaskCountService::showalltasktoexecutor($user_id );
+    //    $respondedtaskforexecutorservice = ExecutorTaskCountService::respondedtaskforexecutor( $user_id );
+    //    $tasksinprogressforexecutorservice = ExecutorTaskCountService::tasksinprogressforexecutor( $user_id );
+    //    $completedtaskexecutorservice = ExecutorTaskCountService::completedtasksforexecutor( $user_id );
+    //    $specialtaskexecutorservice = ExecutorTaskCountService::specialtaskexecutor($type,$user_id );
 
-        $exec_arr=[
-            'user_id' => $user_id,
-            'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
-            'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
-            'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
-            'completedtaskexecutor'  => count($completedtaskexecutorservice),
-            'specialtaskexecutor'=> count($specialtaskexecutorservice)
-        ];
+    //     $exec_arr=[
+    //         'user_id' => $user_id,
+    //         'showalltasktoexecutor' => $showalltasktoexecutorservice['task_length'],
+    //         'respondedtaskforexecutor' => count($respondedtaskforexecutorservice),
+    //         'tasksinprogressforexecutor' => count($tasksinprogressforexecutorservice),
+    //         'completedtaskexecutor'  => count($completedtaskexecutorservice),
+    //         'specialtaskexecutor'=> count($specialtaskexecutorservice)
+    //     ];
 
-        event(new SectionTaskCountEvent($user_id,$exec_arr));
+    //     event(new ExecutorSectionTaskCountEvent($user_id,$exec_arr));
 
-        return response()->json($exec_arr);
+        $get_executor_tasks_section_count=ExecutorTaskCountService::get($type,$user_id);
+
+        return response()->json($get_executor_tasks_section_count);
 
     }
 
