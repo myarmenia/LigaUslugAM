@@ -191,11 +191,11 @@
     // .notification((notification) => {
     //     console.log(notification.message);
     // });
-    Echo.channel('notification_chanal.65')
+    Echo.channel('notification_chanal.136')
                 .listen('.notification', (e)=>{
                     console.log(e)
                 })
-    Echo.channel('unreadnotificationcount_chanal.65')
+    Echo.channel('unreadnotificationcount_chanal.136')
     .listen('.unreadnotificationcount', (e)=>{
         console.log(e)
     })
@@ -208,12 +208,12 @@
     // .listen('.employernotappliedtaskcount', (e)=>{
     //     console.log(e)
     // })
-    Echo.channel('SectionTaskCount_chanal.34')
+    Echo.channel('SectionTaskCount_chanal.136')
     .listen('.SectionTaskCount', (e)=>{
         console.log(e)
     })
 
-    Echo.channel('ExecutorSectionTaskCount_chanal.65')
+    Echo.channel('ExecutorSectionTaskCount_chanal.136')
     .listen('.ExecutorSectionTaskCount', (e)=>{
         console.log(e)
     })
