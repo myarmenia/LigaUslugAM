@@ -191,10 +191,11 @@ class   TaskController extends Controller
              $unread_notification_count = Auth::user()->unreadNotifications()->count();
              event(new UnreadNotificationCountEvent( $executor_prof->user_id, $unread_notification_count));
 
-            // $get_employer_task_section_count=TaskCountService::get('employer',Auth::id());
+
 
             //     // show executor all task section count
-            $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',Auth::id());
+
+            $get_executor_tasks_section_count=ExecutorTaskCountService::get($executor_prof->users->id);
 
             return response()->json($show_new_task);
         }
@@ -217,12 +218,12 @@ class   TaskController extends Controller
 
                 // for all executor
 
-               $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',$item->id);
+               $get_executor_tasks_section_count=ExecutorTaskCountService::get($item->id);
 
 
 
             }
-            $get_employer_task_section_count=TaskCountService::get('employer',Auth::id());
+            $get_employer_task_section_count=TaskCountService::get(Auth::id());
 
 
 
@@ -233,9 +234,6 @@ class   TaskController extends Controller
         $user=Auth::user()->id;
 
         $finished_task=Task::with('reitings')->with('executor_profiles','executor_profiles.users','problem_messages')->where(['user_id'=>$user,'status'=>'completed'])->orderBy('id','desc')->get();
-
-      // $finishedTaskEndpoint= UserResource::collection($finished_task);
-      //  return response()->json($finishedTaskEndpoint);
 
       return response()->json($finished_task);
     }
@@ -249,21 +247,9 @@ class   TaskController extends Controller
 
     public function notAppliedTask()
     {
-        $user = Auth::user()->id;
-        $finished_task = Task::where(['user_id'=>$user,'status'=>'false'])->orderBy('id','desc')->get();
-        $array=[];
-        foreach($finished_task as $items){
+        $get_employer_not_applied_task = TaskCountService::notappliedtask(Auth::id());
 
-            $clickontask=ClickOnTask::where('task_id',$items->id)->first();
-            if(!$clickontask){
-                array_push($array,$items->id);
-            }
-        }
-
-        $task=Task::whereIn('id',$array)->orderBy('id','desc')->with('image_tasks')->get();
-        // dd($task);
-
-        return response()->json($task);
+        return response()->json($get_employer_not_applied_task);
 
     }
 
@@ -492,7 +478,7 @@ class   TaskController extends Controller
                             // dd($unread_notification_count);
                             event(new UnreadNotificationCountEvent( $notifyExecutorForTaskNotSelected->users->id, $unread_notification_count));
 
-                            // $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',$items->executor_profile_id);
+                            // $get_executor_tasks_section_count=ExecutorTaskCountService::get($items->executor_profile_id);
 
                         }
                         else{
@@ -522,15 +508,13 @@ class   TaskController extends Controller
                     event(new UnreadNotificationCountEvent($executor->users->id, $unread_notification_count));
 
                     // ======show employer all task sections count colling socket for changing sections number
-                    $get_employer_task_section_count=TaskCountService::get('employer',Auth::id());
+                    $get_employer_task_section_count = TaskCountService::get(Auth::id());
 
                     //======show executor all task sections count colling socket for changing sections number
 
-                    $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',$executor->users->id);
-
+                    $get_executor_tasks_section_count = ExecutorTaskCountService::get('executor',$executor->users->id);
 
                     return response()->json(['message'=>'success'], 200);
-
                 }
             }
 

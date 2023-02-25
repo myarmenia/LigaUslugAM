@@ -20,7 +20,7 @@ class TaskSectionCountController extends Controller
     public function index($type)
     {
 
-        $get_employer_task_section_count=TaskCountService::get($type,Auth::id());
+        $get_employer_task_section_count=TaskCountService::get(Auth::id());
 
         return response()->json($get_employer_task_section_count);
 
@@ -29,7 +29,7 @@ class TaskSectionCountController extends Controller
 
        $user_id = Auth::id();
 
-        $get_executor_tasks_section_count=ExecutorTaskCountService::get($type,$user_id);
+        $get_executor_tasks_section_count=ExecutorTaskCountService::get($user_id);
 
         return response()->json($get_executor_tasks_section_count);
 

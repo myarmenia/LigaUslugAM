@@ -62,31 +62,26 @@ class ExecutorTaskCountService{
     }
     public static function completedtasksforexecutor($user_id){
 
-      $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
+      $executor=ExecutorProfile::where('user_id',$user_id)->first();
       $executorcompletedtask= Task::with('users')->with('image_tasks','reitings')->where(['executor_profile_id'=>$executor->id,'status'=>'completed'])->get();
         return $executorcompletedtask;
     }
-    public static function specialtaskexecutor($type,$user_id){
-        $executor=ExecutorProfile::where('user_id',Auth::id())->first();
-        $special_task='';
-        if($type == 'employer'){
-            $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
 
-            $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
+    public static function executor_special_task($user_id){
 
-        }else if($type == 'executor'){
-            $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
+        $executor=ExecutorProfile::where('user_id',$user_id)->first();
+        $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
 
-        }
         return $special_task;
     }
-    public static function get($type,$user_id){
-        
+
+    public static function get($user_id){
+
         $showalltasktoexecutorservice=self::showalltasktoexecutor($user_id);
         $respondedtaskforexecutorservice = self::respondedtaskforexecutor( $user_id );
         $tasksinprogressforexecutorservice = self::tasksinprogressforexecutor( $user_id );
         $completedtaskexecutorservice = self::completedtasksforexecutor( $user_id );
-        $specialtaskexecutorservice = self::specialtaskexecutor('executor',$user_id );
+        $specialtaskexecutorservice = self::executor_special_task($user_id );
 
             $exec_arr=[
             'user_id' => $user_id,
@@ -97,6 +92,7 @@ class ExecutorTaskCountService{
             'specialtaskexecutor'=> count($specialtaskexecutorservice)
         ];
 
+// dd($exec_arr);
         event(new ExecutorSectionTaskCountEvent($user_id,$exec_arr));
 
         return   $exec_arr;

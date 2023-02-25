@@ -84,7 +84,7 @@ class ClickOnTaskController extends Controller
                             event(new UnreadNotificationCountEvent($employer->id, $unread_notification_count));
 
                             //afterclicking  this socket will change   all  employer task sections  number
-                            $get_employer_task_section_count=TaskCountService::get('employer',$employer->id);
+                            $get_employer_task_section_count=TaskCountService::get($employer->id);
 
 
                             return response()->json(['message'=>'success']);

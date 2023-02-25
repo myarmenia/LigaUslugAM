@@ -11,6 +11,8 @@ use App\Models\ExecutorProfile;
 use App\Models\specialTaskExecutor;
 use App\Models\Task;
 use App\Notifications\NotifyEmployerExecutorRejectedSpecialTask;
+use App\Services\ExecutorTaskCountService;
+use App\Services\TaskCountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,31 +24,26 @@ class SpecialTaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index($type)
 
     {
-
-        $executor=ExecutorProfile::where('user_id',Auth::id())->first();
         $special_task='';
+
         if($type == 'employer'){
-            $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
 
-            $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
+            $special_task = TaskCountService::employerspecialTask(Auth::id());
 
-        }else if($type == 'executor'){
+        }else if($type =='executor'){
 
-            $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
-
+            $special_task = ExecutorTaskCountService::executor_special_task(Auth::id());
         }
 
         return response()->json(['special_task'=>$special_task]);
     }
     public function rejectEmployerForSpecialTask(Request $request){
 
-        // dd($request->all());
         $task = Task::where('id',$request->task_id)->with('users')->first();
-
-
 
         // if($delete_task){
             $special_task = specialTaskExecutor::where('task_id',$request->task_id)->with('tasks.users')->first();
