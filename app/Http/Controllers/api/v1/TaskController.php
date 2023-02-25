@@ -194,7 +194,7 @@ class   TaskController extends Controller
             // $get_employer_task_section_count=TaskCountService::get('employer',Auth::id());
 
             //     // show executor all task section count
-            // $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',Auth::id());
+            $get_executor_tasks_section_count=ExecutorTaskCountService::get('executor',Auth::id());
 
             return response()->json($show_new_task);
         }
