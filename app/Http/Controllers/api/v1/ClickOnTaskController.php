@@ -86,8 +86,9 @@ class ClickOnTaskController extends Controller
                             //afterclicking  this socket will change   all  employer task sections  number
                             $get_employer_task_section_count=TaskCountService::get($employer->id);
 
-
-                            return response()->json(['message'=>'success']);
+                            $get_responded_task = ExecutorTaskCountService::respondedtaskforexecutor(Auth::id());
+                            return response()->json(['message'=>$get_responded_task ]);
+                            // return response()->json(['message'=>'success']);
                 }else{
                     return response()->json(['message'=>'Вы не можете подать заявку на эту работу, потому что вашего баланса недостаточно']);
                 }
@@ -97,18 +98,10 @@ class ClickOnTaskController extends Controller
 
     public function respondedTaskForExecutor()
     {
-        // $user_id=Auth::user()->id;
+
         $responded_task_for_Executor=ExecutorTaskCountService::respondedtaskforexecutor(Auth::id());
-        // dd($responded_task_for_Executor);
 
-    //     $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
-
-    //   //   $responded_task_for_Executor =  ClickOnTask::where(['executor_profile_id'=>$executor->id, 'status'=>'false'])->pluck('task_id');
-    //    $responded_task_for_Executor =  ClickOnTask::with('tasks','tasks.users','tasks.image_tasks')->where(['executor_profile_id'=>$executor->id, 'status'=>'false'])->orderBy('id','desc')->get();
-    //   // $tasks=Task::whereIn( 'id',$responded_task_for_Executor)->with('users','image_tasks')->get();
-
-
-          return response()->json(['ClickOnTask'=>  $responded_task_for_Executor]);
+        return response()->json(['ClickOnTask'=>  $responded_task_for_Executor]);
     }
     public function employerWatchedClick(Request $request){
 

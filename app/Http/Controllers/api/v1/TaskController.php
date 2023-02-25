@@ -512,7 +512,7 @@ class   TaskController extends Controller
 
                     //======show executor all task sections count colling socket for changing sections number
 
-                    $get_executor_tasks_section_count = ExecutorTaskCountService::get('executor',$executor->users->id);
+                    $get_executor_tasks_section_count = ExecutorTaskCountService::get($executor->users->id);
 
                     return response()->json(['message'=>'success'], 200);
                 }
