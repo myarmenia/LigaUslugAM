@@ -39,8 +39,6 @@ class SpecialTaskController extends Controller
 
         }
 
-
-
         return response()->json(['special_task'=>$special_task]);
     }
     public function rejectEmployerForSpecialTask(Request $request){

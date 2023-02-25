@@ -208,7 +208,7 @@
     // .listen('.employernotappliedtaskcount', (e)=>{
     //     console.log(e)
     // })
-    Echo.channel('SectionTaskCount_chanal.136')
+    Echo.channel('SectionTaskCount_chanal.79')
     .listen('.SectionTaskCount', (e)=>{
         console.log(e)
     })

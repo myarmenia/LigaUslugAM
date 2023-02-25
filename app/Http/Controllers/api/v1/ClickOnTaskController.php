@@ -82,21 +82,9 @@ class ClickOnTaskController extends Controller
                             event(new NotificationEvent($employer->id, $database));
                             $unread_notification_count = Auth::user()->unreadNotifications()->count();
                             event(new UnreadNotificationCountEvent($employer->id, $unread_notification_count));
-// ==================================== show to  employer that executor click on task
-                            $notappliedtaskservice = TaskCountService::notappliedtask($employer->id);
-                            $respondedtaskService = TaskCountService::respondedExecutor($employer->id);
-                            $inprocesstaskservice = TaskCountService::inProcessTask($employer->id);
-                            $completedtaskservice = TaskCountService::completedTasks($employer->id);
-                            $specialtaskcountservice = TaskCountService::specialTaskcount('employer',$employer->id);
-                            $arr=[
-                                'user_id' => $employer->id,
-                                'notappliedtask' => $notappliedtaskservice,
-                                'respondedtask' => $respondedtaskService,
-                                'inprocesstask' => $inprocesstaskservice,
-                                'completedtask' => $completedtaskservice,
-                                'specialtask'=> $specialtaskcountservice
-                            ];
-                            event(new SectionTaskCountEvent($employer->id,$arr));
+
+                            //afterclicking  this socket will change   all  employer task sections  number
+                            $get_employer_task_section_count=TaskCountService::get('employer',$employer->id);
 
 
                             return response()->json(['message'=>'success']);

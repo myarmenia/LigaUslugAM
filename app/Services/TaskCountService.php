@@ -1,6 +1,7 @@
 <?php
 namespace  App\Services;
 
+use App\Events\SectionTaskCountEvent;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
 use App\Models\specialTaskExecutor;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TaskCountService {
-    public $count;
+ 
     public static function notappliedtask(string $user_id){
 
         $finished_task = Task::where(['user_id'=>$user_id,'status'=>'false'])->orderBy('id','desc')->get();
@@ -79,7 +80,7 @@ class TaskCountService {
         $executor=ExecutorProfile::where('user_id',$user_id)->first();
         $special_task='';
          if($type == 'employer'){
-            
+
             $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
 
             $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
@@ -94,6 +95,28 @@ class TaskCountService {
 
 
         return response()->json(['special_task'=>$special_task]);
+    }
+
+    public static function get($type,$user_id){
+
+        $notappliedtaskservice = self::notappliedtask($user_id);
+        $respondedtaskService = self::respondedExecutor($user_id);
+        $inprocesstaskservice = self::inProcessTask($user_id);
+        $completedtaskservice = self::completedTasks($user_id);
+        $specialtaskcountservice = self::specialTaskcount($type,$user_id);
+        $arr=[
+            'user_id' => $user_id,
+            'notappliedtask' => $notappliedtaskservice,
+            'respondedtask' => $respondedtaskService,
+            'inprocesstask' => $inprocesstaskservice,
+            'completedtask' => $completedtaskservice,
+            'specialtask'=> $specialtaskcountservice
+        ];
+
+        event(new SectionTaskCountEvent($user_id,$arr));
+
+        return $arr;
+
     }
 
 

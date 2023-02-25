@@ -14,10 +14,11 @@ class ExecutorTaskCountService{
     public static function showalltasktoexecutor($user_id){
 
         $executor=ExecutorProfile::where('user_id', $user_id)->first();
-        $executor_category=ExecutorCategory::where('executor_profile_id',$executor->id)->pluck('category_name');
+        $executor_category=ExecutorCategory::where('executor_profile_id',$executor->id)->pluck('category_name')->toArray();
         // dd($executor_category);
         // -----select task where not in special task executors
-        $special_task_executor_table=specialTaskExecutor::where('executor_id',$executor->id)->pluck('task_id');
+        $special_task_executor_table=specialTaskExecutor::where('executor_id',$executor->id)->pluck('task_id')->toArray();
+
 
 
 
@@ -28,16 +29,19 @@ class ExecutorTaskCountService{
                             ['user_id','!=', $user_id]
                             ])->with('users')->with('image_tasks')->orderBy('id','desc')->pluck('id');
 
+
         $click_on_task=ClickOnTask::whereIn('task_id',$task)->where([[ 'executor_profile_id','=',$executor->id],['status','=',false]])->pluck('task_id');
-        $task=Task::whereIn('category_name',$executor_category)
+
+        $second_filter_task=Task::whereIn('category_name',$executor_category)
                         ->whereNotIn('id',$special_task_executor_table)
+                        ->whereNotIn('id',$click_on_task)
                         ->where([
                                 ['executor_profile_id','=',Null],
                                 ['user_id','!=', $user_id]
                                 ])->with('users')->with('image_tasks')->orderBy('id','desc')->get();
-        $notSelectedTaskCountforexecutor=count($task);
+        $notSelectedTaskCountforexecutor=count($second_filter_task);
 
-        return ['task_length' => $notSelectedTaskCountforexecutor,'Tasks' => $task];
+        return ['task_length' => $notSelectedTaskCountforexecutor,'Tasks' => $second_filter_task];
 
     }
 
@@ -77,6 +81,7 @@ class ExecutorTaskCountService{
         return $special_task;
     }
     public static function get($type,$user_id){
+        
         $showalltasktoexecutorservice=self::showalltasktoexecutor($user_id);
         $respondedtaskforexecutorservice = self::respondedtaskforexecutor( $user_id );
         $tasksinprogressforexecutorservice = self::tasksinprogressforexecutor( $user_id );
