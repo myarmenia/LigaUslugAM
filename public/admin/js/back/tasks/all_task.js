@@ -14,5 +14,5 @@ date_to.addEventListener('change', (e) => {
 })
 filter()
 function filter($page=null){
-    alert()
+    // alert()
 }

@@ -33,42 +33,68 @@
                 </div>
                 @endif
                     <h3 class="my-5">Все Заказы</h3>
-                    @if (count($task)<1)
+                    {{-- @if (count($task)<1)
                         <div class="p-3"> На данный момент нет задач․</div>
-                    @else
+                    @else --}}
                     <div>
+                        {{-- <form  action="/task" method="get">
+                            <div class="form-group col-md-4">
+                            <label for="inputCity"></label>
+                                <input type="text" class="form-control" name="searchtask_name" id="searchtask_name" value="{{ request()->input('searchtask_name') }}"  >
+                            </div>
+                        </form> --}}
+                        <form  action="/task/" method="get">
 
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                              <label for="inputCity"></label>
-                              <input type="text" class="form-control"  value='' id="searchtask_name">
-                            </div>
-                            <div class="form-group col-md-4">
-                              <label for=""></label>
-                              <select  class="form-control" id="category_name">
+
+                            <div class="form-row">
+
+
+                                <div class="form-group col-md-4">
+
+                                <input type="text" class="form-control" name="searchtask_name"  placeholder="Поиск по названию заказа" value="{{ request()->input('searchtask_name') }}" id="searchtask_name">
+                                </div>
+
+                                <div class="form-group col-md-4">
+
+                                <select  class="form-control" name='category_name' id="category_name" value="{{ request()->input('category_name')}}" >
+
+
+                                    <option  value=''>Категории заказа</option>
+                                  
                                     @foreach ($category as $item)
-                                            <option value="{{$item->category_name}}">{{$item->category_name}}</option>
+                                    @if ($aa && $aa==$item->category_name)
+                                    <option  selected value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
+                                    @else
+                                    <option value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
+                                    @endif
+
+
+
                                     @endforeach
-                              </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputState"></label>
-                                <select id="task_status" class="form-control">
-                                  <option>Статус заказа</option>
-                                  <option value="not confirmed">не подтверждён</option>
-                                  <option value="false">false</option>
-                                  <option value="inprocess">в процессе</option>
-                                  <option value="finished">finished</option>
                                 </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <select id="task_status" name="task_status"  class="form-control" value="{{ request()->input('task_status') }}">
+                                        <option value=''>Статус заказа</option>
+                                        <option value="not confirmed">Не подтверждён специальный заказ</option>
+                                        <option value="false">Не выбран</option>
+                                        <option value="inprocess">В процессе</option>
+                                        <option value="finished">Завершён</option>
+                                    </select>
+                                </div>
+
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group d-flex justify-content-around  align-items-center col-md-6"  style="height:80px">
-                                <label class="form-group font-weight-bold" > Период заказа </label><br>
-                                <label class="form-group font-weight-bold" for=""> От <input type='date' id="date_from"></label><br>
-                                <label class="form-group font-weight-bold" for=""> До <input type='date' id="date_to"></label><br>
+                            <div class="form-row">
+                                <div class="form-group d-flex justify-content-around  align-items-center col-md-8"  style="height:80px">
+                                    <label class="form-group font-weight-bold" > Период заказа </label><br>
+                                    <label class="form-group font-weight-bold" for=""> От </label><input type='date' class="form-control w-25" name="date_from" id="date_from" value="{{ request()->input('date_from') }}"><br>
+                                    <label class="form-group font-weight-bold" for=""> До </label><input type='date' class="form-control w-25" name="date_to" id="date_to" value="{{ request()->input('date_to') }}"><br>
+                                    <button  type="submit" class="btn btn-success px-3">Фильтровать</button>
+                                </div>
                             </div>
-                        </div>
+
+
+                        </form>
 
                     </div>
 
@@ -85,32 +111,41 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach( $task as $items)
-                            <tr>
-                                <td>{{ $items->id }}</td>
-                                <td>{!! $items->title !!}</td>
-                                <td class="text-center">
-                                    <a  href = "{{ route('task.show', $items->id )}}">
-                                        Показать
-                                    </a>
-                                </td>
+                            @if ($task->total()==0)
+                                <tr>
+                                    <th colspan=4 class="btn-success">
+                                        По этим параметрам ничего не найдено
+                                    </th>
+                                </tr>
+                            @else
+                                @foreach( $task as $items)
+                                    <tr>
+                                        <td>{{ $items->id }}</td>
+                                        <td>{!! $items->title !!}</td>
+                                        <td class="text-center">
+                                            <a  href = "{{ route('task.show', $items->id )}}">
+                                                Показать
+                                            </a>
+                                        </td>
 
-                                <td>
-                                    <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
-                                        @csrf
-                                        @method('DELETE')
-                                            <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <td>
+                                            <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
+
                     </table>
 
                     <div class="pagination">
                         {{ $task->links()}}
                     </div>
-                 @endif
+                 {{-- @endif --}}
             </div>
 
 

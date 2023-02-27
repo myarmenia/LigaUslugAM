@@ -86,9 +86,9 @@ class ClickOnTaskController extends Controller
                             //afterclicking  this socket will change   all  employer task sections  number
                             $get_employer_task_section_count=TaskCountService::get($employer->id);
 
-                            $get_responded_task = ExecutorTaskCountService::respondedtaskforexecutor(Auth::id());
-                            return response()->json(['message'=>$get_responded_task ]);
-                            // return response()->json(['message'=>'success']);
+                            // $get_responded_task = ExecutorTaskCountService::respondedtaskforexecutor(Auth::id());
+                            // return response()->json(['message'=>$get_responded_task ]);
+                            return response()->json(['message'=>'success']);
                 }else{
                     return response()->json(['message'=>'Вы не можете подать заявку на эту работу, потому что вашего баланса недостаточно']);
                 }

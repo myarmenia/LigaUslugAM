@@ -45,6 +45,7 @@ class NotifyExecutorForDeadline extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Завершение работы, осталось один день')
                     ->greeting('Уважаемый исполнитель!')
                     ->line('Время номер '.$this->items->task_id.' задачи подходит к концу')
                     ->action('Перейти по ссылке,', url('http://ligauslug.ru/'))

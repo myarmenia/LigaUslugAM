@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\ExecutorProfile;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class TaskController extends Controller
 {
@@ -18,11 +19,45 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+
         $category = Category::all();
-        // $task = Task::orderBy('id','desc')->paginate(10);
-        $task = $this->filter(null, null, null, null, null)->paginate(10);
-        return view('admin.all_task',compact('task','category'));
+
+
+        $query=Task::latest();
+        if(!empty($request->searchtask_name)){
+            $query->where('title','like', '%'.$request->input('searchtask_name') .'%');
+
+        }
+        if($request->has('category_name')){
+            $query->where('category_name','like', '%'.$request->input('category_name') .'%');
+
+        }
+        if($request->has('date_from') && !empty($request->input('date_from'))){
+            $query->where('task_starttime','>=', $request->input('date_from'));
+
+        }
+        if($request->has('date_to') && !empty($request->input('date_to'))){
+            $query->where('task_finishtime','<=', $request->input('date_to'));
+
+        }
+        if(!empty($request->input('task_status'))){
+            $query->where('status', $request->input('task_status'));
+
+        }
+
+
+        $task=$query->paginate(2)->withQueryString();
+
+        return view('admin.all_task',compact('task','category'))->with('aa',$request->input('category_name'));
     }
+    // public function index(Request $request)
+    // {
+    //     $category = Category::all();
+    //     // $task = Task::orderBy('id','desc')->paginate(10);
+    //     $task = $this->filter(null, null, null, null, null)->paginate(10);
+    //     return view('admin.all_task',compact('task','category'));
+    // }
+
     public function filter($searchtask_name=null, $category_name=null, $task_status=null, $date_from=null, $date_to=null){
 
         $task = Task::where('id','>',0);
