@@ -8,7 +8,7 @@
 @section('content')
 <div class="container-fluid ">
     <div class="row d-flex justify-content-center my-5 pt-5">
-        <div class="col-md-8"  style="height:760px">
+        <div class="col-md-8" >
 
             <table class="table table-bordered bg-white">
             <tbody>
