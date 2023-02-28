@@ -226,6 +226,7 @@ Route::prefix('/pages')->group(function(){
     Route::get('/subcategory/{categoryId}/{subcategoryName}/show',[FindExecutorController::class,'show']);
     Route::get('/filter-executor/{category_id}/{region}/{executor_subcategory}',[FindExecutorController::class,'filter']);
     // find work show all tasks witch matched
+    Route::get('/all_tasks',[FindTaskController::class,'allTasks']);
     Route::get('/find_task/{categoryId}/{subcategoryName}/show',[FindTaskController::class,'index']);
 
 

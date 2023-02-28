@@ -15,6 +15,8 @@ class FindTaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index($categoryId,$subcategoryName)
 
     {
@@ -27,13 +29,20 @@ class FindTaskController extends Controller
 
             $query=Task::latest();
             $query->whereIn('subcategory_name', $subcategory);
-           
+
 
             $task=$query->paginate(2)->withQueryString();
             return response()->json(['message'=>$task]);
 
 
         }
+
+    }
+    public function allTasks(){
+        $query=Task::latest();
+        $query->where('status',false);
+        $all_task=$query->paginate(5)->withQueryString();
+        return response()->json(['message'=>$all_task]);
 
     }
 
