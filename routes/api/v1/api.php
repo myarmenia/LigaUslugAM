@@ -38,6 +38,7 @@ use App\Http\Controllers\api\v1\TestEnrollmentController;
 use App\Http\Controllers\Pages\CallbackController;
 use App\Http\Controllers\Pages\ExecutorProfileController as PagesExecutorProfileController;
 use App\Http\Controllers\Pages\FindExecutorController;
+use App\Http\Controllers\Pages\FindTaskController;
 use App\Http\Controllers\Pages\GiveQuestionController;
 use App\Http\Controllers\Pages\LocalityController;
 use App\Http\Controllers\Pages\RayonController;
@@ -221,9 +222,12 @@ Route::prefix('/pages')->group(function(){
     // porz kadastry hamar
     Route::post('/upload_file_test',[GiveQuestionController::class,'uploadFileTest']);
 
-    // not auth user can click on subcategory  and find matched subcategory executor
+    // not auth user can click on subcategory  and find matched subcategory executor gtnel executorner hamapataxan subcategorianeri
     Route::get('/subcategory/{categoryId}/{subcategoryName}/show',[FindExecutorController::class,'show']);
     Route::get('/filter-executor/{category_id}/{region}/{executor_subcategory}',[FindExecutorController::class,'filter']);
+    // find work show all tasks witch matched
+    Route::get('/find_task/{categoryId}/{subcategoryName}/show',[FindTaskController::class,'index']);
+
 
 });
 

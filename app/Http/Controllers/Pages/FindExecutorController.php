@@ -59,7 +59,7 @@ class FindExecutorController extends Controller
 
             $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
 
-            $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users','executor_categories')->paginate(10);
+            $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users','executor_categories')->paginate(10)->withQueryString();
             if($findExecutor->total()==0){
                 return response()->json(['message'=>"Специалисты по данным параметрам не найдены"]);
             }else{
@@ -80,7 +80,7 @@ class FindExecutorController extends Controller
             $matched_executor = ExecutorProfile::whereIn('id',$findExecutorId)->with('users','executor_categories');
 
             $working_region = ExecutorWorkingRegion::distinct()->where('executorwork_region',$region)->pluck('executor_profile_id');
-            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(10);
+            $matched_executor = $matched_executor->whereIn('id',$working_region)->paginate(10)->withQueryString();
             $category=Category::where('id',$category_id)->with('subcategories')->get();
 
             return response()->json(['executor'=>$matched_executor,'selected_subcategories'=>$subcategory_array,'selected_region'=>$region,'category'=>$category],200);
