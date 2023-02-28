@@ -6,10 +6,10 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('content')
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center ">
+<div class="container-fluid ">
+    <div class="row d-flex justify-content-center my-5 pt-5">
         <div class="col-md-8"  style="height:760px">
-       
+
             <table class="table table-bordered bg-white">
             <tbody>
                 <tr>
@@ -42,66 +42,21 @@
             </tr>
 
 
-            {{-- <tr>
-                <td colspan=3><h4 class="font-weight-bold">Районы выезда к клиентам</h4></td>
-            </tr>
-            <tr>
-              <td colspan=3>
-                    @foreach ($executor_profile->executor_working_regions as $items)
-                                <p>{{$items->executorwork_region}}</p>
-                    @endforeach
-                </td>
-            </tr>
-            <tr>
-                <td colspan=3><h4 class="font-weight-bold">Специальность и опыт</h4></td>
-            </tr>
 
-
-
-            @foreach ($executor_profile->executor_working_regions as $items)
-                    <tr>
-                        <td>Рабочее место</td>
-                        <td colspan=2>{{$items->executorwork_region}}  от {{ date('d-m-Y', strtotime($items->created_at))}} до {{date('d-m-Y', strtotime($items->updated_at))}}</td>
-                    </tr>
-            @endforeach
-
-
-
-
-
-
-
-            <tr>
-                <td colspan=3><h4 class="font-weight-bold">Отзывы клиентов</h4></td>
-            </tr>
-
-            @foreach ($rating as $items)
-                <tr>
-                    <td colspan="3">
-                        <div class="d-flex">
-                            <div><img src="{{ asset('admin/img/img_user')}}/{{ $items->users->img_path }} " style="height:150px;width:150px"></div>
-                            <div class="ml-3">
-                                <p>{{$items->users->name}}</p>
-                                <p>
-                                    @php
-                                        $count=$items->employer_star_count_to_executor;
-                                        for($i=0;$i<$count;$i++){
-                                            echo "<i class='fa fa-star' style='color:orange'></i>";
-                                        }
-                                    @endphp
-
-                                </p>
-
-                            </div>
-                        </div>
-                        <div>{{ $items->employer_review_to_executor }}</div>
-                    </td>
-
-                <tr>
-            @endforeach--}}
             </tbody>
             </table>
+            @if ($show_user_profile->tasks!=null)
+                <h3 class="mt-5 ">Заказы</h3>
+                @foreach ($show_user_profile->tasks as  $item)
+                    <p><a href="{{route('task.show',$item->id )}}">{{$item->title}}</a></p>
+
+                @endforeach
+
+            @endif
+
         </div>
+
+
 
 </div>
 

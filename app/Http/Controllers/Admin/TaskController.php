@@ -7,6 +7,7 @@ use App\Http\Resources\FullTaskDescriptionForAdminResource;
 use App\Models\Category;
 use App\Models\ExecutorProfile;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -17,17 +18,24 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $inputsearch;
     public function index(Request $request)
     {
 
-        $category = Category::all();
 
+        $category = Category::all();
 
         $query=Task::latest();
         if(!empty($request->searchtask_name)){
+            $this->inputsearch=$request->searchtask_name;
             $query->where('title','like', '%'.$request->input('searchtask_name') .'%');
+            $query->orWhere('id','like', '%'.$request->input('searchtask_name') .'%');
+            $query->orWhereIn('user_id', User::where(function( $inner_query ){
+                                             $inner_query->where('name', 'like', '%' . $this->inputsearch . '%')
+                                                       ->orWhere('last_name', 'like', '%' . $this->inputsearch . '%');
+                                     })->pluck('id'));
 
-        }
+         }
         if($request->has('category_name')){
             $query->where('category_name','like', '%'.$request->input('category_name') .'%');
 
@@ -48,7 +56,7 @@ class TaskController extends Controller
 
         $task=$query->paginate(2)->withQueryString();
 
-        return view('admin.all_task',compact('task','category'))->with('aa',$request->input('category_name'));
+        return view('admin.all_task',compact('task','category'))->with('session_categoryName',$request->input('category_name'));
     }
     // public function index(Request $request)
     // {

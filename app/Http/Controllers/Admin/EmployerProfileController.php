@@ -14,19 +14,32 @@ class EmployerProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
 
-//    return last task user
-        $paginate=20;
-        $i=$request['page'] ? ($request['page']-1)*$paginate : 0;
+    public function index(Request $request){
+        $paginate = 10;
+            $i=$request['page'] ? ($request['page']-1)*$paginate : 0;
+           $query=User::wherehas('tasks')->latest();
+           if($request->filter_category!=null && $request->input_filter!=null){
+                if($request->filter_category=='employer_name_last_name'){
+                    $query->where('name','like', '%'.$request->input_filter .'%');
+                    $query->orWhere('last_name','like', '%'.$request->input_filter .'%');
 
-        $employer = Task::with('users')->orderBy('id','desc')->paginate($paginate);
+                }
+                if($request->filter_category=='employer_review_count'){
+                    $query->where('employer_review_count','like', '%'.$request->input_filter .'%');
 
-         return view('admin.employer.index',compact('employer' ,'i'));
+                }
+                if($request->filter_category=='phone_number'){
+                    $query->where('phonenumber', 'like', '%' . $request->input_filter . '%');
+                }
 
+            }
+
+        $employer=$query->paginate($paginate)->withQueryString();
+        return view('admin.employer.index',compact('employer' ,'i'))->with('session_filterCategory',$request->filter_category);
 
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -31,6 +31,10 @@
                 <td>{{ $executor_profile->users->gender }}</td>
             </tr>
             <tr>
+                <td style="width:200px" >Номер телефона</td>
+                <td>{{ $executor_profile->users->phonenumber }}</td>
+            </tr>
+            <tr>
                 <td style="width:200px" >Эл. адрес</td>
                 <td>{{ $executor_profile->users->email }}</td>
             </tr>

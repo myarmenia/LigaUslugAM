@@ -17,7 +17,7 @@ class NotificationController extends Controller
     public function index()
     {
 
-
+        // dd(Auth::user()->notifications());
         $notification = Auth::user()->notifications()->where(['read_at'=>null,'type'=>"App\Notifications\NewUserNotification"])->get();
 
         return view('admin.notification.notification',compact('notification'));

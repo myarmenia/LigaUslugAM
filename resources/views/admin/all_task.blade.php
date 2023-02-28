@@ -33,43 +33,36 @@
                 </div>
                 @endif
                     <h3 class="my-5">Все Заказы</h3>
-                    {{-- @if (count($task)<1)
-                        <div class="p-3"> На данный момент нет задач․</div>
-                    @else --}}
+
                     <div>
-                        {{-- <form  action="/task" method="get">
-                            <div class="form-group col-md-4">
-                            <label for="inputCity"></label>
-                                <input type="text" class="form-control" name="searchtask_name" id="searchtask_name" value="{{ request()->input('searchtask_name') }}"  >
-                            </div>
-                        </form> --}}
                         <form  action="/task/" method="get">
-
-
                             <div class="form-row">
 
 
                                 <div class="form-group col-md-4">
 
                                 <input type="text" class="form-control" name="searchtask_name"  placeholder="Поиск по названию заказа" value="{{ request()->input('searchtask_name') }}" id="searchtask_name">
+                                    {{-- <div>
+                                        <div class="form-row">
+                                            <label>по названию заказа</label><input type="checkbox">
+                                        </div>
+                                        <div class="form-row">
+                                            <label>по названию заказчик</label><input type="checkbox">
+                                        </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="form-group col-md-4">
 
-                                <select  class="form-control" name='category_name' id="category_name" value="{{ request()->input('category_name')}}" >
-
-
+                                <select  class="form-control" name='category_name' id="category_name" >
                                     <option  value=''>Категории заказа</option>
-                                  
+
                                     @foreach ($category as $item)
-                                    @if ($aa && $aa==$item->category_name)
-                                    <option  selected value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
-                                    @else
-                                    <option value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
-                                    @endif
-
-
-
+                                        @if ($session_categoryName && $session_categoryName==$item->category_name)
+                                            <option  selected value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
+                                        @else
+                                             <option value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 </div>
@@ -92,13 +85,9 @@
                                     <button  type="submit" class="btn btn-success px-3">Фильтровать</button>
                                 </div>
                             </div>
-
-
                         </form>
 
                     </div>
-
-
                     <table class="table table-bordered table-striped" >
                         <thead>
                         <tr>
@@ -145,7 +134,7 @@
                     <div class="pagination">
                         {{ $task->links()}}
                     </div>
-                 {{-- @endif --}}
+
             </div>
 
 

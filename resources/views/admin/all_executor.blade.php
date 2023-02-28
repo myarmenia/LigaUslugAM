@@ -29,13 +29,74 @@
                 </div>
                 @endif
                     <h3 class="my-5 font-weight-bold">Все исполнители</h3>
+                    <div>
+
+                        <form  action="/executor/" method="get">
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <select id="task_status"  name="filter_category"  class="form-control">
+                                        @if ($session_filterCategory=='rating')
+                                            <option value="rating" selected> По рейтингу</option>
+                                            <option value="" >фильтровать </option>
+                                            <option value="region" >По региону</option>
+                                            <option value="phone_number" >По номер телефона</option>
+                                            <option value="executor_name" >По ФИ</option>
+
+                                        @elseif($session_filterCategory=='region')
+                                            <option value="region"  selected>По региону</option>
+                                            <option value="" >фильтровать </option>
+                                            <option value="rating" > По рейтингу</option>
+                                            <option value="phone_number" >По номер телефона</option>
+                                            <option value="executor_name" >По ФИ</option>
+
+                                        @elseif($session_filterCategory=='phone_number')
+                                            <option value="phone_number" selected >По номер телефона</option>
+                                            <option value="" >фильтровать </option>
+                                            <option value="rating" > По рейтингу</option>
+                                            <option value="region" >По региону</option>
+                                            <option value="executor_name" >По ФИ</option>
+
+                                        @elseif($session_filterCategory=='executor_name')
+                                            <option value="executor_name" selected >По ФИ</option>
+                                            <option value="" >фильтровать </option>
+                                            <option value="rating" > По рейтингу</option>
+                                            <option value="region" >По региону</option>
+                                            <option value="phone_number" >По номер телефона</option>
+
+                                        @else
+
+                                            <option value="" >фильтровать </option>
+                                            <option value="rating" > По рейтингу</option>
+                                            <option value="region" >По региону</option>
+                                            <option value="phone_number" >По номер телефона</option>
+                                            <option value="executor_name" >По ФИ</option>
+
+                                        @endif
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="text" class="form-control" name="executor_filter"  placeholder=" " value="{{ request()->input('executor_filter') }}" >
+                                </div>
+
+
+                                <div class="form-group col-md-2 mx-3">
+                                    <button  type="submit" class="btn btn-success px-3">Фильтровать</button>
+                                </div>
+
+
+                            </div>
+
+                        </form>
+
+                    </div>
                     @if (count($all_executor)<1)
                         <div class="p-3 h4">На данный момент исполнителей нет</div>
                     @else
                         <table class="table table-bordered table-striped" >
                             <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">№</th>
                                 <th scope="col">User ID</th>
                                 <th scope="col">Имя исполнителя</th>
                                 <th scope="col">Фамилия исполнителя</th>
@@ -46,7 +107,7 @@
                                 <th scope="col" class="text-center">Адрес</th>
                                 <th scope="col" class="text-center"> Процент заполнение акаунта</th>
                                 <th scope="col">Показать отдельную страницу исполнителя</th>
-                                <th scope="col">Удалить</th>
+                                {{-- <th scope="col">Удалить</th> --}}
                             </tr>
                             </thead>
                             <tbody>
@@ -68,13 +129,13 @@
                                         </a>
                                     </td>
 
-                                    <td>
+                                    {{-- <td>
                                         <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
                                             @csrf
                                             @method('DELETE')
                                                 <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
                                         </form>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                             </tbody>
