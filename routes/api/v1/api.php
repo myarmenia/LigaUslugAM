@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\AnswerAndQuestionController;
 use App\Http\Controllers\api\v1\AjaxController;
 use App\Http\Controllers\Pages\CategoryController;
 use App\Http\Controllers\Pages\HeaderController;
@@ -43,6 +44,7 @@ use App\Http\Controllers\Pages\GiveQuestionController;
 use App\Http\Controllers\Pages\LocalityController;
 use App\Http\Controllers\Pages\RayonController;
 use App\Http\Controllers\Pages\ShowProfileController;
+use App\Models\AnswerAndQuestion;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
 
@@ -228,7 +230,7 @@ Route::prefix('/pages')->group(function(){
     // find work show all tasks witch matched
     Route::get('/all_tasks',[FindTaskController::class,'allTasks']);
     Route::get('/find_task/{categoryId}/{subcategoryName}/show',[FindTaskController::class,'index']);
-
+    Route::get('/get_answer_and_question',[AnswerAndQuestionController::class,'getanswerandquestion']);
 
 });
 

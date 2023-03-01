@@ -224,6 +224,18 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseeleven"
+                    aria-expanded="true" aria-controls="collapseten">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Вопросы и ответы</span>
+                </a>
+                <div id="collapseeleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('anwer')}}">Вопросы и ответы</a>
+                    </div>
+                </div>
+            </li>
 
 
             <!-- Nav Item - Utilities Collapse Menu -->
