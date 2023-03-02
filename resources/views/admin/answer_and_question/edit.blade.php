@@ -15,8 +15,7 @@
                 <div>
                 <div class=" px-2" style="height:250px;width:200px;overflow:hidden">
 
-
-                    <div id="delete_file"  data-id="{{$edit_question->id}}" style="height:30px;width:30px;color:red;font-size:20px;margin-left:90%;text-align:center">x</div>
+                    <div id="delete_file"  data-id="{{$edit_question->id}}" style="height:30px;width:30px;color:red;font-size:20px;margin-left:85%;text-align:center;background-color:#e2e2e2;border-radius:5px;line-height:30px">x</div>
                     <div  style="height:200px;width:200px;overflow:hidden">
                         <img id="question_img" calss="responsive" src="{{$edit_question->img_path != Null ? route('get-file',['path'=>$edit_question->img_path]) : asset('/images/logo_footer.png')}}" alt="" style="object-fit:contain;width:100%;height:100%" >
                     </div>
@@ -24,7 +23,7 @@
                 <input type="file" name="img_path" id="img_path" multiple>
             </div>
 
-                <button type="submit" class="btn my-2" style="background:#3158c9;color:#fff">Сохранить</button>
+                <button type="submit" class="btn my-3" style="background:#3158c9;color:#fff">Сохранить</button>
             </form>
         </div>
 
