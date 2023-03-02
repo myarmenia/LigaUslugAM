@@ -13,6 +13,7 @@ use App\Events\NewMessage;
 use App\Events\RejectTaskExecutor;
 use App\Events\NotificationEvent;
 use App\Http\Controllers\AnswerAndQuestionController;
+use App\Services\FileUploadService;
 
 // use App\Http\Controllers\NotificationController;
 
@@ -100,8 +101,17 @@ Route::namespace('Admin')->group(function () {
     Route::get('admin/support-problem-message',[SupportletterProblemMessageController::class,'index'])->name('problem-message');
     Route::get('admin/support-problem-message/{id}',[SupportletterProblemMessageController::class,'show'])->name('problem-message-show');
     Route::post('admin/support-problem-message-feedback',[SupportletterProblemMessageController::class,'supportFeedBack'])->name('sopport-feedback-problem-message');
-    Route::get('/answer-and-question',[AnswerAndQuestionController::class,'index'])->name('anwer');
+
     Route::post('/create-question',[AnswerAndQuestionController::class,'store'])->name('create_question');
+    Route::get('/get-all-question',[AnswerAndQuestionController::class,'index'])->name('getallquestion');
+    Route::get('/answer-and-question',[AnswerAndQuestionController::class,'create'])->name('anwer');
+    Route::get('/edit-answer/{id}',[AnswerAndQuestionController::class,'edit'])->name('editanswer');
+    Route::post('/update-answer/{id}',[AnswerAndQuestionController::class,'update'])->name('updateanswer');
+    Route::get('/delete-file/{id}',[AnswerAndQuestionController::class,'deleteFile']);
+    Route::get('/delete-answer-question/{id}',[AnswerAndQuestionController::class,'delete']);
+
+
+    Route::get('get-file/', [FileUploadService::class, 'get_file'])->name('get-file');
 });
 
 Route::post('/tinkoff-transaction',[GetStatusTinkoffTransactionController::class,'index']);

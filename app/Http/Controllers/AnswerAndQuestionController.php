@@ -18,7 +18,8 @@ class AnswerAndQuestionController extends Controller
      */
     public function index()
     {
-        return view('admin.answer_and_question.index');
+        $get_answer_and_question=AnswerAndQuestion::all();
+        return view('admin.answer_and_question.index',compact('get_answer_and_question'));
     }
 
     /**
@@ -28,7 +29,7 @@ class AnswerAndQuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.answer_and_question.create');
     }
 
     /**
@@ -76,7 +77,9 @@ class AnswerAndQuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit_question=AnswerAndQuestion::where('id',$id)->first();
+
+        return view('admin.answer_and_question.edit',compact('edit_question'));
     }
 
     /**
@@ -88,7 +91,20 @@ class AnswerAndQuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $get_anwer=AnswerAndQuestion::find($id);
+        if($request->has('question')){
+            $get_anwer->answer_and_question=$request->question;
+            $get_anwer->save();
+        }
+        if($request->has('img_path')){
+
+            $path = FileUploadService::upload($request->img_path,'admin/answerandquestion/'. $id);
+            $get_anwer->update(['img_path'=>$path]);
+        }
+        $edit_question=AnswerAndQuestion::where('id',$id)->first();
+
+        return view('admin.answer_and_question.edit',compact('edit_question'));
     }
 
     /**
@@ -97,8 +113,18 @@ class AnswerAndQuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteFile($id){
+        $get_file=AnswerAndQuestion::where('id',$id)->update([
+            'img_path'=>null,
+        ]);
+
+        return response()->json(['message'=>'deleted']);
+    }
+    public function delete($id)
     {
-        //
+        $question=AnswerAndQuestion::where('id',$id)->delete();
+        if($question){
+            return response()->json(['message'=>'deleted']);
+        }
     }
 }

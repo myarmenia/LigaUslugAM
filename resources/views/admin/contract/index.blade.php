@@ -81,15 +81,13 @@
                         </tr>
                     </table>
                 @endif
-                <textarea name="upload"></textarea>
 
-                    {{-- {!! $data->render() !!} --}}
                 </div>
             </div>
 
     </div>
     <script>
-        CKEDITOR.replace('upload')
+        
 
    </script>
 
