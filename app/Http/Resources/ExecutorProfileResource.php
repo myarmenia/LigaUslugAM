@@ -65,6 +65,7 @@ class ExecutorProfileResource extends JsonResource
 
         $show_executor_working_region=[];
         $regions = ExecutorWorkingRegion::where('executor_profile_id',$show_executor_profile->id)->distinct('executorwork_region')->pluck('executorwork_region');
+
         foreach($regions as $item){
             $punkt_arr=[];
            $get_item_punkt= ExecutorWorkingRegion::where(['executor_profile_id'=>$show_executor_profile->id,'executorwork_region'=>$item])->get();

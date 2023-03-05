@@ -216,9 +216,7 @@ class ExecutorProfileController extends Controller
 
                 foreach($value['working_region'] as $item){
 
-
                     foreach($item['working_rayons'] as $key=>$data){
-
 
                         $executorprofile=ExecutorWorkingRegion::create([
                             'executor_profile_id'=>$executor_profiles->id,
@@ -260,6 +258,14 @@ class ExecutorProfileController extends Controller
 
         }
     }
+    // "executor_working_regions": {
+    //     "Новосибирская область": [
+    //         "Каргат"
+    //     ],
+    //     "Красноярский край": [
+    //         "Бородино"
+    //     ]
+    // },
 
 
 
@@ -362,7 +368,7 @@ class ExecutorProfileController extends Controller
 
                           return response()->json(['errors'=>$validator->errors()], 404);
                     }
-                   
+
 
 
 

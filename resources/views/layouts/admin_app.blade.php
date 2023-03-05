@@ -234,9 +234,7 @@
                 <div id="collapseeleven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('getallquestion')}}">Все вопросы и ответы</a>
-                        <a class="collapse-item" href="{{route('anwer')}}">Вопросы и ответы</a>
-                      
-
+                        <a class="collapse-item" href="{{route('anwer')}}">Создать вопрос с ответом</a>
                     </div>
                 </div>
             </li>

@@ -73,6 +73,16 @@
                 <td colspan=3>{{ $executor_profile->users->about_me}}</td>
             </tr>
             <tr>
+                <td colspan=3><h4 class="font-weight-bold">Pегионы выезда к клиентам</h4></td>
+            </tr>
+            <tr>
+              <td colspan=3>
+                    @foreach ($executor_profile->executor_working_regions()->distinct('executorwork_region')->pluck('executorwork_region') as $items)
+                                <p class="d-inline-block bg-light m-2 p-2 " >{{$items}}</p>
+                    @endforeach
+                </td>
+            </tr>
+            <tr>
                 <td colspan=3><h4 class="font-weight-bold">Районы выезда к клиентам</h4></td>
             </tr>
             <tr>
