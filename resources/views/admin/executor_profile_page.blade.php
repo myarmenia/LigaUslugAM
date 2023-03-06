@@ -1,9 +1,12 @@
 @extends('layouts.admin_app')
 
-
-
-
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+    .scroll_section{
+        height:200px;
+        overflow-y:scroll;
+    }
+</style>
 
 @section('content')
 <div class="container">
@@ -109,7 +112,7 @@
             </tr>
             <tr>
                 <td>Подкатегории услуг</td>
-                <td colspan=2>
+                <td colspan=2 class="scroll_section">
                     @foreach ($executor_profile->executor_subcategories as $items)
                             <p>{{$items->subcategory_name}}</p>
                     @endforeach
@@ -118,13 +121,15 @@
             <tr>
                 <td colspan=3><h4 class="font-weight-bold">Опыт работы</h4></td>
             </tr>
-            @foreach ($executor_profile->executor_working_regions as $items)
-                    <tr>
-                        <td>Рабочее место</td>
-                        <td colspan=2>{{$items->executorwork_region}}  от {{ date('d-m-Y', strtotime($items->created_at))}} до {{date('d-m-Y', strtotime($items->updated_at))}}</td>
-
-                    </tr>
-            @endforeach
+            <tr>
+                <td>Рабочее место</td>
+                <td colspan=2 class="scroll_section">
+                  
+                    @foreach ($executor_profile->executor_profile_work_experiences as $items)
+                        <p>{{$items->working_place}}  от {{ date('d-m-Y', strtotime($items->created_at))}} до {{date('d-m-Y', strtotime($items->updated_at))}}</p>
+                    @endforeach
+                </td>
+            </tr>
             <tr>
                 <td colspan=3><h4 class="font-weight-bold">Портфолио</h4></td>
             </tr>

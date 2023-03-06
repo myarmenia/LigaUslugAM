@@ -142,7 +142,6 @@ class ExecutorProfileController extends Controller
                 $executorprofileworkexperienc=ExecutorProfileWorkExperience::where('executor_profile_id',$executor_profiles->id)->delete();
 
                 foreach($value['executor_profile_work_experiences'] as $item){
-
                     $executorprofileworkexperienc=ExecutorProfileWorkExperience::create([
 
                         'executor_profile_id'=> $executor_profiles->id,
