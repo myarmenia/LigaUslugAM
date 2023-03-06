@@ -112,22 +112,27 @@
             </tr>
             <tr>
                 <td>Подкатегории услуг</td>
-                <td colspan=2 class="scroll_section">
-                    @foreach ($executor_profile->executor_subcategories as $items)
-                            <p>{{$items->subcategory_name}}</p>
-                    @endforeach
+                <td colspan=2>
+                    <div  class="scroll_section">
+                        @foreach ($executor_profile->executor_subcategories as $items)
+                                <p>{{$items->subcategory_name}}</p>
+                        @endforeach
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td colspan=3><h4 class="font-weight-bold">Опыт работы</h4></td>
             </tr>
             <tr>
+              
                 <td>Рабочее место</td>
-                <td colspan=2 class="scroll_section">
-                  
-                    @foreach ($executor_profile->executor_profile_work_experiences as $items)
-                        <p>{{$items->working_place}}  от {{ date('d-m-Y', strtotime($items->created_at))}} до {{date('d-m-Y', strtotime($items->updated_at))}}</p>
-                    @endforeach
+                <td colspan=2>
+                    <div  class="scroll_section">
+                        @foreach ($executor_profile->executor_profile_work_experiences as $items)
+                            <p>{{$items->working_place}}  от {{ date('d-m-Y', strtotime($items->created_at))}} до {{date('d-m-Y', strtotime($items->updated_at))}}</p>
+                        @endforeach
+                    </div>
+
                 </td>
             </tr>
             <tr>
