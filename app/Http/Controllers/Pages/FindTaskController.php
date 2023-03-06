@@ -39,7 +39,7 @@ class FindTaskController extends Controller
 
     }
     public function allTasks(){
-        $query=Task::latest();
+        $query=Task::with('users')->latest();
         $query->where('status',false);
         $all_task=$query->paginate(5)->withQueryString();
         return response()->json(['message'=>$all_task]);
