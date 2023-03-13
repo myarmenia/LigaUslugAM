@@ -9,14 +9,20 @@
                 {{-- @method('Putch') --}}
                 <div class="form-group px-2">
                     <label for="tema_name"><h3 class="font-weight-bold my-3">Редактирование</h3></label>
-                    <textarea type=text   class="form-control"   name="question" cols="20"  row=10>{{$edit_question->question}}</textarea>
+                    <textarea type=text   class="form-control @error('question') incorrectly @enderror"   name="question" cols="20"  row=10>{{$edit_question->question}}</textarea>
 
                 </div>
+                @error('question')
+                    <div class="my-3 error_message" >{{$message }}</div>
+                @enderror
                 <div class="form-group px-2">
                     <label for="tema_name"><h3 class="font-weight-bold my-3">Редактирование</h3></label>
-                    <textarea type=text   class="form-control"   name="answer" cols="20"  row=10>{{$edit_question->answer}}</textarea>
+                    <textarea type=text   class="form-control @error('answer') incorrectly @enderror"   name="answer" cols="20"  row=10>{{$edit_question->answer}}</textarea>
 
                 </div>
+                @error('answer')
+                    <div class="my-3 error_message" >{{$message }}</div>
+                @enderror
                 <div>
                 <div class=" px-2" style="height:250px;width:200px;overflow:hidden">
 

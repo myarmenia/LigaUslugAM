@@ -101,7 +101,16 @@ class AnswerAndQuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        $validator=Validator::make($request->all(), [
+            'question' => 'required',
+            'answer' => 'required',
+        ]);
+        if ($validator->fails()) {
+            // dd($validator->errors());
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $get_anwer=AnswerAndQuestion::find($id);
         if($request->has('question')){
             $get_anwer->question=$request->question;
