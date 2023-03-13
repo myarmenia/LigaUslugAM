@@ -38,7 +38,18 @@
     .notify a{
         text-decoration:none;
     }
+
+        .incorrectly{
+            border:1px solid red;
+        }
+        .error_message{
+            color:red
+        }
+
+
+
 </style>
+@yield('style')
 
 <body id="page-top">
 

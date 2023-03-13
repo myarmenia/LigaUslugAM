@@ -257,15 +257,7 @@ class ExecutorProfileController extends Controller
 
         }
     }
-    // "executor_working_regions": {
-    //     "Новосибирская область": [
-    //         "Каргат"
-    //     ],
-    //     "Красноярский край": [
-    //         "Бородино"
-    //     ]
-    // },
-
+   
 
 
     public function portfolioBase(Request $request){

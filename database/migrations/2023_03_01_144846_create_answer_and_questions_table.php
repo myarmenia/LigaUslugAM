@@ -15,7 +15,9 @@ class CreateAnswerAndQuestionsTable extends Migration
     {
         Schema::create('answer_and_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('answer_and_question');
+            $table->string('question');
+                       
+            $table->string('answer');
             $table->string('img_path')->nullable();
             $table->timestamps();
         });

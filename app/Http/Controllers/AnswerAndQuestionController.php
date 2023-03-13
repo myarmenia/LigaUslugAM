@@ -6,8 +6,7 @@ use App\Models\AnswerAndQuestion;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
-
+use Illuminate\Support\Facades\Validator;
 
 class AnswerAndQuestionController extends Controller
 {
@@ -40,15 +39,26 @@ class AnswerAndQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->question);
-       $answer= AnswerAndQuestion::create([
-            'answer_and_question'=>$request->question,
+        // dd($request->all());
+        $validator=Validator::make($request->all(), [
+            'question' => 'required',
+            'answer' => 'required',
+        ]);
+        if ($validator->fails()) {
+            // dd($validator->errors());
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+       $question_answer= AnswerAndQuestion::create([
+            'question'=>$request->question,
+            'answer'=>$request->answer,
         ]);
 
        if($request->has('img_path')){
 
-            $path = FileUploadService::upload($request->img_path,'admin/answerandquestion/'. $answer->id);
-            $answer->update(['img_path'=>$path]);
+            $path = FileUploadService::upload($request->img_path,'admin/answerandquestion/'. $question_answer->id);
+            $question_answer->update(['img_path'=>$path]);
         }
        return redirect()->back()->with('message','добавлено');
     }

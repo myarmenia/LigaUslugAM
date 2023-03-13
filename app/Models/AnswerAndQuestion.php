@@ -9,7 +9,8 @@ class AnswerAndQuestion extends Model
 {
     use HasFactory;
     protected $fillable=[
-        "answer_and_question",
+        "question",
+        "answer",
         "img_path",
     ];
 }
