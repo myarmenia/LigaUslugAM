@@ -9,7 +9,12 @@
                 {{-- @method('Putch') --}}
                 <div class="form-group px-2">
                     <label for="tema_name"><h3 class="font-weight-bold my-3">Редактирование</h3></label>
-                    <textarea type=text   class="form-control"  id="question"  name="question" cols="20" >{{$edit_question->answer_and_question}}</textarea>
+                    <textarea type=text   class="form-control"   name="question" cols="20"  row=10>{{$edit_question->question}}</textarea>
+
+                </div>
+                <div class="form-group px-2">
+                    <label for="tema_name"><h3 class="font-weight-bold my-3">Редактирование</h3></label>
+                    <textarea type=text   class="form-control"   name="answer" cols="20"  row=10>{{$edit_question->answer}}</textarea>
 
                 </div>
                 <div>
@@ -34,7 +39,7 @@
     //         filebrowserUploadUrl:"{{route('create_question',['_token'=>csrf_token()])}}",
     //         filebrowserUploadMethod:'form'
     //     });
-     CKEDITOR.replace('question')
+    //  CKEDITOR.replace('question')
 
 // =========== delete file from db ======================
 img_path.addEventListener('change',(e)=>{

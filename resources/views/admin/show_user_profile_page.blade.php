@@ -1,4 +1,13 @@
 @extends('layouts.admin_app')
+@section('style')
+<style>
+    .more{
+        display:none;
+    }
+</style>
+
+@endsection
+
 
 
 
@@ -7,7 +16,7 @@
 
 @section('content')
 <div class="container-fluid ">
-    <div class="row d-flex justify-content-center my-5 pt-5">
+    <div class="row d-flex justify-content-center my-5 pt-5" style="min-height:750px">
         <div class="col-md-8" >
 
             <table class="table table-bordered bg-white">
@@ -45,12 +54,25 @@
 
             </tbody>
             </table>
-            @if ($show_user_profile->tasks!=null)
+             @if ($show_user_profile->tasks!=null)
                 <h3 class="mt-5 ">Заказы</h3>
-                @foreach ($show_user_profile->tasks as  $item)
-                    <p><a href="{{route('task.show',$item->id )}}">{{$item->title}}</a></p>
 
+                @foreach ($show_user_profile->tasks as $key=>$item)
+
+                    @if($key<2)
+                        <p><a href="{{route('task.show',$item->id )}}">{{$item->title}}</a></p>
+                    @elseif($key==2)
+                        <p><a href="{{route('task.show',$item->id )}}">{{$item->title}}</a><span id="dots">.....</span> </p>
+
+
+                    @else
+
+                        <p class="more"><a href="{{route('task.show',$item->id )}}">{{$item->title}}</a></p>
+
+                    @endif
                 @endforeach
+                <button class="btn btn-info" onclick="myFunction()" id="myBtn" >Смотреть больше</button>
+
 
             @endif
 
@@ -59,6 +81,35 @@
 
 
 </div>
+<script>
+    function myFunction() {
+      let dots = document.getElementById("dots");
+      let moreText = document.querySelectorAll(".more");
+      console.log(moreText)
+      let btnText = document.getElementById("myBtn");
+
+
+      if (btnText.innerHTML !== "Смотреть больше") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Смотреть больше";
+        for (const el of moreText) {
+            el.style.display="none"
+        }
+
+        // moreText.style.display = "none";
+
+      }
+      else{
+        dots.style.display = "none";
+        btnText.innerHTML = "Свернуть";
+        for (const el of moreText) {
+            el.style.display="block"
+        }
+
+      }
+    }
+    </script>
+
 
 @endsection('content')
 

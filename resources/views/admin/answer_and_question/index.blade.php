@@ -11,8 +11,8 @@
                     <thead>
                     <tr>
                         <th scope="col" style="width:100px">№</th>
-                        <th scope="col" style="width:250px">Вопросы с ответом</th>
-
+                        <th scope="col" style="width:250px">Вопрос</th>
+                        <th scope="col" style="width:250px">Ответ</th>
                         <th scope="col" class= "text-center" colspan=2>Редактировать</th>
 
                     </tr>
@@ -21,8 +21,8 @@
                         @foreach( $get_answer_and_question as $items)
                             <tr>
                                 <td>{{ $items->id }}</td>
-                                <td style="width:100px">{!! $items->answer_and_question !!}</td>
-
+                                <td style="width:100px">{{$items->question}}</td>
+                                <td style="width:100px">{{$items->answer}}</td>
                                 <td style="width:100px" class="text-center">
                                      <a href="{{ route ('editanswer',$items->id) }}" class="btn btn-info btn-sm mr-1 "><i class="fa fa-edit"></i></a>
                                      <button id="deletequestion"  data-id="{{$items->id}}"  class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>

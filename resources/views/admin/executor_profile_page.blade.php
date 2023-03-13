@@ -124,9 +124,9 @@
                 <td colspan=3><h4 class="font-weight-bold">Опыт работы</h4></td>
             </tr>
             <tr>
-              
-                <td>Рабочее место</td>
-                <td colspan=2>
+
+                {{-- <td>Рабочее место</td> --}}
+                <td colspan=3>
                     <div  class="scroll_section">
                         @foreach ($executor_profile->executor_profile_work_experiences as $items)
                             <p>{{$items->working_place}}  от {{ date('d-m-Y', strtotime($items->created_at))}} до {{date('d-m-Y', strtotime($items->updated_at))}}</p>

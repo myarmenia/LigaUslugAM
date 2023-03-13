@@ -56,6 +56,7 @@ class FullUsersController extends Controller
     {
 
         $show_user_profile = User::where('id',$id)->first();
+        // dd($show_user_profile);
 
 
         return view('admin.show_user_profile_page',compact('show_user_profile'));
