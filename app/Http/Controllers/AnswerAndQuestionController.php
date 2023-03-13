@@ -104,7 +104,11 @@ class AnswerAndQuestionController extends Controller
         // dd($request->all());
         $get_anwer=AnswerAndQuestion::find($id);
         if($request->has('question')){
-            $get_anwer->answer_and_question=$request->question;
+            $get_anwer->question=$request->question;
+            $get_anwer->save();
+        }
+        if($request->has('answer')){
+            $get_anwer->answer=$request->answer;
             $get_anwer->save();
         }
         if($request->has('img_path')){
