@@ -8,6 +8,7 @@ use App\Events\UnreadNotificationCountEvent;
 use App\Http\Controllers\Controller;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
+use App\Models\specialTaskExecutor;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Subcategory;
 use App\Models\Task;
@@ -47,7 +48,11 @@ class ClickOnTaskController extends Controller
                     if($task->status=='not confirmed'){
                         $task->status='false';
                         $task->save();
+                        specialTaskExecutor::where('task_id',$request->task_id)->update([
+                            'status'=>false
+                        ])
                     }
+
                         $clickontask=ClickOnTask::create([
                             'task_id' => $request->task_id,
                             'executor_profile_id' => $check_balance->id,
