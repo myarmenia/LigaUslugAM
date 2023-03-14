@@ -74,7 +74,7 @@ class ExecutorTaskCountService{
         // $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->get();
         $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with(['tasks'=>function($query){
             $query->where('status','not confirmed')->with('users');
-        }])->get();
+        }])->orderBy('id','desc')->get();
 
         return $special_task;
     }
