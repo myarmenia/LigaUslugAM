@@ -50,7 +50,7 @@ class ClickOnTaskController extends Controller
                         $task->save();
                         specialTaskExecutor::where('task_id',$request->task_id)->update([
                             'status'=>false
-                        ])
+                        ]);
                     }
 
                         $clickontask=ClickOnTask::create([
