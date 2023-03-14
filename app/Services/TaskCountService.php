@@ -101,7 +101,7 @@ class TaskCountService {
 
     {
 
-        $task=Task::where('user_id',$user_id)->with('special_task_executors')->pluck('id')->toArray();
+        $task=Task::where(['user_id'=>$user_id,'status'=>'not confirmed'])->with('special_task_executors')->pluck('id')->toArray();
 
         $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
 
