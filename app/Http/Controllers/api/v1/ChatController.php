@@ -33,9 +33,9 @@ class ChatController extends Controller
                                          $q->where('user_id',Auth::id())
                                              ->orWhere("executor_profile_id", $this->executor_variable);
                                        });
-     $employer_chat=$employer_chat->distinct()->get(['task_id','user_id','executor_profile_id']);
+     $employer_chat = $employer_chat->distinct()->get(['task_id','user_id','executor_profile_id']);
 
-      $tasks_for_chatting=ChatResourse::collection($employer_chat);
+      $tasks_for_chatting = ChatResourse::collection($employer_chat);
       return response()->json(["data"=>$tasks_for_chatting]);
     }
 
@@ -60,34 +60,24 @@ class ChatController extends Controller
     {
         $user_id = Auth::user()->id;
         $clickontask = ClickOnTask::where('task_id',$request->task_id)->first();
-        // if($request->has('employer_message_file')){
+        if($clickontask){
+                    $creat_chat=Chat::create([
+                        "task_id" => $request->task_id,
+                        "user_id" => $request->user_id,
+            "executor_profile_id" => $request->executor_profile_id,
+            "employer_message" => $request->employer_message,
+            "executor_message" => $request->executor_message,
+            ]);
 
-        //     $name = time().rand(1,100).'.'.$file->extension();
-        //     $file->move(public_path('admin/img/img_tasks'), $name);
-        //     $image_task=ImageTask::create([
-        //         'task_id'=>$task->id,
-        //         'image_name'=>$name
-        //     ]);
-
-        // }
-
-                $creat_chat=Chat::create([
-                    "task_id" => $request->task_id,
-                    "user_id" => $request->user_id,
-        "executor_profile_id" => $request->executor_profile_id,
-           "employer_message" => $request->employer_message,
-           "executor_message" => $request->executor_message,
-
-
-        ]);
-        $chat=Chat::where([
-            ["task_id",'=', $request->task_id],
-            ["user_id","=", $request->user_id],
-            ["executor_profile_id","=", $request->executor_profile_id],
-        ])->get();
+            $chat=Chat::where([
+                ["task_id",'=', $request->task_id],
+                ["user_id","=", $request->user_id],
+                ["executor_profile_id","=", $request->executor_profile_id],
+            ])->get();
             if($creat_chat){
                      return response()->json(["message"=>$chat]);
             }
+        }
     }
 
 

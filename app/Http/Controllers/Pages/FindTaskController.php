@@ -30,7 +30,7 @@ class FindTaskController extends Controller
             $category_subcategory=Category::where('id',$categoryId)->with('subcategories')->first();
 
             $query = Task::latest();
-            $query->whereIn('subcategory_name', $subcategory);
+            $query->whereIn('subcategory_name', $subcategory)->with('users');
 
             $task = $query->paginate(2)->withQueryString();
             return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
