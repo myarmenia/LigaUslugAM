@@ -25,6 +25,7 @@ class NewTaskChatEvent implements ShouldBroadcast
     {
         $this->id=$id;
         $this->message=$message;
+        // dd($this->message);
     }
 
     /**
