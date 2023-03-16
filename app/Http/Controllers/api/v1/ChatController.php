@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\NewTaskChatEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ChatResourse;
 use App\Models\Chat;
@@ -24,19 +25,19 @@ class ChatController extends Controller
 
         $task = Task::pluck('id');
 
-      $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
-      $this->executor_variable=$executor_profile_id ->id;
+        $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
+        $this->executor_variable=$executor_profile_id ->id;
 
 
-     $employer_chat = Chat::whereIn('task_id',$task)
-                                       ->where(function($q) {
-                                         $q->where('user_id',Auth::id())
-                                             ->orWhere("executor_profile_id", $this->executor_variable);
-                                       });
-     $employer_chat = $employer_chat->distinct()->get(['task_id','user_id','executor_profile_id']);
+        $employer_chat = Chat::whereIn('task_id',$task)
+                                        ->where(function($q) {
+                                            $q->where('user_id',Auth::id())
+                                                ->orWhere("executor_profile_id", $this->executor_variable);
+                                        });
+        $employer_chat = $employer_chat->distinct()->get(['task_id','user_id','executor_profile_id']);
 
-      $tasks_for_chatting = ChatResourse::collection($employer_chat);
-      return response()->json(["data"=>$tasks_for_chatting]);
+        $tasks_for_chatting = ChatResourse::collection($employer_chat);
+        return response()->json(["data"=>$tasks_for_chatting]);
     }
 
     /**
@@ -74,8 +75,20 @@ class ChatController extends Controller
                 ["user_id","=", $request->user_id],
                 ["executor_profile_id","=", $request->executor_profile_id],
             ])->get();
+
             if($creat_chat){
-                     return response()->json(["message"=>$chat]);
+                $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();
+                $task=Task::where('id',$request->task_id)->first();
+                
+
+                if($request->employer_message!=null){
+                    event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message]));
+                }
+                if($request->executor_message!=null){
+                    event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message]));
+                }
+
+                return response()->json(["message"=>$chat]);
             }
         }
     }
@@ -169,6 +182,7 @@ class ChatController extends Controller
 
         return response()->json(["message"=>$task_chat]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

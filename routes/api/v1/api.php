@@ -171,14 +171,16 @@ Route::prefix('/user')->group( function(){
         Route::get('completed-task-executor',[TaskController::class,'completedTasksForExecutor']);
 
         //chat-message
+        // all tasks  in chat room
         Route::get('/employer-tasks-chat',[ChatController::class,'index']);
+        // first time when writing exequtor
         Route::post('/chat-room',[ChatController::class,'store']);
 
         Route::post('task-chat',[ChatController::class,'taskChat']);
         //employer uploading file
         Route::post('chat-file',[ChatController::class,'chatFileUpload']);
         // ===========
-        
+
 
 
         // support

@@ -217,9 +217,11 @@
     .listen('.ExecutorSectionTaskCount', (e)=>{
         console.log(e)
     })
-
-
-
+    // chat socket
+    Echo.channel('newchattext_chanal.136')
+    .listen('.newchattext', (e)=>{
+        console.log(e)
+    })
 
 
 

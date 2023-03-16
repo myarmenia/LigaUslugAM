@@ -74,28 +74,7 @@ class TaskCountService {
         return count($finished_task);
 
     }
-    // public static function specialTaskcount(string $type, string $user_id)
-
-    // {
-    //     $executor=ExecutorProfile::where('user_id',$user_id)->first();
-    //     $special_task='';
-    //      if($type == 'employer'){
-
-    //         $task=Task::where('user_id',Auth::id())->with('special_task_executors')->pluck('id')->toArray();
-
-    //         $special_task=specialTaskExecutor::whereIn('task_id',$task)->with('tasks','executor_profiles.users')->orderBy('id','DESC')->get();
-
-    //         return count($special_task);
-    //     }else if($type == 'executor'){
-
-    //         $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with('tasks','tasks.users')->orderBy('id','DESC')->get();
-    //         return count($special_task);
-    //     }
-
-
-
-    //     return response()->json(['special_task'=>$special_task]);
-    // }
+   
 
     public static function employerspecialTask($user_id)
 
