@@ -102,20 +102,20 @@ class   TaskController extends Controller
          else if($request->task_location=='executor'){
             $validated = $request->validated();
 
-             $task=Task::create([
-                'user_id'=> $user,
-                  'title'=> $request['title'],
-          'category_name'=> $request['category_name'],
-       'subcategory_name'=> $request['subcategory_name'],
+                    $task=Task::create([
+                        'user_id'=> $user,
+                        'title'=> $request['title'],
+                'category_name'=> $request['category_name'],
+            'subcategory_name'=> $request['subcategory_name'],
 
-       'task_description'=> $request['task_description'],
-         'task_starttime'=> $request['task_starttime'],
-        'task_finishtime'=> $request['task_finishtime'],
-             'price_from'=> $request['price_from'],
-               'price_to'=> $request['price_to'],
-          'task_location'=> $request['task_location'],
+            'task_description'=> $request['task_description'],
+                'task_starttime'=> $request['task_starttime'],
+                'task_finishtime'=> $request['task_finishtime'],
+                    'price_from'=> $request['price_from'],
+                    'price_to'=> $request['price_to'],
+                'task_location'=> $request['task_location'],
 
-      ]);
+            ]);
          }
          else{
         $request->validate([

@@ -9,6 +9,7 @@ use App\Models\Chat;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
 use App\Models\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -183,6 +184,18 @@ class ChatController extends Controller
         ])->get();
 
         return response()->json(["message"=>$task_chat]);
+    }
+    public function readChatIds(Request $request){
+        $current = Carbon::now();
+        // dd($current);
+        // $now_time=date('H:i:s',strtotime('now'));
+        // dd($now_time);
+       foreach($request->ids as $item){
+            $chat = Chat::where('id',$item)->update([
+                'read_at'=> $current
+            ]);
+        }
+
     }
 
 
