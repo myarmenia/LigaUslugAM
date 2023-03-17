@@ -54,7 +54,7 @@ class TaskController extends Controller
         }
 
 
-        $task=$query->paginate(2)->withQueryString();
+        $task=$query->paginate(10)->withQueryString();
 
         return view('admin.all_task',compact('task','category'))->with('session_categoryName',$request->input('category_name'));
     }

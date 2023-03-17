@@ -44,16 +44,16 @@
 
             <tr>
                 <td style="width:200px" >Регион</td>
-                <td>{{ $executor_profile->region }}</td>
+                <td>{{ $executor_profile->users->region }}</td>
             </tr>
             <tr>
                 <td style="width:200px" >Населенный пункт / Город</td>
-                <td>{{ $executor_profile->country_name }}</td>
+                <td>{{ $executor_profile->users->country_name }}</td>
             </tr>
 
             <tr>
                 <td style="width:200px" >Адрес</td>
-                <td>{{ $executor_profile->address }}</td>
+                <td>{{ $executor_profile->users->address }}</td>
             </tr>
             <tr>
                 <td style="width:200px" >Баланс</td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\ChatReadedEvent;
 use App\Events\NewTaskChatEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ChatResourse;
@@ -185,15 +186,28 @@ class ChatController extends Controller
 
         return response()->json(["message"=>$task_chat]);
     }
+
     public function readChatIds(Request $request){
+
         $current = Carbon::now();
-        // dd($current);
-        // $now_time=date('H:i:s',strtotime('now'));
-        // dd($now_time);
-       foreach($request->ids as $item){
-            $chat = Chat::where('id',$item)->update([
-                'read_at'=> $current
-            ]);
+
+
+        foreach($request->ids as $item){
+            $chat = Chat::where('id',$item)->first();
+            $chat->read_at= $current;
+            $chat->save();
+
+            $executor_profile = ExecutorProfile::where('id',$chat->executor_profile_id)->first();
+            $this->executor_variable = $executor_profile->id;
+            if(Auth::id() == $chat->user_id){
+                event(new ChatReadedEvent($executor_profile->users->id, ['task_id'=>$chat->task_id,'read_at'=>$current,'chat'=>$chat]));
+            }
+
+            // $user_executor_chat = Chat::where('id',$item)
+            // ->where(function($q) {
+            //     $q->where('user_id',Auth::id())
+            //         ->orWhere("executor_profile_id", $this->executor_variable);
+            // });
         }
 
     }

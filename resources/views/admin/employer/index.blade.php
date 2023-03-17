@@ -59,6 +59,7 @@
                     <thead>
                     <tr>
                         <th scope="col">№</th>
+                        <th scope="col">User id</th>
                         <th scope="col">Имя заказчика</th>
                         <th scope="col">Фамилия заказчика</th>
                         <th scope="col">Регион</th>
@@ -85,6 +86,7 @@
                     @foreach($employer as $items)
                         <tr>
                             <td>{{ ++$i }}</td>
+                            <td>{{ $items->id }}</td>
                             <td scope = "col">{{ $items->name }}</td>
                             <td scope = "col">{{ $items->last_name }}</td>
                             <td scope = "col">{{ $items->region }}</td>
@@ -95,7 +97,7 @@
                             <td scope = "col">{{$items->employer_review_count }}</td>
                             <td><a  href = "{{ route('user.show', $items->id )}}">Показать </a></td>
 
-                           
+
 
                             {{-- <td>
                                 <form role="form"  action="{{ route('user.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">

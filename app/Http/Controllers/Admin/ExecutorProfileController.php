@@ -16,20 +16,11 @@ class ExecutorProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index(Request $request)
 
-    // {
-    //     $paginate=2;
-    //     $i=$request['page'] ? ($request['page']-1)*$paginate : 0;
-
-    //     $all_executor=ExecutorProfile::orderBy('region','desc')->paginate($paginate);
-
-    //     return view('admin.all_executor',compact('all_executor','i'));
-    // }
     public $inputsearch;
     public $region;
     public function index(Request $request){
-        $paginate=2;
+        $paginate=10;
         $i=$request['page'] ? ($request['page']-1)*$paginate : 0;
         $query=ExecutorProfile::latest();
         if(!empty($request->executor_filter && $request->filter_category)){
@@ -57,7 +48,7 @@ class ExecutorProfileController extends Controller
             }
 
         }
-        $all_executor=$query->paginate(10)->withQueryString();
+        $all_executor=$query->paginate($paginate)->withQueryString();
 
         return view('admin.all_executor',compact('all_executor','i'))->with('session_filterCategory',$request->filter_category);
 
