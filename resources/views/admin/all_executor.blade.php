@@ -97,7 +97,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">№</th>
-                                <th scope="col">User ID</th>
+                                <th scope="col">User Id</th>
                                 <th scope="col">Имя исполнителя</th>
                                 <th scope="col">Фамилия исполнителя</th>
                                 <th scope="col">Эл. адрес</th>

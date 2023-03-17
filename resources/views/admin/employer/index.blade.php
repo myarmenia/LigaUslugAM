@@ -59,7 +59,7 @@
                     <thead>
                     <tr>
                         <th scope="col">№</th>
-                        <th scope="col">User id</th>
+                        <th scope="col">User Id</th>
                         <th scope="col">Имя заказчика</th>
                         <th scope="col">Фамилия заказчика</th>
                         <th scope="col">Регион</th>
