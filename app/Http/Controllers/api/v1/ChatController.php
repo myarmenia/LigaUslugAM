@@ -191,10 +191,10 @@ class ChatController extends Controller
 
         $current = Carbon::now();
 
-
+dd($current);
         foreach($request->ids as $item){
             $chat = Chat::where('id',$item)->first();
-            $chat->read_at= $current;
+            $chat->read_at=$current;
             $chat->save();
 
             $executor_profile = ExecutorProfile::where('id',$chat->executor_profile_id)->first();
