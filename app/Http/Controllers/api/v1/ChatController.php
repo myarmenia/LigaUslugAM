@@ -191,7 +191,7 @@ class ChatController extends Controller
 
         $current = Carbon::now();
 
-dd($current);
+
         foreach($request->ids as $item){
             $chat = Chat::where('id',$item)->first();
             $chat->read_at=$current;
