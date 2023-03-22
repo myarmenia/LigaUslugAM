@@ -89,7 +89,7 @@ class ChatController extends Controller
                 }
                 if($request->executor_message!=null){
 
-                    event(new NewTaskChatEvent($task->users->id, ['chat'=>$chat]));
+                    event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
                 }
 
                 return response()->json(["message"=>$chat]);
