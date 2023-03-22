@@ -217,19 +217,17 @@
             </tbody>
             </table>
         </div>
-        <div class="col-md-2">
-            <form>
-                @csrf
-                <div class="form-group">
-                    <label for="status">Status:</label>
+        <div class="col-md-4" style="height:100px;margin-top:50px">
 
-                    <span class="error-text email_err  {{$executor_profile->users->status=='Актив' ? 'text-success' : 'text-danger'}}" data-id="{{ $executor_profile->users->id }}"  data-status =" {{$executor_profile->users->status=="Актив" ? "Пасив" : "Актив"}}" id = "status"> {{ $executor_profile->users->status }}</span>
-                </div>
-                <button  class="btn btn-primary btn-submit" id="change_status">{{$executor_profile->users->status=="Актив"?"Пасив":"Актив"}}
+            <div class="form-group" >
+                <label for="status">Изменить статус на</label>
 
-                </button>
-            </form>
-    </div>
+                <span class="error-text email_err  {{$executor_profile->users->status=='Актив' ? 'text-success' : 'text-danger'}}" data-id="{{ $executor_profile->users->id }}"  data-status =" {{$executor_profile->users->status=="Актив" ? "Пасив" : "Актив"}}" id = "status"> </span>
+                <button  class="btn  {{ $executor_profile->users->status=="Актив" ? "btn-danger" : "btn-success" }} btn-submit" id="change_status">{{$executor_profile->users->status=="Актив"?"Пасив":"Актив"}}</button>
+            </div>
+
+
+        </div>
 </div>
 <script>
     $(".btn-submit").click(function(e){
@@ -243,25 +241,29 @@
                     headers: {
                         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
                     }
-            });
+                });
 
                 $.ajax({
                     url: "{{ route('ajax.request.store') }}",
                     type:'POST',
                     data: {status,id},
                     success: function(data) {
-                        $('#status').html(data);
+                        // $('#status').html(data);
                         $('#status').toggleClass("text-success")
                         $('#status').toggleClass("text-danger")
                         if(data == "Актив"){
-
+                           
                             $('#change_status').html("Пасив")
                             $('#status').attr('data-status',"Пасив")
+                            $('#change_status').removeClass('btn-success')
+                            $('#change_status').addClass('btn-danger')
 
                         }else{
 
                             $('#change_status').html("Актив")
                             $('#status').attr('data-status',"Актив")
+                            $('#change_status').removeClass('btn-danger')
+                            $('#change_status').addClass('btn-success')
                         }
                         console.log(data)
                     }
