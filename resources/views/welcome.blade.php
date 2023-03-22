@@ -218,7 +218,11 @@
         console.log(e)
     })
     // chat socket
-    Echo.channel('newchattext_chanal.72')
+    Echo.channel('newchattext_chanal.79')
+    .listen('.newchattext', (e)=>{
+        console.log(e)
+    })
+    Echo.channel('newchattext_chanal.136')
     .listen('.newchattext', (e)=>{
         console.log(e)
     })
