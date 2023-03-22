@@ -83,14 +83,15 @@ class ChatController extends Controller
                 $task=Task::where('id',$request->task_id)->first();
 
 
-                if($request->employer_message!=null){
+                // if($request->employer_message!=null){
 
-                    event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                }
-                if($request->executor_message!=null){
+                //     event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+                // }
+                // if($request->executor_message!=null){
 
-                    event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->executor_message,'chat'=>$chat]));
-                }
+                //     event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->executor_message,'chat'=>$chat]));
+                // }
+                event(new NewTaskChatEvent(Auth::id(), ['chat'=>$chat]));
 
                 return response()->json(["message"=>$chat]);
             }
