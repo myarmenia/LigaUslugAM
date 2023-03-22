@@ -138,7 +138,7 @@ class SmsController extends Controller
 
             }else{
 
-                return response()->json(['message'=>"Ваш номер не подтвержден"]);
+                return response()->json(['message'=>"Код подтверждения неправильный"]);
             }
 
         }
@@ -162,7 +162,7 @@ class SmsController extends Controller
                     return response()->json(['message' => "Этот номер уже подтвержден."]);
                 }else{
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
-                        $user=User::where('id',Auth::id())->update(['phone_status'=>'','phonenumber'=>'not verified']);
+                        $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
 
                         $smsru = new Smsru('D3F08502-1F17-1EBE-E472-7993198291C8');
                         $data = new stdClass();
