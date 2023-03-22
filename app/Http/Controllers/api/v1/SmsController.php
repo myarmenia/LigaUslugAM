@@ -58,6 +58,50 @@ class SmsController extends Controller
     //     }
 
     // }
+    // public  function getSms(Request $request){
+
+    //     if($request->has('verification_code')){
+
+    //         $user_id = Auth::user()->id;
+
+
+    //         $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
+    //         if($select){
+    //             $update = PhoneNumberVerification::where('user_id',$user_id)->update([
+    //                 'status' => "OK"
+    //             ]);
+    //             if($update){
+    //                 $user=User::where('id',$user_id)->update([
+    //                     "phone_status"=>"verified"
+    //                 ]);
+
+    //                     $check_phone_number_verified=User::where('id',Auth::id())->first();
+    //                     if($check_phone_number_verified->phone_status=="verified"){
+    //                         $settings = Auth::user()->user_settings();
+
+    //                         $settings['phone_status'] = 1;
+    //                         // dd($settings);
+    //                         $check_phone_number_verified->settings()->apply((array)$settings);
+    //                         return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
+    //                     }
+
+
+
+
+    //             }else{
+    //                 return response()->json(['message'=>"Ваш номер не подтвержден"]);
+    //             }
+
+    //         }else{
+
+    //             return response()->json(['message'=>"Ваш номер не подтвержден"]);
+    //         }
+
+    //     }
+
+
+
+    // }
     public  function getSms(Request $request){
 
         if($request->has('verification_code')){
@@ -74,7 +118,7 @@ class SmsController extends Controller
                     $user=User::where('id',$user_id)->update([
                         "phone_status"=>"verified"
                     ]);
-               
+
                         $check_phone_number_verified=User::where('id',Auth::id())->first();
                         if($check_phone_number_verified->phone_status=="verified"){
                             $settings = Auth::user()->user_settings();
@@ -93,6 +137,7 @@ class SmsController extends Controller
                 }
 
             }else{
+
                 return response()->json(['message'=>"Ваш номер не подтвержден"]);
             }
 
@@ -104,17 +149,20 @@ class SmsController extends Controller
 
 
 
+
     public function GetPhoneNumber(Request $request)
     {
 
             if($request->has('phone_number')){
+
+                // $user=User::where('id',Auth::id())->first();
 
                 $check_user_phone=User::where(['phonenumber'=>$request->phone_number,'phone_status'=>'verified'])->first();
                 if($check_user_phone){
                     return response()->json(['message' => "Этот номер уже подтвержден."]);
                 }else{
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
-                        $user=User::where('id',Auth::id())->update(['phone_status'=>'','phonenumber'=>null]);
+                        $user=User::where('id',Auth::id())->update(['phone_status'=>'','phonenumber'=>'not verified']);
 
                         $smsru = new Smsru('D3F08502-1F17-1EBE-E472-7993198291C8');
                         $data = new stdClass();
@@ -169,7 +217,8 @@ class SmsController extends Controller
                                 // echo "Звонок не может быть выполнен. ";
                                 // echo "Текст ошибки: ".$data->status_text.". ";
                                 // echo "";
-
+                                // return $json;
+                                return response()->json(['message'=>$json]);
                                 return response()->json(['message'=>"Ваш номер не подтвержден"]);
                             }
 
@@ -177,7 +226,7 @@ class SmsController extends Controller
                             // echo "Запрос не выполнился. Не удалось установить связь с сервером. ";
                             return response()->json(['message'=>"Запрос не выполнился. Не удалось установить связь с сервером. "]);
                         }
-                }
+                    }
 
 
             }
