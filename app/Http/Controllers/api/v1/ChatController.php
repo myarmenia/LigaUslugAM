@@ -92,14 +92,14 @@ class ChatController extends Controller
                 $task=Task::where('id',$request->task_id)->first();
 
 
-                // if($request->employer_message!=null){
+                if($request->employer_message!=null){
 
-                //     event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                // }
-                // if($request->executor_message!=null){
+                    event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+                }
+                if($request->executor_message!=null){
 
-                //     event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                // }
+                    event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+                }
                 event(new NewTaskChatEvent($room, ['chat'=>$chat]));
                 return response()->json(["message"=>$chat]);
             }
@@ -200,9 +200,10 @@ class ChatController extends Controller
 
         $current = Carbon::now();
 
-
+        $chat = Chat::where('chatroom_name',$request->chatroom_name)->get();
         foreach($request->ids as $item){
-            $chat = Chat::where('id',$item)->first();
+            $chat = Chat::where(['chatroom_name'=>$request->chatroom_name,'id'=>$item])->first();
+
             $chat->read_at=$current;
             $chat->save();
 
@@ -212,12 +213,9 @@ class ChatController extends Controller
                 event(new ChatReadedEvent($executor_profile->users->id, ['task_id'=>$chat->task_id,'read_at'=>$current,'chat'=>$chat]));
             }
 
-            // $user_executor_chat = Chat::where('id',$item)
-            // ->where(function($q) {
-            //     $q->where('user_id',Auth::id())
-            //         ->orWhere("executor_profile_id", $this->executor_variable);
-            // });
+
         }
+        return response()->json(['message'=>"success"]);
 
     }
 
