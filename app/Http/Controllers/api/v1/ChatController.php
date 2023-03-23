@@ -36,7 +36,7 @@ class ChatController extends Controller
                                             $q->where('user_id',Auth::id())
                                                 ->orWhere("executor_profile_id", $this->executor_variable);
                                         });
-        $employer_chat = $employer_chat->distinct()->get(['task_id','user_id','executor_profile_id']);
+        $employer_chat = $employer_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
 
         $tasks_for_chatting = ChatResourse::collection($employer_chat);
         return response()->json(["data"=>$tasks_for_chatting]);

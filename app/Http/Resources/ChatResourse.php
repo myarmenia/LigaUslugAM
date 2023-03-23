@@ -19,7 +19,7 @@ class ChatResourse extends JsonResource
     {
 
         return [
-
+                "chatroom_name"=>$this->chatroom_name,
                 "task_id" => $this->task_id,
                   "tasks" => $this->tasks,
                 "user_id" => $this->user_id,
