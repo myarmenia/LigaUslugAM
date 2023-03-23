@@ -252,7 +252,7 @@
                         $('#status').toggleClass("text-success")
                         $('#status').toggleClass("text-danger")
                         if(data == "Актив"){
-                           
+
                             $('#change_status').html("Пасив")
                             $('#status').attr('data-status',"Пасив")
                             $('#change_status').removeClass('btn-success')
@@ -269,8 +269,6 @@
                     }
                 });
     })
-
-
 
 </script>
 

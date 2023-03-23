@@ -59,12 +59,21 @@ class ChatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-
     {
         $user_id = Auth::user()->id;
         $clickontask = ClickOnTask::where('task_id',$request->task_id)->first();
+        $generate_chat_id=0;
         if($clickontask){
-                    $creat_chat=Chat::create([
+            $room='';
+            if($request->has('chatroom_name')){
+                $room=$request->chatroom_name;
+            }
+            else{
+                $room="room_".$request->task_id."_".$request->user_id."_".$request->executor_profile_id;
+            }
+
+                    $creat_chat = Chat::create([
+                  "chatroom_name" => $room,
                         "task_id" => $request->task_id,
                         "user_id" => $request->user_id,
             "executor_profile_id" => $request->executor_profile_id,
@@ -83,15 +92,15 @@ class ChatController extends Controller
                 $task=Task::where('id',$request->task_id)->first();
 
 
-                if($request->employer_message!=null){
+                // if($request->employer_message!=null){
 
-                    event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                }
-                if($request->executor_message!=null){
+                //     event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+                // }
+                // if($request->executor_message!=null){
 
-                    event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                }
-
+                //     event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+                // }
+                event(new NewTaskChatEvent($room, ['chat'=>$chat]));
                 return response()->json(["message"=>$chat]);
             }
         }

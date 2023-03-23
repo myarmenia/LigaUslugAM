@@ -8,7 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Chat extends Model
 {
     use HasFactory;
-    protected $fillable=["task_id","user_id","executor_profile_id","employer_message","executor_message",'employer_message_file','executor_message_file'];
+    protected $fillable=[
+        "chatroom_name",
+        "task_id",
+        "user_id",
+        "executor_profile_id",
+        "employer_message",
+        "executor_message",
+        "employer_message_file",
+        "executor_message_file"
+    ];
 
     public function tasks(){
         return $this->belongsTo(Task::class,'task_id');
