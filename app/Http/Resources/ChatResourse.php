@@ -33,7 +33,7 @@ class ChatResourse extends JsonResource
             ];
     }
     public function taskchatcount(){
-        $chat=Chat::where(['task_id'=>$this->task_id,"read_at"=>null])->get();
+        $chat=Chat::where(['task_id'=>$this->task_id])->get();
         return count($chat);
     }
 }
