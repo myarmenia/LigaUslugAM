@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
-use App\Events\ChatReadedEvent;
+
 use App\Events\NewTaskChatEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ChatResourse;
@@ -203,16 +203,13 @@ class ChatController extends Controller
         $chat = Chat::where('chatroom_name',$request->chatroom_name)->get();
         foreach($request->ids as $item){
             $chat = Chat::where(['chatroom_name'=>$request->chatroom_name,'id'=>$item])->first();
-
-            $chat->read_at=$current;
-            $chat->save();
-
-            $executor_profile = ExecutorProfile::where('id',$chat->executor_profile_id)->first();
-            $this->executor_variable = $executor_profile->id;
-            if(Auth::id() == $chat->user_id){
-                event(new ChatReadedEvent($executor_profile->users->id, ['task_id'=>$chat->task_id,'read_at'=>$current,'chat'=>$chat]));
+            if($request->type=="employer"){
+                $chat->employer_read_at=$current;
+                $chat->save();
+            }else{
+                $chat->executor_read_at=$current;
+                $chat->save();
             }
-
 
         }
         return response()->json(['message'=>"success"]);

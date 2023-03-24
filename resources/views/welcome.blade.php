@@ -222,12 +222,8 @@
     .listen('.newchattext', (e)=>{
         console.log(e)
     })
-   
 
-    Echo.channel('readedchat_chanal.136')
-    .listen('.readedchat', (e)=>{
-        console.log(e)
-    })
+
 
 
 

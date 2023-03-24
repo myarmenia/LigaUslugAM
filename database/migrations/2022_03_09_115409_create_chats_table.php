@@ -23,7 +23,8 @@ class CreateChatsTable extends Migration
             $table->string('executor_message')->nullable();
             $table->string('employer_message_file')->nullable();
             $table->string('executor_message_file')->nullable();
-            $table->timestamp('read_at')->nullable();
+            $table->timestamp('employer_read_at')->nullable();
+            $table->timestamp('executor_read_at')->nullable();
             $table->string('status')->default('false');
             $table->timestamps();
         });

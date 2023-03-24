@@ -16,7 +16,10 @@ class Chat extends Model
         "employer_message",
         "executor_message",
         "employer_message_file",
-        "executor_message_file"
+        "executor_message_file",
+        "employer_read_at",
+        "executor_read_at"
+
     ];
 
     public function tasks(){
