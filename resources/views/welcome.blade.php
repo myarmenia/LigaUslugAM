@@ -222,6 +222,20 @@
     .listen('.newchattext', (e)=>{
         console.log(e)
     })
+    Echo.channel('readedchat_chanal.room_498_79_28')
+    .listen('.readedchat', (e)=>{
+        console.log(e)
+    })
+    Echo.channel('readedchat_chanal.room_480_72_53')
+    .listen('.readedchat', (e)=>{
+        console.log(e)
+    })
+    Echo.channel('readedchat_chanal.room_495_72_64')
+    .listen('.readedchat', (e)=>{
+        console.log(e)
+    })
+
+
 
 
 

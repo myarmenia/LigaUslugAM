@@ -49,13 +49,11 @@ class ChatResourse extends JsonResource
             $chat=Chat::where([
                 ['task_id','=',$this->task_id],
                 ['employer_message','!=',null],
-              
+
                 ['executor_read_at','=',null]
                 ])->get();
                 return count($chat);
         }
-
-
 
     }
 }
