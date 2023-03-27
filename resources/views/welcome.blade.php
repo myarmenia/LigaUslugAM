@@ -230,7 +230,7 @@
     .listen('.readedchat', (e)=>{
         console.log(e)
     })
-    Echo.channel('readedchat_chanal.room_495_72_64')
+    Echo.channel('readedchat_chanal.room_518_79_64')
     .listen('.readedchat', (e)=>{
         console.log(e)
     })

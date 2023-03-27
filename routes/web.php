@@ -14,6 +14,7 @@ use App\Events\RejectTaskExecutor;
 use App\Events\NotificationEvent;
 use App\Http\Controllers\AnswerAndQuestionController;
 use App\Services\FileUploadService;
+use Illuminate\Support\Facades\Redirect;
 
 // use App\Http\Controllers\NotificationController;
 
@@ -37,6 +38,10 @@ Route::get('/', function () {
 // });
 
 Auth::routes();
+Route::get('/register',function(){
+    return redirect('/login');
+});
+
 
 Route::get('/clear-cache', function() {
         //   $run = Artisan::call('migrate');
