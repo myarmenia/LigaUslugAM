@@ -3,8 +3,10 @@
 namespace App\Http\Resources;
 
 use App\Models\Chat;
+use App\Models\ExecutorProfile;
+use App\Models\Task;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use Illuminate\Support\Facades\Auth;
 
 class ChatResourse extends JsonResource
 {
@@ -33,7 +35,27 @@ class ChatResourse extends JsonResource
             ];
     }
     public function taskchatcount(){
-        $chat=Chat::where(['task_id'=>$this->task_id])->get();
-        return count($chat);
+        $executor=ExecutorProfile::where('user_id',Auth::id())->first();
+        $task = Task::where('id',$this->task_id)->first();
+        if(Auth::id() == $task->user_id){
+            $chat=Chat::where([
+                ['task_id','=',$this->task_id],
+                ['executor_message','!=',null],
+                ['employer_read_at','=',null]
+                ])->get();
+                return count($chat);
+        }
+        if(Auth::id()==$executor->user_id){
+            $chat=Chat::where([
+                ['task_id','=',$this->task_id],
+                ['employer_message','!=',null],
+              
+                ['executor_read_at','=',null]
+                ])->get();
+                return count($chat);
+        }
+
+
+
     }
 }

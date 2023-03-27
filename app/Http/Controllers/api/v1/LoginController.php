@@ -44,6 +44,7 @@ class LoginController extends Controller{
             }
 
             $user=User::find(Auth::id());
+            
             if($user->email_verified_at){
 
                 $accessToken = Auth::user()->createToken('authToken')->accessToken;
