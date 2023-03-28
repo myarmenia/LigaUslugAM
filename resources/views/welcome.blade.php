@@ -226,15 +226,22 @@
     .listen('.readedchat', (e)=>{
         console.log(e)
     })
-    Echo.channel('readedchat_chanal.room_480_72_53')
-    .listen('.readedchat', (e)=>{
+    // Echo.channel('readedchat_chanal.room_480_72_53')
+    // .listen('.readedchat', (e)=>{
+    //     console.log(e)
+    // })
+    // Echo.channel('readedchat_chanal.room_518_79_64')
+    // .listen('.readedchat', (e)=>{
+    //     console.log(e)
+    // })
+     Echo.channel('updateUnreadChatsCount_chanal.79')
+    .listen('.updateUnreadChatsCount', (e)=>{
         console.log(e)
     })
-    Echo.channel('readedchat_chanal.room_518_79_64')
-    .listen('.readedchat', (e)=>{
+    Echo.channel('updateUnreadChatsCount_chanal.136')
+    .listen('.updateUnreadChatsCount', (e)=>{
         console.log(e)
     })
-
 
 
 

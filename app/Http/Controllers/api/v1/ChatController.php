@@ -5,12 +5,14 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Events\NewTaskChatEvent;
 use App\Events\ReadedMessageEvent;
+use App\Events\UpdateUnreadChatsCountEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ChatResourse;
 use App\Models\Chat;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
 use App\Models\Task;
+use App\Services\ChatService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,20 +29,23 @@ class ChatController extends Controller
     public function index()
     {
 
-        $task = Task::pluck('id');
+        // $task = Task::pluck('id');
 
-        $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
-        $this->executor_variable=$executor_profile_id ->id;
+        // $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
+        // $this->executor_variable=$executor_profile_id ->id;
 
 
-        $employer_chat = Chat::whereIn('task_id',$task)
-                                        ->where(function($q) {
-                                            $q->where('user_id',Auth::id())
-                                                ->orWhere("executor_profile_id", $this->executor_variable);
-                                        });
-        $employer_chat = $employer_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
+        // $employer_chat = Chat::whereIn('task_id',$task)
+        //                                 ->where(function($q) {
+        //                                     $q->where('user_id',Auth::id())
+        //                                         ->orWhere("executor_profile_id", $this->executor_variable);
+        //                                 });
+        // $employer_chat = $employer_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
 
-        $tasks_for_chatting = ChatResourse::collection($employer_chat);
+        // $tasks_for_chatting = ChatResourse::collection($employer_chat);
+
+
+        $tasks_for_chatting = ChatService::index();
         return response()->json(["data"=>$tasks_for_chatting]);
     }
 
@@ -94,15 +99,18 @@ class ChatController extends Controller
                 $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();
                 $task=Task::where('id',$request->task_id)->first();
 
+                $tasks_for_chatting=ChatService::index();
 
-                // if($request->employer_message!=null){
+                if($request->employer_message!=null){
 
-                //     event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                // }
-                // if($request->executor_message!=null){
+                    event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
+                    // event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+                }
+                if($request->executor_message!=null){
+                    event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
+                    // event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+                }
 
-                //     event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                // }
                 event(new NewTaskChatEvent($room, ['chat'=>$chat]));
                 return response()->json(["message"=>$chat]);
             }
@@ -209,11 +217,11 @@ class ChatController extends Controller
             if($request->type=="employer"){
                 $chat->employer_read_at=$current;
                 $chat->save();
-                event(new ReadedMessageEvent($request->chatroom_name,['type'=>'employer','chat'=> $chat]));
+                // event(new ReadedMessageEvent($request->chatroom_name,['type'=>'employer','chat'=> $chat]));
             }else{
                 $chat->executor_read_at=$current;
                 $chat->save();
-                event(new ReadedMessageEvent($request->chatroom_name,['type'=>'executor','chat'=> $chat]));
+                // event(new ReadedMessageEvent($request->chatroom_name,['type'=>'executor','chat'=> $chat]));
             }
         }
         return response()->json(['message'=>"success"]);
