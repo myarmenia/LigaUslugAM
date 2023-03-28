@@ -17,8 +17,8 @@ class Chat extends Model
         "executor_message",
         "employer_message_file",
         "executor_message_file",
-        "employer_read_at",
-        "executor_read_at"
+        // "employer_read_at",
+        // "executor_read_at"
 
     ];
 
