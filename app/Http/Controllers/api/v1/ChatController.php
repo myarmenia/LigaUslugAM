@@ -28,24 +28,8 @@ class ChatController extends Controller
 
     public function index()
     {
-
-        // $task = Task::pluck('id');
-
-        // $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
-        // $this->executor_variable=$executor_profile_id ->id;
-
-
-        // $employer_chat = Chat::whereIn('task_id',$task)
-        //                                 ->where(function($q) {
-        //                                     $q->where('user_id',Auth::id())
-        //                                         ->orWhere("executor_profile_id", $this->executor_variable);
-        //                                 });
-        // $employer_chat = $employer_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
-
-        // $tasks_for_chatting = ChatResourse::collection($employer_chat);
-
-
         $tasks_for_chatting = ChatService::index();
+
         return response()->json(["data"=>$tasks_for_chatting]);
     }
 
@@ -70,7 +54,7 @@ class ChatController extends Controller
     {
         $user_id = Auth::user()->id;
         $clickontask = ClickOnTask::where('task_id',$request->task_id)->first();
-        $generate_chat_id=0;
+
         if($clickontask){
             $room='';
             if($request->has('chatroom_name')){
@@ -99,18 +83,25 @@ class ChatController extends Controller
                 $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();
                 $task=Task::where('id',$request->task_id)->first();
 
-                $tasks_for_chatting=ChatService::index();
+                // $tasks_for_chatting=ChatService::index();
+                $opposide_side='';
+                if($request->employer_message != null){
 
-                if($request->employer_message!=null){
+                    $opposide_side = $executor->users->id;
+
+                    $tasks_for_chatting = ChatService::employer_executor($opposide_side);
 
                     event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
-                    // event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
-                }
-                if($request->executor_message!=null){
 
-                    // $k=ChatService::employer_executor($task->users->id);
+                }
+                if($request->executor_message != null){
+
+                    $opposide_side = $task->users->id;
+
+                    $tasks_for_chatting = ChatService::employer_executor($opposide_side);
+
                     event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
-                    // event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
+
                 }
 
                 event(new NewTaskChatEvent($room, ['chat'=>$chat]));
