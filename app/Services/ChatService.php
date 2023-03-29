@@ -29,4 +29,7 @@ class ChatService {
 
         return $tasks_for_chatting;
     }
+    public static function employer_executor($user_id){
+            dd($user_id);
+    }
 }

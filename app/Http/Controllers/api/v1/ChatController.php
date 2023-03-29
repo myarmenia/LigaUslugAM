@@ -107,6 +107,8 @@ class ChatController extends Controller
                     // event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
                 }
                 if($request->executor_message!=null){
+                  
+                    $k=ChatService::employer_executor($task->users->id);
                     event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
                     // event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
                 }
