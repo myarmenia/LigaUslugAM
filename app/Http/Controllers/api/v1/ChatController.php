@@ -107,8 +107,8 @@ class ChatController extends Controller
                     // event(new NewTaskChatEvent($executor->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
                 }
                 if($request->executor_message!=null){
-                  
-                    $k=ChatService::employer_executor($task->users->id);
+
+                    // $k=ChatService::employer_executor($task->users->id);
                     event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
                     // event(new NewTaskChatEvent($task->users->id, ['task_id'=>$request->task_id,'text'=>$request->employer_message,'chat'=>$chat]));
                 }
@@ -213,13 +213,16 @@ class ChatController extends Controller
 
         $current = Carbon::now();
 
-        $chat = Chat::where('chatroom_name',$request->chatroom_name)->get();
+        $chat = Chat::where('chatroom_name',$request->chatroom_name)->first();
+
         foreach($request->ids as $item){
             $chat = Chat::where(['chatroom_name'=>$request->chatroom_name,'id'=>$item])->first();
+
+
             if($request->type=="employer"){
                 $chat->employer_read_at=$current;
                 $chat->save();
-                // event(new ReadedMessageEvent($request->chatroom_name,['type'=>'employer','chat'=> $chat]));
+
             }else{
                 $chat->executor_read_at=$current;
                 $chat->save();
