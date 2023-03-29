@@ -213,7 +213,7 @@ class ChatController extends Controller
 
         $current = Carbon::now();
 
-        $chat = Chat::where('chatroom_name',$request->chatroom_name)->first();
+        // $chat = Chat::where('chatroom_name',$request->chatroom_name)->first();
 
         foreach($request->ids as $item){
             $chat = Chat::where(['chatroom_name'=>$request->chatroom_name,'id'=>$item])->first();
@@ -226,7 +226,7 @@ class ChatController extends Controller
             }else{
                 $chat->executor_read_at=$current;
                 $chat->save();
-                // event(new ReadedMessageEvent($request->chatroom_name,['type'=>'executor','chat'=> $chat]));
+
             }
         }
         return response()->json(['message'=>"success"]);
