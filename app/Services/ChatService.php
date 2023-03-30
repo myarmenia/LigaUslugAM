@@ -35,13 +35,12 @@ class ChatService {
         return $tasks_for_chatting;
     }
     public static function employer_executor($user_id){
-            // $user_id=65;
+            
             $executor_profile=ExecutorProfile::where('user_id',$user_id)->first();
-            // $chat = Chat::where('user_id',$user_id)->orWhere('executor_profile_id',$executor_profile->id)->get(['task_id','chatroom_name','user_id','executor_profile_id'])->groupBy('chatroom_name');
-            // $chats = Chat::where('user_id',$user_id)->orWhere('executor_profile_id',$executor_profile->id)->pluck('chatroom_name')->toArray();
+
             $chat = Chat::where('user_id',$user_id)->orWhere('executor_profile_id',$executor_profile->id)->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
 
-            // $tasks_for_chatting = OpposideSideChatsResource::collection($chat);
+
             $tasks_for_chatting = self::tasks_chat(['chat'=>$chat,'id'=>$user_id]);
             return $tasks_for_chatting;
     }
@@ -50,9 +49,7 @@ class ChatService {
         $message=[];
         $user=User::where('id',$request['id'])->first();
         foreach($request['chat'] as $item){
-            // "room_304_34_12"
-            // dd($item);
-            // dd($item->user_id);
+
             $find_chat=Chat::where('chatroom_name',$item->chatroom_name)->first();
 
             $obj=new stdClass();
@@ -68,11 +65,10 @@ class ChatService {
             $obj->executor_profile_id=$item->executor_profile_id;
 
 
-            // dd($find_chat);
             $executor=ExecutorProfile::where('user_id',$request['id'])->first();
 
             if($item->user_id === $request['id']){
-                // dd($item->user_id."+++");
+
                 $chat = Chat::where([
                     ['task_id','=',$item->task_id],
                     ['executor_message','!=',null],
@@ -82,7 +78,7 @@ class ChatService {
                 $obj->unread_chat_count=count($chat);
             }
             if($item->executor_profile_id == $executor->id){
-                // dd($executor->id."---");
+
                 $chat = Chat::where([
                     ['task_id','=',$item->task_id],
                     ['employer_message','!=',null],

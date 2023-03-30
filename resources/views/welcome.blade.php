@@ -235,6 +235,10 @@
     .listen('.updateUnreadChatsCount', (e)=>{
         console.log(e)
     })
+    Echo.channel('updateUnreadChatsCount_chanal.72')
+    .listen('.updateUnreadChatsCount', (e)=>{
+        console.log(e)
+    })
 
 
 
