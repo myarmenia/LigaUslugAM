@@ -26,7 +26,7 @@ class ChatService {
                                         ->where(function($q) {
                                             $q->where('user_id',Auth::id())
                                                 ->orWhere("executor_profile_id", self::$executor_variable);
-                                        })->get();
+                                        });
 
         $employer_chat = $employer_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
 
