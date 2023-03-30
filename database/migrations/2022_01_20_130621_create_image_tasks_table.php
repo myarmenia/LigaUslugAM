@@ -15,7 +15,8 @@ class CreateImageTasksTable extends Migration
     {
         Schema::create('image_tasks', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('task_id');
+            $table->bigInteger('task_id')->unsigned();
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
             $table->string('image_name');
             $table->timestamps();
         });
