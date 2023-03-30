@@ -53,10 +53,8 @@ class NotifiyEmployer extends Notification
     {
         return (new MailMessage)
                     ->subject('На ваше задание есть отклики специалистов')
-                    ->greeting($this->clickontask->tasks->users->name.',')
-                    ->line('На ваше задание появился новый отклик. Ознакомьтесь с предложением и выберите пожалуйста специалиста для выполнения вашего задания.')
-                    ->action('Перейти по ссылке', url('/http://ligauslug.ru/'))
-                    ->line('Заранее спасибо вам.');
+                    ->view('Mails.notifyemployerexecutorclickontask',['task'=> $this->clickontask->tasks->users->name,'logo'=>'/images/logo_footer.png']);
+                   
     }
     public function toDatabase($notifiable)
     {

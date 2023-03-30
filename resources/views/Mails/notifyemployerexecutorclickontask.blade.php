@@ -11,9 +11,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 col-xs-12  mb-3">
-                   <h3>Уважаемый(ая) {{$task->users->name.' '.$task->users->last_name}}</h3>
-                    <p class="m-2">Исполнитель {{$task->executor_profiles->users->name.' '.$task->executor_profiles->users->last_name}} завершил заказ {{$task->title}}</p>
+                   {{-- <h3>Уважаемый(ая) {{$task->users->name.' '.$task->users->last_name}}</h3>
 
+                    <p class="m-2">Исполнитель {{$task->executor_profiles->users->name.' '.$task->executor_profiles->users->last_name}} завершил заказ по названию {{$task->title}}</p> --}}
+                    <h3>Уважаемый(ая) {{ $task }} </h3>
+                    <p class="m-2">На ваше задание появился новый отклик. Ознакомьтесь с предложением и выберите пожалуйста специалиста для выполнения вашего заказа.</p>
                     <h5>С уважением</h5>
                     <div  style="height:70px;width:300px;display:flex;align-items:center">
                         <img src="{{ $message->embed(public_path().'/images/logo_footer.png') }}" style="width:70px;display:block;">
@@ -24,4 +26,3 @@
         </div>
     </body>
 </html>
-
