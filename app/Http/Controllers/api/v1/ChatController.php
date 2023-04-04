@@ -16,6 +16,7 @@ use App\Services\ChatService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller
 {
@@ -90,7 +91,7 @@ class ChatController extends Controller
                     $opposide_side = $executor->users->id;
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
-
+                    // show opposite side task chats
                     event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
 
                 }
@@ -111,15 +112,101 @@ class ChatController extends Controller
     }
 
 
+    // public function chatFileUpload(Request $request){
+
+    //     if($request->has('message_file')){
+
+    //         $chatFilevalidate = $request->validate([
+    //                     'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF|max:2048'
+
+    //                 ]);
+
+
+
+    //          if($chatFilevalidate){
+    //             $creat_chat_file=Chat::where([
+    //                 ["task_id",'=', $request->task_id],
+    //                 ["user_id","=", $request->user_id],
+    //                 ["executor_profile_id","=", $request->executor_profile_id],
+    //             ])->create([
+    //                 "task_id" => $request->task_id,
+    //                 "user_id" => $request->user_id,
+    //                 "executor_profile_id" => $request->executor_profile_id,
+
+    //             ]);
+
+    //             if(Auth::id()==$creat_chat_file->user_id)
+    //             {
+
+    //                     if( $creat_chat_file){
+    //                         $file=$request->file('message_file');
+    //                         $filename=time().$file->getClientOriginalName();
+    //                         $file->move(public_path('admin/img/chatfiles'),$filename);
+
+    //                         $creat_chat_file_update=$creat_chat_file->update([
+    //                             "employer_message_file" => $filename,
+    //                         ]);
+    //                         if($creat_chat_file_update){
+    //                             return response()->json(["message"=>"Employer inserted file"]);
+    //                         }else{
+    //                             return response()->json(["message"=>"failed"]);
+    //                         }
+    //                     }
+
+
+    //             }else{
+    //                 if( $creat_chat_file){
+    //                     $file=$request->file('message_file');
+    //                     $filename=time().$file->getClientOriginalName();
+    //                     $file->move(public_path('admin/img/chatfiles'),$filename);
+
+    //                     $creat_chat_file_update=$creat_chat_file->update([
+    //                         "executor_message_file" => $filename,
+    //                     ]);
+    //                     if($creat_chat_file_update){
+    //                         return response()->json(["message"=>"Executor inserted file"]);
+    //                     }else{
+    //                         return response()->json(["message"=>"failed"]);
+    //                     }
+    //                 }
+
+    //             }
+
+
+    //         }else{
+    //             return response()->json(["message"=>"notvalidate"]);
+    //         }
+
+
+    //     }
+
+
+
+
+    // }
     public function chatFileUpload(Request $request){
-        if($request->has('message_file')){
-            $chatFilevalidate = $request->validate([
-                        'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF|max:2048'
 
-                    ]);
+        // if($request->has('message_file')){
 
-             if($chatFilevalidate){
+
+            $validate = [
+                'chatroom_name'=>'required',
+                'task_id'=>'required',
+                'user_id'=>'required',
+                "executor_profile_id"=>'required',
+                'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF|max:2048'
+            ];
+
+            $validator = Validator::make($request->all(), $validate);
+
+            if($validator->fails()) {
+                return response()->json(['errors'=>$validator->errors()], 404);
+
+            }
+
+
                 $creat_chat_file=Chat::where([
+                    ["chatroom_name",'=',$request->chatroom_name],
                     ["task_id",'=', $request->task_id],
                     ["user_id","=", $request->user_id],
                     ["executor_profile_id","=", $request->executor_profile_id],
@@ -127,6 +214,7 @@ class ChatController extends Controller
                     "task_id" => $request->task_id,
                     "user_id" => $request->user_id,
                     "executor_profile_id" => $request->executor_profile_id,
+                    "chatroom_name"=> $request->chatroom_name
 
                 ]);
 
@@ -147,10 +235,8 @@ class ChatController extends Controller
                                 return response()->json(["message"=>"failed"]);
                             }
                         }
-
-
                 }else{
-                    if( $creat_chat_file){
+                    if($creat_chat_file){
                         $file=$request->file('message_file');
                         $filename=time().$file->getClientOriginalName();
                         $file->move(public_path('admin/img/chatfiles'),$filename);
@@ -166,14 +252,16 @@ class ChatController extends Controller
                     }
 
                 }
+                $room = $request->chatroom_name;
+                $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
+                event(new NewTaskChatEvent($room, ['chat'=>$chat]));
+                return response()->json(["message"=>$chat]);
 
 
-            }else{
-                return response()->json(["message"=>"notvalidate"]);
-            }
 
 
-        }
+
+        // }
 
 
 

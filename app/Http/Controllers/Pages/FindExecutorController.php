@@ -9,6 +9,7 @@ use App\Models\ExecutorSubcategory;
 use App\Models\ExecutorWorkingRegion;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FindExecutorController extends Controller
 {
@@ -53,11 +54,19 @@ class FindExecutorController extends Controller
     {
 
         $find_subcategory_category=Subcategory::where('subcategory_name',$subcategoryName)->first();
-        if( $find_subcategory_category->category_id==$category_id){
+        if($find_subcategory_category->category_id==$category_id){
             $category_subcategory=Category::where('id',$category_id)->with('subcategories')->first();
-            // dd($category_subcategory);
 
-            $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id');
+
+            $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id')->toArray();
+
+            $executor = ExecutorProfile::where('user_id',Auth('api')->user()->id)->first();
+
+
+            if($executor != null){
+                 // removing element from array
+                $findExecutorId = array_diff($findExecutorId, array($executor->id));
+            }
 
             $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users','executor_categories')->paginate(10)->withQueryString();
             if($findExecutor->total()==0){
