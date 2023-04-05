@@ -156,7 +156,7 @@ class ChatController extends Controller
                 {
                         if( $creat_chat_file){
                             $file=$request->file('message_file');
-                            $filename=time().$file->getClientOriginalName();
+                            $filename=$file->getClientOriginalName();
                             $file->move(public_path('admin/img/chatfiles'),$filename);
 
                             $creat_chat_file_update=$creat_chat_file->update([
