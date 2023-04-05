@@ -169,6 +169,11 @@ class ChatController extends Controller
                                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
                                     // show opposite side task chats
                                     event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
+
+                                    $room = $request->chatroom_name;
+                                    $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
+                                    event(new NewTaskChatEvent($room, ['chat'=>$chat]));
+
                                 // =====
                                 return response()->json(["message"=>"Employer inserted file"]);
                             }else{
@@ -190,6 +195,10 @@ class ChatController extends Controller
                                 $tasks_for_chatting = ChatService::employer_executor($opposide_side);
 
                                 event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
+                                // =====
+                                $room = $request->chatroom_name;
+                                $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
+                                event(new NewTaskChatEvent($room, ['chat'=>$chat]));
                             //====
                             return response()->json(["message"=>"Executor inserted file"]);
                         }else{
@@ -199,10 +208,10 @@ class ChatController extends Controller
 
                 }
 
-                $room = $request->chatroom_name;
-                $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
-                event(new NewTaskChatEvent($room, ['chat'=>$chat]));
-                return response()->json(["message"=>$chat]);
+                // $room = $request->chatroom_name;
+                // $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
+                // event(new NewTaskChatEvent($room, ['chat'=>$chat]));
+                // return response()->json(["message"=>$chat]);
 
     }
 
