@@ -218,24 +218,21 @@
         console.log(e)
     })
     // chat socket
-    Echo.channel('newchattext_chanal.79')
-    .listen('.newchattext', (e)=>{
-        console.log(e)
-    })
-    Echo.channel('readedchat_chanal.room_498_79_28')
-    .listen('.readedchat', (e)=>{
-        console.log(e)
-    })
+    // Echo.channel('newchattext_chanal.79')
+    // .listen('.newchattext', (e)=>{
+    //     console.log(e)
+    // })
+    // Echo.channel('readedchat_chanal.room_498_79_28')
+    // .listen('.readedchat', (e)=>{
+    //     console.log(e)
+    // })
 //
-     Echo.channel('updateUnreadChatsCount_chanal.79')
+
+    Echo.channel('updateUnreadChatsCount_chanal.174')
     .listen('.updateUnreadChatsCount', (e)=>{
         console.log(e)
     })
-    Echo.channel('updateUnreadChatsCount_chanal.136')
-    .listen('.updateUnreadChatsCount', (e)=>{
-        console.log(e)
-    })
-    Echo.channel('updateUnreadChatsCount_chanal.72')
+    Echo.channel('updateUnreadChatsCount_chanal.87')
     .listen('.updateUnreadChatsCount', (e)=>{
         console.log(e)
     })

@@ -186,8 +186,9 @@ class ChatController extends Controller
                         ]);
                         if($creat_chat_file_update){
                             // =====
-                                $opposide_side = $task->users->id;
+                                $opposide_side = $task->users->id
                                 $tasks_for_chatting = ChatService::employer_executor($opposide_side);
+
                                 event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
                             //====
                             return response()->json(["message"=>"Executor inserted file"]);
@@ -204,7 +205,6 @@ class ChatController extends Controller
                 return response()->json(["message"=>$chat]);
 
     }
-
 
     /**
      * Display the specified resource.
