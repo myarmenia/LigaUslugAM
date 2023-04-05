@@ -112,81 +112,10 @@ class ChatController extends Controller
     }
 
 
-    // public function chatFileUpload(Request $request){
 
-    //     if($request->has('message_file')){
-
-    //         $chatFilevalidate = $request->validate([
-    //                     'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF|max:2048'
-
-    //                 ]);
-
-
-
-    //          if($chatFilevalidate){
-    //             $creat_chat_file=Chat::where([
-    //                 ["task_id",'=', $request->task_id],
-    //                 ["user_id","=", $request->user_id],
-    //                 ["executor_profile_id","=", $request->executor_profile_id],
-    //             ])->create([
-    //                 "task_id" => $request->task_id,
-    //                 "user_id" => $request->user_id,
-    //                 "executor_profile_id" => $request->executor_profile_id,
-
-    //             ]);
-
-    //             if(Auth::id()==$creat_chat_file->user_id)
-    //             {
-
-    //                     if( $creat_chat_file){
-    //                         $file=$request->file('message_file');
-    //                         $filename=time().$file->getClientOriginalName();
-    //                         $file->move(public_path('admin/img/chatfiles'),$filename);
-
-    //                         $creat_chat_file_update=$creat_chat_file->update([
-    //                             "employer_message_file" => $filename,
-    //                         ]);
-    //                         if($creat_chat_file_update){
-    //                             return response()->json(["message"=>"Employer inserted file"]);
-    //                         }else{
-    //                             return response()->json(["message"=>"failed"]);
-    //                         }
-    //                     }
-
-
-    //             }else{
-    //                 if( $creat_chat_file){
-    //                     $file=$request->file('message_file');
-    //                     $filename=time().$file->getClientOriginalName();
-    //                     $file->move(public_path('admin/img/chatfiles'),$filename);
-
-    //                     $creat_chat_file_update=$creat_chat_file->update([
-    //                         "executor_message_file" => $filename,
-    //                     ]);
-    //                     if($creat_chat_file_update){
-    //                         return response()->json(["message"=>"Executor inserted file"]);
-    //                     }else{
-    //                         return response()->json(["message"=>"failed"]);
-    //                     }
-    //                 }
-
-    //             }
-
-
-    //         }else{
-    //             return response()->json(["message"=>"notvalidate"]);
-    //         }
-
-
-    //     }
-
-
-
-
-    // }
     public function chatFileUpload(Request $request){
 
-        // if($request->has('message_file')){
+
 
 
             $validate = [
@@ -204,7 +133,6 @@ class ChatController extends Controller
 
             }
 
-
                 $creat_chat_file=Chat::where([
                     ["chatroom_name",'=',$request->chatroom_name],
                     ["task_id",'=', $request->task_id],
@@ -217,10 +145,15 @@ class ChatController extends Controller
                     "chatroom_name"=> $request->chatroom_name
 
                 ]);
+                // ======
+                    $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();
+                    $task=Task::where('id',$request->task_id)->first();
 
+                    // $tasks_for_chatting=ChatService::index();
+                    $opposide_side='';
+                // ========
                 if(Auth::id()==$creat_chat_file->user_id)
                 {
-
                         if( $creat_chat_file){
                             $file=$request->file('message_file');
                             $filename=time().$file->getClientOriginalName();
@@ -229,7 +162,14 @@ class ChatController extends Controller
                             $creat_chat_file_update=$creat_chat_file->update([
                                 "employer_message_file" => $filename,
                             ]);
+
                             if($creat_chat_file_update){
+                                // ======
+                                    $opposide_side = $executor->users->id;
+                                    $tasks_for_chatting = ChatService::employer_executor($opposide_side);
+                                    // show opposite side task chats
+                                    event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
+                                // =====
                                 return response()->json(["message"=>"Employer inserted file"]);
                             }else{
                                 return response()->json(["message"=>"failed"]);
@@ -245,6 +185,11 @@ class ChatController extends Controller
                             "executor_message_file" => $filename,
                         ]);
                         if($creat_chat_file_update){
+                            // =====
+                                $opposide_side = $task->users->id;
+                                $tasks_for_chatting = ChatService::employer_executor($opposide_side);
+                                event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
+                            //====
                             return response()->json(["message"=>"Executor inserted file"]);
                         }else{
                             return response()->json(["message"=>"failed"]);
@@ -252,19 +197,11 @@ class ChatController extends Controller
                     }
 
                 }
+
                 $room = $request->chatroom_name;
                 $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
                 event(new NewTaskChatEvent($room, ['chat'=>$chat]));
                 return response()->json(["message"=>$chat]);
-
-
-
-
-
-        // }
-
-
-
 
     }
 
