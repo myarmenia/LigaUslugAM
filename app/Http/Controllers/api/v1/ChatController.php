@@ -183,7 +183,7 @@ class ChatController extends Controller
                 }else{
                     if($creat_chat_file){
                         $file=$request->file('message_file');
-                        $filename=time().$file->getClientOriginalName();
+                        $filename=$file->getClientOriginalName();
                         $file->move(public_path('admin/img/chatfiles'),$filename);
 
                         $creat_chat_file_update=$creat_chat_file->update([
@@ -208,10 +208,7 @@ class ChatController extends Controller
 
                 }
 
-                // $room = $request->chatroom_name;
-                // $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
-                // event(new NewTaskChatEvent($room, ['chat'=>$chat]));
-                // return response()->json(["message"=>$chat]);
+
 
     }
 
