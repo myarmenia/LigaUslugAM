@@ -59,14 +59,16 @@ class FindExecutorController extends Controller
 
 
             $findExecutorId = ExecutorSubcategory::where('subcategory_name',$subcategoryName)->pluck('executor_profile_id')->toArray();
+                if(Auth('api')->user()){
+                    $executor = ExecutorProfile::where('user_id',Auth('api')->user()->id)->first();
 
-            $executor = ExecutorProfile::where('user_id',Auth('api')->user()->id)->first();
 
+                    if($executor != null){
+                        // removing element from array
+                        $findExecutorId = array_diff($findExecutorId, array($executor->id));
+                    }
 
-            if($executor != null){
-                 // removing element from array
-                $findExecutorId = array_diff($findExecutorId, array($executor->id));
-            }
+                }
 
             $findExecutor=ExecutorProfile::whereIn('id', $findExecutorId)->with('users','executor_categories')->paginate(10)->withQueryString();
             if($findExecutor->total()==0){

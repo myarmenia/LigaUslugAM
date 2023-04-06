@@ -202,7 +202,9 @@ Route::prefix('/user')->group( function(){
         Route::post('/reject-employer-for-special-task',[SpecialTaskController::class,'rejectEmployerForSpecialTask']);
         // Route::post('/select-special-task-executor',[SpecialTaskController::class,'selectSpecialTaskExecutor']);
         // ============
+        // type employer enq uxarkum
         Route::get('/task-section-count/{type}',[TaskSectionCountController::class,'index']);
+        // type executor enq uxarkum
         Route::get('/executor-task-section-count/{type}',[TaskSectionCountController::class,'executor']);
     });
 
