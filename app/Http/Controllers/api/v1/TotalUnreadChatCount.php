@@ -20,7 +20,7 @@ class TotalUnreadChatCount extends Controller
         $totalunreadchatmessagecount=0;
         // dd($tasks_for_chatting);
         foreach($tasks_for_chatting as $item){
-            dd($item->unread_chat_count);
+            // dd($item->unread_chat_count);
             $totalunreadchatmessagecount+=$item->unread_chat_count;
 
 
