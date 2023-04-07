@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use stdClass;
 
 class ChatService {
+
     public static $executor_variable;
     public static  function index(){
 
@@ -96,5 +97,8 @@ class ChatService {
         }
         // dd($message);
         return $message;
+    }
+    public static function total_count(){
+
     }
 }

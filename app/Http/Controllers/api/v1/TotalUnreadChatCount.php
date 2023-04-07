@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
+use App\Models\ExecutorProfile;
+use App\Models\Task;
 use App\Services\ChatService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TotalUnreadChatCount extends Controller
 {
@@ -13,21 +17,56 @@ class TotalUnreadChatCount extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $executor_variable;
     public function index()
     {
-        $tasks_for_chatting = ChatService::index();
+        $task = Task::pluck('id');
 
-        $totalunreadchatmessagecount=0;
-        // dd($tasks_for_chatting);
-        foreach($tasks_for_chatting as $item){
-            // dd($item->unread_chat_count);
-            $totalunreadchatmessagecount+=$item->unread_chat_count;
+        $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
 
-
+        if($executor_profile_id){
+            $this->executor_variable = $executor_profile_id->id;
         }
-        // dd($totalunreadchatmessagecount);
-        return response()->json($tasks_for_chatting);
-        return response()->json(["total_unread_message_count"=>$totalunreadchatmessagecount]);
+
+        $employer_executor_chat = Chat::whereIn('task_id',$task)
+                                        ->where(function($q) {
+                                            $q->where('user_id',Auth::id())
+                                                ->orWhere("executor_profile_id", $this->executor_variable);
+                                        });
+
+        $employer_executor_chat = $employer_executor_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
+        $k=0;
+        foreach($employer_executor_chat as $item){
+
+            $aa=$this->taskchatcount($item->task_id);
+            $k+=$aa;
+        }
+        dd($k);
+
+    }
+    public function taskchatcount($task_id){
+        // dd($task_id);
+        $executor=ExecutorProfile::where('user_id',Auth::id())->first();
+        $task = Task::where('id',$task_id)->first();
+        if(Auth::id() == $task->user_id){
+            $chat=Chat::where([
+                ['task_id','=',$task_id],
+                ['executor_message','!=',null],
+                ['employer_read_at','=',null]
+                ])->get();
+
+                return count($chat);
+        }
+        if(Auth::id()==$executor->user_id){
+            $chat=Chat::where([
+                ['task_id','=',$task_id],
+                ['employer_message','!=',null],
+
+                ['executor_read_at','=',null]
+                ])->get();
+
+                return count($chat);
+        }
 
     }
 

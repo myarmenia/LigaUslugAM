@@ -16,10 +16,10 @@ class ChatResourse extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public $task_chatcount;
+
     public function toArray($request)
     {
-        
+
         return [
                 "chatroom_name"=>$this->chatroom_name,
                 "task_id" => $this->task_id,
@@ -43,6 +43,7 @@ class ChatResourse extends JsonResource
                 ['executor_message','!=',null],
                 ['employer_read_at','=',null]
                 ])->get();
+
                 return count($chat);
         }
         if(Auth::id()==$executor->user_id){
@@ -52,6 +53,7 @@ class ChatResourse extends JsonResource
 
                 ['executor_read_at','=',null]
                 ])->get();
+              
                 return count($chat);
         }
 
