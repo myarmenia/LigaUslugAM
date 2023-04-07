@@ -30,6 +30,7 @@ class ChatController extends Controller
 
     public function index()
     {
+
         $tasks_for_chatting = ChatService::index();
 
         return response()->json(["data"=>$tasks_for_chatting]);
@@ -93,14 +94,14 @@ class ChatController extends Controller
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
                     // show opposite side task chats
-                    $totalunreadchatcount=0;
-                    foreach($tasks_for_chatting as $item){
-                        $totalunreadchatcount+=$item->unread_chat_count;
+                    // $totalunreadchatcount=0;
+                    // foreach($tasks_for_chatting as $item){
+                    //     $totalunreadchatcount+=$item->unread_chat_count;
 
-                    }
+                    // }
 
-                    // dd($unreadmessage);
-                    event(new TotalunreadChatCount($executor->users->id,$totalunreadchatcount));
+                    // // dd($unreadmessage);
+                    // event(new TotalunreadChatCount($executor->users->id,$totalunreadchatcount));
 
                     event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
 
@@ -110,13 +111,13 @@ class ChatController extends Controller
                     $opposide_side = $task->users->id;
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
-                    $totalunreadchatcount=0;
-                    foreach($tasks_for_chatting as $item){
-                        $totalunreadchatcount+=$item->unread_chat_count;
+                    // $totalunreadchatcount=0;
+                    // foreach($tasks_for_chatting as $item){
+                    //     $totalunreadchatcount+=$item->unread_chat_count;
 
-                    }
+                    // }
 
-                    event(new TotalunreadChatCount($task->users->id,$totalunreadchatcount));
+                    // event(new TotalunreadChatCount($task->users->id,$totalunreadchatcount));
 
                     event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
 
