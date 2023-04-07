@@ -36,6 +36,7 @@ use App\Http\Controllers\api\v1\SmsController;
 use App\Http\Controllers\api\v1\SpecialTaskController;
 use App\Http\Controllers\api\v1\TaskSectionCountController;
 use App\Http\Controllers\api\v1\TestEnrollmentController;
+use App\Http\Controllers\api\v1\TotalUnreadChatCount;
 use App\Http\Controllers\Pages\CallbackController;
 use App\Http\Controllers\Pages\ExecutorProfileController as PagesExecutorProfileController;
 use App\Http\Controllers\Pages\FindExecutorController;
@@ -173,6 +174,7 @@ Route::prefix('/user')->group( function(){
         //chat-message
         // all tasks  in chat room
         Route::get('/employer-tasks-chat',[ChatController::class,'index']);
+        Route::get('/totalunreadmessagecount',[TotalUnreadChatCount::class,'index']);
         // first time when writing exequtor
         Route::post('/chat-room',[ChatController::class,'store']);
 

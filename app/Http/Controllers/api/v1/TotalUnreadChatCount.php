@@ -1,52 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Pages;
+namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Subcategory;
-use App\Models\Task;
+use App\Services\ChatService;
 use Illuminate\Http\Request;
 
-class FindTaskController extends Controller
+class TotalUnreadChatCount extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    public function index($categoryId,$subcategoryName)
-
+    public function index()
     {
+        $tasks_for_chatting = ChatService::index();
+        $totalunreadchatmessagecount=0;
+        // dd($tasks_for_chatting);
+        foreach($tasks_for_chatting as $item){
+            $totalunreadchatmessagecount+=$item->unread_chat_count;
 
-        $subcategory=explode('_',$subcategoryName);
-        $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
-        $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
-
-
-        if($get_category_id->category_id=$categoryId){
-            $category_subcategory=Category::where('id',$categoryId)->with('subcategories')->first();
-
-            $query = Task::latest();
-            $query->whereIn('subcategory_name', $subcategory)->with('users');
-
-            $task = $query->paginate(10)->withQueryString();
-            return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
         }
 
-    }
-    public function allTasks(){
-        // $query = Task::with('users')->pluck('id');
-        // dd(Auth('api')->user());
-
-
-        $query = Task::with('users')->latest();
-
-        $query->where('status',false);
-        $all_task=$query->paginate(5)->withQueryString();
-        return response()->json(['message'=>$all_task]);
+        return response()->json(["total_unread_message_count"=>$totalunreadchatmessagecount]);
 
     }
 

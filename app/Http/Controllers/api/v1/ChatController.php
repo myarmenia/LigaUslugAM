@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Events\NewTaskChatEvent;
 use App\Events\ReadedMessageEvent;
+use App\Events\TotalunreadChatCount;
 use App\Events\UpdateUnreadChatsCountEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ChatResourse;
@@ -92,6 +93,15 @@ class ChatController extends Controller
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
                     // show opposite side task chats
+                    $totalunreadchatcount=0;
+                    foreach($tasks_for_chatting as $item){
+                        $totalunreadchatcount+=$item->unread_chat_count;
+
+                    }
+
+                    // dd($unreadmessage);
+                    event(new TotalunreadChatCount($executor->users->id,$totalunreadchatcount));
+
                     event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
 
                 }
@@ -100,6 +110,13 @@ class ChatController extends Controller
                     $opposide_side = $task->users->id;
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
+                    $totalunreadchatcount=0;
+                    foreach($tasks_for_chatting as $item){
+                        $totalunreadchatcount+=$item->unread_chat_count;
+
+                    }
+
+                    event(new TotalunreadChatCount($task->users->id,$totalunreadchatcount));
 
                     event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
 
