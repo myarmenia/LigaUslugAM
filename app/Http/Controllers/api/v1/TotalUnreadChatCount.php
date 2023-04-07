@@ -10,7 +10,7 @@ use App\Services\ChatService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TotalUnreadChatCount extends Controller
+class TotalUnreadChatCount extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -35,13 +35,15 @@ class TotalUnreadChatCount extends Controller
                                         });
 
         $employer_executor_chat = $employer_executor_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
-        $k=0;
+        $unread_chat_count=0;
         foreach($employer_executor_chat as $item){
 
-            $aa=$this->taskchatcount($item->task_id);
-            $k+=$aa;
+            $one_task=$this->taskchatcount($item->task_id);
+            $unread_chat_count+=$one_task;
         }
-        dd($k);
+        $success=$unread_chat_count;
+        // return response()->json(['unread_chat_count'=>$unread_chat_count]);
+        return $this->sendResponse($success, 'User tital unread messages count');
 
     }
     public function taskchatcount($task_id){
