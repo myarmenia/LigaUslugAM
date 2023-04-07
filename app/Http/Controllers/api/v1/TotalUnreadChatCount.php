@@ -43,7 +43,7 @@ class TotalUnreadChatCount extends BaseController
         }
         $success=$unread_chat_count;
         // return response()->json(['unread_chat_count'=>$unread_chat_count]);
-        return $this->sendResponse($success, 'User tital unread messages count');
+        return $this->sendResponse($success, 'User total unread messages count');
 
     }
     public function taskchatcount($task_id){
