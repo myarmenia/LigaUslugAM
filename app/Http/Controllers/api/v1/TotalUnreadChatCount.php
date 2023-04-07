@@ -16,13 +16,17 @@ class TotalUnreadChatCount extends Controller
     public function index()
     {
         $tasks_for_chatting = ChatService::index();
+
         $totalunreadchatmessagecount=0;
         // dd($tasks_for_chatting);
         foreach($tasks_for_chatting as $item){
+            dd($item->unread_chat_count);
             $totalunreadchatmessagecount+=$item->unread_chat_count;
 
-        }
 
+        }
+        // dd($totalunreadchatmessagecount);
+        return response()->json($tasks_for_chatting);
         return response()->json(["total_unread_message_count"=>$totalunreadchatmessagecount]);
 
     }
