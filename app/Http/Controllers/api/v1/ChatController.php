@@ -65,7 +65,7 @@ class ChatController extends Controller
                 $room=$request->chatroom_name;
             }
             else{
-              
+
                 $room="room_".$request->task_id."_".$request->user_id."_".$request->executor_profile_id;
             }
 
@@ -96,8 +96,8 @@ class ChatController extends Controller
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
                         // showing in navbar
-                        $chat_message_count = TasksMessagesCountInChat::index($opposide_side);
-                        event(new TotalunreadChatCount( $opposide_side, $chat_message_count));
+                        // $chat_message_count = TasksMessagesCountInChat::index($opposide_side);
+                        // event(new TotalunreadChatCount( $opposide_side, $chat_message_count));
 
                     event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
                 }
@@ -107,8 +107,8 @@ class ChatController extends Controller
                     $opposide_side = $task->users->id;
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
-                        $chat_message_count = TasksMessagesCountInChat::index($opposide_side);
-                        event(new TotalunreadChatCount($executor->users->id,$chat_message_count));
+                        // $chat_message_count = TasksMessagesCountInChat::index($opposide_side);
+                        // event(new TotalunreadChatCount($executor->users->id,$chat_message_count));
 
                     event(new UpdateUnreadChatsCountEvent( $opposide_side, $tasks_for_chatting));
                 }
