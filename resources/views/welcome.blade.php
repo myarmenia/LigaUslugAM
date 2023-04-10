@@ -237,7 +237,7 @@
     //     console.log(e)
     // })
      Echo.channel('totalunreadchatscount_chanal.87')
-    .listen('.updateUnreadChatsCount', (e)=>{
+    .listen('.totalunreadchatscount', (e)=>{
         console.log(e)
     })
     Echo.channel('totalunreadchatscount_chanal.174')
