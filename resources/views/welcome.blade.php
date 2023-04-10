@@ -240,7 +240,7 @@
     .listen('.updateUnreadChatsCount', (e)=>{
         console.log(e)
     })
-    Echo.channel('totalunreadchatscount_chanal.177')
+    Echo.channel('totalunreadchatscount_chanal.174')
     .listen('.totalunreadchatscount', (e)=>{
         console.log(e)
     })
