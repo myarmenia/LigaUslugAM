@@ -14,6 +14,7 @@ use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
 use App\Models\Task;
 use App\Services\ChatService;
+use App\Services\TasksMessagesCountInChat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +65,7 @@ class ChatController extends Controller
                 $room=$request->chatroom_name;
             }
             else{
+              
                 $room="room_".$request->task_id."_".$request->user_id."_".$request->executor_profile_id;
             }
 
@@ -86,41 +88,29 @@ class ChatController extends Controller
                 $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();
                 $task=Task::where('id',$request->task_id)->first();
 
-                // $tasks_for_chatting=ChatService::index();
+
                 $opposide_side='';
                 if($request->employer_message != null){
 
                     $opposide_side = $executor->users->id;
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
-                    // show opposite side task chats
-                    // $totalunreadchatcount=0;
-                    // foreach($tasks_for_chatting as $item){
-                    //     $totalunreadchatcount+=$item->unread_chat_count;
-
-                    // }
-
-                    // // dd($unreadmessage);
-                    // event(new TotalunreadChatCount($executor->users->id,$totalunreadchatcount));
+                        // showing in navbar
+                        $chat_message_count = TasksMessagesCountInChat::index($opposide_side);
+                        event(new TotalunreadChatCount( $opposide_side, $chat_message_count));
 
                     event(new UpdateUnreadChatsCountEvent($executor->users->id,$tasks_for_chatting));
-
                 }
+
                 if($request->executor_message != null){
 
                     $opposide_side = $task->users->id;
 
                     $tasks_for_chatting = ChatService::employer_executor($opposide_side);
-                    // $totalunreadchatcount=0;
-                    // foreach($tasks_for_chatting as $item){
-                    //     $totalunreadchatcount+=$item->unread_chat_count;
+                        $chat_message_count = TasksMessagesCountInChat::index($opposide_side);
+                        event(new TotalunreadChatCount($executor->users->id,$chat_message_count));
 
-                    // }
-
-                    // event(new TotalunreadChatCount($task->users->id,$totalunreadchatcount));
-
-                    event(new UpdateUnreadChatsCountEvent($task->users->id,$tasks_for_chatting));
-
+                    event(new UpdateUnreadChatsCountEvent( $opposide_side, $tasks_for_chatting));
                 }
 
                 event(new NewTaskChatEvent($room, ['chat'=>$chat]));

@@ -36,12 +36,14 @@ class TotalUnreadChatCount extends BaseController
 
         $employer_executor_chat = $employer_executor_chat->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
         $unread_chat_count=0;
+
         foreach($employer_executor_chat as $item){
 
-            $one_task=$this->taskchatcount($item->task_id);
+            $one_task = $this->taskchatcount($item->task_id);
             $unread_chat_count+=$one_task;
         }
-        $success=$unread_chat_count;
+
+        $success = $unread_chat_count;
         // return response()->json(['unread_chat_count'=>$unread_chat_count]);
         return $this->sendResponse($success, 'User total unread messages count');
 
@@ -71,7 +73,7 @@ class TotalUnreadChatCount extends BaseController
         }
 
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      *

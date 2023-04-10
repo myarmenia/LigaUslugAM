@@ -174,8 +174,10 @@ Route::prefix('/user')->group( function(){
         //chat-message
         // all tasks  in chat room
         Route::get('/employer-tasks-chat',[ChatController::class,'index']);
+
+        // show in nav bar if user has unread message in chat
         Route::get('/totalunreadmessagecount',[TotalUnreadChatCount::class,'index']);
-        // first time when writing exequtor
+        // first time when writing exequtor generated chtroom name
         Route::post('/chat-room',[ChatController::class,'store']);
 
         Route::post('task-chat',[ChatController::class,'taskChat']);

@@ -22,7 +22,7 @@ class ChatService {
         $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
 
         if($executor_profile_id){
-            self::$executor_variable=$executor_profile_id ->id;
+            self::$executor_variable = $executor_profile_id ->id;
         }
 
 
@@ -57,7 +57,7 @@ class ChatService {
 
             $find_chat=Chat::where('chatroom_name',$item->chatroom_name)->first();
 
-            $obj=new stdClass();
+            $obj = new stdClass();
             $obj->chatroom_name = $item->chatroom_name;
             $obj->task_id = $item->task_id;
             $obj->tasks = $find_chat->tasks;
@@ -98,7 +98,5 @@ class ChatService {
         // dd($message);
         return $message;
     }
-    public static function total_count(){
 
-    }
 }
