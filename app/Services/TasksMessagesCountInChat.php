@@ -39,7 +39,7 @@ class TasksMessagesCountInChat extends BaseController{
         return $success;
 
     }
-    public function taskchatcount($task_id,$user_id){
+    public static function  taskchatcount($task_id,$user_id){
 
         $executor=ExecutorProfile::where('user_id',$user_id)->first();
         $task = Task::where('id',$task_id)->first();
