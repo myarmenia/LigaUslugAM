@@ -99,7 +99,7 @@ class   TaskController extends Controller
           'task_location'=> $request['task_location'],
       ]);
          }
-         else if($request->task_location=='executor'){
+         else if($request->task_location=='У исполнителя'){
             $validated = $request->validated();
 
                     $task=Task::create([
@@ -117,7 +117,7 @@ class   TaskController extends Controller
 
             ]);
          }
-         else{
+         else if($request->task_location=='У клиента'){
         $request->validate([
                  'region' => 'required',
                 'address' => 'required',
