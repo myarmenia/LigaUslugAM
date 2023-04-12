@@ -17,6 +17,7 @@ class ExecutorEducationCertificateResource extends JsonResource
         // return parent::toArray($request);
         return[
             'id'=>$this->id,
+            'certificate'=>$this->certificate,
             'certificate_base'=>$this->certificate_base,
         ];
     }
