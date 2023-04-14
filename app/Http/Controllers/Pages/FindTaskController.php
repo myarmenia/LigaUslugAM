@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ExecutorProfile;
 use App\Models\Subcategory;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FindTaskController extends Controller
 {
@@ -40,11 +42,16 @@ class FindTaskController extends Controller
     public function allTasks(){
         // $query = Task::with('users')->pluck('id');
         // dd(Auth('api')->user());
-
-
         $query = Task::with('users')->latest();
 
-        $query->where('status',false);
+        if(Auth('api')->user()){
+            $exequtor=ExecutorProfile::where('user_id',Auth::id())->first();
+
+        }
+
+
+
+        $query->where('status','false');
         $all_task=$query->paginate(5)->withQueryString();
         return response()->json(['message'=>$all_task]);
 
