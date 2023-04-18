@@ -42,7 +42,7 @@ class ChatService {
     public static function employer_executor($user_id){
         // dd($user_id);
             $executor_profile=ExecutorProfile::where('user_id',$user_id)->first();
-        dd($executor_profile);
+        // dd($executor_profile);
             $chat = Chat::where('user_id',$user_id)->orWhere('executor_profile_id',$executor_profile->id)->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
             // $query=Chat::where('user_id',$user_id);
             // if($executor_profile!=null){
@@ -50,7 +50,7 @@ class ChatService {
             // }
             // $chat=$query->distinct()->get(['task_id','chatroom_name','user_id','executor_profile_id']);
 
-            // dd($chat);
+            dd($chat);
 
             $tasks_for_chatting = self::tasks_chat(['chat'=>$chat,'id'=>$user_id]);
             return $tasks_for_chatting;
