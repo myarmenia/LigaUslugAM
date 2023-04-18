@@ -211,7 +211,7 @@ Route::prefix('/user')->group( function(){
         Route::get('/task-section-count/{type}',[TaskSectionCountController::class,'index']);
         // type executor enq uxarkum
         Route::get('/executor-task-section-count/{type}',[TaskSectionCountController::class,'executor']);
-        // Route::get('/contract-documents')
+       
 
     });
 

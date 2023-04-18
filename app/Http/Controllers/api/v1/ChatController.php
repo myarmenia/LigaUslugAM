@@ -82,7 +82,8 @@ class ChatController extends Controller
                 ["task_id",'=', $request->task_id],
                 ["user_id","=", $request->user_id],
                 ["executor_profile_id","=", $request->executor_profile_id],
-            ])->get();
+                ["chatroom_name","=",$room]
+            ])->get(); 
 
             if($creat_chat){
                 $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();

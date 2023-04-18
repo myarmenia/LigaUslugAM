@@ -52,42 +52,17 @@ class ContractController extends Controller
                         ->withInput();
         }
 
-            // if($request->has('contract_path')){
-            //     $contract = $request->validate([
-            //         'contract_path'=>'file|required|mimes:docx',
-            //     ]);
+        $create_contract = Contract::create([
+            "description"=>$request->description,
 
+        ]);
 
-                // $file = $request->file('contract_path');
-                // $filename ='contract.'.$file->getClientOriginalName();
-                // $filename =$file->getClientOriginalName();
-                // dd($filename);
-                // $name = "contract.".$file->extension();
-                // $name = $file->extension();
+        if($request->has('contract_path')){
 
-                // $file->move(public_path('admin/contract'),$filename);
-                $create_contract = Contract::create([
-                  "description"=>$request->description,
-
-                ]);
-
-                if($request->has('contract_path')){
-
-                    $path = FileUploadService::upload($request->contract_path,'admin/contracts/'.$create_contract->id);
-                    $create_contract->update(['contract_path'=>$path]);
-                    return redirect()->back()->with('success','Файл был успешно загружен');
-                }
-
-
-                //   if($upload){
-
-                //   }
-            // }else{
-            //     return redirect()->back()->with('message-danger','Выберите файл');
-            // }
-
-
-
+            $path = FileUploadService::upload($request->contract_path,'admin/contracts/'.$create_contract->id);
+            $create_contract->update(['contract_path'=>$path]);
+            return redirect()->back()->with('success','Файл был успешно загружен');
+        }
 
     }
 
