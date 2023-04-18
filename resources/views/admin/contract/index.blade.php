@@ -57,12 +57,14 @@
                     <table class="table table-bordered">
                         <tr>
                             <th>No</th>
+                            <th>Описание</th>
                             <th>Имя файла </th>
                             <th width="">Действие</th>
                         </tr>
                         @foreach($contract as $key=>$items)
                         <tr>
                             <td>{{++$key}}</td>
+                            <td>{{$items->description}}</td>
                             <td><a href="{{('/admin/contract')}}/{{ $items->contract_path}}" target="_blank">{{ $items->contract_path}}</a></td>
                             <td>
                                 <form role="form"  action="{{ route('contract.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
