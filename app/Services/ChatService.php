@@ -82,17 +82,21 @@ class ChatService {
                 if($item->user_id == $request['id']){
 
                     $chat = Chat::where([
+                        ['chatroom_name','=',$item->chatroom_name],
                         ['task_id','=',$item->task_id],
+
                         ['executor_message','!=',null],
                         ['employer_read_at','=',null]
                         ])->get();
+                        // dd($chat);
 
                     $obj->unread_chat_count=count($chat);
                 }
                 $executor=ExecutorProfile::where('user_id',$request['id'])->first();
                 if( $executor!=null && $item->executor_profile_id == $executor->id){
-                    dd($executor->id);
+                    // dd($executor->id);
                     $chat = Chat::where([
+                        ['chatroom_name','=',$item->chatroom_name],
                         ['task_id','=',$item->task_id],
                         ['employer_message','!=',null],
                         ['executor_read_at','=',null]
@@ -104,7 +108,7 @@ class ChatService {
             // }
 
         }
-     
+
         return $message;
     }
 
