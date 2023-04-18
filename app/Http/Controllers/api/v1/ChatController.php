@@ -83,7 +83,8 @@ class ChatController extends Controller
                 ["user_id","=", $request->user_id],
                 ["executor_profile_id","=", $request->executor_profile_id],
                 ["chatroom_name","=",$room]
-            ])->get(); 
+            ])->get();
+            // dd($chat);
 
             if($creat_chat){
                 $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();
@@ -104,6 +105,7 @@ class ChatController extends Controller
                 }
 
                 if($request->executor_message != null){
+            
 
                     $opposide_side = $task->users->id;
 
