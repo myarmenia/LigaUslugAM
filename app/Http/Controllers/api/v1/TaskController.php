@@ -26,6 +26,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\TaskResource;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Chat;
 use App\Models\ClickOnTask;
 use App\Models\ExecutorCategory;
 use App\Models\ExecutorProfile;
@@ -399,6 +400,17 @@ class   TaskController extends Controller
                     //======show executor all task sections count colling socket for changing sections number
 
                     $get_executor_tasks_section_count = ExecutorTaskCountService::get($executor->users->id);
+
+                    $chats =Chat::where([
+                        ['task_id','=',$request->task_id],
+                        ['executor_profile_id','!=',$request->executor_profile_id],
+                        ])->get();
+                    if($chats!=null){
+                        foreach($chats as $item){
+                            $item->delete();
+                        }
+                    }
+
 
                     return response()->json(['message'=>'success'], 200);
                 }
