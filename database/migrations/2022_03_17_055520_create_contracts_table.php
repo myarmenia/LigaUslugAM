@@ -16,7 +16,7 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('contract_path');
+            $table->string('contract_path')->nullable();
             $table->timestamps();
         });
     }

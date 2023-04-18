@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
-
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,21 +58,30 @@ class ContractController extends Controller
             //     ]);
 
 
-                $file = $request->file('contract_path');
+                // $file = $request->file('contract_path');
                 // $filename ='contract.'.$file->getClientOriginalName();
-                $filename =$file->getClientOriginalName();
+                // $filename =$file->getClientOriginalName();
                 // dd($filename);
                 // $name = "contract.".$file->extension();
-                $name = $file->extension();
+                // $name = $file->extension();
 
-                $file->move(public_path('admin/contract'),$filename);
-                $upload = Contract::create([
+                // $file->move(public_path('admin/contract'),$filename);
+                $create_contract = Contract::create([
                   "description"=>$request->description,
-                  "contract_path" =>$filename
+
                 ]);
-                  if($upload){
-                      return redirect()->back()->with('success','Файл был успешно загружен');
-                  }
+
+                if($request->has('contract_path')){
+
+                    $path = FileUploadService::upload($request->contract_path,'admin/contracts/'.$create_contract->id);
+                    $create_contract->update(['contract_path'=>$path]);
+                    return redirect()->back()->with('success','Файл был успешно загружен');
+                }
+
+
+                //   if($upload){
+
+                //   }
             // }else{
             //     return redirect()->back()->with('message-danger','Выберите файл');
             // }

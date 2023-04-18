@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContractDocumentController extends Controller
 {
@@ -16,6 +17,11 @@ class ContractDocumentController extends Controller
     public function index()
     {
         $contract_document=Contract::all();
+        foreach($contract_document as $item){
+            $item['contract_path']=Storage::path($item->contract_path);
+        }
+
+        // $contract_document['contract_path']=Storage::path($contract_document->contract_path);
         return response()->json(['message'=>$contract_document]);
 
     }
