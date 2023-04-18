@@ -17,11 +17,10 @@ class ContractDocumentController extends Controller
     public function index()
     {
         $contract_document=Contract::all();
-        foreach($contract_document as $item){
-            $item['contract_path']=Storage::path($item->contract_path);
-        }
+        // foreach($contract_document as $item){
+        //     $item['contract_path']=Storage::path($item->contract_path);
+        // }
 
-        // $contract_document['contract_path']=Storage::path($contract_document->contract_path);
         return response()->json(['message'=>$contract_document]);
 
     }
