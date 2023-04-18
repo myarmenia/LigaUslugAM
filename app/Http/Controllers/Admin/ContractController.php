@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ContractController extends Controller
 {
@@ -39,10 +41,21 @@ class ContractController extends Controller
     public function store(Request $request)
 
     {
-            if($request->has('contract_path')){
-                $contract = $request->validate([
-                    'contract_path'=>'file|required|mimes:docx',
-                ]);
+        $validator=Validator::make($request->all(), [
+            'description' => 'required',
+            'contract_path'=>'file|required|mimes:docx',
+        ]);
+        if ($validator->fails()) {
+
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+            // if($request->has('contract_path')){
+            //     $contract = $request->validate([
+            //         'contract_path'=>'file|required|mimes:docx',
+            //     ]);
 
 
                 $file = $request->file('contract_path');
@@ -54,14 +67,15 @@ class ContractController extends Controller
 
                 $file->move(public_path('admin/contract'),$filename);
                 $upload = Contract::create([
+                  "description"=>$request->description,
                   "contract_path" =>$filename
                 ]);
                   if($upload){
                       return redirect()->back()->with('success','Файл был успешно загружен');
                   }
-            }else{
-                return redirect()->back()->with('message-danger','Выберите файл');
-            }
+            // }else{
+            //     return redirect()->back()->with('message-danger','Выберите файл');
+            // }
 
 
 

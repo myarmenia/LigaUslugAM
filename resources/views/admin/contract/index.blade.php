@@ -30,7 +30,12 @@
                 </div>
                 <form role="form" method="POST" action="{{route('contract.store')}}" enctype="multipart/form-data">
                     @csrf
+                    <div class="form-group">
 
+
+                        <input type="text" class="form-control "   name="description" value="">
+
+                    </div>
 
                     <div class="form-group">
 
@@ -87,7 +92,7 @@
 
     </div>
     <script>
-        
+
 
    </script>
 

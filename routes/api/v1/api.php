@@ -38,6 +38,7 @@ use App\Http\Controllers\api\v1\TaskSectionCountController;
 use App\Http\Controllers\api\v1\TestEnrollmentController;
 use App\Http\Controllers\api\v1\TotalUnreadChatCount;
 use App\Http\Controllers\Pages\CallbackController;
+use App\Http\Controllers\Pages\ContractDocumentController;
 use App\Http\Controllers\Pages\ExecutorProfileController as PagesExecutorProfileController;
 use App\Http\Controllers\Pages\FindExecutorController;
 use App\Http\Controllers\Pages\FindTaskController;
@@ -210,6 +211,8 @@ Route::prefix('/user')->group( function(){
         Route::get('/task-section-count/{type}',[TaskSectionCountController::class,'index']);
         // type executor enq uxarkum
         Route::get('/executor-task-section-count/{type}',[TaskSectionCountController::class,'executor']);
+        // Route::get('/contract-documents')
+
     });
 
 
@@ -242,6 +245,7 @@ Route::prefix('/pages')->group(function(){
     Route::get('/all_tasks',[FindTaskController::class,'allTasks']);
     Route::get('/find_task/{categoryId}/{subcategoryName}/show',[FindTaskController::class,'index']);
     Route::get('/get_answer_and_question',[AnswerAndQuestionController::class,'getanswerandquestion']);
+    Route::get('/get-contract-document',[ContractDocumentController::class,'index']);
 
 });
 

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     use HasFactory;
-    protected $fillable = ['contract_path'];
+    protected $fillable = [
+        'description',
+        'contract_path'
+    ];
 
 }
