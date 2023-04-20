@@ -134,7 +134,6 @@ class ChatController extends Controller
                 'task_id'=>'required',
                 'user_id'=>'required',
                 "executor_profile_id"=>'required',
-                // 'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF|max:2048'
                 'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,zip,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF'
             ];
 
@@ -161,7 +160,7 @@ class ChatController extends Controller
                     $executor = ExecutorProfile::where('id',$request->executor_profile_id)->first();
                     $task=Task::where('id',$request->task_id)->first();
 
-                    // $tasks_for_chatting=ChatService::index();
+
                     $opposide_side='';
                 // ========
                 if(Auth::id()==$creat_chat_file->user_id)
@@ -212,6 +211,8 @@ class ChatController extends Controller
                                 $chat =Chat::where('chatroom_name',$request->chatroom_name)->get();
                                 event(new NewTaskChatEvent($room, ['chat'=>$chat]));
                             //====
+
+
                             return response()->json(["message"=>"Executor inserted file"]);
                         }else{
                             return response()->json(["message"=>"failed"]);

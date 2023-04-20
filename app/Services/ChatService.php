@@ -56,7 +56,7 @@ class ChatService {
             return $tasks_for_chatting;
     }
     public static function tasks_chat($request){
-// dd($request);
+
         $message=[];
         $user=User::where('id',$request['id'])->first();
         foreach($request['chat'] as $item){
@@ -76,9 +76,7 @@ class ChatService {
             $obj->executor_profile_id=$item->executor_profile_id;
 
 
-            // $executor=ExecutorProfile::where('user_id',$request['id'])->first();
-            // dd($executor);
-            // if($item->user_id == $request['id'] && $item->executor_profile_id == $executor->id){
+
                 if($item->user_id == $request['id']){
 
                     $chat = Chat::where([
@@ -87,25 +85,25 @@ class ChatService {
 
                         ['executor_message','!=',null],
                         ['employer_read_at','=',null]
-                        ])->get();
-                        // dd($chat);
+                        ])->orWhere('executor_message_file','!=', null)->get();
+
 
                     $obj->unread_chat_count=count($chat);
                 }
                 $executor=ExecutorProfile::where('user_id',$request['id'])->first();
                 if( $executor!=null && $item->executor_profile_id == $executor->id){
-                    // dd($executor->id);
+
                     $chat = Chat::where([
                         ['chatroom_name','=',$item->chatroom_name],
                         ['task_id','=',$item->task_id],
                         ['employer_message','!=',null],
                         ['executor_read_at','=',null]
-                    ])->get();
+                    ])->orWhere('employer_message_file','!=', null)->get();
 
                     $obj->unread_chat_count=count($chat);
                 }
                 array_push($message,$obj);
-            // }
+       
 
         }
 
