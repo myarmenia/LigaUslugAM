@@ -135,7 +135,7 @@ class ChatController extends Controller
                 'user_id'=>'required',
                 "executor_profile_id"=>'required',
                 // 'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF|max:2048'
-                'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF'
+                'message_file'=>'file|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,zip,DOCX,JPEG,JPG,PNG,GIF,CSV,TXT,PDF'
             ];
 
             $validator = Validator::make($request->all(), $validate);
