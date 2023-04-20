@@ -40,20 +40,26 @@ class ChatResourse extends JsonResource
         if(Auth::id() == $task->user_id){
             $chat=Chat::where([
                 ['task_id','=',$this->task_id],
-                ['executor_message','!=',null],
+                // ['executor_message','!=',null],
                 ['employer_read_at','=',null]
-                ])->get();
+                ])
+                ->orWhere('executor_message','!=', null)
+                ->orWhere('executor_message_file','!=', null)
+                ->get();
 
                 return count($chat);
         }
         if(Auth::id()==$executor->user_id){
             $chat=Chat::where([
                 ['task_id','=',$this->task_id],
-                ['employer_message','!=',null],
+                // ['employer_message','!=',null],
 
                 ['executor_read_at','=',null]
-                ])->get();
-              
+                ])
+                ->orWhere('employer_message','!=', null)
+                ->orWhere('employer_message_file','!=', null)
+                ->get();
+
                 return count($chat);
         }
 
