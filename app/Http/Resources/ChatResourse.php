@@ -43,8 +43,7 @@ class ChatResourse extends JsonResource
                 ['executor_message','!=',null],
                 ['employer_read_at','=',null]
                 ])
-                // ->orWhere('executor_message','!=', null)
-                ->orWhere('executor_message_file','!=', null)
+
                 ->get();
 
                 return count($chat);
@@ -53,11 +52,8 @@ class ChatResourse extends JsonResource
             $chat=Chat::where([
                 ['task_id','=',$this->task_id],
                 ['employer_message','!=',null],
-
                 ['executor_read_at','=',null]
                 ])
-                // ->orWhere('employer_message','!=', null)
-                ->orWhere('employer_message_file','!=', null)
                 ->get();
 
                 return count($chat);

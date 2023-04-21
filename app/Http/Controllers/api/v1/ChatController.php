@@ -171,6 +171,7 @@ class ChatController extends Controller
                             $file->move(public_path('admin/img/chatfiles'),$filename);
 
                             $creat_chat_file_update=$creat_chat_file->update([
+                                "employer_message"=>' ',
                                 "employer_message_file" => $filename,
                             ]);
 
@@ -198,6 +199,7 @@ class ChatController extends Controller
                         $file->move(public_path('admin/img/chatfiles'),$filename);
 
                         $creat_chat_file_update=$creat_chat_file->update([
+                            "executor_message"=>' ',
                             "executor_message_file" => $filename,
                         ]);
                         if($creat_chat_file_update){
