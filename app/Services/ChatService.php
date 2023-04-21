@@ -20,7 +20,7 @@ class ChatService {
         $task = Task::pluck('id');
 
         $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
-dd($executor_profile_id);
+// dd($executor_profile_id);
         if($executor_profile_id){
             self::$executor_variable = $executor_profile_id ->id;
         }
