@@ -20,7 +20,7 @@ class ChatService {
         $task = Task::pluck('id');
 
         $executor_profile_id = ExecutorProfile::where('user_id',Auth::id())->first();
-
+dd($executor_profile_id);
         if($executor_profile_id){
             self::$executor_variable = $executor_profile_id ->id;
         }
@@ -82,10 +82,9 @@ class ChatService {
                     $chat = Chat::where([
                         ['chatroom_name','=',$item->chatroom_name],
                         ['task_id','=',$item->task_id],
-
                         ['executor_message','!=',null],
                         ['employer_read_at','=',null]
-                        ])->orWhere('executor_message_file','!=', null)->get();
+                        ])->get();
 
 
                     $obj->unread_chat_count=count($chat);
@@ -98,12 +97,12 @@ class ChatService {
                         ['task_id','=',$item->task_id],
                         ['employer_message','!=',null],
                         ['executor_read_at','=',null]
-                    ])->orWhere('employer_message_file','!=', null)->get();
+                    ])->get();
 
                     $obj->unread_chat_count=count($chat);
                 }
                 array_push($message,$obj);
-       
+
 
         }
 
