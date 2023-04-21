@@ -51,7 +51,7 @@ class MessageForSupportController extends Controller
                 ]);
                 if($insert_message){
 
-                    return response()->json(["message"=>"Спасибо за доверие, мы свяжемся с вами в течение 1 недели"]);
+                    return response()->json(["message"=>"Спасибо за доверие, мы свяжемся с вами"]);
                 }
 
 
