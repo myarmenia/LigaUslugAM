@@ -10,6 +10,7 @@ class Contract extends Model
     use HasFactory;
     protected $fillable = [
         'description',
+        'name',
         'contract_path'
     ];
 

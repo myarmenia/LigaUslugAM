@@ -60,7 +60,12 @@ class ContractController extends Controller
         if($request->has('contract_path')){
 
             $path = FileUploadService::upload($request->contract_path,'admin/contracts/'.$create_contract->id);
-            $create_contract->update(['contract_path'=>$path]);
+            // dd($path);
+            $create_contract->update([
+                'name'=>$path['name'],
+                'contract_path'=>$path['path']
+
+            ]);
             return redirect()->back()->with('success','Файл был успешно загружен');
         }
 

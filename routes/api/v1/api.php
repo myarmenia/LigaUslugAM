@@ -211,7 +211,7 @@ Route::prefix('/user')->group( function(){
         Route::get('/task-section-count/{type}',[TaskSectionCountController::class,'index']);
         // type executor enq uxarkum
         Route::get('/executor-task-section-count/{type}',[TaskSectionCountController::class,'executor']);
-       
+
 
     });
 
@@ -246,6 +246,8 @@ Route::prefix('/pages')->group(function(){
     Route::get('/find_task/{categoryId}/{subcategoryName}/show',[FindTaskController::class,'index']);
     Route::get('/get_answer_and_question',[AnswerAndQuestionController::class,'getanswerandquestion']);
     Route::get('/get-contract-document',[ContractDocumentController::class,'index']);
+
+    Route::get('/send-sms',[ContractDocumentController::class,'sendSms']);
 
 });
 

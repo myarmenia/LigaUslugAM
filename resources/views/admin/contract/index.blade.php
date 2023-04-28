@@ -50,7 +50,7 @@
 
 
                 @if (count($contract)<1)
-                    <div>На данный момент формы договора нет</div>
+                    <div>Образцы договоров отсутствуют</div>
 
                 @else
 
@@ -62,33 +62,22 @@
                             <th width="">Действие</th>
                         </tr>
                         @foreach($contract as $key=>$items)
-                        <tr>
-                            <td>{{++$key}}</td>
-                            <td>{{$items->description}}</td>
-                            <td><a href="{{('/admin/contract')}}/{{ $items->contract_path}}" target="_blank">{{ $items->contract_path}}</a></td>
-                            <td>
-                                <form role="form"  action="{{ route('contract.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
-                                    @csrf
-                                    @method('DELETE')
-                                        <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
-                                </form>
-                            </td>
+                            <tr>
+                                <td>{{++$key}}</td>
+                                <td>{{$items->description}}</td>
 
-
-
-
-                            {{-- <td>
-                            <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Показывать</a>
-                            <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Редактировать</a>
-                                {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                                    {!! Form::submit('Удалять', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
-                            </td> --}}
-                            @endforeach
-                        </tr>
+                                <td><a href="{{route('get-file',['path'=>$items->contract_path])}}" target="_blank">{{ $items->name}}</a></td>
+                                <td>
+                                    <form role="form"  action="{{ route('contract.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                 @endif
-
                 </div>
             </div>
 
