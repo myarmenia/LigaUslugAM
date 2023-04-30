@@ -2,12 +2,12 @@
 
 
 @section('content')
-<section id="main-content">
-    <section class="wrapper">
+<section id="main-content"  class="container" style="margin-top:100px">
+    <section class="mt-5">
       <!--overview start-->
-      <div class="row  my-5 justify-content-center">
+      <div class="row  justify-content-center">
 
-        <div class="col-lg-8 my-5 bg-white">
+        <div class="col-lg-12 col-md-12 bg-white">
 
             <div class="panel-body m-4">
 
