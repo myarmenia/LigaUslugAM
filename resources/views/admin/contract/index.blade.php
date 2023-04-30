@@ -66,7 +66,11 @@
                                 <td>{{++$key}}</td>
                                 <td>{{$items->description}}</td>
 
-                                <td><a href="{{route('get-file',['path'=>$items->contract_path])}}" target="_blank">{{ $items->name}}</a></td>
+                                <td>
+                                    <a href="{{route('get-file',['path'=>$items->contract_path])}}" target="_blank">{{ $items->name}}</a>
+                                    <a href="" target="_blank">aaaaaa</a>
+
+                                </td>
                                 <td>
                                     <form role="form"  action="{{ route('contract.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
                                         @csrf
