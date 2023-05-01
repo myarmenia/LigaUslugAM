@@ -2,13 +2,11 @@
 
 
 @section('content')
-<section id="main-content"  class="container" style="margin-top:100px">
-    <section class="mt-5">
+    <section id="main-content"  class="container" style="border:1px solid red;margin-top:100px">
+    {{-- <section class="mt-5">
       <!--overview start-->
       <div class="row  justify-content-center">
-
         <div class="col-lg-12 col-md-12 bg-white">
-
             <div class="panel-body m-4">
 
                 @if(session()->has('message'))
@@ -41,30 +39,23 @@
 
                                 <div class="form-group col-md-4">
 
-                                <input type="text" class="form-control" name="searchtask_name"  placeholder="Поиск по названию заказа" value="{{ request()->input('searchtask_name') }}" id="searchtask_name">
-                                    {{-- <div>
-                                        <div class="form-row">
-                                            <label>по названию заказа</label><input type="checkbox">
-                                        </div>
-                                        <div class="form-row">
-                                            <label>по названию заказчик</label><input type="checkbox">
-                                        </div>
-                                    </div> --}}
+                                    <input type="text" class="form-control" name="searchtask_name"  placeholder="Поиск по названию заказа" value="{{ request()->input('searchtask_name') }}" id="searchtask_name">
+
                                 </div>
 
                                 <div class="form-group col-md-4">
 
-                                <select  class="form-control" name='category_name' id="category_name" >
-                                    <option  value=''>Категории заказа</option>
+                                    <select  class="form-control" name='category_name' id="category_name" >
+                                        <option  value=''>Категории заказа</option>
 
-                                    @foreach ($category as $item)
-                                        @if ($session_categoryName && $session_categoryName==$item->category_name)
-                                            <option  selected value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
-                                        @else
-                                             <option value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                            @foreach ($category as $item)
+                                                @if ($session_categoryName && $session_categoryName==$item->category_name)
+                                                    <option  selected value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
+                                                @else
+                                                    <option value="{{ $item->category_name }}" >{{ $item->category_name }}</option>
+                                                @endif
+                                            @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <select id="task_status" name="task_status"  class="form-control" value="{{ request()->input('task_status') }}">
@@ -90,14 +81,14 @@
                     </div>
                     <table class="table table-bordered table-striped" >
                         <thead>
-                        <tr>
-                            <th scope="col">№</th>
-                            <th scope="col">Название заказа</th>
+                            <tr>
+                                <th scope="col">№</th>
+                                <th scope="col">Название заказа</th>
 
-                            <th scope="col" class="text-center">Показать заказ </th>
+                                <th scope="col" class="text-center">Показать заказ </th>
 
-                            <th scope="col">Удалить</th>
-                        </tr>
+                                <th scope="col">Удалить</th>
+                            </tr>
                         </thead>
                         <tbody>
                             @if ($task->total()==0)
@@ -136,12 +127,10 @@
                     </div>
 
             </div>
-
-
         </div>
       </div>
 
-    </section>
+    </section> --}}
 
   </section>
 

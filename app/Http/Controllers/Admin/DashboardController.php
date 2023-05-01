@@ -22,15 +22,15 @@ class DashboardController extends Controller
     }
     public function dashboard(){
 
-// isAmdin is a function which cold from user model
+        // isAmdin is a function which cold from user model
        if(!auth()->user()->isAdmin()){
 
             return view('auth.login');
        }
-  
-    $all_category = Category:: paginate(20);
 
-    return view('admin.all_category',compact('all_category'));
+        $all_category = Category:: paginate(20);
+
+        return view('admin.all_category',compact('all_category'));
 
     }
 
