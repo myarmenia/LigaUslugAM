@@ -94,7 +94,7 @@
                             @foreach( $task as $items)
                                     <tr>
                                         <td>{{ $items->id }}</td>
-                                        <td>{!! $items->title !!}</td>
+                                        <td>{{ $items->title }}</td>
                                         <td class="text-center">
                                             <a  href = "{{ route('task.show', $items->id )}}">
                                                 Показать
@@ -102,11 +102,12 @@
                                         </td>
 
                                         <td>
-                                            <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
+                                            44444444
+                                            {{-- <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
                                                 @csrf
                                                 @method('DELETE')
                                                     <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach
