@@ -94,15 +94,16 @@
                             @foreach( $task as $items)
                                     <tr>
                                         <td>{{ $items->id }}</td>
-                                        <td>{{ $items->title }}</td>
-                                        <td class="text-center">
+                                        <td>33333</td>
+                                        <td>44444</td>
+                                        {{-- <td class="text-center">
                                             <a  href = "{{ route('task.show', $items->id )}}">
                                                 Показать
                                             </a>
-                                        </td>
+                                        </td> --}}
 
                                         <td>
-                                            44444444
+                                            555555
                                             {{-- <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
                                                 @csrf
                                                 @method('DELETE')
