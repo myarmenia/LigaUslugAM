@@ -95,15 +95,14 @@
                                     <tr>
                                         <td>{{ $items->id }}</td>
                                         <td>33333</td>
-                                        <td>44444</td>
-                                        {{-- <td class="text-center">
+                                      
+                                        <td class="text-center">
                                             <a  href = "{{ route('task.show', $items->id )}}">
                                                 Показать
                                             </a>
-                                        </td> --}}
+                                        </td>
 
                                         <td>
-
                                             <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
                                                 @csrf
                                                 @method('DELETE')
