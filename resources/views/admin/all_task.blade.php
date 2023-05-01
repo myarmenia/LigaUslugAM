@@ -7,7 +7,7 @@
       <!--overview start-->
       <div class="row  justify-content-center">
         <div class="col-lg-12 col-md-12 bg-white">
-            <div class="panel-body m-4">
+            <div class="panel-body">
 
                 @if(session()->has('message'))
                     <div class="alert alert-success">
@@ -91,7 +91,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach( $task as $items)
+                            {{-- @foreach( $task as $items)
                                     <tr>
                                         <td>{{ $items->id }}</td>
                                         <td>{{ $items->title}}</td>
@@ -107,8 +107,8 @@
                                             </form>
                                         </td>
                                     </tr>
-                             @endforeach
-                            {{-- @if ($task->total()==0)
+                             @endforeach --}}
+                            @if ($task->total()==0)
                                 <tr>
                                     <th colspan=4 class="btn-success">
                                         По этим параметрам ничего не найдено
@@ -118,7 +118,7 @@
                                 @foreach( $task as $items)
                                     <tr>
                                         <td>{{ $items->id }}</td>
-                                        <td>{!! $items->title !!}</td>
+                                        <td>{{ $items->category_name}}</td>
                                         <td class="text-center">
                                             <a  href = "{{ route('task.show', $items->id )}}">
                                                 Показать
@@ -134,7 +134,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif --}}
+                            @endif
                         </tbody>
 
                     </table>
