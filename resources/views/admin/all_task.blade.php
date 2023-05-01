@@ -2,8 +2,8 @@
 
 
 @section('content')
-    <section id="main-content"  class="container" style="border:1px solid red;margin-top:100px">
-    {{-- <section class="mt-5">
+    <section id="main-content"  class="container" style="border:1px solid red;margin-top:100px;margin-bottom:100px">
+    <section class="mt-5">
       <!--overview start-->
       <div class="row  justify-content-center">
         <div class="col-lg-12 col-md-12 bg-white">
@@ -79,7 +79,7 @@
                         </form>
 
                     </div>
-                    <table class="table table-bordered table-striped" >
+                    <table class="table table-bordered table-striped"  style="border:1px solid green">
                         <thead>
                             <tr>
                                 <th scope="col">№</th>
@@ -91,7 +91,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($task->total()==0)
+                            <tr>
+                                <td>
+                                    По этим параметрам ничего не найдено
+                                </td>
+                                <td>
+                                    По этим параметрам ничего не найдено
+                                </td>
+                                <td>
+                                    По этим параметрам ничего не найдено
+                                </td>
+                            </tr>
+                            {{-- @if ($task->total()==0)
                                 <tr>
                                     <th colspan=4 class="btn-success">
                                         По этим параметрам ничего не найдено
@@ -117,7 +128,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif
+                            @endif --}}
                         </tbody>
 
                     </table>
@@ -130,7 +141,7 @@
         </div>
       </div>
 
-    </section> --}}
+    </section>
 
   </section>
 
