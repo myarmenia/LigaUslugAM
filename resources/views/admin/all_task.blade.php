@@ -83,11 +83,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">№</th>
-                                <th scope="col">Название заказа</th>
+                                <th scope="col" >Название заказа</th>
 
                                 <th scope="col" class="text-center">Показать заказ </th>
 
-                                <th scope="col">Удалить</th>
+                                <th scope="col" class="text-center">Действие</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -109,12 +109,21 @@
                                             </a>
                                         </td>
 
-                                        <td>
-                                            <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
-                                                @csrf
-                                                @method('DELETE')
-                                                    <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
-                                            </form>
+                                        <td class="text-center">
+                                            @if(count($items->click_on_tasks)==0)
+
+                                                 <form role="form"  action="{{ route('task.destroy',$items->id) }}"  method="POST" style="width:70%;margin:0 auto">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                        <button type="submit" class="btn my-2" style="background:#394a59;color:#fff"><i class="fa fa-trash"></i></button>
+                                                </form>
+
+                                            @else
+                                            У заказа есть клик
+
+
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach

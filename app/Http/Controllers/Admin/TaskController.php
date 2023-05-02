@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FullTaskDescriptionForAdminResource;
 use App\Models\Category;
+use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
 use App\Models\Task;
 use App\Models\User;
@@ -56,15 +57,10 @@ class TaskController extends Controller
 
         $task=$query->paginate(10)->withQueryString();
 
+
         return view('admin.all_task',compact('task','category'))->with('session_categoryName',$request->input('category_name'));
     }
-    // public function index(Request $request)
-    // {
-    //     $category = Category::all();
-    //     // $task = Task::orderBy('id','desc')->paginate(10);
-    //     $task = $this->filter(null, null, null, null, null)->paginate(10);
-    //     return view('admin.all_task',compact('task','category'));
-    // }
+
 
     public function filter($searchtask_name=null, $category_name=null, $task_status=null, $date_from=null, $date_to=null){
 
@@ -160,6 +156,17 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+      
+        $click_on_task=ClickOnTask::where('task_id',285)->first();
+
+        if($click_on_task==null){
+            $task = Task::where('id',$id)->first();
+            $deleted = $task->delete();
+            if($deleted){
+                return redirect()->back();
+            }
+
+
+        }
     }
 }
