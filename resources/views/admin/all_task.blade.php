@@ -102,7 +102,7 @@
                                 @foreach( $task as $items)
                                     <tr>
                                         <td>{{ $items->id }}</td>
-                                        <td style="border:1px solid red;">{{ $items->title}}</td>
+                                        <td>{{ $items->title}}</td>
                                         <td class="text-center">
                                             <a  href = "{{ route('task.show', $items->id )}}">
                                                 Показать
