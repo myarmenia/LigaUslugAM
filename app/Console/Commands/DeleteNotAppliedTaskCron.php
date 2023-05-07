@@ -55,11 +55,11 @@ class DeleteNotAppliedTaskCron extends Command
 
                 })->get();
 
-
                 foreach($task as $item){
                     $task_date=$item->created_at;
 
                     $task_date = date('Y-m-d H:i:s', strtotime($task_date . '+2 day'));
+
 
                     if($task_date<$now_time){
                         info($item);

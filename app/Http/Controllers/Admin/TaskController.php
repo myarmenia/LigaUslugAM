@@ -156,11 +156,11 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-      
+
         $click_on_task=ClickOnTask::where('task_id',285)->first();
 
         if($click_on_task==null){
-            $task = Task::where('id',$id)->first();
+            $task = Task::find($id);
             $deleted = $task->delete();
             if($deleted){
                 return redirect()->back();

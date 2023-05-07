@@ -101,36 +101,46 @@
                     </table>
                     <div>
                         <p>Фотографий</p>
+{{-- {{dd($show_task->image_tasks)}} --}}
+                        @if(count($show_task->image_tasks)>0)
+                            @foreach ($show_task->image_tasks as $item )
+                                {{-- {{dd($item->image_name)}} --}}
+                                @php
+                                    $file = $item->image_name;
+                                    
 
-                        @foreach ($show_task->image_tasks as $items)
-                        @php
-                            $file = $items->image_name;
+                                    $file_type = explode(".",$file);
+                                    // echo  $k=$file_type[1];
+                                    echo $file_type[1]=="docx" || $file_type[1]=="txt"? "<p><a href='admin/img/img_tasks/".$item->image_name."' target='_blanck'>".$item->image_name."</a></p>":"no";
+                                @endphp
 
-                            $file_type = explode(".",$file);
-                            // echo  $k=$file_type[1];
-                            echo $file_type[1]=="docx" || $file_type[1]=="txt"? "<p><a href='admin/img/img_tasks/".$items->image_name."' target='_blanck'>".$items->image_name."</a></p>":"no";
+                            @endforeach
+
+                        @else
+                        У этого заказа нет картинки.
+
+                        @endif
+
+                        {{-- @foreach ($show_task->image_tasks as $items)
+
+                            @php
+                                $file = $items->image_name;
+
+                                $file_type = explode(".",$file);
+                                // echo  $k=$file_type[1];
+                                echo $file_type[1]=="docx" || $file_type[1]=="txt"? "<p><a href='admin/img/img_tasks/".$items->image_name."' target='_blanck'>".$items->image_name."</a></p>":"no";
 
 
-                            // echo "<a href='' target='_blanck'>"{{$items->image_name}}"</a>";
-                            //   @if(false)
-                            // // /
-                            //     echo "k";
-                            //   @else
-                            //   echo "aaaaaaa";
-                            // //         <img src="{{asset('admin/img/img_tasks')}}/{{$items->image_name}}" width=150>
-                            //   @endif
-
-
-
-                        @endphp
-
-                            {{-- @if($k==2)
-                                yes
-
-                            @else
-                                 no
-                            @endif --}}
-                        @endforeach
+                                // echo "<a href='' target='_blanck'>"{{$items->image_name}}"</a>";
+                                //   @if(false)
+                                // // /
+                                //     echo "k";
+                                //   @else
+                                //   echo "aaaaaaa";
+                                // //         <img src="{{asset('admin/img/img_tasks')}}/{{$items->image_name}}" width=150>
+                                //   @endif
+                            @endphp
+                        @endforeach --}}
 
                     </div>
                     @php

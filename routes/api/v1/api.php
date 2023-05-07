@@ -249,6 +249,12 @@ Route::prefix('/pages')->group(function(){
 
     Route::get('/send-sms',[ContractDocumentController::class,'sendSms']);
 
+
+    // ====experiment
+
+    Route::get('/hh',[ClickOnTaskController::class,'returnMoney']);
+
+
 });
 
 

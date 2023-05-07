@@ -84,7 +84,7 @@ return [
         'string' => 'The :attribute must not be greater than :max characters.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
-    'mimes' => 'Скачано должен быть файлом типа: :values.',
+    'mimes' => 'Тип скачанного файла должен быть: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
@@ -139,6 +139,7 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+
         ],
     ],
 
@@ -166,6 +167,8 @@ return [
         'education_place'=>'Образовательное учереждение',
         'question ' => 'вопрос',
         'answer' => 'ответ',
+        'description'=>'описание',
+        'contract_path'=>'загрузки файла'
       ],
 
 ];

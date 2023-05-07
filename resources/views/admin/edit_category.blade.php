@@ -26,8 +26,6 @@
                         <textarea type=text   class="form-control" id="{{ $show_special_category->id }}"  name="category_name" cols="20"> {{ $show_special_category->category_name }} </textarea>
                         <input type="hidden" value="0" name="status">
                     </div>
-
-
                     <button type="submit" class="btn my-2" style="background:#3158c9;color:#fff">Сохранить</button>
 
                 </form>

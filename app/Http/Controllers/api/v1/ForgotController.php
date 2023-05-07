@@ -32,12 +32,11 @@ class ForgotController extends Controller
                     'token'=>$token
                 ]);
                 // in resources we create Mails folder  in
-                // Mail::send('Mails.forgot',['token'=>$token,'email'=>$email],function (Message $message) use ($email){
-                //         $message->to($email);
-                //         $message->subject('Восстановление пароля');
-                // });
+                Mail::send('Mails.forgot',['token'=>$token,'email'=>$email],function (Message $message) use ($email){
+                        $message->to($email);
+                        $message->subject('Восстановление пароля');
+                });
                 return response([
-
                     'message'=>'Проверти вашу почту'
                 ]);
 
