@@ -16,9 +16,11 @@ class ReturnedMoneyExecutorTwoDay extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public $message;
+    public function __construct($message)
     {
-        //
+        $this->message=$message;
+
     }
 
     /**
@@ -29,7 +31,8 @@ class ReturnedMoneyExecutorTwoDay extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+
+        return ['mail','database'];
     }
 
     /**
@@ -40,10 +43,7 @@ class ReturnedMoneyExecutorTwoDay extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return (new MailMessage)->subject('Ваши деньги возвращены ')->view('Mails.returnedmoney',['click_on_task'=> $this->message->tasks->title,'logo'=>'/images/logo_footer.png']);
     }
 
     /**
@@ -52,6 +52,20 @@ class ReturnedMoneyExecutorTwoDay extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
+    public function toDatabase($notifiable)
+    {
+                        return
+                               [
+                                'task_id' => $this->message->task_id,
+                             'task_title' => $this->message->tasks->title,
+                                'user_id' => $this->message->tasks->user_id,
+                               'employer' => $this->message->tasks->users->name,
+                    'executor_profile_id' => $this->message->executor_profile_id,
+                          'executor_name' => $this->message->executor_profiles->users->name,
+                                 'status' => $this->message->status
+
+                        ];
+    }
     public function toArray($notifiable)
     {
         return [

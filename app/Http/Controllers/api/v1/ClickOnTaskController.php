@@ -15,6 +15,7 @@ use App\Models\Task;
 use App\Models\TransactionApi;
 use App\Models\User;
 use App\Notifications\NotifiyEmployer;
+use App\Notifications\ReturnedMoneyExecutorTwoDay;
 use App\Services\ExecutorTaskCountService;
 use App\Services\TaskCountService;
 use Illuminate\Http\Request;
@@ -122,7 +123,39 @@ class ClickOnTaskController extends Controller
 
     }
     public function returnMoney(){
-        
+
+        date_default_timezone_set('Europe/Moscow');
+        $now_time = date('Y-m-d H:i:s',strtotime('now'));
+        // dd($now_time);
+
+        $click_on_task = ClickOnTask::where('status','false')->get();
+            foreach($click_on_task as $item){
+                $task_date = $item->created_at;
+
+                $task_date = date('Y-m-d H:i:s', strtotime($task_date . '+2 day'));
+                // dd($task_date);
+                if($task_date<$now_time){
+                    // dd($item->tasks->subcategory_name);
+                    $subcategory = Subcategory::where('subcategory_name',$item->tasks->subcategory_name)->first();
+                    $click_price = $subcategory->price;
+
+                    $executor = ExecutorProfile::where('id',$item->executor_profile_id)->first();
+                    $balance = $executor->balance;
+
+                     $executor->users->notify(new ReturnedMoneyExecutorTwoDay($item));
+
+                        $new_balance = $balance+$click_price;
+                        ExecutorProfile::where('id',$item->executor_profile_id)->update([
+                            'balance'=>$new_balance
+                        ]);
+
+                        $find_click = ClickOnTask::where('id',$item->id)->first();
+
+                        $find_click->status='returnedmoney';
+                        $find_click ->save();
+
+                }
+            }
 
     }
 

@@ -2,7 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Models\ClickOnTask;
+use App\Models\ExecutorProfile;
+use App\Models\Subcategory;
+use App\Notifications\ReturnedMoneyExecutorTwoDay;
 use Illuminate\Console\Command;
+// use Illuminate\Support\Facades\Log;
+use IlluminateSupportFacadesLog;
 
 class ReturnedMoneyExecutorCron extends Command
 {
@@ -37,29 +43,40 @@ class ReturnedMoneyExecutorCron extends Command
      */
     public function handle()
     {
+
         date_default_timezone_set('Europe/Moscow');
-        $now_time=date('Y-m-d H:i:s',strtotime('now'));
+        $now_time = date('Y-m-d H:i:s',strtotime('now'));
+        // dd($now_time);
+       \Log::info("ggggg");
+        $click_on_task = ClickOnTask::where('status','false')->get();
+            foreach($click_on_task as $item){
+                $task_date = $item->created_at;
 
-        // $auth_task=Task::where('status',false)->pluck('id');
+                $task_date = date('Y-m-d H:i:s', strtotime($task_date . '+2 day'));
 
-        // $click_on_task=ClickOnTask::whereIn('task_id',$auth_task)->pluck('task_id');
-        // $task = Task::where('status','=','false')
-        //         ->where(function ($query)  use($click_on_task) {
-        //             $query->whereNotIn('id', $click_on_task);
+                if($task_date<$now_time){
 
-        //         })->get();
+                    $subcategory = Subcategory::where('subcategory_name',$item->tasks->subcategory_name)->first();
+                    $click_price = $subcategory->price;
 
-        //         foreach($task as $item){
-        //             $task_date=$item->created_at;
+                    $executor = ExecutorProfile::where('id',$item->executor_profile_id)->first();
+                    $balance = $executor->balance;
 
-        //             $task_date = date('Y-m-d H:i:s', strtotime($task_date . '+2 day'));
+                     $executor->users->notify(new ReturnedMoneyExecutorTwoDay($item));
+
+                        $new_balance = $balance+$click_price;
+                        ExecutorProfile::where('id',$item->executor_profile_id)->update([
+                            'balance'=>$new_balance
+                        ]);
+
+                        $find_click = ClickOnTask::where('id',$item->id)->first();
+
+                        $find_click->status = 'returned_money';
+                        $find_click->save();
+
+                }
+            }
 
 
-        //             if($task_date<$now_time){
-        //                 info($item);
-        //                 $item->users->notify(new NotifyEmployerForDeletingTask($item));
-        //                 $item->delete();
-        //             }
-        //         }
     }
 }
