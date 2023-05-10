@@ -316,7 +316,7 @@ class   TaskController extends Controller
     public function selectTaskExecutor(Request $request){
 
 
-        $check_task=Task::where('id',$request->task_id)->first();
+        $check_task = Task::where('id',$request->task_id)->first();
             if($check_task){
                 $check_task->executor_profile_id= $request->executor_profile_id;
                 $check_task->status="inprocess";

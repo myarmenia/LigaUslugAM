@@ -48,6 +48,7 @@ class ForgotController extends Controller
 
         }
         public function reset (ResetRequest $request){
+            
             $token=$request->token;
             $email=$request->email;
             if(!$passwordResets = DB::table('password_resets')->where(['token'=>$token,'email'=>$email] )->first()){

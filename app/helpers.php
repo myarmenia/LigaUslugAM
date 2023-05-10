@@ -48,6 +48,26 @@ use Illuminate\Support\Facades\Auth;
              return   $count;
         }
     }
+    //get all unread notification from  Служба поддержки
+    if(!function_exists('admin_unreadnotification_message_for_support')){
+        function admin_unreadnotification_message_for_support(){
+
+            $admin_message_for_support = Auth::user()->notifications()->where(['read_at'=>null,'type'=>"App\Notifications\NotifyAdminMessageForSupport"])->get();
+                $count = count($admin_message_for_support);
+
+             return   $count;
+        }
+    }
+    if(!function_exists('admin_unreadnotification_disagree_price')){
+        function admin_unreadnotification_disagree_price(){
+
+            $admin_message_for_support = Auth::user()->notifications()->where(['read_at'=>null,'type'=>"App\Notifications\NotifyAdminProblemMessage"])->get();
+                $count = count($admin_message_for_support);
+
+             return   $count;
+        }
+    }
+
 
 
 ?>

@@ -15,6 +15,7 @@ class CreateLetterFromAdminsTable extends Migration
     {
         Schema::create('letter_from_admins', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('support_id');
             $table->bigInteger('user_id');
             $table->text('text');
             $table->timestamps();

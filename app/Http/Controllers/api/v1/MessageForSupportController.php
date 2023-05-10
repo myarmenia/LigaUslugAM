@@ -4,10 +4,16 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProblemMessageRequest;
+use App\Models\ExecutorProfile;
 use App\Models\ProblemMessage;
 use App\Models\Support;
 use App\Models\Task;
+use App\Models\User;
+use App\Notifications\NotifyAdminMessageForSupport;
+use App\Notifications\NotifyAdminProblemMessage;
+use App\Notifications\NotifyExecutorDisagreeWithPrice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,6 +57,11 @@ class MessageForSupportController extends Controller
                 ]);
                 if($insert_message){
 
+                  $admin=User::whereHas('roles',function($query){
+                        $query->where('name','Admin');
+                    })->get();
+                    Notification::send($admin, new NotifyAdminMessageForSupport($insert_message));
+
                     return response()->json(["message"=>"Спасибо за доверие, мы свяжемся с вами"]);
                 }
 
@@ -74,6 +85,18 @@ class MessageForSupportController extends Controller
             $request['task_id']=$request->task_id;
         $problem_message = ProblemMessage::create($request->all());
         $user = Auth::user()->id;
+
+        $admin=User::whereHas('roles',function($query){
+            $query->where('name','Admin');
+        })->get();
+
+        //  employer  disagree whith price---- notify executor
+        $executor=ExecutorProfile::where('id',$request->executor_profile_id)->first();
+
+        $executor->users->notify(new NotifyExecutorDisagreeWithPrice( $problem_message));
+
+        Notification::send($admin, new NotifyAdminProblemMessage($problem_message));
+
         $inprocess = Task::with('problem_messages')->with('executor_profiles.users')->with('image_tasks')->where(['user_id'=>$user,'status'=>'completed'])->get();
         return response()->json(['tasks'=>$inprocess]);
 

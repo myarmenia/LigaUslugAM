@@ -6,20 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CallBackController extends Controller
+class AdminSupportFeedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-        $callbacknotification = Auth::user()->notifications()->where(['read_at'=>null,'type'=>"App\Notifications\CallBackNotification"])->get();
-     
 
-        return view('admin.notification.callback',compact('callbacknotification'));
+        $admin_support_feedback = Auth::user()->notifications()->where(['read_at'=>null,'type'=>"App\Notifications\NotifyAdminMessageForSupport"])->get();
+
+
+        return view('admin.notification.support_feedback.index',compact('admin_support_feedback'));
     }
 
     /**
@@ -51,9 +51,10 @@ class CallBackController extends Controller
      */
     public function show($id)
     {
-        $callbacknotification = Auth::user()->unreadNotifications()->find($id)->markAsRead();
-        $callbacknotification_read = auth()->user()->notifications()->where('id', $id)->first();
-        return view('admin.notification.show_callbacknotification',compact('callbacknotification_read'));
+        $admin_support_feedback = Auth::user()->unreadNotifications()->find($id)->markAsRead();
+   
+        $admin_support_feedback_read = auth()->user()->notifications()->where('id', $id)->first();
+        return view('admin.notification.support_feedback.show',compact('admin_support_feedback_read'));
     }
 
     /**

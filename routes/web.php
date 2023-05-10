@@ -88,6 +88,9 @@ Route::namespace('Admin')->group(function () {
     Route::resource('executor', ExecutorProfileController::class);
     Route::resource('letters',SupportsLetterController::class);
     Route::resource('supportfeedback',SupportFeedback::class);
+    // show notification  Служба поддержки message-for support
+    Route::resource('admin_support_feedback',AdminSupportFeedbackController::class);
+    Route::resource('admin_disagree_price',AdminDisagreePriceController::class);
 
     Route::resource('employer',EmployerProfileController::class);
 

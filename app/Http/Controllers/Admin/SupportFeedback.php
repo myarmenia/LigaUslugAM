@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\SupportFeedback as MailSupportFeedback;
 use App\Models\LetterFromAdmin;
+use App\Models\Support;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -39,20 +40,20 @@ class SupportFeedback extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            "suportfeedback" => "required|min:10"
+            "text" => "required|min:10"
         ]);
 
+        $insert = LetterFromAdmin::create($request->all());
+        $support=Support::where('id',$request->support_id)->first();
+        $support->status=1;
+        $support->save();
 
-        $insert = LetterFromAdmin::create([
-            "user_id" => $request->user_id,
-               "text" => $request->suportfeedback
-        ]);
-
-        if( $insert){
+        if($insert){
 
             $details=[
-                "message"=> $request->suportfeedback,
+                "message"=> $request->text,
                 "user_id"=> $request->user_id
             ];
 

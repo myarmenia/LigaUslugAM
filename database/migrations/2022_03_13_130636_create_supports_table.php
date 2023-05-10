@@ -19,6 +19,7 @@ class CreateSupportsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('email');
             $table->string('text');
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

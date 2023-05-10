@@ -21,7 +21,7 @@ class SupportsLetterController extends Controller
         }else{
             $int=$request['page']*100-100+1;
         }
-        $all_letter = Support::with('users')->orderBy('id','desc')->paginate(10);
+        $all_letter = Support::with('users')->where('status',0)->orderBy('id','desc')->paginate(10);
 
         return view('admin.all_supports_letter',compact('all_letter','int'));
     }

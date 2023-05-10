@@ -437,6 +437,30 @@
                                         <div class="ml-2"> <a href="{{route('user-question.index')}}">Заданные вопросы<span class="badge badge-danger badge-counter mx-2">{{admin_unreadnotification_users_give_question()}}+</span></a></div>
                                     </div>
                                 @endif
+                                {{-- working code  --}}
+                                @if(admin_unreadnotification_message_for_support()!=0)
+                                <div class="d-flex align-items-center p-3 notify">
+                                    <div>
+                                        <div class="icon-circle bg-success p-3">
+
+                                            <i class="fas fa-envelope fa-fw text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-2"> <a href="{{route('admin_support_feedback.index')}}">Служба поддержки<span class="badge badge-danger badge-counter mx-2">{{admin_unreadnotification_message_for_support()}}+</span></a></div>
+                                </div>
+                                @endif
+
+                                @if(admin_unreadnotification_disagree_price()!=0)
+                                <div class="d-flex align-items-center p-3 notify">
+                                    <div>
+                                        <div class="icon-circle bg-success p-3">
+
+                                            <i class="fas fa-envelope fa-fw text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-2"> <a href="{{route('admin_disagree_price.index')}}">Не согласна с ценой<span class="badge badge-danger badge-counter mx-2">{{admin_unreadnotification_disagree_price()}}+</span></a></div>
+                                </div>
+                                @endif
                             </div>
                         </li>
 

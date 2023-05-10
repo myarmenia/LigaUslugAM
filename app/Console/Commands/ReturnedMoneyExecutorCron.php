@@ -47,7 +47,7 @@ class ReturnedMoneyExecutorCron extends Command
         date_default_timezone_set('Europe/Moscow');
         $now_time = date('Y-m-d H:i:s',strtotime('now'));
         // dd($now_time);
-       \Log::info("ggggg");
+    
         $click_on_task = ClickOnTask::where('status','false')->get();
             foreach($click_on_task as $item){
                 $task_date = $item->created_at;

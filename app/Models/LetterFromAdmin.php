@@ -9,6 +9,7 @@ class LetterFromAdmin extends Model
 {
     use HasFactory;
     protected $fillable=[
+        "support_id",
         "user_id",
         "text"
     ];

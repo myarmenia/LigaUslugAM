@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row  my-5  justify-content-center ">
         <div class="col-md-6 my-5 p-2 bg-white">
-           
+
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}
@@ -36,10 +36,10 @@
 
                 <form method = "Post" action="{{route('supportfeedback.store')}}" class="my-5" >
                     @csrf
-
+                    <input type="hidden"  name="support_id" value="{{$show_user_letter->id}}">
                     <div class="form-group">
                       <label for="exampleFormControlTextarea1">Отправить ответ пользователю</label>
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='suportfeedback'></textarea>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='text'></textarea>
                     </div>
                     <input type = "hidden" value = "{{ $show_user_letter->user_id }}" name = "user_id">
                     <button type="submit" class = "btn my-2" style = "background:#3158c9;color:#fff">Отправлять</button>
