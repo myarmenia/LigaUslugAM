@@ -6,6 +6,7 @@ use App\Models\ClickOnTask;
 use App\Models\ExecutorProfile;
 use App\Models\Subcategory;
 use App\Notifications\ReturnedMoneyExecutorTwoDay;
+use DateTime;
 use Illuminate\Console\Command;
 // use Illuminate\Support\Facades\Log;
 use IlluminateSupportFacadesLog;
@@ -47,7 +48,7 @@ class ReturnedMoneyExecutorCron extends Command
         date_default_timezone_set('Europe/Moscow');
         $now_time = date('Y-m-d H:i:s',strtotime('now'));
         // dd($now_time);
-    
+  
         $click_on_task = ClickOnTask::where('status','false')->get();
             foreach($click_on_task as $item){
                 $task_date = $item->created_at;

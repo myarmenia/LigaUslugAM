@@ -234,10 +234,18 @@ class   TaskController extends Controller
     public function completedTasks(){
         $user=Auth::user()->id;
 
+        // $finished_task=Task::with('reitings')
+        //                     ->with('executor_profiles','executor_profiles.users','problem_messages')
+        //                     ->where(['user_id'=>$user,'status'=>'completed'])
+
+        //                     ->orderBy('id','desc')->get();
         $finished_task=Task::with('reitings')
                             ->with('executor_profiles','executor_profiles.users','problem_messages')
-                            ->where(['user_id'=>$user,'status'=>'completed'])
-                            // ->orWhere(['user_id'=>$user,'status'=>'has_conflict'])
+                            ->where('user_id',$user)
+                            ->where(function($q){
+                                $q->where('status','completed')
+                                    ->orWhere('status','has_conflict');
+                            })
                             ->orderBy('id','desc')->get();
 
       return response()->json($finished_task);
@@ -679,15 +687,14 @@ class   TaskController extends Controller
      */
 
      public function hasConflict($id){
+
         $task=Task::where('id',$id)->first();
         $task->status='has_conflict';
         $task->save();
         $task=Task::with('users','executor_profiles.users','image_tasks','click_on_tasks','click_on_tasks.executor_profiles.users','reitings','problem_messages','special_task_executors.executor_profiles.users')->find($id);
-        return response()->json(['click-on-special-task'=> $task]);
+        return response()->json(['click-on-special-task'=>$task]);
 
-
-        return response()->json(['message'=>'success']);
-     }
+    }
     public function show($id)
     {
         //

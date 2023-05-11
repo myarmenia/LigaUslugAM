@@ -214,7 +214,7 @@ Route::prefix('/user')->group( function(){
 
 
         // chenge status when disagree
-        Route::get('/has-confict/{id}',[TaskController::class,'hasConflict']);
+        Route::get('/has-conflict/{id}',[TaskController::class,'hasConflict']);
 
 
     });
