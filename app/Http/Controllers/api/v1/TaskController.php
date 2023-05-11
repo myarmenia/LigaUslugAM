@@ -234,17 +234,12 @@ class   TaskController extends Controller
     public function completedTasks(){
         $user=Auth::user()->id;
 
-        // $finished_task=Task::with('reitings')
-        //                     ->with('executor_profiles','executor_profiles.users','problem_messages')
-        //                     ->where(['user_id'=>$user,'status'=>'completed'])
-
-        //                     ->orderBy('id','desc')->get();
         $finished_task=Task::with('reitings')
                             ->with('executor_profiles','executor_profiles.users','problem_messages')
                             ->where('user_id',$user)
                             ->where(function($q){
                                 $q->where('status','completed')
-                                    ->orWhere('status','has_conflict');
+                                  ->orWhere('status','has_conflict');
                             })
                             ->orderBy('id','desc')->get();
 

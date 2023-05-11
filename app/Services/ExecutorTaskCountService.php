@@ -63,7 +63,13 @@ class ExecutorTaskCountService{
     public static function completedtasksforexecutor($user_id){
 
       $executor=ExecutorProfile::where('user_id',$user_id)->first();
-      $executorcompletedtask= Task::with('users')->with('image_tasks','reitings')->where(['executor_profile_id'=>$executor->id,'status'=>'completed'])->get();
+    //   $executorcompletedtask= Task::with('users')->with('image_tasks','reitings')->where(['executor_profile_id'=>$executor->id,'status'=>'completed'])->get();
+      $executorcompletedtask= Task::with('users')->with('image_tasks','reitings')
+                                                 ->where('executor_profile_id',$executor->id)
+                                                 ->where(function($q){
+                                                    $q->where('status','completed')
+                                                        ->orWhere('status','has_conflict');
+                                                 })->get();
         return $executorcompletedtask;
     }
 
@@ -72,13 +78,7 @@ class ExecutorTaskCountService{
         $executor=ExecutorProfile::where('user_id',$user_id)->first();
 
         $special_task=specialTaskExecutor::where(['executor_id'=>$executor->id,'status'=>'not confirmed'])->with('tasks','tasks.users')->get();
-        // $special_task=specialTaskExecutor::where('executor_id',$executor->id)->with(['tasks'=>function($query){
-        //     $query->where('status','not confirmed')->with('users');
-        // }])->orderBy('id','desc')->get();
-        // $special_task=specialTaskExecutor::where('executor_id',$executor->id)->whereHas('tasks',function($query){
-        //     $query->where('status','not confirmed')->with('users');
-        // })->orderBy('id','desc')->get();
-
+     
         return $special_task;
     }
 
