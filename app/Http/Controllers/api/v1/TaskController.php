@@ -237,7 +237,7 @@ class   TaskController extends Controller
         $finished_task=Task::with('reitings')
                             ->with('executor_profiles','executor_profiles.users','problem_messages')
                             ->where(['user_id'=>$user,'status'=>'completed'])
-                            ->orWhere(['user_id'=>$user,'status'=>'has_conflict'])
+                            // ->orWhere(['user_id'=>$user,'status'=>'has_conflict'])
                             ->orderBy('id','desc')->get();
 
       return response()->json($finished_task);
