@@ -234,7 +234,11 @@ class   TaskController extends Controller
     public function completedTasks(){
         $user=Auth::user()->id;
 
-        $finished_task=Task::with('reitings')->with('executor_profiles','executor_profiles.users','problem_messages')->where(['user_id'=>$user,'status'=>'completed'])->orderBy('id','desc')->get();
+        $finished_task=Task::with('reitings')
+                            ->with('executor_profiles','executor_profiles.users','problem_messages')
+                            ->where(['user_id'=>$user,'status'=>'completed'])
+                            ->orWhere(['user_id'=>$user,'status'=>'has_conflict'])
+                            ->orderBy('id','desc')->get();
 
       return response()->json($finished_task);
     }
@@ -673,6 +677,12 @@ class   TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function hasConflict($id){
+        $task=Task::where('id',$id)->first();
+        $task->status='has_conflict';
+        $task->save();
+     }
     public function show($id)
     {
         //

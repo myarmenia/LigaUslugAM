@@ -213,6 +213,10 @@ Route::prefix('/user')->group( function(){
         Route::get('/executor-task-section-count/{type}',[TaskSectionCountController::class,'executor']);
 
 
+        // chenge status when disagree
+        Route::get('/has-confict/{id}',[TaskController::class,'hasConflict']);
+
+
     });
 
 
@@ -253,6 +257,7 @@ Route::prefix('/pages')->group(function(){
     // ====experiment
 
     Route::get('/hh',[ClickOnTaskController::class,'returnMoney']);
+    Route::get('/fromtwoday',[ClickOnTaskController::class,'fromtwoday']);
 
 
 });
