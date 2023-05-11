@@ -682,6 +682,11 @@ class   TaskController extends Controller
         $task=Task::where('id',$id)->first();
         $task->status='has_conflict';
         $task->save();
+        $task=Task::with('users','executor_profiles.users','image_tasks','click_on_tasks','click_on_tasks.executor_profiles.users','reitings','problem_messages','special_task_executors.executor_profiles.users')->find($id);
+        return response()->json(['click-on-special-task'=> $task]);
+
+
+        return response()->json(['message'=>'success']);
      }
     public function show($id)
     {
