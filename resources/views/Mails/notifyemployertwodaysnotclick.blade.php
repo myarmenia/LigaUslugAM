@@ -21,7 +21,7 @@
                         <img src="{{ $message->embed(public_path().'/images/logo_footer.png') }}" style="width:70px;display:block;">
                     </div>
                 </div>
-                <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="http://ligauslug.ru/" style="color:white;text-decoration:none">Перейти по ссылке</a></button></div>
+                <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="http://ligauslug.ru/employer_task/".{{ $task->id}} style="color:white;text-decoration:none">Перейти по ссылке</a></button></div>
             </div>
         </div>
     </body>
