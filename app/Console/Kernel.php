@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('newjob:cron')->dailyAt('08:00');
         $schedule->command('deletenotappliedtask:cron')->everyMinute();
         $schedule->command('returnedmoney:cron')->dailyAt('08:00');
-        $schedule->command('notclickfromtwodays:cron')->dailyAt('09:29');
+        $schedule->command('notclickfromtwodays:cron')->dailyAt('08:00');
         $schedule->command('notclickfromthreedays:cron')->dailyAt('08:00');
 
 
