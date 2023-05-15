@@ -2,13 +2,12 @@
 
 namespace App\Notifications;
 
-use App\Models\ExecutorProfile;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NotifyExecutorDisagreeWithPrice extends Notification
+class NotifyEmployerDeleteTaskFromThreeDay extends Notification
 {
     use Queueable;
 
@@ -17,12 +16,11 @@ class NotifyExecutorDisagreeWithPrice extends Notification
      *
      * @return void
      */
-    public  $problem_message;
-    public function __construct( $problem_message)
+    public $message;
+    public function __construct($item)
     {
-        $this->problem_message=$problem_message;
+        $this->message=$item;
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -31,11 +29,12 @@ class NotifyExecutorDisagreeWithPrice extends Notification
      */
     public function via($notifiable)
     {
-         $executor=ExecutorProfile::where('id',$this->problem_message->executor_profile_id)->first();
+        if($this->message->users->geting_notification == 1){
 
-        if( $executor->users->geting_notification == 1){
             return ['mail','database'];
+
         }else{
+
             return ['database'];
         }
 
@@ -50,8 +49,8 @@ class NotifyExecutorDisagreeWithPrice extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Не согласен с ценой')
-        ->view('Mails.disagreewithprice',['disagreewithprice'=>$this->problem_message,'logo'=>'/images/logo_footer.png']);
+        ->subject('Задание будет удалена')
+        ->view('Mails.notifyemployerfromthreedaynotclick',['task'=>$this->message,'logo'=>'/images/logo_footer.png']);
     }
 
     /**
@@ -62,13 +61,12 @@ class NotifyExecutorDisagreeWithPrice extends Notification
      */
     public function toArray($notifiable)
     {
-$executor=ExecutorProfile::where('id',$this->problem_message->executor_profile_id)->first();
         return [
-           
-            'employer_id'=>$this->problem_message->tasks->user_id,
-            'employer_name'=>$this->problem_message->tasks->users->name.' '.$this->problem_message->tasks->users->last_name,
-            'task_title'=>$this->problem_message->tasks->title,
-            'text'=>$this->problem_message->problem_description,
+            'task_id'=>$this->message->id,
+            'employer_id'=>$this->message->user_id,
+            'employer_name'=>$this->message->users->name.' '.$this->message->users->last_name,
+            'task_title'=>$this->message->title,
+            'text'=>"На ваше задание '{{$this->message->title}}' нет откликов, если в течение одного дней не будет откликов задание будет удалена."
 
         ];
     }

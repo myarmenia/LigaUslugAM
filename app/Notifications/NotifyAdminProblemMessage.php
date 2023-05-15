@@ -58,6 +58,7 @@ class NotifyAdminProblemMessage extends Notification
     {
         $executor=ExecutorProfile::where('id',$this->problem_message->executor_profile_id)->first();
         return [
+             'problem_message_id'=>$this->problem_message->id,
             'employer_id'=>$this->problem_message->tasks->user_id,
             'employer_name'=>$this->problem_message->tasks->users->name.' '.$this->problem_message->tasks->users->last_name,
             'employer_email'=>$this->problem_message->tasks->users->email,

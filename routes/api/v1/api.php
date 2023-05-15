@@ -258,6 +258,7 @@ Route::prefix('/pages')->group(function(){
 
     Route::get('/hh',[ClickOnTaskController::class,'returnMoney']);
     Route::get('/fromtwoday',[ClickOnTaskController::class,'fromtwoday']);
+    Route::get('/notifyemployertwoday',[ClickOnTaskController::class,'twodays']);
 
 
 });

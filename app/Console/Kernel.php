@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\ReturnedMoneyExecutorCron;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -18,6 +17,8 @@ class Kernel extends ConsoleKernel
         Commands\NewJobCron::class,
         Commands\DeleteNotAppliedTaskCron::class,
         Commands\ReturnedMoneyExecutorCron::class,
+        Commands\NotifyEmployerDeleteTaskFromTwoDayCron::class,
+        Commands\NotifyEmployerDeleteTaskFromThreeDayCron::class,
 
     ];
 
@@ -32,7 +33,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('deadline:cron')->everyMinute();
         $schedule->command('newjob:cron')->dailyAt('08:00');
         $schedule->command('deletenotappliedtask:cron')->everyMinute();
-        $schedule->command('returnedmoney:cron')->dailyAt('21:06');
+        $schedule->command('returnedmoney:cron')->dailyAt('08:00');
+        $schedule->command('notclickfromtwodays:cron')->dailyAt('08:00');
+        $schedule->command('notclickfromthreedays:cron')->dailyAt('08:00');
+
+
 
     }
 

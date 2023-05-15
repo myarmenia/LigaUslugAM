@@ -15,6 +15,7 @@ use App\Models\Task;
 use App\Models\TransactionApi;
 use App\Models\User;
 use App\Notifications\NotifiyEmployer;
+use App\Notifications\NotifyEmployerDeleteTaskFromTwoDay;
 use App\Notifications\ReturnedMoneyExecutorTwoDay;
 use App\Services\ExecutorTaskCountService;
 use App\Services\TaskCountService;
@@ -157,6 +158,38 @@ class ClickOnTaskController extends Controller
                 }
             }
 
+    }
+    public function twodays(){
+         // через 2 дня предупреждаем заказчику о том, что задание будет удалено, если нет откликов
+         date_default_timezone_set('Europe/Moscow');
+         $now_time=date('Y-m-d H:i:s',strtotime('now'));
+
+
+         $auth_task=Task::where('status',false)->pluck('id');
+
+         $click_on_task=ClickOnTask::whereIn('task_id',$auth_task)->pluck('task_id');
+         $task = Task::where('status','=','false')
+                 ->where(function ($query)  use($click_on_task) {
+                     $query->whereNotIn('id', $click_on_task);
+
+                 })->get();
+
+                 foreach($task as $item){
+                     $task_date=$item->created_at;
+
+                     $task_date = date('Y-m-d H:i:s', strtotime($task_date . '+2 day'));
+
+
+                     if($task_date<$now_time){
+                         info($item);
+                       
+                         $item->users->notify(new NotifyEmployerDeleteTaskFromTwoDay($item));
+
+                     }
+                 }
+
+
+         // \Log::info("ggggg")
     }
 
 }

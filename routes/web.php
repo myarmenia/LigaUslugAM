@@ -110,6 +110,7 @@ Route::namespace('Admin')->group(function () {
     // letter from employer about task problems
     Route::get('admin/support-problem-message',[SupportletterProblemMessageController::class,'index'])->name('problem-message');
     Route::get('admin/support-problem-message/{id}',[SupportletterProblemMessageController::class,'show'])->name('problem-message-show');
+    // Route::get('admin/support-problem-message/{notif}/{id}',[SupportletterProblemMessageController::class,'show'])->name('problem-message-show');
     Route::post('admin/support-problem-message-feedback',[SupportletterProblemMessageController::class,'supportFeedBack'])->name('sopport-feedback-problem-message');
 
     Route::post('/create-question',[AnswerAndQuestionController::class,'store'])->name('create_question');

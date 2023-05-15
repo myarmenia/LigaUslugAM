@@ -4,19 +4,17 @@ namespace App\Console\Commands;
 
 use App\Models\ClickOnTask;
 use App\Models\Task;
-use App\Models\User;
-use App\Notifications\NotifyEmployerForDeletingTask;
+use App\Notifications\NotifyEmployerDeleteTaskFromTwoDay;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Auth;
 
-class DeleteNotAppliedTaskCron extends Command
+class NotifyEmployerDeleteTaskFromTwoDayCron extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'deletenotappliedtask:cron';
+    protected $signature = 'notclickfromtwodays:cron';
 
     /**
      * The console command description.
@@ -42,6 +40,7 @@ class DeleteNotAppliedTaskCron extends Command
      */
     public function handle()
     {
+        // через 2 дня предупреждаем заказчику о том, что задание будет удалено, если нет откликов
         date_default_timezone_set('Europe/Moscow');
         $now_time=date('Y-m-d H:i:s',strtotime('now'));
 
@@ -58,13 +57,14 @@ class DeleteNotAppliedTaskCron extends Command
                 foreach($task as $item){
                     $task_date=$item->created_at;
 
-                    $task_date = date('Y-m-d H:i:s', strtotime($task_date . '+4 day'));
+                    $task_date = date('Y-m-d H:i:s', strtotime($task_date . '+2 day'));
 
 
                     if($task_date<$now_time){
                         info($item);
-                        $item->users->notify(new NotifyEmployerForDeletingTask($item));
-                        $item->delete();
+                        // $item->users->notify(new NotifyEmployerForDeletingTask($item));
+                        $item->users->notify(new NotifyEmployerDeleteTaskFromTwoDay($item));
+
                     }
                 }
 

@@ -95,7 +95,8 @@ class MessageForSupportController extends Controller
 
         $executor->users->notify(new NotifyExecutorDisagreeWithPrice( $problem_message));
 
-        Notification::send($admin, new NotifyAdminProblemMessage($problem_message));
+       Notification::send($admin, new NotifyAdminProblemMessage($problem_message));
+
 
         $inprocess = Task::with('problem_messages')->with('executor_profiles.users')->with('image_tasks')->where(['user_id'=>$user,'status'=>'completed'])->get();
         return response()->json(['tasks'=>$inprocess]);

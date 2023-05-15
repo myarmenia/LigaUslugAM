@@ -53,7 +53,9 @@ class SupportletterProblemMessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+
     {
+ 
         $show_special_message=ProblemMessage::find($id);
         return view('admin.show_user_problem_message_letter',compact('show_special_message'));
     }

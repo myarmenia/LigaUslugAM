@@ -39,19 +39,16 @@
                         $count=1;
                     @endphp
                 @foreach($admin_disagree_price_notification as $key)
-                {{-- 'employer_id'=>$this->problem_message->tasks->user_id,
-                'employer_name'=>$this->problem_message->tasks->users->name.' '.$this->problem_message->tasks->users->last_name,
-                'task_title'=>$this->problem_message->tasks->title,
-                'text'=>$this->problem_message->problem_description,
-                'executor_id'=>$this->problem_message->executor_profile_id,
-                'executor' --}}
+
 
                     <tr>
                        <td>{{ $count++ }}</td>
                        <td>{{ $key->data['employer_id'] }}</td>
                        <td scope = "col">{{ $key->data['employer_name'] }}</td>
                         <td scope = "col">{{ $key->data['employer_email'] }}</td>
-                        {{-- <td scope = "col">{{ $key->data['text'] }}</td> --}}
+                        {{-- {{dd($key->data['problem_message_id'])}} --}}
+
+                        {{-- <td><a  href = "{{ route('problem-message-show', [$key->id,$key->data['problem_message_id']] )}}"> Показать </a></td> --}}
 
                         <td><a  href = "{{ route('admin_disagree_price.show', $key->id )}}"> Показать </a></td>
                     </tr>
