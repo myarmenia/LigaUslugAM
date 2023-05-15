@@ -67,7 +67,7 @@ class NotifyEmployerDeleteTaskFromTwoDay extends Notification
             'employer_id'=>$this->message->user_id,
             'employer_name'=>$this->message->users->name.' '.$this->message->users->last_name,
             'task_title'=>$this->message->title,
-            'text'=>"На ваше задание '$this->message->title' нет откликов, если в течение двух дней не будет откликов задание будет удалена."
+            'text'=>"На ваше задание ".$this->message->title." нет откликов, если в течение двух дней не будет откликов задание будет удалена."
 
         ];
     }
