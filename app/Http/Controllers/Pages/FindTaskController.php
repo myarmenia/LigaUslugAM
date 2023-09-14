@@ -43,8 +43,8 @@ class FindTaskController extends Controller
     // }
     public function index(Request $request)
     {
-        dd($request->all());
-        // $subcategory=explode('_',$subcategoryName);
+        dd($request->subcategory_name);
+        
         // $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
         // $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
 
