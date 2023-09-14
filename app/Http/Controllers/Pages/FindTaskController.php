@@ -58,7 +58,7 @@ class FindTaskController extends Controller
 
         //     $task = $query->paginate(10)->withQueryString();
         //     return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
-        }
+        // }
 
     }
     public function allTasks(){
