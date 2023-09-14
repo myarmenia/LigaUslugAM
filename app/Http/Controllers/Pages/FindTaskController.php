@@ -41,23 +41,23 @@ class FindTaskController extends Controller
     //     }
 
     // }
-    public function index($categoryId,$subcategoryName)
+    public function index(Request $request)
     {
-        dd($subcategoryName);
-        $subcategory=explode('_',$subcategoryName);
-        $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
-        $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
+        dd($request->all());
+        // $subcategory=explode('_',$subcategoryName);
+        // $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
+        // $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
 
 
-        if($get_category_id->category_id=$categoryId){
-            $category_subcategory=Category::where('id',$categoryId)->with('subcategories')->first();
+        // if($get_category_id->category_id=$categoryId){
+        //     $category_subcategory=Category::where('id',$categoryId)->with('subcategories')->first();
 
-            $query = Task::latest();
-            $query->whereIn('subcategory_name', $subcategory)->with('users');
+        //     $query = Task::latest();
+        //     $query->whereIn('subcategory_name', $subcategory)->with('users');
 
 
-            $task = $query->paginate(10)->withQueryString();
-            return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
+        //     $task = $query->paginate(10)->withQueryString();
+        //     return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
         }
 
     }
