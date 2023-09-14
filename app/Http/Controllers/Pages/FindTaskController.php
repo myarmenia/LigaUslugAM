@@ -47,7 +47,7 @@ class FindTaskController extends Controller
 
 
         $find_subcategory_category=Subcategory::whereIn('subcategory_name',$request->subcategory_name)->get();
-
+dd($find_subcategory_category);
 
         if($request->category_id!=null){
             $category_subcategory=Category::where('id',$request->category_id)->with('subcategories')->first();
