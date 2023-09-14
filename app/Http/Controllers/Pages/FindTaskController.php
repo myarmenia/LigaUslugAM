@@ -20,10 +20,10 @@ class FindTaskController extends Controller
      */
 
 
-    public function index($categoryId,$subcategoryName,$regionName)
+    public function index($categoryId,$subcategoryName, $request)
 
     {
-dd($regionName);
+dd($request->all());
         $subcategory=explode('_',$subcategoryName);
         $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
         $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
@@ -34,7 +34,7 @@ dd($regionName);
 
             $query = Task::latest();
             $query->whereIn('subcategory_name', $subcategory)->with('users');
-            if($regionName!=null){
+            if($request['region_name']!=null){
                 // $query->
                 dd(777);
             }
