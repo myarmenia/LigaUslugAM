@@ -247,8 +247,8 @@ Route::prefix('/pages')->group(function(){
     Route::get('/filter-executor/{category_id}/{region}/{executor_subcategory}',[FindExecutorController::class,'filter']);
     // find work show all tasks witch matched
     Route::get('/all_tasks',[FindTaskController::class,'allTasks']);
-    Route::get('/find_task/{categoryId}/{subcategoryName}/show',[FindTaskController::class,'index']);
-    // Route::get('/find_task/',[FindTaskController::class,'index']);
+    // Route::get('/find_task/{categoryId}/{subcategoryName}/show',[FindTaskController::class,'index']);
+    Route::get('/find_task',[FindTaskController::class,'index']);
     Route::get('/get_answer_and_question',[AnswerAndQuestionController::class,'getanswerandquestion']);
     Route::get('/get-contract-document',[ContractDocumentController::class,'index']);
 

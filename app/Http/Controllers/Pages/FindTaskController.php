@@ -20,33 +20,13 @@ class FindTaskController extends Controller
      */
 
 
-    public function index($categoryId,$subcategoryName)
+    // public function index($categoryId,$subcategoryName)
 
-    {
-
-        $subcategory=explode('_',$subcategoryName);
-        $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
-        $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
-
-
-        if($get_category_id->category_id=$categoryId){
-            $category_subcategory=Category::where('id',$categoryId)->with('subcategories')->first();
-
-            $query = Task::latest();
-            $query->whereIn('subcategory_name', $subcategory)->with('users');
-
-
-            $task = $query->paginate(10)->withQueryString();
-            return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
-        }
-
-    }
-    // public function index(Request $request)
     // {
-    //     dd($request->subcategory_name);
 
-
-    //     $find_subcategory_category=Subcategory::whereIn('subcategory_name',$request->subcategory_name)->get();
+    //     $subcategory=explode('_',$subcategoryName);
+    //     $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
+    //     $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
 
 
     //     if($get_category_id->category_id=$categoryId){
@@ -61,6 +41,29 @@ class FindTaskController extends Controller
     //     }
 
     // }
+    public function index(Request $request)
+    {
+        // dd($request->subcategory_name);
+
+
+        $find_subcategory_category=Subcategory::whereIn('subcategory_name',$request->subcategory_name)->get();
+
+
+        if($request->category_id!=null){
+            $category_subcategory=Category::where('id',$request->category_id)->with('subcategories')->first();
+
+            $query = Task::latest();
+            $query->whereIn('subcategory_name', $request->subcategory_name)->with('users');
+            if($request->has('region_name')){
+                $query->where('region',$request->region);
+            }
+
+
+            $task = $query->paginate(10)->withQueryString();
+            return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
+        }
+
+    }
     public function allTasks(){
 
         $query = Task::with('users')->latest();
