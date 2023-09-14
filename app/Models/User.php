@@ -72,6 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
            'education_type' => 0,
           'education_place' => 0,
               'certificate' => 0,
+           'portfolio_link' => 0,
             );
         }
 // making settings for users, for that we install glorand laravel package, and then checking if i there any data in settings column  if not we apply

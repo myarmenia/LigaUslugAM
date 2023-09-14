@@ -257,7 +257,7 @@ class ExecutorProfileController extends Controller
 
         }
     }
-   
+
 
 
     public function portfolioBase(Request $request){
@@ -329,7 +329,7 @@ class ExecutorProfileController extends Controller
             $user->settings()->apply((array)$settings);
         }
         // Auth::user()->settings()->apply((array)$settings);
-// dd($settings);
+        // dd($settings);
         $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
         return ExecutorProfileResource::collection($show_executor_profile);
 
@@ -451,7 +451,7 @@ class ExecutorProfileController extends Controller
             $settings['certificate'] = 0;
         }
          Auth::user()->settings()->apply((array)$settings);
-    //    dd($settings);
+        //  dd($settings);
         $show_executor_profile=ExecutorProfile::with('users')->where('user_id',$user_id)->get();
         return ExecutorProfileResource::collection($show_executor_profile);
 

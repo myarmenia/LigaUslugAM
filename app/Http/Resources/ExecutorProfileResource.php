@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\DonatedBalanceExecutor;
 use App\Models\ExecutorProfile;
 use App\Models\ExecutorWorkingRegion;
+use App\Notifications\DonatedBalanceNotificaton;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,17 +49,49 @@ class ExecutorProfileResource extends JsonResource
 
     public function percent_settings(){
         $settings = Auth::user()->user_settings();
-        $count=0;
+        $count = 0;
         foreach($settings as $key=>$value){
-            if($value ==1){
+            if($value == 1){
                 $count+=1;
             }
         }
-        $tokos=100/17*$count;
+        $tokos=100/18*$count;
         $update=ExecutorProfile::where('user_id',Auth::id())->update([
                 'profile_persent'=>$tokos
 
         ]);
+        $executor_profile = ExecutorProfile::where('user_id',Auth::id())->first();
+        if($executor_profile->profile_persent>70){
+            $donated_balance=DonatedBalanceExecutor::where('executor_id', $executor_profile->id)->first();
+            if(!$donated_balance){
+                $donated_amount=1000;
+                $total_balance = $executor_profile->balance+$donated_amount;
+                $create_donated_balance_executor = DonatedBalanceExecutor::create([
+                    'executor_id' => $executor_profile->id,
+                    'real_balance' => $executor_profile->balance,
+                    'profile_percent' => $tokos,
+                    'donated_money' => $donated_amount,
+                    'balance' => $total_balance
+                ]);
+                $executor_profile->balance=$total_balance;
+                $executor_profile->save();
+                // =====
+                $executor_prof=ExecutorProfile::where('id',$executor_profile->id)->first();
+                
+            $executor_prof->users->notify(new DonatedBalanceNotificaton($executor_prof->user_id, $create_donated_balance_executor ));
+             // =======creating socket for event ==================
+             $executor_notification = DB::table('notifications')->where('notifiable_id', $executor_prof->users->id)->orderBy('created_at','desc')->get();
+
+             $database = json_decode($executor_notification);
+
+             event(new NotificationEvent( $executor_prof->users->id, $database));
+             $unread_notification_count = Auth::user()->unreadNotifications()->count();
+             event(new UnreadNotificationCountEvent( $executor_prof->user_id, $unread_notification_count));
+
+            }
+
+
+        }
         return  $tokos;
     }
     public function get_executor_working_region(){

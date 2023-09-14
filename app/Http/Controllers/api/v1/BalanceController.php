@@ -36,11 +36,7 @@ class BalanceController extends Controller
         if($request->has('executor_account')){
             // dump($request->executor_account);
             $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
-            // if($executor->balance>0){
-                // $add=$executor->balance+$request->executor_account;
-                // $update_executor_account = ExecutorProfile::where('user_id',Auth::user()->id)->update([
-                //     'balance' =>$add
-                // ]);
+            
 
                 $transaction_api=TransactionApi::create([
 
@@ -51,18 +47,7 @@ class BalanceController extends Controller
 
                 ]);
 
-                // $executor_profile = ExecutorProfile::where('user_id',Auth::user()->id)->get();
-                // $update_balance= TransactionApiReseource::collection($executor_profile);
-                // return response()->json($update_balance);
-            // }
-            // else if($executor->balance == 0){
-            //     $update_executor_account = ExecutorProfile::where('user_id',Auth::user()->id)->update([
-            //         'balance' =>$request->executor_account
-            //     ]);
-            //     $executor_profile = ExecutorProfile::where('user_id',Auth::user()->id)->get();
-            //     $update_balance= TransactionApiReseource::collection($executor_profile);
-            //     return response()->json($update_balance);
-            // }
+
             $api = new TinkoffMerchantApi(
                 '1644570310100',  //Ваш Terminal_Key
                 'vn9uzyxwiq4rhwdx'   //Ваш Secret_Key

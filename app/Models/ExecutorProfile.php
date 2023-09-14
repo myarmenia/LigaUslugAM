@@ -66,9 +66,9 @@ class ExecutorProfile extends Model
     public  function special_task_executors(){
         return $this->hasMany(specialTaskExecutor::class);
     }
-    // public  function special_task_executors(){
-    //     return $this->belongsTo(specialTaskExecutor::class,'executor_id');
-    // }
-
+    public  function donated_balance_executors(){
+        return $this->hasOne(DonatedBalanceExecutor::class);
+    }
+   
 
 }

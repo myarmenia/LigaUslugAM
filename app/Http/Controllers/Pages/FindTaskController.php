@@ -20,7 +20,7 @@ class FindTaskController extends Controller
      */
 
 
-    public function index($categoryId,$subcategoryName)
+    public function index($categoryId,$subcategoryName,$regionName)
 
     {
 
@@ -34,6 +34,10 @@ class FindTaskController extends Controller
 
             $query = Task::latest();
             $query->whereIn('subcategory_name', $subcategory)->with('users');
+            if($regionName!=null){
+                // $query->
+                dd(777);
+            }
 
             $task = $query->paginate(10)->withQueryString();
             return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
@@ -44,18 +48,11 @@ class FindTaskController extends Controller
 
         $query = Task::with('users')->latest();
 
-        // if(Auth('api')->user()){
-        //     $exequtor=ExecutorProfile::where('user_id',Auth::id())->first();
-
-        // }
-
         $query->where('status','false');
+
         $all_task=$query->paginate(5)->withQueryString();
+
         return response()->json(['message'=>$all_task]);
-
-            // $query=AllTasksService::alltaskswithoutowntask();
-            // return response()->json(['message'=>$all_task]);
-
 
     }
 

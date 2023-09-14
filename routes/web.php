@@ -13,6 +13,7 @@ use App\Events\NewMessage;
 use App\Events\RejectTaskExecutor;
 use App\Events\NotificationEvent;
 use App\Http\Controllers\Admin\PDFController as AdminPDFController;
+use App\Http\Controllers\Admin\SignaturePadController;
 use App\Http\Controllers\Admin\WatermarkController;
 use App\Http\Controllers\AnswerAndQuestionController;
 use App\Services\FileUploadService;
@@ -139,6 +140,11 @@ Route::get('email_log',[logoController::class,'index']);
 
 // Route::get('push-notification', [NotificationController::class, 'index']);
 // Route::post('sendNotification', [NotificationController::class, 'sendNotification'])->name('send.notification');
+// experiment
 Route::get('generate-pdf', [WatermarkController::class, 'generatePDF']);
+Route::get('generate-pdf_meta-data', [WatermarkController::class, 'generatePdfMetaData']);
+
+Route::get('signaturepad', [SignaturePadController::class, 'index']);
+Route::post('signaturepad', [SignaturePadController::class, 'upload'])->name('signaturepad.upload');
 
 
