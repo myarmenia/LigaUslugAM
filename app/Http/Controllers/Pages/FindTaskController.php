@@ -43,7 +43,7 @@ class FindTaskController extends Controller
     // }
     public function index(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
 
         $find_subcategory_category=Subcategory::whereIn('subcategory_name',$request->subcategory_name)->get();
@@ -54,6 +54,7 @@ class FindTaskController extends Controller
 
             $query = Task::latest();
             $query->whereIn('subcategory_name', $request->subcategory_name)->with('users');
+
             if($request->has('region_name')){
                 $query->where('region',$request->region);
             }
