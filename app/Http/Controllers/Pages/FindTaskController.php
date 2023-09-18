@@ -18,22 +18,47 @@ class FindTaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index($categoryId,$subcategoryName)
+
+    {
+
+        $subcategory=explode('_',$subcategoryName);
+        $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
+        $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
 
 
-    // public function index($categoryId,$subcategoryName)
+        if($get_category_id->category_id=$categoryId){
+            $category_subcategory=Category::where('id',$categoryId)->with('subcategories')->first();
 
+            $query = Task::latest();
+            $query->whereIn('subcategory_name', $subcategory)->with('users');
+
+            $task = $query->paginate(10)->withQueryString();
+            return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
+        }
+
+    }
+
+
+
+    // https://backend.ligauslug.ru/api/v1/pages/find_task/?category_id=1&subcategory_name=["Компьютерная помощь","Разработка программ"]&region_name="Новосибирская область"&page=1
+    // public function index(Request $request)
     // {
-
-    //     $subcategory=explode('_',$subcategoryName);
-    //     $get_category_id=Subcategory::where('subcategory_name',$subcategory[0])->first();
-    //     $find_subcategory_category=Subcategory::whereIn('subcategory_name',$subcategory)->get();
+    //     $json_decode_subcategory = json_decode($request->subcategory_name);
 
 
-    //     if($get_category_id->category_id=$categoryId){
-    //         $category_subcategory=Category::where('id',$categoryId)->with('subcategories')->first();
+    //     $find_subcategory_category=Subcategory::whereIn('subcategory_name',$json_decode_subcategory)->get();
+
+
+    //     if($request->category_id!=null){
+    //         $category_subcategory=Category::where('id',$request->category_id)->with('subcategories')->first();
 
     //         $query = Task::latest();
-    //         $query->whereIn('subcategory_name', $subcategory)->with('users');
+    //         $query->whereIn('subcategory_name', $json_decode_subcategory)->with('users');
+
+    //         if($request->has('region_name')){
+    //             $query->where('region',$request->region_name);
+    //         }
 
 
     //         $task = $query->paginate(10)->withQueryString();
@@ -41,30 +66,6 @@ class FindTaskController extends Controller
     //     }
 
     // }
-    public function index(Request $request)
-    {
-        $json_decode_subcategory = json_decode($request->subcategory_name);
-
-
-        $find_subcategory_category=Subcategory::whereIn('subcategory_name',$json_decode_subcategory)->get();
-
-
-        if($request->category_id!=null){
-            $category_subcategory=Category::where('id',$request->category_id)->with('subcategories')->first();
-
-            $query = Task::latest();
-            $query->whereIn('subcategory_name', $json_decode_subcategory)->with('users');
-
-            if($request->has('region_name')){
-                $query->where('region',$request->region_name);
-            }
-
-
-            $task = $query->paginate(10)->withQueryString();
-            return response()->json(['message'=>$task,'category'=>$category_subcategory,'selected_subcategory'=> $find_subcategory_category]);
-        }
-
-    }
     public function allTasks(){
 
         $query = Task::with('users')->latest();
