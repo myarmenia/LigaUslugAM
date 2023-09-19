@@ -44,7 +44,7 @@ class FindTaskController extends Controller
     // https://backend.ligauslug.ru/api/v1/pages/find_task/?category_id=1&subcategory_name=["Компьютерная помощь","Разработка программ"]&region_name="Новосибирская область"&page=1
     public function index(Request $request)
     {
-dd($request->subcategory_name);
+// dd($request->subcategory_name);
         $json_decode_subcategory = json_decode($request->subcategory_name);
         dd($json_decode_subcategory);
 
