@@ -56,7 +56,7 @@ class FindTaskController extends Controller
             $query = Task::latest();
             $query->whereIn('subcategory_name', $json_decode_subcategory)->with('users');
 
-            if($request->has('region_name')){
+            if($request->region_name!=null){
                 $query->where('region',$request->region_name);
             }
 
