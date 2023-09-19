@@ -57,7 +57,7 @@ class FindTaskController extends Controller
             $query->whereIn('subcategory_name', $json_decode_subcategory)->with('users');
 
             if($request->region_name!=null){
-                dd($request->region_name);
+         
                 $query->where('region',$request->region_name);
             }
 
