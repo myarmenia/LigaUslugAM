@@ -78,9 +78,9 @@ class   TaskController extends Controller
     }
 
     public function createNewTask(CheckTaskValidation $request){
-
+// dd($request->all());
         // executor,Дистанционно,client
-        $user=Auth::user()->id;
+        $user = Auth::user()->id;
 
 
 
@@ -119,12 +119,12 @@ class   TaskController extends Controller
             ]);
          }
          else if($request->task_location=='У клиента'){
-        $request->validate([
-                 'region' => 'required',
-                'address' => 'required',
-                 'nation' => 'required',
-           'country_name' => 'required'
-            ]);
+            $request->validate([
+                    'region' => 'required',
+                    'address' => 'required',
+                    'nation' => 'required',
+            'country_name' => 'required'
+                ]);
             $validated = $request->validated();
 
             $task=Task::create([
@@ -148,6 +148,7 @@ class   TaskController extends Controller
          }
 
         if ($request->hasfile('task_img')) {
+          
             foreach($request->file('task_img') as $file)
             {
                 $name = time().rand(1,100).'.'.$file->extension();
@@ -171,8 +172,8 @@ class   TaskController extends Controller
 
 
 
-        $show_new_task=Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
-
+        $show_new_task = Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
+// dd($show_new_task);
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');
@@ -202,29 +203,32 @@ class   TaskController extends Controller
         }
 
         $user_ides = ExecutorProfile::whereIn('id', $executor_categories)->pluck('user_id');
+        // dd($user_ides);
 
         $user = User::where('id','!=',Auth::id())
         ->whereIn('id',$user_ides)->get();
-            foreach($user as $item){
-                // =======notification section start ==================
-                $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
+// bacel
+            // foreach($user as $item){
+            //     // =======notification section start ==================
+            //     $item->notify(new NotifyExecutorForNewJobEveryTime($item->id,$show_new_task));
 
-                // =======creating socket for event ==================
-                $user_notification = DB::table('notifications')->where('notifiable_id',$item->id)->orderBy('created_at','desc')->get();
-                $database = json_decode($user_notification);
-                event(new NotificationEvent( $item->id, $database));
-                $unread_notification_count = Auth::user()->unreadNotifications()->count();
-                event(new UnreadNotificationCountEvent( $item->id, $unread_notification_count));
-
-
-                // for all executor
-
-               $get_executor_tasks_section_count=ExecutorTaskCountService::get($item->id);
+            //     // =======creating socket for event ==================
+            //     $user_notification = DB::table('notifications')->where('notifiable_id',$item->id)->orderBy('created_at','desc')->get();
+            //     $database = json_decode($user_notification);
+            //     event(new NotificationEvent( $item->id, $database));
+            //     $unread_notification_count = Auth::user()->unreadNotifications()->count();
+            //     event(new UnreadNotificationCountEvent( $item->id, $unread_notification_count));
 
 
+            //     // for all executor
 
-            }
-            $get_employer_task_section_count=TaskCountService::get(Auth::id());
+            //    $get_executor_tasks_section_count=ExecutorTaskCountService::get($item->id);
+
+
+
+            // }
+            // $get_employer_task_section_count = TaskCountService::get(Auth::id());
+
 
 
 

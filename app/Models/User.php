@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
 
     use HasApiTokens, HasFactory, Notifiable, HasSettingsTable,HasRoles,HasPermissions;
+    // use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -32,80 +34,86 @@ class User extends Authenticatable implements MustVerifyEmail
         'phonenumber',
     ];
 
-// ----------------------------
-    public function tasks(){
+    // ----------------------------
+    public function tasks()
+    {
         return $this->hasMany(Task::class);
     }
 
-    public function executor_profiles(){
+    public function executor_profiles()
+    {
         return $this->hasOne(ExecutorProfile::class);
     }
 
-    public function supports(){
+    public function supports()
+    {
         return $this->hasMany(Support::class);
     }
-    public function chats(){
+    public function chats()
+    {
         return $this->hasMany(Chat::class);
     }
 
 
 
-        public const NEW = 'new';
-        public const COMPLETED = 'completed';
+    public const NEW = 'new';
+    public const COMPLETED = 'completed';
 
-        public function  settings_array(){
-            return $array = array (
-                 'img_path' => 0,
-                   'gender' => 0,
-               'birth_date' => 0,
-                 'about_me' => 0,
-             'phone_status' => 0,
+    public function  settings_array()
+    {
+        return $array = array(
+            'img_path' => 0,
+            'gender' => 0,
+            'birth_date' => 0,
+            'about_me' => 0,
+            'phone_status' => 0,
             'fasebook_link' => 0,
-           'instagram_link' => 0,
-                   'region' => 0,
-                  'address' => 0,
-      'executorwork_region' => 0,
+            'instagram_link' => 0,
+            'region' => 0,
+            'address' => 0,
+            'executorwork_region' => 0,
             'category_name' => 0,
-         'subcategory_name' => 0,
+            'subcategory_name' => 0,
             'working_place' => 0,
             'portfolio_pic' => 0,
-           'education_type' => 0,
-          'education_place' => 0,
-              'certificate' => 0,
-           'portfolio_link' => 0,
-            );
-        }
-// making settings for users, for that we install glorand laravel package, and then checking if i there any data in settings column  if not we apply
-        public function user_settings(){
-                $user = Auth::user();
+            'education_type' => 0,
+            'education_place' => 0,
+            'certificate' => 0,
+            'portfolio_link' => 0,
+        );
+    }
+    // making settings for users, for that we install glorand laravel package, and then checking if i there any data in settings column  if not we apply
+    public function user_settings()
+    {
+        $user = Auth::user();
 
-            $settings = $user->settings()->get();
-// dd($settings);
-            if(!$settings){
-                $settings = User::settings_array();
+        $settings = $user->settings()->get();
+        // dd($settings);
+        if (!$settings) {
+            $settings = User::settings_array();
+        }
+        // dd( $settings);
+        return $settings;
+    }
+
+
+    public function  isAdmin()
+    {
+
+        foreach ($this->roles()->get() as $role) {
+            if ($role->name) {
+                return true;
             }
-            // dd( $settings);
-            return $settings;
         }
+        return false;
+    }
 
+    public function reitings()
+    {
+        return $this->hasMany(Reiting::class);
+    }
 
-        public function  isAdmin(){
-
-            foreach($this->roles()->get() as $role)
-            {
-                if($role->name){
-                    return true;
-                }
-            }
-            return false;
-
-        }
-
-        public function reitings(){
-            return $this->hasMany(Reiting::class);
-        }
-
-// --------------------------------
+    // --------------------------------
 
 
 
@@ -129,8 +137,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-//     public function sendPasswordResetNotification($token)
-// {
-//     $this->notify(new \App\Notifications\MailResetPasswordNotification($token));
-// }
+    //     public function sendPasswordResetNotification($token)
+    // {
+    //     $this->notify(new \App\Notifications\MailResetPasswordNotification($token));
+    // }
 }

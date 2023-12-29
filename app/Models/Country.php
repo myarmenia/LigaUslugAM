@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'region_id',
-        'country_name'
-    ];
+    protected $guarded = [];
     public function regions(){
         return $this->belongsTo(Region::class,'region_id');
     }

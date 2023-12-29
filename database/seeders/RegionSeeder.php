@@ -17,8 +17,8 @@ class RegionSeeder extends Seeder
         Region::create( [
             'id'=>1,
             'region'=>'Красноярский край',
-            'created_at'=>'2022-02-11 11:16:50',
-            'updated_at'=>'2022-02-11 11:16:50'
+            'created_at'=>null,
+            'updated_at'=>null
             ] );
 
 
@@ -26,8 +26,14 @@ class RegionSeeder extends Seeder
             Region::create( [
             'id'=>2,
             'region'=>'Новосибирская область',
-            'created_at'=>'2022-02-11 11:47:48',
-            'updated_at'=>'2022-02-11 11:47:48'
+            'created_at'=>null,
+            'updated_at'=>null
             ] );
+            Region::create( [
+                'id'=>3,
+                'region'=>'Хакасия',
+                'created_at'=>null,
+                'updated_at'=>null
+                ] );
     }
 }

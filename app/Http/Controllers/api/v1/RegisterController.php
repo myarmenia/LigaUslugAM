@@ -30,6 +30,7 @@ class RegisterController extends Controller
 
 
     public function register (Request $request) {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'last_name' =>'required|string|max:255',
@@ -51,9 +52,10 @@ class RegisterController extends Controller
         event(new Registered($user));
         // $user->notify(new NotifyNewUserRegistration($user));
 
-
-        $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-        $email=$request->email;
+// commentel em 27.12.23 piti bacvi bajc chi ashxatum
+        // $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+        // dd($token);
+        $email = $request->email;
     //     Mail::send('Mails.registration',['token'=>$token,'email'=>$email,'user'=>$user],function (Message $message) use ($email){
     //         $message->to($email);
     //         $message->subject('Регистрация нового пользователя');

@@ -44,19 +44,15 @@ class LoginController extends Controller{
             }
 
             $user=User::find(Auth::id());
-            
-            if($user->email_verified_at){
 
+            if($user->email_verified_at){
                 $accessToken = Auth::user()->createToken('authToken')->accessToken;
-                // dd('aaaaa');
+
                 return response(['user'=>['user_id'=> Auth::user()->id,'user_name'=> Auth::user()->name,'user_email'=> Auth::user()->email],'access_token'=>$accessToken]);
             }else{
 
                 return response(['message'=>'Подтвердите адрес электронной почты!']);
             }
-
-
-
 
     }
     public function updateSocLink(Request $request){

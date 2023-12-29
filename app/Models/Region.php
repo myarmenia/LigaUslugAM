@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     use HasFactory;
-    protected $fillable=['region'];
+    protected $guarded=[];
 
     public function countries(){
         return $this->hasMany(Country::class);
