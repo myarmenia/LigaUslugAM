@@ -624,7 +624,7 @@ class UserSeeder extends Seeder
             'gender'=>NULL,
             'birth_date'=>NULL,
             'phonenumber'=>'0037493257297',
-            ' 'phone_status'=>'not verified','=>NULL,
+            'phone_status'=>'not verified',
             'fasebook_link'=>NULL,
             'instagram_link'=>NULL,
             'geting_notification'=>NULL,

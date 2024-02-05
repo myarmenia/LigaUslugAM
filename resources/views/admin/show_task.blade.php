@@ -146,12 +146,7 @@
                     @php
                     $k = "hello/world";
                     $k_type = explode('/','hello/world');
-                    // echo $k_type[1]=="world" ? "yes": "no";
-                    // @if({{$y}})
-                    //      echo $k_type[1];
-                    // @else
-                    //     echo "kkkk";
-                    // @endif
+
 
                     @endphp
 
