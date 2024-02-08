@@ -17,7 +17,7 @@ class SubcategorySeeder extends Seeder
         Subcategory::create( [
             'id'=>1,
             'category_id'=>1,
-            'subcategory_name'=>'Компьютерная помощь',
+            'subcategory_name'=>'Համակարգչային օգնություն',
             'price'=>50,
             'status'=>'0',
             'created_at'=>'2021-12-21 02:17:30',
@@ -29,7 +29,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>2,
             'category_id'=>1,
-            'subcategory_name'=>'Сайты под ключ',
+            'subcategory_name'=>'CMS կայքեր',
             'price'=>500,
             'status'=>'0',
             'created_at'=>'2021-12-21 02:26:17',
@@ -41,7 +41,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>3,
             'category_id'=>1,
-            'subcategory_name'=>'Разработка программ ',
+            'subcategory_name'=>'Ծրագրային ապահովման մշակում',
             'price'=>470,
             'status'=>'0',
             'created_at'=>'2021-12-21 02:33:45',
@@ -53,7 +53,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>4,
             'category_id'=>1,
-            'subcategory_name'=>'Администрирование',
+            'subcategory_name'=>'Ադմինիստրատիվ աշխատանք',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2021-12-22 12:07:10',
@@ -65,7 +65,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>5,
             'category_id'=>1,
-            'subcategory_name'=>'Разработка сайтов  ',
+            'subcategory_name'=>'Կայքերի ստեղծում',
             'price'=>500,
             'status'=>'0',
             'created_at'=>'2022-01-21 09:12:32',
@@ -77,7 +77,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>6,
             'category_id'=>1,
-            'subcategory_name'=>'Заправка картриджей ',
+            'subcategory_name'=>'Քարթրիջների լիցքավորում',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-10 09:49:02',
@@ -89,7 +89,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>7,
             'category_id'=>1,
-            'subcategory_name'=>'Разработка мобильных приложений ',
+            'subcategory_name'=>'Բջջային հավելվածի ստեղծում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-10 09:49:40',
@@ -101,7 +101,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>8,
             'category_id'=>1,
-            'subcategory_name'=>'Разработка игр ',
+            'subcategory_name'=>'Խաղերի ստեղծում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 09:50:23',
@@ -113,7 +113,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>9,
             'category_id'=>1,
-            'subcategory_name'=>'Другое',
+            'subcategory_name'=>'Այլ',
             'price'=>250,
             'status'=>'',
             'created_at'=>'2022-02-10 09:51:33',
@@ -125,7 +125,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>10,
             'category_id'=>2,
-            'subcategory_name'=>'Шиномонтаж',
+            'subcategory_name'=>'Անվադողերի սպասարկում',
             'price'=>100,
             'status'=>'',
             'created_at'=>'2022-02-10 09:54:25',
@@ -137,7 +137,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>11,
             'category_id'=>2,
-            'subcategory_name'=>'Кузовной ремонт 1',
+            'subcategory_name'=>'Թափքի վերանորոգում 1',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 09:54:25',
@@ -149,7 +149,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>12,
             'category_id'=>2,
-            'subcategory_name'=>'Диагностика',
+            'subcategory_name'=>'Ախտորոշում',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-10 09:55:16',
@@ -157,23 +157,10 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
-            Subcategory::create( [
-            'id'=>13,
-            'category_id'=>2,
-            'subcategory_name'=>'Трансмиссия',
-            'price'=>200,
-            'status'=>'',
-            'created_at'=>'2022-02-10 09:57:10',
-            'updated_at'=>'2022-02-10 09:57:10'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>14,
             'category_id'=>2,
-            'subcategory_name'=>'Замена стекла ',
+            'subcategory_name'=>'Ապակու փոխարինում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 09:57:10',
@@ -185,7 +172,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>15,
             'category_id'=>2,
-            'subcategory_name'=>'Подвеска',
+            'subcategory_name'=>'Մեքենայի կախոցներ',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-10 10:06:18',
@@ -197,7 +184,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>16,
             'category_id'=>2,
-            'subcategory_name'=>'Рулевое управление ',
+            'subcategory_name'=>'Ղեկ',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 10:06:18',
@@ -205,23 +192,10 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
-            Subcategory::create( [
-            'id'=>17,
-            'category_id'=>2,
-            'subcategory_name'=>'Рулевое управление ',
-            'price'=>200,
-            'status'=>'',
-            'created_at'=>'2022-02-10 10:08:16',
-            'updated_at'=>'2022-02-10 10:08:16'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>18,
             'category_id'=>2,
-            'subcategory_name'=>'Сход-развал ',
+            'subcategory_name'=>'Անիվների հավասարեցում',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-10 10:08:16',
@@ -233,7 +207,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>19,
             'category_id'=>2,
-            'subcategory_name'=>'Тормозная система ',
+            'subcategory_name'=>'Արգելակային համակարգ',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-10 10:09:21',
@@ -245,7 +219,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>20,
             'category_id'=>2,
-            'subcategory_name'=>'Ремонт грузовых авто ',
+            'subcategory_name'=>'Բեռնատարների վերանորոգում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-10 10:09:21',
@@ -253,23 +227,10 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
-            Subcategory::create( [
-            'id'=>21,
-            'category_id'=>2,
-            'subcategory_name'=>'Ремонт тентов грузовых авто ',
-            'price'=>350,
-            'status'=>'',
-            'created_at'=>'2022-02-10 10:11:18',
-            'updated_at'=>'2022-02-10 10:11:18'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>22,
             'category_id'=>2,
-            'subcategory_name'=>'Мойка и уход за авто ',
+            'subcategory_name'=>'Մեքենայի լվացում և խնամք',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-10 10:11:18',
@@ -281,7 +242,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>23,
             'category_id'=>2,
-            'subcategory_name'=>'Капитальный ремонт  Двигателя ',
+            'subcategory_name'=>'Շարժիչի կապիտալ վերանորոգում ',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-10 10:12:13',
@@ -293,7 +254,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>24,
             'category_id'=>2,
-            'subcategory_name'=>'Техническое обслуживание ',
+            'subcategory_name'=>'Տեխնիկական սպասարկում',
             'price'=>100,
             'status'=>'',
             'created_at'=>'2022-02-10 10:12:13',
@@ -305,7 +266,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>25,
             'category_id'=>2,
-            'subcategory_name'=>'Тюнинг ',
+            'subcategory_name'=>'Թյունինգ',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-10 10:13:22',
@@ -317,7 +278,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>26,
             'category_id'=>2,
-            'subcategory_name'=>'Электрооборудование',
+            'subcategory_name'=>'Էլեկտրասարքավորումներ',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 10:13:22',
@@ -329,7 +290,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>27,
             'category_id'=>2,
-            'subcategory_name'=>'Выездной шиномонтаж ',
+            'subcategory_name'=>'Շարժական անվադողերի տեղադրում',
             'price'=>180,
             'status'=>'',
             'created_at'=>'2022-02-10 10:14:30',
@@ -341,7 +302,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>28,
             'category_id'=>2,
-            'subcategory_name'=>'Отогрев авто ',
+            'subcategory_name'=>'Մեքենայի ջեռուցում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 10:14:30',
@@ -353,7 +314,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>29,
             'category_id'=>2,
-            'subcategory_name'=>'Ремонт спецтехники ',
+            'subcategory_name'=>'Հատուկ սարքավորումների վերանորոգում',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-10 10:15:49',
@@ -365,7 +326,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>30,
             'category_id'=>2,
-            'subcategory_name'=>'Покраска ',
+            'subcategory_name'=>'Ներկում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-10 10:20:27',
@@ -377,7 +338,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>31,
             'category_id'=>2,
-            'subcategory_name'=>'Другое',
+            'subcategory_name'=>'Այլ',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 10:18:28',
@@ -389,7 +350,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>32,
             'category_id'=>3,
-            'subcategory_name'=>'Грузоперевозки',
+            'subcategory_name'=>'Բեռնափոխադրումներ',
             'price'=>55,
             'status'=>'',
             'created_at'=>'2022-02-10 10:49:49',
@@ -401,7 +362,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>33,
             'category_id'=>3,
-            'subcategory_name'=>'Перевозка стройматериалов ',
+            'subcategory_name'=>'Շինանյութի տեղափոխում',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-10 10:49:49',
@@ -413,7 +374,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>34,
             'category_id'=>3,
-            'subcategory_name'=>'Услуги грузчиков ',
+            'subcategory_name'=>'Բեռնիչի ծառայություններ',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-10 10:50:29',
@@ -425,7 +386,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>35,
             'category_id'=>3,
-            'subcategory_name'=>'Вывоз мусора ',
+            'subcategory_name'=>'Աղբի հեռացում',
             'price'=>60,
             'status'=>'',
             'created_at'=>'2022-02-10 10:51:44',
@@ -437,7 +398,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>36,
             'category_id'=>3,
-            'subcategory_name'=>'Междугородные перевозки ',
+            'subcategory_name'=>'Միջքաղաքային տրանսպորտ',
             'price'=>250,
             'status'=>'',
             'created_at'=>'2022-02-10 10:51:44',
@@ -449,7 +410,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>37,
             'category_id'=>3,
-            'subcategory_name'=>'Перевозка продуктов ',
+            'subcategory_name'=>'Ապրանքների տեղափոխում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-10 10:52:59',
@@ -461,7 +422,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>38,
             'category_id'=>3,
-            'subcategory_name'=>'Курьеры',
+            'subcategory_name'=>'Առաքիչ',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-10 10:52:59',
@@ -473,7 +434,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>39,
             'category_id'=>3,
-            'subcategory_name'=>'Курьеры на авто ',
+            'subcategory_name'=>'Առաքիչ իր ավտոմեքենայով',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-10 10:54:13',
@@ -485,7 +446,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>40,
             'category_id'=>3,
-            'subcategory_name'=>'Услуги манипулятора ',
+            'subcategory_name'=>'Մանիպուլյատորների ծառայություններ',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 10:54:13',
@@ -497,7 +458,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>41,
             'category_id'=>3,
-            'subcategory_name'=>'Перевозка негабаритных грузов ',
+            'subcategory_name'=>'Չափազանց մեծ բեռների տեղափոխում',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-10 10:55:33',
@@ -509,7 +470,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>42,
             'category_id'=>3,
-            'subcategory_name'=>'Перевозка продуктов с рефрижератором ',
+            'subcategory_name'=>'Ապրանքների տեղափոխում սառնարանով',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-10 10:55:33',
@@ -521,7 +482,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>43,
             'category_id'=>3,
-            'subcategory_name'=>'Эвакуаторы',
+            'subcategory_name'=>'Քարշակ մեքենաներ',
             'price'=>250,
             'status'=>'',
             'created_at'=>'2022-02-10 10:57:53',
@@ -533,7 +494,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>44,
             'category_id'=>3,
-            'subcategory_name'=>'Междугородные перевозки животных ',
+            'subcategory_name'=>'Կենդանիների միջքաղաքային տեղափոխում',
             'price'=>450,
             'status'=>'',
             'created_at'=>'2022-02-10 10:57:53',
@@ -545,7 +506,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>45,
             'category_id'=>3,
-            'subcategory_name'=>'Междугородные перевозки автомобилей  \r\n',
+            'subcategory_name'=>'Միջքաղաքային տեղափոխում',
             'price'=>1000,
             'status'=>'',
             'created_at'=>'2022-02-10 10:58:42',
@@ -557,7 +518,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>46,
             'category_id'=>3,
-            'subcategory_name'=>'Другое',
+            'subcategory_name'=>'Այլ',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-10 10:58:42',
@@ -569,7 +530,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>47,
             'category_id'=>4,
-            'subcategory_name'=>'Выгул',
+            'subcategory_name'=>'Զբոսանք',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-17 07:07:08',
@@ -581,7 +542,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>48,
             'category_id'=>4,
-            'subcategory_name'=>'Стрижка животных',
+            'subcategory_name'=>'Կենդանիների մազերի խնամք',
             'price'=>80,
             'status'=>'',
             'created_at'=>'2022-02-17 07:07:08',
@@ -593,7 +554,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>49,
             'category_id'=>4,
-            'subcategory_name'=>'Перевозка ',
+            'subcategory_name'=>'Տեղափոխում',
             'price'=>70,
             'status'=>'',
             'created_at'=>'2022-02-17 07:10:07',
@@ -605,7 +566,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>50,
             'category_id'=>4,
-            'subcategory_name'=>'Передержка',
+            'subcategory_name'=>'Պահել',
             'price'=>90,
             'status'=>'',
             'created_at'=>'2022-02-17 07:10:07',
@@ -613,11 +574,11 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
+            ////////
             Subcategory::create( [
             'id'=>53,
             'category_id'=>4,
-            'subcategory_name'=>'Составление родословной',
+            'subcategory_name'=>'Տոհմաբանության կազմում',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-17 07:17:20',
@@ -629,7 +590,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>54,
             'category_id'=>4,
-            'subcategory_name'=>'Дрессировка',
+            'subcategory_name'=>'Վարժեցում',
             'price'=>900,
             'status'=>'',
             'created_at'=>'2022-02-17 07:17:20',
@@ -641,7 +602,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>55,
             'category_id'=>4,
-            'subcategory_name'=>'Стрижка когтей',
+            'subcategory_name'=>'Եղունգների կտրում',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-17 07:17:59',
@@ -653,7 +614,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>56,
             'category_id'=>5,
-            'subcategory_name'=>'Электромонтажные работы ',
+            'subcategory_name'=>'Էլեկտրամոնտաժային աշխատանքներ',
             'price'=>1000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:22:01',
@@ -665,7 +626,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>57,
             'category_id'=>5,
-            'subcategory_name'=>'Изготовление мебели',
+            'subcategory_name'=>'Կահույքի պատրաստում',
             'price'=>1000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:22:01',
@@ -677,7 +638,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>58,
             'category_id'=>5,
-            'subcategory_name'=>'Изготовление кухни',
+            'subcategory_name'=>'Խոհանոցի պատրաստում',
             'price'=>1500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:23:12',
@@ -689,7 +650,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>59,
             'category_id'=>5,
-            'subcategory_name'=>'Кафельные работы',
+            'subcategory_name'=>'Սալիկի աշխատանքներ',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:23:12',
@@ -701,7 +662,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>60,
             'category_id'=>5,
-            'subcategory_name'=>'Кладка брусчатки',
+            'subcategory_name'=>'Մայթաքարերի տեղադրում',
             'price'=>2000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:24:46',
@@ -713,7 +674,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>61,
             'category_id'=>5,
-            'subcategory_name'=>'Бетонные работы ',
+            'subcategory_name'=>'Բետոնի աշխատանքներ',
             'price'=>1500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:24:46',
@@ -725,7 +686,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>62,
             'category_id'=>5,
-            'subcategory_name'=>'Сантехнические работы, водоснабжение, канализация и отопление, квартира',
+            'subcategory_name'=>'Սանտեխնիկական աշխատանքներ, ջրամատակարարում, կոյուղի և ջեռուցում',
             'price'=>1000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:26:11',
@@ -737,7 +698,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>63,
             'category_id'=>5,
-            'subcategory_name'=>'Сантехнические работы, водоснабжение, канализация и отопление, частный дом',
+            'subcategory_name'=>'Սանտեխնիկական աշխատանքներ, ջրամատակարարում, կոյուղի և ջեռուցում առանձնատներում',
             'price'=>2000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:26:11',
@@ -749,7 +710,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>64,
             'category_id'=>5,
-            'subcategory_name'=>'Сантехнические работы, водоснабжение, канализация и отопление, торговое помещение',
+            'subcategory_name'=>'Սանտեխնիկական աշխատանքներ, ջրամատակարարում, կոյուղի և ջեռուցում շուկաներում',
             'price'=>3000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:27:29',
@@ -761,7 +722,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>65,
             'category_id'=>5,
-            'subcategory_name'=>'Сантехнические работы, водоснабжение, канализация и отопление промышленное здание',
+            'subcategory_name'=>'Սանտեխնիկական աշխատանքներ, ջրամատակարարում, կոյուղի և ջեռուցման արդյունաբերական շենքերում',
             'price'=>4000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:27:29',
@@ -773,7 +734,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>66,
             'category_id'=>5,
-            'subcategory_name'=>'Мелкосрочный ремонт сантехники',
+            'subcategory_name'=>'Սանտեխնիկայի վերանորոգում',
             'price'=>80,
             'status'=>'',
             'created_at'=>'2022-02-17 07:28:50',
@@ -785,7 +746,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>67,
             'category_id'=>5,
-            'subcategory_name'=>'Фасадные работы монтаж',
+            'subcategory_name'=>'Ճակատային աշխատանքների իրականացում',
             'price'=>3000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:28:50',
@@ -797,7 +758,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>68,
             'category_id'=>5,
-            'subcategory_name'=>'Отделка деревянных домов, бань, саун. Заборы и ограждения ',
+            'subcategory_name'=>'Փայտե տների, լոգարանների, սաունաների հարդարում։ Ցանկապատեր և պարիսպներ',
             'price'=>800,
             'status'=>'',
             'created_at'=>'2022-02-17 07:31:25',
@@ -805,23 +766,10 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
-            Subcategory::create( [
-            'id'=>69,
-            'category_id'=>5,
-            'subcategory_name'=>'Фасадные работы ремонт',
-            'price'=>200,
-            'status'=>'',
-            'created_at'=>'2022-02-17 07:31:25',
-            'updated_at'=>'2022-02-17 07:31:25'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>70,
             'category_id'=>5,
-            'subcategory_name'=>'Сборка и ремонт мебели',
+            'subcategory_name'=>'Կահույքի հավաքում և վերանորոգում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 07:32:57',
@@ -833,7 +781,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>71,
             'category_id'=>5,
-            'subcategory_name'=>'Натяжные потолки ',
+            'subcategory_name'=>'Ձգվող առաստաղ',
             'price'=>280,
             'status'=>'',
             'created_at'=>'2022-02-17 07:32:57',
@@ -845,7 +793,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>72,
             'category_id'=>5,
-            'subcategory_name'=>'Ремонт балконов ',
+            'subcategory_name'=>'Պատշգամբի վերանորոգում',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:35:53',
@@ -857,7 +805,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>73,
             'category_id'=>5,
-            'subcategory_name'=>'Остекление балконов ',
+            'subcategory_name'=>'Պատշգամբների ապակեպատում',
             'price'=>750,
             'status'=>'',
             'created_at'=>'2022-02-17 07:35:53',
@@ -869,7 +817,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>74,
             'category_id'=>5,
-            'subcategory_name'=>'Ремонт ванной',
+            'subcategory_name'=>'Սանհանգույցի վերանորոգում',
             'price'=>1800,
             'status'=>'',
             'created_at'=>'2022-02-17 07:37:14',
@@ -881,7 +829,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>75,
             'category_id'=>5,
-            'subcategory_name'=>'Строительство домов, коттеджей ',
+            'subcategory_name'=>'Տների, քոթեջների կառուցում',
             'price'=>10000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:37:14',
@@ -893,7 +841,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>76,
             'category_id'=>5,
-            'subcategory_name'=>'Мастер на час, любые мелкосрочные работы ',
+            'subcategory_name'=>'Վարպետ մեկ ժամով, ցանկացած կարճաժամկետ աշխատանքի համար',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-17 07:38:21',
@@ -905,7 +853,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>77,
             'category_id'=>5,
-            'subcategory_name'=>'Обои и малярные работы',
+            'subcategory_name'=>'Պաստառ և ներկման աշխատանքներ',
             'price'=>700,
             'status'=>'',
             'created_at'=>'2022-02-17 07:38:21',
@@ -917,7 +865,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>78,
             'category_id'=>5,
-            'subcategory_name'=>'Снос и демонтаж',
+            'subcategory_name'=>'Քանդում և ապամոնտաժում',
             'price'=>700,
             'status'=>'',
             'created_at'=>'2022-02-17 07:39:27',
@@ -929,7 +877,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>79,
             'category_id'=>5,
-            'subcategory_name'=>'Строительство гараж',
+            'subcategory_name'=>'Շինարարական ավտոտնակ',
             'price'=>4500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:39:27',
@@ -941,7 +889,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>80,
             'category_id'=>5,
-            'subcategory_name'=>'Сварочные работы, мелкосрочные работы',
+            'subcategory_name'=>'Եռակցման աշխատանքներ, կարճաժամկետ աշխատանք',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-17 07:40:46',
@@ -953,7 +901,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>81,
             'category_id'=>5,
-            'subcategory_name'=>'Земляные работы',
+            'subcategory_name'=>'Պեղում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 07:40:46',
@@ -965,7 +913,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>82,
             'category_id'=>5,
-            'subcategory_name'=>'Монтаж Лестницы ',
+            'subcategory_name'=>'Աստիճանների տեղադրում',
             'price'=>2000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:42:07',
@@ -977,7 +925,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>83,
             'category_id'=>5,
-            'subcategory_name'=>'Высотные работы без техники',
+            'subcategory_name'=>'Աշխատանք բարձրության վրա՝ առանց սարքավորումների',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:42:07',
@@ -989,7 +937,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>84,
             'category_id'=>5,
-            'subcategory_name'=>'Газовая сварка',
+            'subcategory_name'=>'Գազի զոդում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 07:43:37',
@@ -1001,7 +949,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>85,
             'category_id'=>5,
-            'subcategory_name'=>'Слаботочные системы ',
+            'subcategory_name'=>'Ցածր հոսանքի համակարգ',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:43:37',
@@ -1013,7 +961,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>86,
             'category_id'=>5,
-            'subcategory_name'=>'Ремонт и установка замков',
+            'subcategory_name'=>'Փականների վերանորոգում և տեղադրում',
             'price'=>100,
             'status'=>'',
             'created_at'=>'2022-02-17 07:45:18',
@@ -1025,7 +973,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>87,
             'category_id'=>5,
-            'subcategory_name'=>'Реставрация и эмалировка ванн ',
+            'subcategory_name'=>'Լոգարանների վերականգնում և էմալապատում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 07:45:18',
@@ -1037,7 +985,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>88,
             'category_id'=>5,
-            'subcategory_name'=>'Демонтаж металлоконструкций',
+            'subcategory_name'=>'Մետաղական կոնստրուկցիաների ապամոնտաժում',
             'price'=>400,
             'status'=>'',
             'created_at'=>'2022-02-17 07:46:31',
@@ -1049,7 +997,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>89,
             'category_id'=>5,
-            'subcategory_name'=>'Вентиляция',
+            'subcategory_name'=>'Օդափոխում',
             'price'=>2000,
             'status'=>'',
             'created_at'=>'2022-02-17 07:46:31',
@@ -1061,7 +1009,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>90,
             'category_id'=>5,
-            'subcategory_name'=>'Алмазное сверление и резка',
+            'subcategory_name'=>'Ալմազով կտրում',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:48:13',
@@ -1073,7 +1021,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>91,
             'category_id'=>5,
-            'subcategory_name'=>'Чистка труб ',
+            'subcategory_name'=>'Խողովակների մաքրում',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 07:48:13',
@@ -1085,7 +1033,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>92,
             'category_id'=>5,
-            'subcategory_name'=>'Рольставни и секционные ворота',
+            'subcategory_name'=>'Գլանափեղկեր և սեկցիոն դռներ',
             'price'=>600,
             'status'=>'',
             'created_at'=>'2022-02-17 07:50:05',
@@ -1097,7 +1045,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>93,
             'category_id'=>5,
-            'subcategory_name'=>'Изготовление ключей',
+            'subcategory_name'=>'Բանալիների արտադրություն',
             'price'=>50,
             'status'=>'',
             'created_at'=>'2022-02-17 07:50:05',
@@ -1109,7 +1057,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>94,
             'category_id'=>5,
-            'subcategory_name'=>'Настройка Антенн',
+            'subcategory_name'=>'Ալեհավաքի կարգավորումներ',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 07:51:04',
@@ -1121,7 +1069,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>95,
             'category_id'=>5,
-            'subcategory_name'=>'Озеленение',
+            'subcategory_name'=>'Կանաչապատում',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:51:04',
@@ -1133,7 +1081,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>96,
             'category_id'=>5,
-            'subcategory_name'=>'Лепнина и мозаики ',
+            'subcategory_name'=>'Սվազ և խճանկար',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 07:51:58',
@@ -1145,7 +1093,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>97,
             'category_id'=>5,
-            'subcategory_name'=>'Перетяжка и ремонт мягкой мебели ',
+            'subcategory_name'=>'Փափուկ կահույքի պաստառապատում և վերանորոգում',
             'price'=>250,
             'status'=>'',
             'created_at'=>'2022-02-17 07:51:58',
@@ -1157,7 +1105,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>98,
             'category_id'=>5,
-            'subcategory_name'=>'Изготовление кованых изделий ',
+            'subcategory_name'=>'Դարբնոցային արտադրություն',
             'price'=>800,
             'status'=>'',
             'created_at'=>'2022-02-17 07:56:54',
@@ -1169,7 +1117,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>99,
             'category_id'=>5,
-            'subcategory_name'=>'Замена окна пластикового ',
+            'subcategory_name'=>'Պլաստիկ պատուհանի փոխարինում',
             'price'=>400,
             'status'=>'',
             'created_at'=>'2022-02-17 07:56:54',
@@ -1181,7 +1129,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>100,
             'category_id'=>5,
-            'subcategory_name'=>'Сварочные работы ',
+            'subcategory_name'=>'Եռակցման աշխատանքներ',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 07:58:07',
@@ -1193,7 +1141,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>101,
             'category_id'=>5,
-            'subcategory_name'=>'Строительство бань, саун ',
+            'subcategory_name'=>'Լոգարանների, սաունաների կառուցում',
             'price'=>1200,
             'status'=>'',
             'created_at'=>'2022-02-17 07:58:07',
@@ -1205,7 +1153,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>102,
             'category_id'=>5,
-            'subcategory_name'=>'Ремонт квартиры под ключ ',
+            'subcategory_name'=>'Բնակարանի վերանորոգում',
             'price'=>5000,
             'status'=>'',
             'created_at'=>NULL,
@@ -1217,7 +1165,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>103,
             'category_id'=>5,
-            'subcategory_name'=>'Кровельные работы ',
+            'subcategory_name'=>'Տանիքապատում',
             'price'=>1500,
             'status'=>'',
             'created_at'=>'2022-02-17 08:08:05',
@@ -1229,7 +1177,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>104,
             'category_id'=>5,
-            'subcategory_name'=>'Ремонт офиса',
+            'subcategory_name'=>'Գրասենյակի վերանորոգում',
             'price'=>1400,
             'status'=>'',
             'created_at'=>'2022-02-17 08:08:05',
@@ -1241,7 +1189,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>105,
             'category_id'=>5,
-            'subcategory_name'=>'Охранные системы и контроль доступа',
+            'subcategory_name'=>'Անվտանգության համակարգեր և մուտքի վերահսկում',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 08:15:32',
@@ -1253,7 +1201,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>106,
             'category_id'=>5,
-            'subcategory_name'=>'Изготовление шкафов-купе ',
+            'subcategory_name'=>'Զգեստապահարանների արտադրություն',
             'price'=>800,
             'status'=>'',
             'created_at'=>'2022-02-17 08:15:32',
@@ -1265,7 +1213,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>107,
             'category_id'=>5,
-            'subcategory_name'=>'Установка межкомнатных дверей ',
+            'subcategory_name'=>'Ներքին դռների տեղադրում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:16:53',
@@ -1277,7 +1225,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>108,
             'category_id'=>5,
-            'subcategory_name'=>'Промышленные полы ',
+            'subcategory_name'=>'Արդյունաբերական հատակներ',
             'price'=>3000,
             'status'=>'',
             'created_at'=>'2022-02-17 08:16:53',
@@ -1289,7 +1237,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>109,
             'category_id'=>5,
-            'subcategory_name'=>'Бурение скважины.',
+            'subcategory_name'=>'Հորատանցք հորատում',
             'price'=>1000,
             'status'=>'',
             'created_at'=>'2022-02-17 08:18:11',
@@ -1301,7 +1249,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>110,
             'category_id'=>5,
-            'subcategory_name'=>'Установка стен с Гипсокартона ',
+            'subcategory_name'=>'Պատերի տեղադրում գիպսաստվարաթղթով',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 08:18:11',
@@ -1309,11 +1257,11 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
+                ///////////
             Subcategory::create( [
             'id'=>111,
             'category_id'=>5,
-            'subcategory_name'=>'Ремонт электрокотлов ',
+            'subcategory_name'=>'Էլեկտրական կաթսաների վերանորոգում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:19:02',
@@ -1325,7 +1273,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>112,
             'category_id'=>5,
-            'subcategory_name'=>'Кладка печей и каминов ',
+            'subcategory_name'=>'Վառարանների և բուխարիների տեղադրում',
             'price'=>1500,
             'status'=>'',
             'created_at'=>'2022-02-17 08:19:02',
@@ -1337,7 +1285,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>113,
             'category_id'=>5,
-            'subcategory_name'=>'Столярные и плотницкие работы',
+            'subcategory_name'=>'Հյուսնային և ատաղձագործական աշխատանքներ',
             'price'=>500,
             'status'=>'',
             'created_at'=>'2022-02-17 08:20:07',
@@ -1349,7 +1297,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>114,
             'category_id'=>5,
-            'subcategory_name'=>'Установка карнизов ',
+            'subcategory_name'=>'Վարագույրների տեղադրում',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-17 08:20:07',
@@ -1361,7 +1309,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>115,
             'category_id'=>5,
-            'subcategory_name'=>'Ремонт и установка кодовых замков ',
+            'subcategory_name'=>'Համակցված փականների վերանորոգում և տեղադրում',
             'price'=>250,
             'status'=>'',
             'created_at'=>'2022-02-17 08:23:23',
@@ -1373,7 +1321,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>116,
             'category_id'=>5,
-            'subcategory_name'=>'Стекольные услуги ',
+            'subcategory_name'=>'Ապակեգործի ծառայություններ',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:23:23',
@@ -1385,7 +1333,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>117,
             'category_id'=>5,
-            'subcategory_name'=>'Изготовление дверей из дерева ',
+            'subcategory_name'=>'Փայտից դռների պատրաստում',
             'price'=>350,
             'status'=>'',
             'created_at'=>'2022-02-17 08:25:18',
@@ -1397,31 +1345,27 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>118,
             'category_id'=>5,
-            'subcategory_name'=>'Поверка счетчиков ',
+            'subcategory_name'=>'Հաշվիչների ստուգում',
             'price'=>150,
             'status'=>'',
             'created_at'=>'2022-02-17 08:25:18',
             'updated_at'=>'2022-02-17 08:25:18'
             ] );
 
-
-
             Subcategory::create( [
             'id'=>119,
             'category_id'=>5,
-            'subcategory_name'=>'Роспись стен',
+            'subcategory_name'=>'Պատի նկարչություն',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:26:46',
             'updated_at'=>'2022-02-17 08:26:46'
             ] );
 
-
-
             Subcategory::create( [
             'id'=>120,
             'category_id'=>5,
-            'subcategory_name'=>'Проектирование зданий ',
+            'subcategory_name'=>'Շենքի նախագծում',
             'price'=>1000,
             'status'=>'',
             'created_at'=>'2022-02-17 08:26:46',
@@ -1433,7 +1377,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>125,
             'category_id'=>5,
-            'subcategory_name'=>'Герметизация фасадов',
+            'subcategory_name'=>'Ֆասադների հերմետիկացում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:30:14',
@@ -1445,7 +1389,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>126,
             'category_id'=>5,
-            'subcategory_name'=>'Другое',
+            'subcategory_name'=>'Այլ',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 08:30:14',
@@ -1457,7 +1401,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>127,
             'category_id'=>6,
-            'subcategory_name'=>'Услуги дезинсекции ',
+            'subcategory_name'=>'Ախտահանման ծառայություններ',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:35:52',
@@ -1469,7 +1413,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>128,
             'category_id'=>6,
-            'subcategory_name'=>'Обеззараживание помещения ',
+            'subcategory_name'=>'Տարածքի ախտահանում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:35:52',
@@ -1481,7 +1425,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>129,
             'category_id'=>6,
-            'subcategory_name'=>'Дезинфекция',
+            'subcategory_name'=>'Ախտահանում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:39:44',
@@ -1493,31 +1437,17 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>130,
             'category_id'=>6,
-            'subcategory_name'=>'Избавление от плесени и грибка',
+            'subcategory_name'=>'Ազատվել բորբոսից և սնկից',
             'price'=>300,
             'status'=>'',
             'created_at'=>'2022-02-17 08:39:44',
             'updated_at'=>'2022-02-17 08:39:44'
             ] );
 
-
-
-            Subcategory::create( [
-            'id'=>133,
-            'category_id'=>6,
-            'subcategory_name'=>'Уничтожение клопов ',
-            'price'=>200,
-            'status'=>'',
-            'created_at'=>'2022-02-17 08:51:22',
-            'updated_at'=>'2022-02-17 08:51:22'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>134,
             'category_id'=>6,
-            'subcategory_name'=>'Уничтожение тараканов ',
+            'subcategory_name'=>'Ուտիճների ոչնչացում',
             'price'=>200,
             'status'=>'',
             'created_at'=>'2022-02-17 08:51:22',
@@ -1529,7 +1459,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>135,
             'category_id'=>6,
-            'subcategory_name'=>'Уничтожение грызунов ',
+            'subcategory_name'=>'Կրծողների ոչնչացում',
             'price'=>200,
             'status'=>' ',
             'created_at'=>'2022-02-17 08:53:22',
@@ -1541,7 +1471,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>142,
             'category_id'=>11,
-            'subcategory_name'=>'Веб-дизайнер',
+            'subcategory_name'=>'Վեբ դիզայներ',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:39:19',
@@ -1553,7 +1483,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>143,
             'category_id'=>11,
-            'subcategory_name'=>'Дизайнер интерьеров',
+            'subcategory_name'=>'Ինտերիերի դիզայներ',
             'price'=>500,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:40:18',
@@ -1565,7 +1495,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>144,
             'category_id'=>11,
-            'subcategory_name'=>'Графический дизайнер',
+            'subcategory_name'=>'Գրաֆիկական դիզայներ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:41:45',
@@ -1577,7 +1507,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>145,
             'category_id'=>11,
-            'subcategory_name'=>'UX/UI-дизайнер',
+            'subcategory_name'=>'UX/UI դիզայներ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:42:24',
@@ -1589,7 +1519,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>146,
             'category_id'=>11,
-            'subcategory_name'=>'Упаковка и реклам',
+            'subcategory_name'=>'Փաթեթավորում և գովազդ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:42:46',
@@ -1601,7 +1531,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>147,
             'category_id'=>11,
-            'subcategory_name'=>'Ландшафтный дизайнер',
+            'subcategory_name'=>'Լանդշաֆտային դիզայներ',
             'price'=>1000,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:43:16',
@@ -1613,7 +1543,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>148,
             'category_id'=>12,
-            'subcategory_name'=>'Персональный помощник',
+            'subcategory_name'=>'Անձնական օգնական',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:47:06',
@@ -1625,7 +1555,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>149,
             'category_id'=>12,
-            'subcategory_name'=>'Работа в MS Office',
+            'subcategory_name'=>'Աշխատանք MS Office-ով',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:47:36',
@@ -1637,7 +1567,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>150,
             'category_id'=>12,
-            'subcategory_name'=>'Поиск информации',
+            'subcategory_name'=>'Տեղեկությունների որոնում',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:49:52',
@@ -1649,7 +1579,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>151,
             'category_id'=>12,
-            'subcategory_name'=>'Любая интеллектуальная работа',
+            'subcategory_name'=>'Ցանկացած ինտելեկտուալ աշխատանք',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:50:11',
@@ -1661,7 +1591,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>152,
             'category_id'=>12,
-            'subcategory_name'=>'Рутинная работа',
+            'subcategory_name'=>'Սովորական աշխատանք',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:50:39',
@@ -1673,7 +1603,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>153,
             'category_id'=>12,
-            'subcategory_name'=>'Менеджмент проектов',
+            'subcategory_name'=>'Ծրագրի կառավարում',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:51:05',
@@ -1685,7 +1615,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>154,
             'category_id'=>12,
-            'subcategory_name'=>'Юридическая помощь',
+            'subcategory_name'=>'Իրավաբանական օգնություն',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:51:32',
@@ -1697,7 +1627,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>155,
             'category_id'=>12,
-            'subcategory_name'=>'Договор и доверенность',
+            'subcategory_name'=>'Համաձայնագիր և լիազորագիր',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:52:43',
@@ -1709,7 +1639,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>156,
             'category_id'=>12,
-            'subcategory_name'=>'Судебный документ',
+            'subcategory_name'=>'Դատական ​​փաստաթուղթ',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:53:44',
@@ -1721,7 +1651,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>157,
             'category_id'=>12,
-            'subcategory_name'=>'Ведение ООО и ИП',
+            'subcategory_name'=>'ՍՊԸ-ների և անհատ ձեռնարկատերերի կառավարում',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:54:43',
@@ -1733,7 +1663,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>158,
             'category_id'=>12,
-            'subcategory_name'=>'Юридическая консультация',
+            'subcategory_name'=>'Իրավաբանական խորհրդատվություն',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:55:03',
@@ -1745,7 +1675,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>159,
             'category_id'=>12,
-            'subcategory_name'=>'Подбор персонала',
+            'subcategory_name'=>'Աշխատողների հավաքագրում',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:55:32',
@@ -1757,7 +1687,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>160,
             'category_id'=>12,
-            'subcategory_name'=>'Подбор резюме',
+            'subcategory_name'=>'Ռեզյումեների պատրաստում',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:55:57',
@@ -1769,7 +1699,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>161,
             'category_id'=>12,
-            'subcategory_name'=>'Найм специалиста',
+            'subcategory_name'=>'Վարձել մասնագետ',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 04:56:19',
@@ -1781,7 +1711,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>162,
             'category_id'=>13,
-            'subcategory_name'=>'Аренда квартир',
+            'subcategory_name'=>'Բնակարանների վարձակալություն',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:23:42',
@@ -1793,7 +1723,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>163,
             'category_id'=>13,
-            'subcategory_name'=>'Аренда квартир посуточно',
+            'subcategory_name'=>'Բնակարանների վարձակալություն օրավարձով',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:24:07',
@@ -1805,7 +1735,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>164,
             'category_id'=>13,
-            'subcategory_name'=>'Аренда домов, коттеджей',
+            'subcategory_name'=>'Վարձակալություն ՝ տների, քոթեջների',
             'price'=>250,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:24:35',
@@ -1817,7 +1747,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>165,
             'category_id'=>13,
-            'subcategory_name'=>'Оборудование разное',
+            'subcategory_name'=>'Տարբեր սարքավորումներ',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:25:07',
@@ -1829,7 +1759,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>166,
             'category_id'=>13,
-            'subcategory_name'=>'Автомобили',
+            'subcategory_name'=>'Ավտոմեքենաներ',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:25:27',
@@ -1841,7 +1771,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>167,
             'category_id'=>13,
-            'subcategory_name'=>'Автобетононасосы',
+            'subcategory_name'=>'Բետոնե պոմպեր',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:25:59',
@@ -1853,7 +1783,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>168,
             'category_id'=>13,
-            'subcategory_name'=>'Автомобили-длинномеры',
+            'subcategory_name'=>'Երկարաթափք մեքենաներ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:26:24',
@@ -1865,7 +1795,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>169,
             'category_id'=>13,
-            'subcategory_name'=>'Самосвалы',
+            'subcategory_name'=>'Ինքնաթափ բեռնատարներ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:27:01',
@@ -1873,11 +1803,11 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
+                /////////////
             Subcategory::create( [
             'id'=>170,
             'category_id'=>13,
-            'subcategory_name'=>'Низкорамные платформы',
+            'subcategory_name'=>'Ցածրաբեռնիչ հարթակներ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:27:32',
@@ -1889,7 +1819,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>171,
             'category_id'=>13,
-            'subcategory_name'=>'Автокраны и автовышки',
+            'subcategory_name'=>'Բեռնատար Կռունկներ',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:27:54',
@@ -1901,31 +1831,27 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>172,
             'category_id'=>13,
-            'subcategory_name'=>'Экскаваторы и погрузчики',
+            'subcategory_name'=>'Էքսկավատորներ և բանվորներ',
             'price'=>500,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:28:16',
             'updated_at'=>'2022-03-11 05:28:16'
             ] );
 
-
-
             Subcategory::create( [
             'id'=>173,
             'category_id'=>13,
-            'subcategory_name'=>'Башенные краны',
+            'subcategory_name'=>'Աշտարակային կռունկներ',
             'price'=>1000,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:28:45',
             'updated_at'=>'2022-03-11 05:28:45'
             ] );
 
-
-
             Subcategory::create( [
             'id'=>174,
             'category_id'=>13,
-            'subcategory_name'=>'Мини-экскаваторы и погрузчики',
+            'subcategory_name'=>'Մինի էքսկավատորներ և բանվորներ',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:29:09',
@@ -1937,7 +1863,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>175,
             'category_id'=>13,
-            'subcategory_name'=>'Фотостудии',
+            'subcategory_name'=>'Ֆոտոստուդիաներ',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:29:33',
@@ -1949,7 +1875,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>176,
             'category_id'=>13,
-            'subcategory_name'=>'Дорожная спецтехника',
+            'subcategory_name'=>'Ճանապարհային Հատուկ տեխնիկա',
             'price'=>800,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:29:54',
@@ -1961,31 +1887,17 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>177,
             'category_id'=>13,
-            'subcategory_name'=>'Ямобуры',
+            'subcategory_name'=>'Փոս փորող բուրեր',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:30:16',
             'updated_at'=>'2022-03-11 05:30:16'
             ] );
 
-
-
-            Subcategory::create( [
-            'id'=>178,
-            'category_id'=>13,
-            'subcategory_name'=>'Илососы',
-            'price'=>200,
-            'status'=>'0',
-            'created_at'=>'2022-03-11 05:30:38',
-            'updated_at'=>'2022-03-11 05:30:38'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>179,
             'category_id'=>13,
-            'subcategory_name'=>'Автогидроподъёмники',
+            'subcategory_name'=>'Ավտոհիդրավլիկ վերելակներ',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:31:00',
@@ -1997,31 +1909,17 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>180,
             'category_id'=>13,
-            'subcategory_name'=>'Скутеры',
+            'subcategory_name'=>'Սկուտերներ',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:31:21',
             'updated_at'=>'2022-03-11 05:31:21'
             ] );
 
-
-
-            Subcategory::create( [
-            'id'=>181,
-            'category_id'=>13,
-            'subcategory_name'=>'Теплоходы',
-            'price'=>900,
-            'status'=>'0',
-            'created_at'=>'2022-03-11 05:31:41',
-            'updated_at'=>'2022-03-11 05:31:41'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>182,
             'category_id'=>13,
-            'subcategory_name'=>'Автомобили под такси',
+            'subcategory_name'=>'Վարձով մեքենաներ տաքսիի համար',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:32:01',
@@ -2033,31 +1931,17 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>183,
             'category_id'=>13,
-            'subcategory_name'=>'Лимузины',
+            'subcategory_name'=>'Լիմուզին',
             'price'=>700,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:32:22',
             'updated_at'=>'2022-03-11 05:32:22'
             ] );
 
-
-
-            Subcategory::create( [
-            'id'=>184,
-            'category_id'=>13,
-            'subcategory_name'=>'Вертолеты',
-            'price'=>5000,
-            'status'=>'0',
-            'created_at'=>'2022-03-11 05:32:49',
-            'updated_at'=>'2022-03-11 05:32:49'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>185,
             'category_id'=>13,
-            'subcategory_name'=>'Строительные инструменты',
+            'subcategory_name'=>'Շինարարական գործիքներ',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:33:06',
@@ -2069,7 +1953,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>186,
             'category_id'=>13,
-            'subcategory_name'=>'Лыжи и сноуборды',
+            'subcategory_name'=>'Դահուկներ և սնոուբորդներ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:33:26',
@@ -2081,7 +1965,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>187,
             'category_id'=>13,
-            'subcategory_name'=>'Велосипеды',
+            'subcategory_name'=>'Հեծանիվներ',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:33:48',
@@ -2093,7 +1977,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>188,
             'category_id'=>13,
-            'subcategory_name'=>'Фото и видеотехника',
+            'subcategory_name'=>'Ֆոտո և վիդեոտեխնիկա',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:34:13',
@@ -2101,23 +1985,10 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
-            Subcategory::create( [
-            'id'=>189,
-            'category_id'=>13,
-            'subcategory_name'=>'Гидроциклы',
-            'price'=>300,
-            'status'=>'0',
-            'created_at'=>'2022-03-11 05:34:35',
-            'updated_at'=>'2022-03-11 05:34:35'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>190,
             'category_id'=>13,
-            'subcategory_name'=>'Спортивный инвентарь',
+            'subcategory_name'=>'Սպորտային սարքավորումներ',
             'price'=>350,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:35:00',
@@ -2129,7 +2000,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>191,
             'category_id'=>13,
-            'subcategory_name'=>'Мотоциклы',
+            'subcategory_name'=>'Մոտոցիկլներ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:35:29',
@@ -2137,23 +2008,10 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
-            Subcategory::create( [
-            'id'=>192,
-            'category_id'=>13,
-            'subcategory_name'=>'Экскаваторы-планировщики',
-            'price'=>500,
-            'status'=>'0',
-            'created_at'=>'2022-03-11 05:35:51',
-            'updated_at'=>'2022-03-11 05:35:51'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>193,
             'category_id'=>13,
-            'subcategory_name'=>'Другое',
+            'subcategory_name'=>'Այլ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:36:10',
@@ -2165,7 +2023,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>194,
             'category_id'=>14,
-            'subcategory_name'=>'Услуги Фотографа',
+            'subcategory_name'=>'Լուսանկարչի ծառայություններ',
             'price'=>600,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:37:47',
@@ -2177,7 +2035,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>195,
             'category_id'=>14,
-            'subcategory_name'=>'Фото на документы',
+            'subcategory_name'=>'Փաստաթղթերի լուսանկար',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:38:14',
@@ -2185,23 +2043,10 @@ class SubcategorySeeder extends Seeder
             ] );
 
 
-
-            Subcategory::create( [
-            'id'=>196,
-            'category_id'=>14,
-            'subcategory_name'=>'Постобработка',
-            'price'=>100,
-            'status'=>'0',
-            'created_at'=>'2022-03-11 05:38:56',
-            'updated_at'=>'2022-03-11 05:38:56'
-            ] );
-
-
-
             Subcategory::create( [
             'id'=>197,
             'category_id'=>14,
-            'subcategory_name'=>'Создание и монтаж видеороликов',
+            'subcategory_name'=>'Տեսանյութերի ստեղծում և մոնտաժ',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:39:43',
@@ -2213,7 +2058,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>198,
             'category_id'=>14,
-            'subcategory_name'=>'Видеосъемка',
+            'subcategory_name'=>'Տեսանկարահանում',
             'price'=>700,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:40:10',
@@ -2225,7 +2070,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>199,
             'category_id'=>14,
-            'subcategory_name'=>'Модели для съемок',
+            'subcategory_name'=>'Նկարահանման մոդելներ',
             'price'=>800,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:41:28',
@@ -2237,7 +2082,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>200,
             'category_id'=>14,
-            'subcategory_name'=>'Создание 3D-видеороликов',
+            'subcategory_name'=>'3D տեսանյութերի ստեղծում',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:41:51',
@@ -2249,7 +2094,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>201,
             'category_id'=>14,
-            'subcategory_name'=>'Запись музыки и песен',
+            'subcategory_name'=>'Երաժշտության և երգերի ձայնագրում',
             'price'=>1000,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:42:14',
@@ -2261,7 +2106,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>202,
             'category_id'=>14,
-            'subcategory_name'=>'Оцифровка',
+            'subcategory_name'=>'Թվայնացում',
             'price'=>500,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:42:38',
@@ -2273,7 +2118,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>203,
             'category_id'=>14,
-            'subcategory_name'=>'Другое',
+            'subcategory_name'=>'Այլ',
             'price'=>400,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:44:56',
@@ -2285,7 +2130,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>204,
             'category_id'=>15,
-            'subcategory_name'=>'Ремонт одежды',
+            'subcategory_name'=>'Հագուստի վերանորոգում',
             'price'=>50,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:46:03',
@@ -2297,7 +2142,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>205,
             'category_id'=>15,
-            'subcategory_name'=>'Уборка',
+            'subcategory_name'=>'Մաքրում',
             'price'=>70,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:46:28',
@@ -2309,7 +2154,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>206,
             'category_id'=>15,
-            'subcategory_name'=>'Ремонт обуви',
+            'subcategory_name'=>'Կոշիկի վերանորոգում',
             'price'=>50,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:46:48',
@@ -2321,7 +2166,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>207,
             'category_id'=>15,
-            'subcategory_name'=>'Химчистка одежды',
+            'subcategory_name'=>'Հագուստի քիմմաքրում',
             'price'=>50,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:47:14',
@@ -2333,7 +2178,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>208,
             'category_id'=>15,
-            'subcategory_name'=>'Няни',
+            'subcategory_name'=>'Դայակներ',
             'price'=>50,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:47:38',
@@ -2345,7 +2190,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>209,
             'category_id'=>15,
-            'subcategory_name'=>'Химчистка ковров и мебели',
+            'subcategory_name'=>'Գորգերի և կահույքի քիմմաքրում',
             'price'=>70,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:48:05',
@@ -2357,7 +2202,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>210,
             'category_id'=>15,
-            'subcategory_name'=>'Помощь в Саду и огороде',
+            'subcategory_name'=>'Օգնություն պարտեզում և բանջարանոցում',
             'price'=>70,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:48:43',
@@ -2369,7 +2214,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>211,
             'category_id'=>15,
-            'subcategory_name'=>'Услуги Сиделки',
+            'subcategory_name'=>'Խնամողի ծառայություններ',
             'price'=>70,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:49:44',
@@ -2381,7 +2226,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>212,
             'category_id'=>15,
-            'subcategory_name'=>'Уборка территории',
+            'subcategory_name'=>'Տարածքի մաքրում',
             'price'=>70,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:50:12',
@@ -2393,7 +2238,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>213,
             'category_id'=>15,
-            'subcategory_name'=>'Спил и обрезка деревьев и кустарников',
+            'subcategory_name'=>'Ծառերի և թփերի կտրում և էտում',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:50:37',
@@ -2405,7 +2250,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>214,
             'category_id'=>15,
-            'subcategory_name'=>'Сиделки с проживанием',
+            'subcategory_name'=>'Խնամակալներ բնակեցումով',
             'price'=>100,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:51:06',
@@ -2417,7 +2262,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>215,
             'category_id'=>15,
-            'subcategory_name'=>'Стирка',
+            'subcategory_name'=>'Լվացում',
             'price'=>50,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:51:34',
@@ -2429,7 +2274,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>216,
             'category_id'=>15,
-            'subcategory_name'=>'Химчистка',
+            'subcategory_name'=>'Քիմմաքրում',
             'price'=>70,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:51:58',
@@ -2441,7 +2286,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>217,
             'category_id'=>15,
-            'subcategory_name'=>'Другое',
+            'subcategory_name'=>'Այլ',
             'price'=>80,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:52:29',
@@ -2453,7 +2298,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>218,
             'category_id'=>16,
-            'subcategory_name'=>'Представительство в суде',
+            'subcategory_name'=>'Ներկայացուցչություն դատարանում',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:53:56',
@@ -2465,7 +2310,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>219,
             'category_id'=>16,
-            'subcategory_name'=>'Трудовые споры',
+            'subcategory_name'=>'Աշխատանքային վեճեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:54:20',
@@ -2477,7 +2322,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>220,
             'category_id'=>16,
-            'subcategory_name'=>'Взыскание долгов',
+            'subcategory_name'=>'Պարտքերի հավաքագրում',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:54:54',
@@ -2489,7 +2334,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>221,
             'category_id'=>16,
-            'subcategory_name'=>'Семейные споры',
+            'subcategory_name'=>'Ընտանեկան վեճեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:55:26',
@@ -2501,7 +2346,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>222,
             'category_id'=>16,
-            'subcategory_name'=>'Жилищные споры',
+            'subcategory_name'=>'Բնակարանային վեճեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:55:49',
@@ -2513,7 +2358,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>223,
             'category_id'=>16,
-            'subcategory_name'=>'Защита прав потребителей',
+            'subcategory_name'=>'Սպառողների իրավունքների պաշտպանություն',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:56:13',
@@ -2525,7 +2370,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>224,
             'category_id'=>16,
-            'subcategory_name'=>'Кредитные споры',
+            'subcategory_name'=>'Վարկային վեճեր',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:56:43',
@@ -2537,7 +2382,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>225,
             'category_id'=>16,
-            'subcategory_name'=>'Наследственные споры',
+            'subcategory_name'=>'Ժառանգական վեճեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:57:05',
@@ -2549,7 +2394,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>226,
             'category_id'=>16,
-            'subcategory_name'=>'Автомобильные споры',
+            'subcategory_name'=>'Ավտոմեքենաների վեճեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:57:25',
@@ -2561,7 +2406,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>227,
             'category_id'=>16,
-            'subcategory_name'=>'Юридические документы',
+            'subcategory_name'=>'Իրավական փաստաթղթեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:59:02',
@@ -2573,7 +2418,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>228,
             'category_id'=>16,
-            'subcategory_name'=>'Налоговые споры',
+            'subcategory_name'=>'Հարկային վեճեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:59:28',
@@ -2585,7 +2430,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>229,
             'category_id'=>16,
-            'subcategory_name'=>'Земельные споры',
+            'subcategory_name'=>'Հողային վեճեր',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 05:59:46',
@@ -2597,7 +2442,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>230,
             'category_id'=>16,
-            'subcategory_name'=>'Помощь в регистрации ООО и ИП',
+            'subcategory_name'=>'Օգնություն ՍՊԸ-ի և անհատ ձեռնարկատիրոջ գրանցման գործում',
             'price'=>250,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:00:29',
@@ -2609,7 +2454,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>231,
             'category_id'=>16,
-            'subcategory_name'=>'Проверка документов и договоров',
+            'subcategory_name'=>'Փաստաթղթերի և պայմանագրերի ստուգում',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:01:50',
@@ -2621,7 +2466,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>232,
             'category_id'=>16,
-            'subcategory_name'=>'Юридическое сопровождение сделок',
+            'subcategory_name'=>'Գործարքների իրավաբանական ուղեկցում',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:02:21',
@@ -2633,7 +2478,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>233,
             'category_id'=>16,
-            'subcategory_name'=>'Регистрационные услуги',
+            'subcategory_name'=>'Գրանցման ծառայություններ',
             'price'=>150,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:02:45',
@@ -2645,7 +2490,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>234,
             'category_id'=>16,
-            'subcategory_name'=>'Тендеры',
+            'subcategory_name'=>'Տենդերներ',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:03:30',
@@ -2657,7 +2502,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>235,
             'category_id'=>16,
-            'subcategory_name'=>'Банкротство юридических лиц',
+            'subcategory_name'=>'Իրավաբանական անձանց սնանկություն',
             'price'=>200,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:03:52',
@@ -2669,7 +2514,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>236,
             'category_id'=>16,
-            'subcategory_name'=>'Проведение независимых экспертиз',
+            'subcategory_name'=>'Անկախ փորձաքննությունների իրականացում',
             'price'=>450,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:04:25',
@@ -2681,7 +2526,7 @@ class SubcategorySeeder extends Seeder
             Subcategory::create( [
             'id'=>237,
             'category_id'=>16,
-            'subcategory_name'=>'Ликвидация юридических лиц',
+            'subcategory_name'=>'Իրավաբանական անձանց լուծարումը',
             'price'=>300,
             'status'=>'0',
             'created_at'=>'2022-03-11 06:04:53',

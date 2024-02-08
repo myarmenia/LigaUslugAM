@@ -14,26 +14,20 @@ class RegionSeeder extends Seeder
      */
     public function run()
     {
-        Region::create( [
-            'id'=>1,
-            'region'=>'Красноярский край',
-            'created_at'=>null,
-            'updated_at'=>null
-            ] );
-
-
-
-            Region::create( [
-            'id'=>2,
-            'region'=>'Новосибирская область',
-            'created_at'=>null,
-            'updated_at'=>null
-            ] );
-            Region::create( [
-                'id'=>3,
-                'region'=>'Хакасия',
-                'created_at'=>null,
-                'updated_at'=>null
-                ] );
+        $regionInsert = [
+            ['region' => 'Երևան'],
+            ['region' => 'Արագածոտն'],
+            ['region' => 'Արարատ'],
+            ['region' => 'Արմավիր'],
+            ['region' => 'Գեղարքունիք'],
+            ['region' => 'Կոտայք'],
+            ['region' => 'Լոռի'],
+            ['region' => 'Շիրակ'],
+            ['region' => 'Սյունիք'],
+            ['region' => 'Տավուշ'],
+            ['region' => 'Վայոց ձոր'],
+        ];
+        
+        Region::insert($regionInsert);
     }
 }

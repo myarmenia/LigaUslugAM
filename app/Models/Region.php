@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     use HasFactory;
+
+    protected $table = 'regions';
+
+    protected $fillable = [
+        'region'
+    ];
     protected $guarded=[];
 
     public function countries(){
