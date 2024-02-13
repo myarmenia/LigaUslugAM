@@ -11,10 +11,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 col-xs-12  mb-3">
-                   <h3>Уважаемый(ая) {{$show_new_task->special_task_executors->executor_profiles->users->name}}</h3>
-                    <p class="m-2">Заказчик {{$show_new_task->users->name}} отправил специальные заданиe {{$show_new_task->title}}</p>
+                   <h3>Հարգելի {{$show_new_task->special_task_executors->executor_profiles->users->name}}</h3>
+                    <p class="m-2">Պատվիրատու {{$show_new_task->users->name}} ուղարկել է հատուկ առաջադրանք {{$show_new_task->title}}</p>
 
-                    <h5>С уважением</h5>
+                    <h5>Հարգանքով</h5>
                     <div  style="height:70px;width:300px;display:flex;align-items:center">
                         <img src="{{ $message->embed(public_path().'/images/logo_footer.png') }}" style="width:70px;display:block;">
                     </div>
