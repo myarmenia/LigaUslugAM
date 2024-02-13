@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Добрый день!')
+# @lang('Բարի գալուստ!')
 @endif
 @endif
 
@@ -43,7 +43,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('С уважением'),<br>
+@lang('Հարգանքներով'),<br>
 {{ config('app.name') }}
 @endif
 
@@ -51,8 +51,8 @@
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "Если у вас возникли проблемы с нажатием \":actionText\" кнопки, скопируйте и вставьте URL-адрес ниже \n".
-    'в свой веб-браузер:',
+    "Եթե ​​դուք խնդիրներ ունեք սեղմելու \":actionText\" կոճակի հետ, պատճենեք և տեղադրեք ստորև նշված URL-ը \n".
+    'ձեր վեբ բրաուզերում:',
     [
         'actionText' => $actionText,
     ]

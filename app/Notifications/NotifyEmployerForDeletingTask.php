@@ -41,9 +41,9 @@ class NotifyEmployerForDeletingTask extends Notification
      */
     public function toMail($notifiable)
     {
-        // return (new MailMessage)->view('Mails.deletetask',['newjob'=>$this->ditails,'logo'=>'/images/logo_footer.png']);
+       
         return (new MailMessage)
-        ->subject('Удаление задачи, из за отсутствие откликов')
+        ->subject(__('message.deleting_tasks_due_to_lack_of_feedback'))
         ->view('Mails.notifyemployerfordeletingtask',['deletetask'=>$this->ditails,'logo'=>'/images/logo_footer.png']);
     }
     public function toDatabase($notifiable)
