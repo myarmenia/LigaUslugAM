@@ -11,17 +11,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 col-xs-12  mb-3">
-                   <h3> Уважаемый(ая) Исполнитель, </h3>
-
-                   <p class="m-2">Спасибо за ваш отклик на заказ "{{ $click_on_task }}", в этот раз клиент выбрал нужного специалиста.</p>
-
-                    <h5>С уважением</h5>
+                   <h3>{{__('message.dear_executor')}},</h3>
+                   <p class="m-2">{{__('message.thank_you_for_your_response_to')}} "{{ $click_on_task }}", {{__('message.this_time_the_client_chose_the_right_specialist')}}</p>
+                    <h5>{{__('message.sincerely')}}</h5>
                     <div  style="height:70px;width:300px;display:flex;align-items:center">
                         <img src="{{ $message->embed(public_path().'/images/logo_footer.png') }}" style="width:70px;display:block;">
                     </div>
 
                 </div>
-                <div style="margin-top:20px"><button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a href="http://ligauslug.ru/" style="color:white;text-decoration:none">Перейти по ссылке</a></button></div>
+                <div style="margin-top:20px">
+                    <button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a
+                     href="http://ligauslug.ru/"
+                     href="{{ env('BASE_CLIENT_URL')}}/"
+                      style="color:white;text-decoration:none"
+                      >Перейти по ссылке</a>
+                    </button></div>
 
             </div>
         </div>

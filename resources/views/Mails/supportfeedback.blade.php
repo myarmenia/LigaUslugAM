@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="p-3">{{ $details['message'] }}</div>
-    <h3>С уважением, Лигауслуга</h3>
+    <h3>Հարգանքներով՝ Լիգաուսլուգա</h3>
     <div><img src=""></div>
 </body>
 </html>
