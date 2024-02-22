@@ -30,14 +30,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('deadline:cron')->everyMinute();//done
-        // $schedule->command('newjob:cron')->dailyAt('08:00'); //done
+        $schedule->command('deadline:cron')->everyMinute();//done
+        $schedule->command('newjob:cron')->dailyAt('08:00'); //done
 
-        // $schedule->command('deletenotappliedtask:cron')->everyMinute();//done
-        // $schedule->command('returnedmoney:cron')->dailyAt('08:00');
-        // $schedule->command('notclickfromtwodays:cron')->dailyAt('08:00');
-        $schedule->command('notclickfromtwodays:cron')->everyMinute();//test
-        // $schedule->command('notclickfromthreedays:cron')->dailyAt('08:00');
+        $schedule->command('deletenotappliedtask:cron')->everyMinute();//done
+        $schedule->command('returnedmoney:cron')->dailyAt('08:00');
+        $schedule->command('notclickfromtwodays:cron')->dailyAt('08:00');
+
+        $schedule->command('notclickfromthreedays:cron')->dailyAt('08:00');
 
 
     }
