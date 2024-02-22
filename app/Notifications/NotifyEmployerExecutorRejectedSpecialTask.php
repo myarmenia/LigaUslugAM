@@ -21,7 +21,7 @@ class NotifyEmployerExecutorRejectedSpecialTask extends Notification
     public $special_task;
     public function __construct(specialTaskExecutor $special_task)
     {
-     
+
         $this->special_task=$special_task;
         // dd($this->special_task);
     }
@@ -51,7 +51,7 @@ class NotifyEmployerExecutorRejectedSpecialTask extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('Специалист отклонил персональный заказ')->view('Mails.notifyemployerexecutorrejectedtask',['special_task'=> $this->special_task->tasks->title,'logo'=>'/images/logo_footer.png']);
+        return (new MailMessage)->subject('Специалист отклонил персональный заказ')->view('Mails.notifyemployerexecutorrejectedtask',['special_task'=> $this->special_task->tasks->title,'logo'=>'/images/gorcka.png']);
 
         // return (new MailMessage)
         //             ->line('The introduction to the notification.')

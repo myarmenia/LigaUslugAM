@@ -50,7 +50,7 @@ class NotifyEmployerDeleteTaskFromThreeDay extends Notification
     {
         return (new MailMessage)
         ->subject('Задание будет удалена')
-        ->view('Mails.notifyemployerfromthreedaynotclick',['task'=>$this->message,'logo'=>'/images/logo_footer.png']);
+        ->view('Mails.notifyemployerfromthreedaynotclick',['task'=>$this->message,'logo'=>'/images/gorcka.png']);
     }
 
     /**

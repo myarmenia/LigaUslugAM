@@ -43,7 +43,7 @@ class NotifyExecutorForNewJob extends Notification
     {
 
         return (new MailMessage)->subject( __('message.new_projects_on_liga_uslug') )
-                                ->view('Mails.newjob',['newjob'=>$this->ditails,'logo'=>'/images/logo_footer.png']);
+                                ->view('Mails.newjob',['newjob'=>$this->ditails,'logo'=>'/images/gorcka.png']);
     }
 
     /**

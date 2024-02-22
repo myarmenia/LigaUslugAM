@@ -51,7 +51,7 @@ class NotifyExecutorDisagreeWithPrice extends Notification
     {
         return (new MailMessage)
         ->subject('Не согласен с ценой')
-        ->view('Mails.disagreewithprice',['disagreewithprice'=>$this->problem_message,'logo'=>'/images/logo_footer.png']);
+        ->view('Mails.disagreewithprice',['disagreewithprice'=>$this->problem_message,'logo'=>'/images/gorcka.png']);
     }
 
     /**
@@ -64,7 +64,7 @@ class NotifyExecutorDisagreeWithPrice extends Notification
     {
 $executor=ExecutorProfile::where('id',$this->problem_message->executor_profile_id)->first();
         return [
-           
+
             'employer_id'=>$this->problem_message->tasks->user_id,
             'employer_name'=>$this->problem_message->tasks->users->name.' '.$this->problem_message->tasks->users->last_name,
             'task_title'=>$this->problem_message->tasks->title,

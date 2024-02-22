@@ -43,7 +43,7 @@ class ReturnedMoneyExecutorTwoDay extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('Ваши деньги возвращены ')->view('Mails.returnedmoney',['click_on_task'=> $this->message->tasks->title,'logo'=>'/images/logo_footer.png']);
+        return (new MailMessage)->subject('Ваши деньги возвращены ')->view('Mails.returnedmoney',['click_on_task'=> $this->message->tasks->title,'logo'=>'/images/gorcka.png']);
     }
 
     /**
