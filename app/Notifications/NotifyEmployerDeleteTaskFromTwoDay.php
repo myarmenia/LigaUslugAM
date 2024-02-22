@@ -50,8 +50,8 @@ class NotifyEmployerDeleteTaskFromTwoDay extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->subject('Задание будет удалена')
-                ->view('Mails.notifyemployertwodaysnotclick',['task'=>$this->message,'logo'=>'/images/logo_footer.png']);
+                ->subject(__('message.the_task_will_be_deleted'))
+                ->view('Mails.notifyemployertwodaysnotclick',['task'=>$this->message,'logo'=>'/images/gorcka.png']);
     }
 
     /**

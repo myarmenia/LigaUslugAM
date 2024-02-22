@@ -16,7 +16,7 @@
 
                     <h5>С уважением</h5>
                     <div  style="height:70px;width:300px;display:flex;align-items:center">
-                        <img src="{{ $message->embed(public_path().'/images/logo_footer.png') }}" style="width:70px;display:block;">
+                        <img src="{{ $message->embed(public_path().'/images/gorcka.png') }}" style="width:70px;display:block;">
                     </div>
                 </div>
 

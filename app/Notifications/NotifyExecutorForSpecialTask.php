@@ -55,7 +55,7 @@ class NotifyExecutorForSpecialTask extends Notification
     {
         return (new MailMessage)
                 ->subject('Հատուկ առաջադրանք')
-                ->view('Mails.notifyexecutorforspecialtask',['show_new_task'=>$this->show_new_task,'logo'=>'/images/logo_footer.png']);
+                ->view('Mails.notifyexecutorforspecialtask',['show_new_task'=>$this->show_new_task,'logo'=>'/images/gorcka.png']);
 
 
     }

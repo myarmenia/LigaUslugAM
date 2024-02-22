@@ -49,7 +49,7 @@ class SupportFeedbackNotification extends Notification
     {
 
 
-        return (new MailMessage)->view('Mails.supportfeedbackproblemmessage',['supportfeedback'=> $this->support_feedback,'logo'=>'/images/logo_footer.png'])->subject('Служба поддержки лига услуга');
+        return (new MailMessage)->view('Mails.supportfeedbackproblemmessage',['supportfeedback'=> $this->support_feedback,'logo'=>'/images/gorcka.png'])->subject('Служба поддержки лига услуга');
     }
     public function toDatabase($notifiable)
     {

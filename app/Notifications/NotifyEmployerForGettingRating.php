@@ -49,7 +49,7 @@ class NotifyEmployerForGettingRating extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('Исполнитель оценил вашу работу')->view('Mails.notifyemployerforgettingrating',['rating'=> $this->rating,'logo'=>'/images/logo_footer.png']);
+        return (new MailMessage)->subject('Исполнитель оценил вашу работу')->view('Mails.notifyemployerforgettingrating',['rating'=> $this->rating,'logo'=>'/images/gorcka.png']);
     }
     public function toDatabase($notifiable)
     {
