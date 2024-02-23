@@ -148,7 +148,7 @@ class   TaskController extends Controller
          }
 
         if ($request->hasfile('task_img')) {
-          
+
             foreach($request->file('task_img') as $file)
             {
                 $name = time().rand(1,100).'.'.$file->extension();
@@ -173,7 +173,7 @@ class   TaskController extends Controller
 
 
         $show_new_task = Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
-// dd($show_new_task);
+
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
 
         $check_categories = Task::where('created_at','>=',$deadlineday)->pluck('category_name');

@@ -28,7 +28,7 @@ class ClickOnTaskController extends Controller
         $user_id = Auth::user()->id;
         $check_status = User::where('id',$user_id)->first();
         if($check_status->status =="Пасив"){
-            return response()->json(['message'=>'Вы не можете подать заявку на эту работу, пока ваш статус пассивный.']);
+            return response()->json(['message'=> __('message.you_cannot_apply_for_this_job_while_your_status_is_passive')]);
         }else{
 
 
@@ -41,12 +41,12 @@ class ClickOnTaskController extends Controller
                     $second_time_click=ClickOnTask::where(['task_id'=>$request->task_id,'executor_profile_id' => $check_balance->id])->first();
 
                     if($second_time_click){
-                        return response()->json(['message'=>'Вы уже откликнулись на этот заказ.']);
+                        return response()->json(['message'=>__('message.you_have_already_responded_to_this_order')]);
                     }
                     if($request->service_price_to<$request->service_price_from){
-                        return response()->json(['message'=>'Стоимость услуги До не может быть меньше, чем От.']);
+                        return response()->json(['message'=>__('message.the_cost_of_the_To_service_cannot_be_less_than_from')]);
                     }
-                    $task=Task::where('id',$request->task_id)->first();
+                    $task = Task::where('id',$request->task_id)->first();
                     if($task->status=='not confirmed'){
                         $task->status='false';
                         $task->save();
@@ -182,7 +182,7 @@ class ClickOnTaskController extends Controller
 
                      if($task_date<$now_time){
                          info($item);
-                       
+
                          $item->users->notify(new NotifyEmployerDeleteTaskFromTwoDay($item));
 
                      }

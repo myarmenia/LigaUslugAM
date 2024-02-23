@@ -53,8 +53,8 @@ class NotifiyEmployer extends Notification
     {
         return (new MailMessage)
                     ->subject('На ваше задание есть отклики специалистов')
-                    ->view('Mails.notifyemployerexecutorclickontask',['task'=> $this->clickontask->tasks->users->name,'logo'=>'/images/logo_footer.png']);
-                   
+                    ->view('Mails.notifyemployerexecutorclickontask',['task'=> $this->clickontask->tasks->users->name,'logo'=>'/images/gorcka.png']);
+
     }
     public function toDatabase($notifiable)
     {

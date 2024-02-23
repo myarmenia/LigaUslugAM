@@ -45,11 +45,11 @@ class NotifyExecutorForDeadline extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Завершение работы, осталось один день')
-                    ->greeting('Уважаемый исполнитель!')
-                    ->line('Время номер '.$this->items->task_id.' задачи подходит к концу')
-                    ->action('Перейти по ссылке,', url('http://ligauslug.ru/'))
-                    ->line('Заранее благодарим за сдачу работы вовремя!');
+                    ->subject(__('message.completion_of_work_one_day_left'))
+                    ->greeting(__('message.dear_executor'))
+                    ->line('Թիվ '.$this->items->task_id.' համարի առաջադրանքի ժամկետը մոտենում է ավարտին')
+                    ->action(__('message.follow_the_link'), url('http://ligauslug.ru/'))
+                    ->line(__('message.thank_you_in_advance_for_submitting_your_work_on_time'));
     }
     public function toDatabase($notifiable)
     {

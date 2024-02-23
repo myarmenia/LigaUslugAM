@@ -54,8 +54,8 @@ class NotifyExecutorForSpecialTask extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->subject('Eсть специальное задание')
-                ->view('Mails.notifyexecutorforspecialtask',['show_new_task'=>$this->show_new_task,'logo'=>'/images/logo_footer.png']);
+                ->subject('Հատուկ առաջադրանք')
+                ->view('Mails.notifyexecutorforspecialtask',['show_new_task'=>$this->show_new_task,'logo'=>'/images/gorcka.png']);
 
 
     }

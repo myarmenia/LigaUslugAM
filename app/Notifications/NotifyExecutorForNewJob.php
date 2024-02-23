@@ -42,8 +42,8 @@ class NotifyExecutorForNewJob extends Notification
     public function toMail($notifiable)
     {
 
-        return (new MailMessage)->subject('Новые проекты на бирже Лига Услуг
-        ')->view('Mails.newjob',['newjob'=>$this->ditails,'logo'=>'/images/logo_footer.png']);
+        return (new MailMessage)->subject( __('message.new_projects_on_liga_uslug') )
+                                ->view('Mails.newjob',['newjob'=>$this->ditails,'logo'=>'/images/gorcka.png']);
     }
 
     /**

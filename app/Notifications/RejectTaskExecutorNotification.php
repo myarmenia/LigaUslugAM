@@ -56,7 +56,7 @@ class RejectTaskExecutorNotification extends Notification  implements ShouldBroa
     public function toMail($notifiable)
     {
 
-        return (new MailMessage)->subject('Заказчик выбрал нужного специалиста')->view('Mails.rejecttaskexecutor',['click_on_task'=> $this->click_on_task->tasks->title,'logo'=>'/images/logo_footer.png']);
+        return (new MailMessage)->subject(__('message.the_customer_chose_the_right_specialist'))->view('Mails.rejecttaskexecutor',['click_on_task'=> $this->click_on_task->tasks->title,'logo'=>'/images/gorcka.png']);
 
     }
 

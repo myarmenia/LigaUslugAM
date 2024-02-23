@@ -49,7 +49,7 @@ class NotifyExecutorEmployerCompletedTask extends Notification
     {
 
 
-        return (new MailMessage)->subject('Заказчик завершил задание')->view('Mails.notifyexecutoremployercompletedtask',['task'=> $this->task,'logo'=>'/images/logo_footer.png']);
+        return (new MailMessage)->subject('Заказчик завершил задание')->view('Mails.notifyexecutoremployercompletedtask',['task'=> $this->task,'logo'=>'/images/gorcka.png']);
     }
     public function toDatabase($notifiable)
     {

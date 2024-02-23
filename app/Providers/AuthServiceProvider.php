@@ -29,11 +29,11 @@ class AuthServiceProvider extends ServiceProvider
         // $this->registerPolicies();
 
         // Passport::routes();
-        VerifyEmail::toMailUsing(function ($notifiable, $url){
+        VerifyEmail::toMailUsing(function ($notifiable, $url) {
             return (new MailMessage)
-            ->subject('Подтвердите адрес электронной почты')
-            ->line('Нажмите кнопку ниже, чтобы подтвердить свой адрес электронной почты.')
-            ->action('Подтвердите адрес электронной почты',$url);
+                ->subject('Հաստատեք ձեր էլփոստի հասցեն')
+                ->line('Սեղմեք ստորև նշված կոճակը՝ ձեր էլ.փոստի հասցեն հաստատելու համար:')
+                ->action('Հաստատեք ձեր էլփոստի հասցեն', $url);
         });
     }
 }
