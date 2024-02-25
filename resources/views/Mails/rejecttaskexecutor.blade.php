@@ -21,7 +21,7 @@
                 </div>
                 <div style="margin-top:20px">
                     <button type="button" class="btn" style="background-color: #4B9A2D;border-radius:15px;padding:5px 8px; border:none;outline:none"><a
-                     href="http://ligauslug.ru/"
+                     {{-- href="http://ligauslug.ru/" --}}
                      href="{{ env('BASE_CLIENT_URL')}}/"
                       style="color:white;text-decoration:none"
                       >Перейти по ссылке</a>
