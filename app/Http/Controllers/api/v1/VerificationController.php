@@ -91,7 +91,7 @@ class VerificationController extends Controller
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
-        return redirect('http://ligauslug.ru');
+        return redirect('http://gorc-ka.am');
 
 
     }
