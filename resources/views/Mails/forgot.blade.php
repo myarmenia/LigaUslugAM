@@ -1,3 +1,3 @@
-Для смены пароля нажмите  <a href="http://ligauslug.ru/reset/?email={{$email}}&token={{$token}}">ЗДЕСЬ</a>
+ Գաղտնաբառի փոփոխման համար սեղմեք <a href="{{env('BASE_CLIENT_URL')}}/reset/?email={{$email}}&token={{$token}}">Այստեղ</a>
 
 
