@@ -47,6 +47,8 @@ return [
     //
     'forget_password'=>'Գաղտնաբառի վերականգնում',
     'you_have_successfully_changed_your_password'=>'Ձեր գաղտնաբառը փոխված է',
+    // update avatar
+    'you_have_successfully_updated_your_profile_avatar'=>'Ձեր պրոֆիլի նկարը թարմացվել է:',
 
 
 ];
