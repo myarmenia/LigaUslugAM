@@ -44,6 +44,9 @@ return [
     'number'=>'Թիվ',
     // ================
     'the_task_will_be_deleted'=>'Առաջադրանքը կջնջվի երկու օրից',
+    //
+    'forget_password'=>'Գաղտնաբառի վերականգնում',
+    'you_have_successfully_changed_your_password'=>'Ձեր գաղտնաբառը փոխված է',
 
 
 ];

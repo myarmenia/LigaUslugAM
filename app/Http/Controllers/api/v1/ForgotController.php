@@ -34,10 +34,10 @@ class ForgotController extends Controller
                 // in resources we create Mails folder  in
                 Mail::send('Mails.forgot',['token'=>$token,'email'=>$email],function (Message $message) use ($email){
                         $message->to($email);
-                        $message->subject('Восстановление пароля');
+                        $message->subject(__('message.forget_password'));
                 });
                 return response([
-                    'message'=>'Проверти вашу почту'
+                    'message'=>'Ստուգեք Ձեր էլ.հասցեն'
                 ]);
 
             }catch(\Exception $exception){
@@ -48,7 +48,7 @@ class ForgotController extends Controller
 
         }
         public function reset (ResetRequest $request){
-            
+
             $token=$request->token;
             $email=$request->email;
             if(!$passwordResets = DB::table('password_resets')->where(['token'=>$token,'email'=>$email] )->first()){
@@ -67,7 +67,7 @@ class ForgotController extends Controller
             $user->save();
 
             return response([
-                'message'=>'Вы успешно изменили ваш пароль'
+                'message'=> __('message.you_have_successfully_changed_your_password')
             ]);
 
 
