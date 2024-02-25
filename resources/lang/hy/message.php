@@ -21,7 +21,7 @@ return [
         'interesting_hurry_up_with_your_response_now_the_order_is_available_to_a_limited_number_of_performers_but_in_an_hour_we_will_show_the_rest'=>'Հետաքրքի՞ր է: Շտապե՛ք արձագանքել, այժմ պատվերը հասանելի է սահմանափակ թվով կատարողների, բայց մեկ ժամից մենք ցույց կտանք մնացածին:',
         'respond'=>'Արձագանքել',
     // ===================notifyemployerfordeletingtask=====================================================
-    'deleting_tasks_due_to_lack_of_feedback'=>'Առաջադրանքը ջնջվում է դիմորդների բացակայության պատճառով',
+    'deleting_tasks_due_to_lack_of_feedback'=>'Հարգելի Պատվիրատու, առաջադրանքը ջնջվել է Կատարողների արձագանքի բացակայության պատճառով',
     'dear' =>'Հարգելի',
     'your_task_will_be_deleted_because_no_one_responded_to_the_order'=>'ձեր առաջադրանքը կջնջվի, քանի որ ոչ ոք չի դիմել',
     // ===================rejecttaskexecutor======================================================
@@ -38,6 +38,12 @@ return [
     'you_have_already_responded_to_this_order'=>'Դուք արդեն արձագանքել եք այս առաջադրանքին',
     'the_cost_of_the_To_service_cannot_be_less_than_from'=>'Մուտքագրեք ծառայության  արժեքի հավաստի դաշտեր',
     //===========================
+    'completion_of_work_one_day_left'=>'Առաջադրանքի ավարտին, մնաց մեկ օր',
+    'follow_the_link'=>'Անցեք հղումով',
+    'thank_you_in_advance_for_submitting_your_work_on_time'=>'Նախապես հայտնում ենք մեր  շնորհակալությունը, առաջադրանքը ժամանակին ներկայացնելու համար։',
+    'number'=>'Թիվ',
+    // ================
+    'the_task_will_be_deleted'=>'Առաջադրանքը կջնջվի երկու օրից',
 
 
 ];

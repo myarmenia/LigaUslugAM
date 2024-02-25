@@ -42,7 +42,7 @@ class NotifyNewUserRegistration extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('Регистрация нового пользователя')->view('Mails.registration',['user'=> $this->user,'logo'=>'/images/logo_footer.png']);
+        return (new MailMessage)->subject('Регистрация нового пользователя')->view('Mails.registration',['user'=> $this->user,'logo'=>'/images/gorcka.png']);
     }
 
     /**

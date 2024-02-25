@@ -56,7 +56,7 @@ class DonatedBalanceNotificaton extends Notification
     {
         return (new MailMessage)
                     ->subject('Подарок')
-                    ->view('Mails.notifyexecutdonatedmoney',['donated'=> $this->donated_balance,'logo'=>'/images/logo_footer.png']);
+                    ->view('Mails.notifyexecutdonatedmoney',['donated'=> $this->donated_balance,'logo'=>'/images/gorcka.png']);
 
     }
     public function toDatabase($notifiable)

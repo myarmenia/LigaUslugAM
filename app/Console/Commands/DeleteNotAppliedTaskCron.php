@@ -62,7 +62,8 @@ class DeleteNotAppliedTaskCron extends Command
 
 
                     if($task_date<$now_time){
-                        info($item);
+
+                        \Log::info($item);
                         $item->users->notify(new NotifyEmployerForDeletingTask($item));
                         $item->delete();
                     }
