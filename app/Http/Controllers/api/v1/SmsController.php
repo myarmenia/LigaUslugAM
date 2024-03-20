@@ -5,10 +5,10 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\PhoneNumberVerification;
 use App\Models\User;
-use App\Smsru\Smsru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use stdClass;
+
+use Illuminate\Support\Facades\Http;
 
 class SmsController extends Controller
 {
@@ -150,6 +150,87 @@ class SmsController extends Controller
 
 
 
+    // public function GetPhoneNumber(Request $request)
+    // {
+
+    //         if($request->has('phone_number')){
+
+    //             // $user=User::where('id',Auth::id())->first();
+
+    //             $check_user_phone=User::where(['phonenumber'=>$request->phone_number,'phone_status'=>'verified'])->first();
+    //             if($check_user_phone){
+    //                 return response()->json(['message' => "Этот номер уже подтвержден."]);
+    //             }else{
+    //                     $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
+    //                     $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
+
+    //                     $smsru = new Smsru('D3F08502-1F17-1EBE-E472-7993198291C8');
+    //                     $data = new stdClass();
+    //                     $ch = curl_init("https://sms.ru/code/call");
+    //                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //                     curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    //                     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array(
+    //                         "phone" => $request->phone_number, // номер телефона пользователя
+    //                         "ip" => $_SERVER["REMOTE_ADDR"], // ip адрес пользователя
+    //                         "api_id" => "D3F08502-1F17-1EBE-E472-7993198291C8"
+
+
+
+    //                     )));
+    //                     $body = curl_exec($ch);
+    //                     curl_close($ch);
+    //                     $json = json_decode($body);
+    //                     if($json) { // Получен ответ от сервера
+
+    //                         // print_r($json); // Для дебага
+    //                         if ($json->status == "OK") { // Запрос выполнился
+    //                             // echo "Звонок выполняется. ";
+    //                             // echo "Четырехзначный код (последние 4 цифры номера, с которого мы позвоним пользователю): ".$json->code.". ";
+    //                             // echo "ID звонка: ".$json->call_id.". ";
+    //                             // echo "Стоимость звонка: ".$json->cost." руб. ";
+    //                             // echo "Ваш баланс после звонка: ".$json->balance." руб. ";
+    //                             // echo "";
+    //                             // $check_user_phone=User::where(['id'=>Auth::id(),'phonenumber'=>$request->phone_number])->first();
+    //                             // if($check_user_phone){
+    //                             //     return response()->json(['message' => "Этот номер уже подтвержден."]);
+    //                             // }
+
+    //                             $phone_number_verification=PhoneNumberVerification::create([
+    //                                         "user_id" => Auth::id(),
+    //                                         "token" => $json->code,
+    //                                     ]);
+
+    //                                     $user = User::where('id',Auth::id())->update([
+    //                                         "phonenumber"=>$request->phone_number,
+    //                                         "phone_status"=>'not verified'
+    //                                     ]);
+    //                                     if($user){
+    //                                         $settings = Auth::user()->user_settings();
+
+    //                                         $settings['phone_status'] = 0;
+
+    //                                         return response()->json(['message' => "Отправить код подтверждения"]);
+    //                                     }
+
+    //                             // return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
+    //                         } else { // Ошибка в запросе
+    //                             // echo "Звонок не может быть выполнен. ";
+    //                             // echo "Текст ошибки: ".$data->status_text.". ";
+    //                             // echo "";
+    //                             // return $json;
+    //                             return response()->json(['message'=>$json]);
+    //                             return response()->json(['message'=>"Ваш номер не подтвержден"]);
+    //                         }
+
+    //                     }else{
+    //                         // echo "Запрос не выполнился. Не удалось установить связь с сервером. ";
+    //                         return response()->json(['message'=>"Запрос не выполнился. Не удалось установить связь с сервером. "]);
+    //                     }
+    //                 }
+
+
+    //         }
+    // }
     public function GetPhoneNumber(Request $request)
     {
 
@@ -161,71 +242,58 @@ class SmsController extends Controller
                 if($check_user_phone){
                     return response()->json(['message' => "Этот номер уже подтвержден."]);
                 }else{
+
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
                         $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
+                        $text ="Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է";
+                        $user_phone_number=37498054449;
 
-                        $smsru = new Smsru('D3F08502-1F17-1EBE-E472-7993198291C8');
-                        $data = new stdClass();
-                        $ch = curl_init("https://sms.ru/code/call");
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array(
-                            "phone" => $request->phone_number, // номер телефона пользователя
-                            "ip" => $_SERVER["REMOTE_ADDR"], // ip адрес пользователя
-                            "api_id" => "D3F08502-1F17-1EBE-E472-7993198291C8"
+                                    // $obj = new stdClass();
+                                    // $obj->messages['recipient'] = $user_phone_number;
+                                    // $obj->messages['priority'] = 2;
+                                    // $obj->messages['message-id'] = "201902280917";
+                                    // $obj->messages['sms']['originator']="Gorc-ka.am";
+                                    // $obj->messages['sms']['content']['text']=$text;
+                                    // $json_data=json_encode($obj, true);
+
+                                    //     $ch = curl_init();
 
 
+                                    //     curl_setopt($ch, CURLOPT_URL, 'https://sendsms.nikita.am/broker-api/send');
+                                    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                    //     curl_setopt($ch, CURLOPT_POST, 1);
+                                    //     curl_setopt($ch, CURLOPT_POSTFIELDS,$json_data);
+                                    //     curl_setopt($ch, CURLOPT_USERPWD, 'webex' . ':' . 'GbrE29X1EV');
 
-                        )));
-                        $body = curl_exec($ch);
-                        curl_close($ch);
-                        $json = json_decode($body);
-                        if($json) { // Получен ответ от сервера
+                                    //     $headers = array();
+                                    //     $headers[] = 'Content-Type: application/json; charset=utf-8';
+                                    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-                            // print_r($json); // Для дебага
-                            if ($json->status == "OK") { // Запрос выполнился
-                                // echo "Звонок выполняется. ";
-                                // echo "Четырехзначный код (последние 4 цифры номера, с которого мы позвоним пользователю): ".$json->code.". ";
-                                // echo "ID звонка: ".$json->call_id.". ";
-                                // echo "Стоимость звонка: ".$json->cost." руб. ";
-                                // echo "Ваш баланс после звонка: ".$json->balance." руб. ";
-                                // echo "";
-                                // $check_user_phone=User::where(['id'=>Auth::id(),'phonenumber'=>$request->phone_number])->first();
-                                // if($check_user_phone){
-                                //     return response()->json(['message' => "Этот номер уже подтвержден."]);
-                                // }
+                                    //     $result = curl_exec($ch);
+                                    //     if (curl_errno($ch)) {
+                                    //         echo 'Error:' . curl_error($ch);
+                                    //     }
+                                    //     curl_close($ch);
+                                    //     echo $result ;
+                        $response = Http::withBasicAuth('webex', 'GbrE29X1EV')
+                            ->post('https://sendsms.nikita.am/broker-api/send', [
+                                'messages' => [
+                                    [
+                                        'recipient' => '37498054449',
+                                        'priority' => '2',
+                                        'sms' => [
+                                            'originator' => 'Gorc-ka.am',
+                                            'content' => [
+                                                'text' => 'Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է'
+                                            ]
+                                        ],
+                                        'message-id' => '201902280917'
+                                    ]
+                                ]
+                            ])->throw();
 
-                                $phone_number_verification=PhoneNumberVerification::create([
-                                            "user_id" => Auth::id(),
-                                            "token" => $json->code,
-                                        ]);
+                           echo  $response;
 
-                                        $user = User::where('id',Auth::id())->update([
-                                            "phonenumber"=>$request->phone_number,
-                                            "phone_status"=>'not verified'
-                                        ]);
-                                        if($user){
-                                            $settings = Auth::user()->user_settings();
-
-                                            $settings['phone_status'] = 0;
-
-                                            return response()->json(['message' => "Отправить код подтверждения"]);
-                                        }
-
-                                // return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
-                            } else { // Ошибка в запросе
-                                // echo "Звонок не может быть выполнен. ";
-                                // echo "Текст ошибки: ".$data->status_text.". ";
-                                // echo "";
-                                // return $json;
-                                return response()->json(['message'=>$json]);
-                                return response()->json(['message'=>"Ваш номер не подтвержден"]);
-                            }
-
-                        }else{
-                            // echo "Запрос не выполнился. Не удалось установить связь с сервером. ";
-                            return response()->json(['message'=>"Запрос не выполнился. Не удалось установить связь с сервером. "]);
-                        }
                     }
 
 
