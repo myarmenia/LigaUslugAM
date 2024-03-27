@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PhoneNumberRequest;
 use App\Models\PhoneNumberVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -188,7 +189,7 @@ class SmsController extends Controller
 
     //         }
     // }
-    public function GetPhoneNumber(Request $request)
+    public function GetPhoneNumber(PhoneNumberRequest $request)
     {
 
             if($request->has('phone_number')){
