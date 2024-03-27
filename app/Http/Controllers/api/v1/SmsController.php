@@ -58,50 +58,7 @@ class SmsController extends Controller
     //     }
 
     // }
-    // public  function getSms(Request $request){
 
-    //     if($request->has('verification_code')){
-
-    //         $user_id = Auth::user()->id;
-
-
-    //         $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
-    //         if($select){
-    //             $update = PhoneNumberVerification::where('user_id',$user_id)->update([
-    //                 'status' => "OK"
-    //             ]);
-    //             if($update){
-    //                 $user=User::where('id',$user_id)->update([
-    //                     "phone_status"=>"verified"
-    //                 ]);
-
-    //                     $check_phone_number_verified=User::where('id',Auth::id())->first();
-    //                     if($check_phone_number_verified->phone_status=="verified"){
-    //                         $settings = Auth::user()->user_settings();
-
-    //                         $settings['phone_status'] = 1;
-    //                         // dd($settings);
-    //                         $check_phone_number_verified->settings()->apply((array)$settings);
-    //                         return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
-    //                     }
-
-
-
-
-    //             }else{
-    //                 return response()->json(['message'=>"Ваш номер не подтвержден"]);
-    //             }
-
-    //         }else{
-
-    //             return response()->json(['message'=>"Ваш номер не подтвержден"]);
-    //         }
-
-    //     }
-
-
-
-    // }
     public  function getSms(Request $request){
 
         if($request->has('verification_code')){
@@ -126,7 +83,7 @@ class SmsController extends Controller
                             $settings['phone_status'] = 1;
                             // dd($settings);
                             $check_phone_number_verified->settings()->apply((array)$settings);
-                            return response()->json(['message'=>__('message.your_phone_number_is_activated')]);
+                            return response()->json(['message'=>'Ձեր հեռախոսահամարն ակտիվացված է']);
                         }
 
 
@@ -138,7 +95,7 @@ class SmsController extends Controller
 
             }else{
 
-                return response()->json(['message'=>"Код подтверждения неправильный"]);
+                return response()->json(['message'=>"Հաստատման կոդն անվավեր է "]);
             }
 
         }
