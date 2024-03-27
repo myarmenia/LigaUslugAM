@@ -64,7 +64,7 @@ class SmsController extends Controller
 
 
 
-    public function GetPhoneNumber(Request $request)
+    public function GetPhoneNumber(PhoneNumberRequest $request)
     {
 
             if($request->has('phone_number')){
