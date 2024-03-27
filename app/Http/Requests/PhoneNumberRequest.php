@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Validator;
 
 class PhoneNumberRequest extends FormRequest
 {
@@ -27,12 +29,10 @@ class PhoneNumberRequest extends FormRequest
             'phone_number' =>'required',
         ];
     }
-    public function messages(): array
+    protected function failedValidation(Validator|\Illuminate\Contracts\Validation\Validator $validator)
     {
-        return [
-
-            'phone_number' => 'Հեռախոսահամարի դաշտը պարտադիր է',
-
-        ];
+        throw new HttpResponseException(response()->json([
+            'errors' => $validator->errors(),
+        ], 422));
     }
 }
