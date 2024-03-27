@@ -15,50 +15,50 @@ class SmsController extends Controller
 {
 
 
-    // public  function getSms(Request $request){
+    public  function getSms(Request $request){
 
-    //     if($request->has('verification_code')){
+        if($request->has('verification_code')){
 
-    //         $user_id = Auth::user()->id;
-
-
-    //         $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
-    //         if($select){
-    //             $update = PhoneNumberVerification::where('user_id',$user_id)->update([
-    //                 'status' => "OK"
-    //             ]);
-    //             if($update){
-    //                 $user=User::where('id',$user_id)->update([
-    //                     "phone_status"=>"verified"
-    //                 ]);
-
-    //                     $check_phone_number_verified=User::where('id',Auth::id())->first();
-    //                     if($check_phone_number_verified->phone_status=="verified"){
-    //                         $settings = Auth::user()->user_settings();
-
-    //                         $settings['phone_status'] = 1;
-    //                         // dd($settings);
-    //                         $check_phone_number_verified->settings()->apply((array)$settings);
-    //                         return response()->json(['message'=>'Ձեր հեռախոսահամարն ակտիվացված է']);
-    //                     }
+            $user_id = Auth::user()->id;
 
 
+            $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
+            if($select){
+                $update = PhoneNumberVerification::where('user_id',$user_id)->update([
+                    'status' => "OK"
+                ]);
+                if($update){
+                    $user=User::where('id',$user_id)->update([
+                        "phone_status"=>"verified"
+                    ]);
 
+                        $check_phone_number_verified=User::where('id',Auth::id())->first();
+                        if($check_phone_number_verified->phone_status=="verified"){
+                            $settings = Auth::user()->user_settings();
 
-    //             }else{
-    //                 return response()->json(['message'=>"Ваш номер не подтвержден"]);
-    //             }
-
-    //         }else{
-
-    //             return response()->json(['message'=>"Հաստատման կոդն անվավեր է "]);
-    //         }
-
-    //     }
+                            $settings['phone_status'] = 1;
+                            // dd($settings);
+                            $check_phone_number_verified->settings()->apply((array)$settings);
+                            return response()->json(['message'=>'Ձեր հեռախոսահամարն ակտիվացված է']);
+                        }
 
 
 
-    // }
+
+                }else{
+                    return response()->json(['message'=>"Ваш номер не подтвержден"]);
+                }
+
+            }else{
+
+                return response()->json(['message'=>"Հաստատման կոդն անվավեր է "]);
+            }
+
+        }
+
+
+
+    }
 
 
 
