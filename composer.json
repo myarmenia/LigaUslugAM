@@ -11,7 +11,7 @@
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "glorand/laravel-model-settings": "^4.4",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.8",
         "laravel-validation-rules/phone": "^1.6",
         "laravel/framework": "^8.65",
         "laravel/passport": "^10.2",
