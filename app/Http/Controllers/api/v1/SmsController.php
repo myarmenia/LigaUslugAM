@@ -7,8 +7,8 @@ use App\Models\PhoneNumberVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Http;
+use stdClass;
 
 class SmsController extends Controller
 {
@@ -246,53 +246,30 @@ class SmsController extends Controller
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
                         $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
                         $text ="Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է";
-                        $user_phone_number=37498054449;
+                        $user_phone_number=$request->phone_number;
+                        dd($user_phone_number);
 
-                                    // $obj = new stdClass();
-                                    // $obj->messages['recipient'] = $user_phone_number;
-                                    // $obj->messages['priority'] = 2;
-                                    // $obj->messages['message-id'] = "201902280917";
-                                    // $obj->messages['sms']['originator']="Gorc-ka.am";
-                                    // $obj->messages['sms']['content']['text']=$text;
-                                    // $json_data=json_encode($obj, true);
+                        // $response = Http::withBasicAuth('webex', 'GbrE29X1EV')
+                        //     ->post('https://sendsms.nikita.am/broker-api/send', [
+                        //         'messages' => [
+                        //             [
+                        //                 'recipient' => $user_phone_number,
+                        //                 'priority' => '2',
+                        //                 'sms' => [
+                        //                     'originator' => 'Gorc-ka.am',
+                        //                     'content' => [
+                        //                         'text' => 'Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է'
+                        //                     ]
+                        //                 ],
+                        //                 'message-id' => '201902280917'
+                        //             ]
+                        //         ]
+                        //     ])->throw();
 
-                                    //     $ch = curl_init();
+                        //     $pin = mt_rand(1000000, 9999999);
+                        //     echo $pin;
+                        //    echo  $response;
 
-
-                                    //     curl_setopt($ch, CURLOPT_URL, 'https://sendsms.nikita.am/broker-api/send');
-                                    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                                    //     curl_setopt($ch, CURLOPT_POST, 1);
-                                    //     curl_setopt($ch, CURLOPT_POSTFIELDS,$json_data);
-                                    //     curl_setopt($ch, CURLOPT_USERPWD, 'webex' . ':' . 'GbrE29X1EV');
-
-                                    //     $headers = array();
-                                    //     $headers[] = 'Content-Type: application/json; charset=utf-8';
-                                    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-                                    //     $result = curl_exec($ch);
-                                    //     if (curl_errno($ch)) {
-                                    //         echo 'Error:' . curl_error($ch);
-                                    //     }
-                                    //     curl_close($ch);
-                                    //     echo $result ;
-                        $response = Http::withBasicAuth('webex', 'GbrE29X1EV')
-                            ->post('https://sendsms.nikita.am/broker-api/send', [
-                                'messages' => [
-                                    [
-                                        'recipient' => '37498054449',
-                                        'priority' => '2',
-                                        'sms' => [
-                                            'originator' => 'Gorc-ka.am',
-                                            'content' => [
-                                                'text' => 'Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է'
-                                            ]
-                                        ],
-                                        'message-id' => '201902280917'
-                                    ]
-                                ]
-                            ])->throw();
-
-                           echo  $response;
 
                     }
 
@@ -305,10 +282,7 @@ class SmsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -316,10 +290,7 @@ class SmsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -327,10 +298,6 @@ class SmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -338,10 +305,7 @@ class SmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -350,10 +314,7 @@ class SmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -361,8 +322,5 @@ class SmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+
 }
