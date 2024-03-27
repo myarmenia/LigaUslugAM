@@ -236,17 +236,11 @@ class SmsController extends Controller
 
             if($request->has('phone_number')){
 
-                // $user=User::where('id',Auth::id())->first();
-
-                $check_user_phone=User::where(['phonenumber'=>$request->phone_number,'phone_status'=>'verified'])->first();
-                if($check_user_phone){
-                    return response()->json(['message' => "Этот номер уже подтвержден."]);
-                }else{
 
 
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
                         $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
-                        // $text ="Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է";
+
                         $user_phone_number=$request->phone_number;
                         // dd($user_phone_number);
                         // $client = new \GuzzleHttp\Client([
@@ -300,13 +294,7 @@ class SmsController extends Controller
                             ]);
 
                             $body = $response->getBody()->getContents();
-
-
-
-
-
-
-                    }
+                            echo $body;
 
 
             }
