@@ -294,7 +294,7 @@ class SmsController extends Controller
                             // echo $pin;
                             // $body = $response->getBody()->getContents();
                             $body = $response->getBody();
-                            echo $body;
+                            print_r($body);
 
 
 
