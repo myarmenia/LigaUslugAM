@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use stdClass;
-
+use GuzzleHttp\Client;
 class SmsController extends Controller
 {
     /**
@@ -102,50 +102,50 @@ class SmsController extends Controller
 
 
     // }
-    public  function getSms(Request $request){
+    // public  function getSms(Request $request){
 
-        if($request->has('verification_code')){
+    //     if($request->has('verification_code')){
 
-            $user_id = Auth::user()->id;
-
-
-            $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
-            if($select){
-                $update = PhoneNumberVerification::where('user_id',$user_id)->update([
-                    'status' => "OK"
-                ]);
-                if($update){
-                    $user=User::where('id',$user_id)->update([
-                        "phone_status"=>"verified"
-                    ]);
-
-                        $check_phone_number_verified=User::where('id',Auth::id())->first();
-                        if($check_phone_number_verified->phone_status=="verified"){
-                            $settings = Auth::user()->user_settings();
-
-                            $settings['phone_status'] = 1;
-                            // dd($settings);
-                            $check_phone_number_verified->settings()->apply((array)$settings);
-                            return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
-                        }
+    //         $user_id = Auth::user()->id;
 
 
+    //         $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
+    //         if($select){
+    //             $update = PhoneNumberVerification::where('user_id',$user_id)->update([
+    //                 'status' => "OK"
+    //             ]);
+    //             if($update){
+    //                 $user=User::where('id',$user_id)->update([
+    //                     "phone_status"=>"verified"
+    //                 ]);
 
+    //                     $check_phone_number_verified=User::where('id',Auth::id())->first();
+    //                     if($check_phone_number_verified->phone_status=="verified"){
+    //                         $settings = Auth::user()->user_settings();
 
-                }else{
-                    return response()->json(['message'=>"Ваш номер не подтвержден"]);
-                }
-
-            }else{
-
-                return response()->json(['message'=>"Код подтверждения неправильный"]);
-            }
-
-        }
+    //                         $settings['phone_status'] = 1;
+    //                         // dd($settings);
+    //                         $check_phone_number_verified->settings()->apply((array)$settings);
+    //                         return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
+    //                     }
 
 
 
-    }
+
+    //             }else{
+    //                 return response()->json(['message'=>"Ваш номер не подтвержден"]);
+    //             }
+
+    //         }else{
+
+    //             return response()->json(['message'=>"Код подтверждения неправильный"]);
+    //         }
+
+    //     }
+
+
+
+    // }
 
 
 
@@ -243,32 +243,60 @@ class SmsController extends Controller
                     return response()->json(['message' => "Этот номер уже подтвержден."]);
                 }else{
 
+
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
                         $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
                         $text ="Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է";
                         $user_phone_number=$request->phone_number;
-                        dd($user_phone_number);
+                        // dd($user_phone_number);
+                        $client = new \GuzzleHttp\Client([
+                            'verify' => false,
+                          ]);
 
-                        // $response = Http::withBasicAuth('webex', 'GbrE29X1EV')
-                        //     ->post('https://sendsms.nikita.am/broker-api/send', [
-                        //         'messages' => [
-                        //             [
-                        //                 'recipient' => $user_phone_number,
-                        //                 'priority' => '2',
-                        //                 'sms' => [
-                        //                     'originator' => 'Gorc-ka.am',
-                        //                     'content' => [
-                        //                         'text' => 'Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է'
-                        //                     ]
-                        //                 ],
-                        //                 'message-id' => '201902280917'
-                        //             ]
-                        //         ]
-                        //     ])->throw();
+                        $sms = mt_rand(1000000, 9999999);
+                        $response = Http::withBasicAuth('webex', 'GbrE29X1EV')
+                            ->post('https://sendsms.nikita.am/broker-api/send', [
+                                'messages' => [
+                                    [
+                                        'recipient' => $user_phone_number,
+                                        'priority' => '2',
+                                        'sms' => [
+                                            'originator' => 'Gorc-ka.am',
+                                            'content' => [
+                                                'text' => $sms
+                                            ]
+                                        ],
+                                        'message-id' => '201902280917'
+                                    ]
+                                ]
+                            ])->throw();
+                        // dd($client);
+                            // $response = $client->request('POST', 'https://sendsms.nikita.am/broker-api/send', [
+                            //     'auth' => ['webex', 'GbrE29X1EV'],
+                            //     'form_params' => [
+                            //             'messages' => [
+                            //                 [
+                            //                     'recipient' => $user_phone_number,
+                            //                     'priority' => '2',
+                            //                     'sms' => [
+                            //                         'originator' => 'Gorc-ka.am',
+                            //                         'content' => [
+                            //                             'text' => 'Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է'
+                            //                         ]
+                            //                     ],
+                            //                     'message-id' => '201902280917',
+                            //                 ],
+                            //             ],
+                            //         ]
+                            //     ]);
 
-                        //     $pin = mt_rand(1000000, 9999999);
-                        //     echo $pin;
-                        //    echo  $response;
+                            // $pin = mt_rand(1000000, 9999999);
+                            // echo $pin;
+                            $body = $response->getBody()->getContents();
+                            echo $body;
+
+
+
 
 
                     }
