@@ -69,7 +69,6 @@ class SmsController extends Controller
 
             if($request->has('phone_number')){
 
-dd(4444);
 
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
                         $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
