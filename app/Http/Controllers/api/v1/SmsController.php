@@ -292,7 +292,8 @@ class SmsController extends Controller
 
                             // $pin = mt_rand(1000000, 9999999);
                             // echo $pin;
-                            $body = $response->getBody()->getContents();
+                            // $body = $response->getBody()->getContents();
+                            $body = $response->getBody();
                             echo $body;
 
 
