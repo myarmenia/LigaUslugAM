@@ -102,50 +102,50 @@ class SmsController extends Controller
 
 
     // }
-    // public  function getSms(Request $request){
+    public  function getSms(Request $request){
 
-    //     if($request->has('verification_code')){
+        if($request->has('verification_code')){
 
-    //         $user_id = Auth::user()->id;
-
-
-    //         $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
-    //         if($select){
-    //             $update = PhoneNumberVerification::where('user_id',$user_id)->update([
-    //                 'status' => "OK"
-    //             ]);
-    //             if($update){
-    //                 $user=User::where('id',$user_id)->update([
-    //                     "phone_status"=>"verified"
-    //                 ]);
-
-    //                     $check_phone_number_verified=User::where('id',Auth::id())->first();
-    //                     if($check_phone_number_verified->phone_status=="verified"){
-    //                         $settings = Auth::user()->user_settings();
-
-    //                         $settings['phone_status'] = 1;
-    //                         // dd($settings);
-    //                         $check_phone_number_verified->settings()->apply((array)$settings);
-    //                         return response()->json(['message'=>"Ваш номер был успешно подтвержден"]);
-    //                     }
+            $user_id = Auth::user()->id;
 
 
+            $select = PhoneNumberVerification::where(['user_id'=>$user_id,'token'=>$request->verification_code])->first();
+            if($select){
+                $update = PhoneNumberVerification::where('user_id',$user_id)->update([
+                    'status' => "OK"
+                ]);
+                if($update){
+                    $user=User::where('id',$user_id)->update([
+                        "phone_status"=>"verified"
+                    ]);
 
+                        $check_phone_number_verified=User::where('id',Auth::id())->first();
+                        if($check_phone_number_verified->phone_status=="verified"){
+                            $settings = Auth::user()->user_settings();
 
-    //             }else{
-    //                 return response()->json(['message'=>"Ваш номер не подтвержден"]);
-    //             }
-
-    //         }else{
-
-    //             return response()->json(['message'=>"Код подтверждения неправильный"]);
-    //         }
-
-    //     }
+                            $settings['phone_status'] = 1;
+                            // dd($settings);
+                            $check_phone_number_verified->settings()->apply((array)$settings);
+                            return response()->json(['message'=>__('message.your_phone_number_is_activated')]);
+                        }
 
 
 
-    // }
+
+                }else{
+                    return response()->json(['message'=>"Ваш номер не подтвержден"]);
+                }
+
+            }else{
+
+                return response()->json(['message'=>"Код подтверждения неправильный"]);
+            }
+
+        }
+
+
+
+    }
 
 
 
@@ -246,12 +246,12 @@ class SmsController extends Controller
 
                         $user=PhoneNumberVerification::where('user_id',Auth::id())->delete();
                         $user=User::where('id',Auth::id())->update(['phone_status'=>'not verified','phonenumber'=>'']);
-                        $text ="Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է";
+                        // $text ="Հարգելի օգտատեր Ձեզ հեռախոսահամարն ակտիվացված է";
                         $user_phone_number=$request->phone_number;
                         // dd($user_phone_number);
-                        $client = new \GuzzleHttp\Client([
-                            'verify' => false,
-                          ]);
+                        // $client = new \GuzzleHttp\Client([
+                        //     'verify' => false,
+                        //   ]);
 
                         $sms = mt_rand(1000000, 9999999);
                         $response = Http::withBasicAuth('webex', 'GbrE29X1EV')
@@ -292,9 +292,15 @@ class SmsController extends Controller
 
                             // $pin = mt_rand(1000000, 9999999);
                             // echo $pin;
-                            // $body = $response->getBody()->getContents();
-                            $body = $response->getBody();
-                            print_r($body);
+
+                            $user=PhoneNumberVerification::create([
+                                'user_id'=>Auth::id(),
+                                'token'=>$sms
+
+                            ]);
+
+                            $body = $response->getBody()->getContents();
+
 
 
 

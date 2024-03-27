@@ -49,6 +49,8 @@ return [
     'you_have_successfully_changed_your_password'=>'Ձեր գաղտնաբառը փոխված է',
     // update avatar
     'you_have_successfully_updated_your_profile_avatar'=>'Ձեր պրոֆիլի նկարը թարմացվել է:',
+    //phone number
+    'your_phone_number_is_activated'=>'Ձեր հեռախոսահամարն ակտիվացված է',
 
 
 ];
