@@ -11,8 +11,8 @@ class FileUploadService
 
     public static function upload(object  $data, string $folder_path)
     {
-        // $filename = md5(microtime()). '.' .$data->getClientOriginalExtension();
-        $filename=$data->getClientOriginalName().'.'.$data->getClientOriginalExtension();
+       
+        $filename=$data->getClientOriginalName();
         $path = Storage::disk('local')->putFileAs(
           'public/' . $folder_path,
           $data,
