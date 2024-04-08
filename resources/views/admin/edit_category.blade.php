@@ -18,7 +18,7 @@
                     </div>
                 @endif
 
-                <form role="form"  action="{{ route('category.update',$show_special_category->id) }}"  method="POST" style="width:70%;margin:0 auto">
+                <form role="form"  action="{{ route('category.update',$show_special_category->id) }}"  method="POST" style="width:70%;margin:0 auto" enctype="multipart/form-data">
                     @csrf
                      @method('PUT')
                     <div class="form-group px-2">
@@ -26,6 +26,16 @@
                         <textarea type=text   class="form-control" id="{{ $show_special_category->id }}"  name="category_name" cols="20"> {{ $show_special_category->category_name }} </textarea>
                         <input type="hidden" value="0" name="status">
                     </div>
+                    <div class="form-group px-2">
+
+                        <input type="file"  name="path">
+                    </div>
+                    @if ($show_special_category->path!=null)
+                        <div class="form-group px-2">
+                            <img src="{{ route('get-file',['path'=>$show_special_category->path]) }}">
+                        </div>
+                    @endif
+
                     <button type="submit" class="btn my-2" style="background:#3158c9;color:#fff">Сохранить</button>
 
                 </form>
