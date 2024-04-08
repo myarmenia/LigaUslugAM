@@ -16,7 +16,7 @@ class HeaderController extends Controller
     {
         // getting all categories and subcategories and executor rating
 
-        $category = Category::with('subcategories')->get(['id','category_name']);
+        $category = Category::with('subcategories')->get(['id','category_name','path','logo_name']);
         $our_checked_specialists=ExecutorProfile::with('users')->orderBy('total_reiting','desc')->limit(3)->get(['id','user_id','total_reiting','executor_review_count']);
 
         $response=['category'=>$category,'our_checked_specialists'=>$our_checked_specialists];
