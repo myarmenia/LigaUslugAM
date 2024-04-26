@@ -119,13 +119,14 @@ class   TaskController extends Controller
             ]);
          }
          else if($request->task_location=='У клиента'){
+
             $request->validate([
                     'region' => 'required',
                     'address' => 'required',
                     'nation' => 'required',
             'country_name' => 'required'
                 ]);
-            $validated = $request->validated();
+                $validated = $request->validated();
 
             $task=Task::create([
                 'user_id'=> $user,
@@ -144,7 +145,7 @@ class   TaskController extends Controller
                'price_to'=> $request['price_to'],
           'task_location'=> $request['task_location'],
       ]);
-
+// dd($task);
          }
 
         if ($request->hasfile('task_img')) {
@@ -171,7 +172,7 @@ class   TaskController extends Controller
         }
 
 
-
+// dd($task);
         $show_new_task = Task::with('users','image_tasks','special_task_executors','special_task_executors.executor_profiles.users')->where('id',$task->id)->get(["id","user_id", "title","category_name","subcategory_name","nation","country_name","region","address","task_description","task_starttime","task_finishtime","price_from","price_to","task_location","status"]);
 
         $deadlineday = date('Y-m-d',strtotime('-1 day'));
