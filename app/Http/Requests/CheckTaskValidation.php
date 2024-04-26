@@ -22,6 +22,7 @@ class CheckTaskValidation extends FormRequest
      * @return array
      */
     public function rules(){
+ 
         return [
 
             'category_name' => 'required',
@@ -32,7 +33,7 @@ class CheckTaskValidation extends FormRequest
             'task_location' => 'required',
                 //  'task_img' => 'required',
             //    'task_img.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf,JPEG,JPG,PNG,GIF,CSV,TXT,PDF|max:2048',
-           
+
         ];
 
     }
