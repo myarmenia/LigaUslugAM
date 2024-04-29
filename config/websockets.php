@@ -11,40 +11,40 @@ return [
     |
     */
 //prod
-    // 'dashboard' => [
+    'dashboard' => [
 
-    //     'port' => env('LARAVEL_WEBSOCKETS_PORT', 6001),
+        'port' => env('LARAVEL_WEBSOCKETS_PORT', 6001),
 
-    //     'domain' => env('LARAVEL_WEBSOCKETS_DOMAIN'),
+        'domain' => env('LARAVEL_WEBSOCKETS_DOMAIN'),
 
-    //     'path' => env('LARAVEL_WEBSOCKETS_PATH', 'laravel-websockets'),
+        'path' => env('LARAVEL_WEBSOCKETS_PATH', 'laravel-websockets'),
 
-    //     'middleware' => [
-    //         'web',
-    //         \BeyondCode\LaravelWebSockets\Dashboard\Http\Middleware\Authorize::class,
-    //     ],
+        'middleware' => [
+            'web',
+            \BeyondCode\LaravelWebSockets\Dashboard\Http\Middleware\Authorize::class,
+        ],
 
-    // ],
+    ],
 
-    // 'managers' => [
+    'managers' => [
 
-    //     /*
-    //     |--------------------------------------------------------------------------
-    //     | Application Manager
-    //     |--------------------------------------------------------------------------
-    //     |
-    //     | An Application manager determines how your websocket server allows
-    //     | the use of the TCP protocol based on, for example, a list of allowed
-    //     | applications.
-    //     | By default, it uses the defined array in the config file, but you can
-    //     | anytime implement the same interface as the class and add your own
-    //     | custom method to retrieve the apps.
-    //     |
-    //     */
+        /*
+        |--------------------------------------------------------------------------
+        | Application Manager
+        |--------------------------------------------------------------------------
+        |
+        | An Application manager determines how your websocket server allows
+        | the use of the TCP protocol based on, for example, a list of allowed
+        | applications.
+        | By default, it uses the defined array in the config file, but you can
+        | anytime implement the same interface as the class and add your own
+        | custom method to retrieve the apps.
+        |
+        */
 
-    //     'app' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppManager::class,
+        'app' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppManager::class,
 
-    // ],
+    ],
 //endprod
     /*
     |--------------------------------------------------------------------------
@@ -87,15 +87,15 @@ return [
         ],
     ],
 //prod
-    // 'pusher' => [
-    //     'driver' => 'pusher',
-    //     'key' => env('PUSHER_APP_KEY'),
-    //     'secret' => env('PUSHER_APP_SECRET'),
-    //     'app_id' => env('PUSHER_APP_ID'),
-    //     'options' => [
-    //         'cluster' => env('PUSHER_APP_CLUSTER'),
-    //     ],
-    // ],
+    'pusher' => [
+        'driver' => 'pusher',
+        'key' => env('PUSHER_APP_KEY'),
+        'secret' => env('PUSHER_APP_SECRET'),
+        'app_id' => env('PUSHER_APP_ID'),
+        'options' => [
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+        ],
+    ],
 //endpro
     /*
     |--------------------------------------------------------------------------
@@ -111,126 +111,126 @@ return [
     |
     */
 //prod
-    // 'replication' => [
+    'replication' => [
 
-    //     'mode' => env('WEBSOCKETS_REPLICATION_MODE', 'local'),
+        'mode' => env('WEBSOCKETS_REPLICATION_MODE', 'local'),
 
-    //     'modes' => [
+        'modes' => [
 
-    //         /*
-    //         |--------------------------------------------------------------------------
-    //         | Local Replication
-    //         |--------------------------------------------------------------------------
-    //         |
-    //         | Local replication is actually a null replicator, meaning that it
-    //         | is the default behaviour of storing the connections into an array.
-    //         |
-    //         */
+            /*
+            |--------------------------------------------------------------------------
+            | Local Replication
+            |--------------------------------------------------------------------------
+            |
+            | Local replication is actually a null replicator, meaning that it
+            | is the default behaviour of storing the connections into an array.
+            |
+            */
 
-    //         'local' => [
+            'local' => [
 
-    //             /*
-    //             |--------------------------------------------------------------------------
-    //             | Channel Manager
-    //             |--------------------------------------------------------------------------
-    //             |
-    //             | The channel manager is responsible for storing, tracking and retrieving
-    //             | the channels as long as their members and connections.
-    //             |
-    //             */
+                /*
+                |--------------------------------------------------------------------------
+                | Channel Manager
+                |--------------------------------------------------------------------------
+                |
+                | The channel manager is responsible for storing, tracking and retrieving
+                | the channels as long as their members and connections.
+                |
+                */
 
-    //             'channel_manager' => \BeyondCode\LaravelWebSockets\ChannelManagers\LocalChannelManager::class,
+                'channel_manager' => \BeyondCode\LaravelWebSockets\ChannelManagers\LocalChannelManager::class,
 
-    //             /*
-    //             |--------------------------------------------------------------------------
-    //             | Statistics Collector
-    //             |--------------------------------------------------------------------------
-    //             |
-    //             | The Statistics Collector will, by default, handle the incoming statistics,
-    //             | storing them until they will become dumped into another database, usually
-    //             | a MySQL database or a time-series database.
-    //             |
-    //             */
+                /*
+                |--------------------------------------------------------------------------
+                | Statistics Collector
+                |--------------------------------------------------------------------------
+                |
+                | The Statistics Collector will, by default, handle the incoming statistics,
+                | storing them until they will become dumped into another database, usually
+                | a MySQL database or a time-series database.
+                |
+                */
 
-    //             'collector' => \BeyondCode\LaravelWebSockets\Statistics\Collectors\MemoryCollector::class,
+                'collector' => \BeyondCode\LaravelWebSockets\Statistics\Collectors\MemoryCollector::class,
 
-    //         ],
+            ],
 
-    //         'redis' => [
+            'redis' => [
 
-    //             'connection' => env('WEBSOCKETS_REDIS_REPLICATION_CONNECTION', 'default'),
+                'connection' => env('WEBSOCKETS_REDIS_REPLICATION_CONNECTION', 'default'),
 
-    //             /*
-    //             |--------------------------------------------------------------------------
-    //             | Channel Manager
-    //             |--------------------------------------------------------------------------
-    //             |
-    //             | The channel manager is responsible for storing, tracking and retrieving
-    //             | the channels as long as their members and connections.
-    //             |
-    //             */
+                /*
+                |--------------------------------------------------------------------------
+                | Channel Manager
+                |--------------------------------------------------------------------------
+                |
+                | The channel manager is responsible for storing, tracking and retrieving
+                | the channels as long as their members and connections.
+                |
+                */
 
-    //             'channel_manager' => \BeyondCode\LaravelWebSockets\ChannelManagers\RedisChannelManager::class,
+                'channel_manager' => \BeyondCode\LaravelWebSockets\ChannelManagers\RedisChannelManager::class,
 
-    //             /*
-    //             |--------------------------------------------------------------------------
-    //             | Statistics Collector
-    //             |--------------------------------------------------------------------------
-    //             |
-    //             | The Statistics Collector will, by default, handle the incoming statistics,
-    //             | storing them until they will become dumped into another database, usually
-    //             | a MySQL database or a time-series database.
-    //             |
-    //             */
+                /*
+                |--------------------------------------------------------------------------
+                | Statistics Collector
+                |--------------------------------------------------------------------------
+                |
+                | The Statistics Collector will, by default, handle the incoming statistics,
+                | storing them until they will become dumped into another database, usually
+                | a MySQL database or a time-series database.
+                |
+                */
 
-    //             'collector' => \BeyondCode\LaravelWebSockets\Statistics\Collectors\RedisCollector::class,
+                'collector' => \BeyondCode\LaravelWebSockets\Statistics\Collectors\RedisCollector::class,
 
-    //         ],
+            ],
 
-    //     ],
+        ],
 
-    // ],
+    ],
 
-    // 'statistics' => [
+    'statistics' => [
 
-    //     /*
-    //     |--------------------------------------------------------------------------
-    //     | Statistics Store
-    //     |--------------------------------------------------------------------------
-    //     |
-    //     | The Statistics Store is the place where all the temporary stats will
-    //     | be dumped. This is a much reliable store and will be used to display
-    //     | graphs or handle it later on your app.
-    //     |
-    //     */
+        /*
+        |--------------------------------------------------------------------------
+        | Statistics Store
+        |--------------------------------------------------------------------------
+        |
+        | The Statistics Store is the place where all the temporary stats will
+        | be dumped. This is a much reliable store and will be used to display
+        | graphs or handle it later on your app.
+        |
+        */
 
-    //     'store' => \BeyondCode\LaravelWebSockets\Statistics\Stores\DatabaseStore::class,
+        'store' => \BeyondCode\LaravelWebSockets\Statistics\Stores\DatabaseStore::class,
 
-    //     /*
-    //     |--------------------------------------------------------------------------
-    //     | Statistics Interval Period
-    //     |--------------------------------------------------------------------------
-    //     |
-    //     | Here you can specify the interval in seconds at which
-    //     | statistics should be logged.
-    //     |
-    //     */
+        /*
+        |--------------------------------------------------------------------------
+        | Statistics Interval Period
+        |--------------------------------------------------------------------------
+        |
+        | Here you can specify the interval in seconds at which
+        | statistics should be logged.
+        |
+        */
 
-    //     'interval_in_seconds' => 60,
+        'interval_in_seconds' => 60,
 
-    //     /*
-    //     |--------------------------------------------------------------------------
-    //     | Statistics Deletion Period
-    //     |--------------------------------------------------------------------------
-    //     |
-    //     | When the clean-command is executed, all recorded statistics older than
-    //     | the number of days specified here will be deleted.
-    //     |
-    //     */
+        /*
+        |--------------------------------------------------------------------------
+        | Statistics Deletion Period
+        |--------------------------------------------------------------------------
+        |
+        | When the clean-command is executed, all recorded statistics older than
+        | the number of days specified here will be deleted.
+        |
+        */
 
-    //     'delete_statistics_older_than_days' => 60,
+        'delete_statistics_older_than_days' => 60,
 
-    // ],
+    ],
 //endprod
 
 
@@ -252,7 +252,7 @@ return [
          * the number of days specified here will be deleted.
          */
         'delete_statistics_older_than_days' => 60,
-        
+
         /*
          * Use an DNS resolver to make the requests to the statistics logger
          * default is to resolve everything to 127.0.0.1.
@@ -285,21 +285,21 @@ return [
     |
     */
 //prod
-    // 'ssl' => [
+    'ssl' => [
 
-    //     'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
+        'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
 
-    //     'capath' => env('LARAVEL_WEBSOCKETS_SSL_CA', null),
+        'capath' => env('LARAVEL_WEBSOCKETS_SSL_CA', null),
 
-    //     'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
+        'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
 
-    //     'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
+        'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
 
-    //     'verify_peer' => env('APP_ENV') === 'production',
+        'verify_peer' => env('APP_ENV') === 'production',
 
-    //     'allow_self_signed' => env('APP_ENV') !== 'production',
+        'allow_self_signed' => env('APP_ENV') !== 'production',
 
-    // ],
+    ],
 //endprod
 
 'ssl' => [
@@ -334,21 +334,21 @@ return [
     |
     */
 //prod
-    // 'handlers' => [
+    'handlers' => [
 
-    //     'websocket' => \BeyondCode\LaravelWebSockets\Server\WebSocketHandler::class,
+        'websocket' => \BeyondCode\LaravelWebSockets\Server\WebSocketHandler::class,
 
-    //     'health' => \BeyondCode\LaravelWebSockets\Server\HealthHandler::class,
+        'health' => \BeyondCode\LaravelWebSockets\Server\HealthHandler::class,
 
-    //     'trigger_event' => \BeyondCode\LaravelWebSockets\API\TriggerEvent::class,
+        'trigger_event' => \BeyondCode\LaravelWebSockets\API\TriggerEvent::class,
 
-    //     'fetch_channels' => \BeyondCode\LaravelWebSockets\API\FetchChannels::class,
+        'fetch_channels' => \BeyondCode\LaravelWebSockets\API\FetchChannels::class,
 
-    //     'fetch_channel' => \BeyondCode\LaravelWebSockets\API\FetchChannel::class,
+        'fetch_channel' => \BeyondCode\LaravelWebSockets\API\FetchChannel::class,
 
-    //     'fetch_users' => \BeyondCode\LaravelWebSockets\API\FetchUsers::class,
+        'fetch_users' => \BeyondCode\LaravelWebSockets\API\FetchUsers::class,
 
-    // ],
+    ],
 //endprod
     /*
     |--------------------------------------------------------------------------
