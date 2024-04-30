@@ -147,4 +147,12 @@ Route::get('generate-pdf_meta-data', [WatermarkController::class, 'generatePdfMe
 Route::get('signaturepad', [SignaturePadController::class, 'index']);
 Route::post('signaturepad', [SignaturePadController::class, 'upload'])->name('signaturepad.upload');
 
+Route::get('/test',function(){
+    $text=request()->text;
+    $text="check socket";
+    echo $text;
+
+    event(new NewMessage($text));
+});
+
 
