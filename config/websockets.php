@@ -10,7 +10,7 @@ return [
     | You can configure the dashboard settings from here.
     |
     */
-//prod
+
     'dashboard' => [
 
         'port' => env('LARAVEL_WEBSOCKETS_PORT', 6001),
@@ -45,7 +45,7 @@ return [
         'app' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppManager::class,
 
     ],
-//endprod
+
     /*
     |--------------------------------------------------------------------------
     | Applications Repository
@@ -78,15 +78,13 @@ return [
             'name' => env('APP_NAME'),
             'key' => env('PUSHER_APP_KEY'),
             'secret' => env('PUSHER_APP_SECRET'),
-            //prod
-            // 'capacity' => null,
-            // 'encripted' => true,
-            //endprod
+            'capacity' => null,
+            'encripted' => true,
             'enable_client_messages' => false,
             'enable_statistics' => true,
         ],
     ],
-//prod
+
     'pusher' => [
         'driver' => 'pusher',
         'key' => env('PUSHER_APP_KEY'),
@@ -96,7 +94,7 @@ return [
             'cluster' => env('PUSHER_APP_CLUSTER'),
         ],
     ],
-//endpro
+
     /*
     |--------------------------------------------------------------------------
     | Broadcasting Replication PubSub
@@ -110,7 +108,7 @@ return [
     | WebSocket servers. Just set the driver to 'redis' to enable the PubSub using Redis.
     |
     */
-//prod
+
     'replication' => [
 
         'mode' => env('WEBSOCKETS_REPLICATION_MODE', 'local'),
@@ -231,35 +229,6 @@ return [
         'delete_statistics_older_than_days' => 60,
 
     ],
-//endprod
-
-
-    'statistics' => [
-        /*
-         * This model will be used to store the statistics of the WebSocketsServer.
-         * The only requirement is that the model should extend
-         * `WebSocketsStatisticsEntry` provided by this package.
-         */
-        'model' => \BeyondCode\LaravelWebSockets\Statistics\Models\WebSocketsStatisticsEntry::class,
-
-        /*
-         * Here you can specify the interval in seconds at which statistics should be logged.
-         */
-        'interval_in_seconds' => 60,
-
-        /*
-         * When the clean-command is executed, all recorded statistics older than
-         * the number of days specified here will be deleted.
-         */
-        'delete_statistics_older_than_days' => 60,
-
-        /*
-         * Use an DNS resolver to make the requests to the statistics logger
-         * default is to resolve everything to 127.0.0.1.
-         */
-        'perform_dns_lookup' => false,
-    ],
-
 
     /*
     |--------------------------------------------------------------------------
@@ -284,7 +253,7 @@ return [
     | You will need to restart the server for the settings to take place.
     |
     */
-//prod
+
     'ssl' => [
 
         'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
@@ -300,28 +269,7 @@ return [
         'allow_self_signed' => env('APP_ENV') !== 'production',
 
     ],
-//endprod
 
-'ssl' => [
-    /*
-     * Path to local certificate file on filesystem. It must be a PEM encoded file which
-     * contains your certificate and private key. It can optionally contain the
-     * certificate chain of issuers. The private key also may be contained
-     * in a separate file specified by local_pk.
-     */
-    'local_cert' => null,
-
-    /*
-     * Path to local private key file on filesystem in case of separate files for
-     * certificate (local_cert) and private key.
-     */
-    'local_pk' => null,
-
-    /*
-     * Passphrase for your local_cert file.
-     */
-    'passphrase' => null
-],
     /*
     |--------------------------------------------------------------------------
     | Route Handlers
@@ -333,7 +281,7 @@ return [
     | with the existing logic.
     |
     */
-//prod
+
     'handlers' => [
 
         'websocket' => \BeyondCode\LaravelWebSockets\Server\WebSocketHandler::class,
@@ -349,7 +297,7 @@ return [
         'fetch_users' => \BeyondCode\LaravelWebSockets\API\FetchUsers::class,
 
     ],
-//endprod
+
     /*
     |--------------------------------------------------------------------------
     | Promise Resolver
