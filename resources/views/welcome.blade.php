@@ -21,7 +21,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-          @vite([ 'resources/js/app.js'])
+          {{-- @vite([ 'resources/js/app.js']) --}}
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -132,9 +132,9 @@
             </div>
         </div>
 
-        {{-- <script src="{{ asset('js/app.js')}}"></script> --}}
+        <script src="{{ asset('js/app.js')}}"></script>
         <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
+    // document.addEventListener("DOMContentLoaded", function(event) {
             //   Echo.channel('home')
             //     .listen('NewMessage', (e)=>{
             //         console.log(e)
@@ -246,10 +246,14 @@
     // .listen('.totalunreadchatscount', (e)=>{
     //     console.log(e)
     // })
+            window.Echo.channel('home')
+                        .listen('.MyWebSocket2',(e)=>{
+
+                    console.log(e.message);
+                })
 
 
-
-    });
+    // });
 
 
 
