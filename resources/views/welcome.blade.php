@@ -246,7 +246,7 @@
     // .listen('.totalunreadchatscount', (e)=>{
     //     console.log(e)
     // })
-            window.Echo.channel('home')
+            Echo.channel('home')
                         .listen('.MyWebSocket2',(e)=>{
 
                     console.log(e.message);
@@ -254,7 +254,10 @@
 
 
 
-    });
+
+    // });
+
+
 
 
 
