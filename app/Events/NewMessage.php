@@ -22,6 +22,7 @@ class NewMessage
     public function __construct($message)
     {
         $this->message=$message;
+        dd($this->message);
     }
 
     /**
