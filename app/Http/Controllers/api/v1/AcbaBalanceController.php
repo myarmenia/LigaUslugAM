@@ -31,18 +31,35 @@ class AcbaBalanceController extends Controller
                             'account' => $request->executor_account,
 
         ]);
+        // dd($transaction_api->id);
 
-        $response = Http::withHeaders(['Content-Type' => 'application/json'])
-                            ->post('https://ipaytest.arca.am:8445/payment/rest/register.do', [
+        // $response = Http::withHeaders(['Content-Type' => 'application/json'])
+        //                     ->post('https://ipaytest.arca.am:8445/payment/rest/register.do', [
 
+        //                         'userName'=>'gorcka_api',
+        //                         'password' => 'Nokia6300',
+        //                         'amount' => $request->executor_account,
+        //                         'currency' => '051',
+        //                         'language'=> 'en',
+        //                         'orderNumber'=> $transaction_api->id,
+        //                         'returnUrl'=> 'https://gorc-ka.am/'
+        //                     ]);
+        
+                            $data=[
                                 'userName'=>'gorcka_api',
                                 'password' => 'Nokia6300',
                                 'amount' => $request->executor_account,
-                                'currency' => 051,
+                                'currency' => '051',
                                 'language'=> 'en',
                                 'orderNumber'=> $transaction_api->id,
                                 'returnUrl'=> 'https://gorc-ka.am/'
-                            ]);
+                            ];
+                            $response = Http::withOptions([
+                                CURLOPT_CUSTOMREQUEST => 'POST', // Set the request method to POST
+                                CURLOPT_POSTFIELDS => json_encode($data), // Set the request body
+                                CURLOPT_HTTPHEADER => ['Content-Type: application/json'], // Set custom headers
+                            ])->get('https://ipaytest.arca.am:8445/payment/rest/register.do');
+
 
             $responseBody = $response->body();
             echo $responseBody;
