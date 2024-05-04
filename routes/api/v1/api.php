@@ -1,7 +1,9 @@
 <?php
 
+
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\AnswerAndQuestionController;
+use App\Http\Controllers\api\v1\AcbaBalanceController;
 use App\Http\Controllers\api\v1\AjaxController;
 use App\Http\Controllers\Pages\CategoryController;
 use App\Http\Controllers\Pages\HeaderController;
@@ -154,6 +156,11 @@ Route::prefix('/user')->group( function(){
         Route::post('/increase-balance',[BalanceController::class, 'increaseBalance']);
         Route::get('/balance',[BalanceController::class,'index']);
         // writing route for geting request from tinkoff page and updating executor balance
+        // ===========acba=================
+            Route::post('/increase-balance',[AcbaBalanceController::class,'store']);
+
+
+
 
 
 
