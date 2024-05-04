@@ -31,12 +31,11 @@ class BalanceController extends Controller
     }
 
     public function increaseBalance(Request $request){
-    //  $t = new TinkoffMerchantApi('1644570310100DEMO','jgucz9bewfyang83');
-    //  dd($t);
+   
         if($request->has('executor_account')){
             // dump($request->executor_account);
             $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
-            
+
 
                 $transaction_api=TransactionApi::create([
 
