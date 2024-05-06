@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 
 class AcbaBalanceController extends Controller
 {
@@ -21,7 +22,7 @@ class AcbaBalanceController extends Controller
     public function store(Request $request)
     {
 
-        // dd(Auth::user()->id);
+
         $executor=ExecutorProfile::where('user_id',Auth::user()->id)->first();
 
 
@@ -74,7 +75,7 @@ class AcbaBalanceController extends Controller
         // dd($response);
 
         // echo $response;
-      $client = new Client(['verify' => false]);
+    //   $client = new Client(['verify' => false]);
 
     //   $response = $client->post('https://ipaytest.arca.am:8445/payment/rest/register.do', [
     //       'headers' => [
@@ -103,11 +104,25 @@ class AcbaBalanceController extends Controller
         'currency' => '051',
         'language'=> 'en',
         'orderNumber'=> $transaction_api->id,
-        'returnUrl'=> 'https://gorc-ka.am/'
+        // 'returnUrl'=> self::paymentResult($transaction_api->id),
+        'returnUrl'=> url('').'/payment-result/'.$transaction_api->id
+        // 'returnUrl'=> 'https://gorc-ka.am/'.$transaction_api->id
     ]);
        $responseBody = $response->getBody()->getContents();
       echo   $responseBody;
 
+
+    }
+    public function paymentResult(Request $request,$transactionId){
+        // dd($transactionId);
+        // dd($request['orderId']);
+        $transaction_api=TransactionApi::where('id',$transactionId)->first();
+        $transaction_api->paymentId = $request['orderId'];
+        $transaction_api->status = "success";
+        $transaction_api->save();
+        // dd(777);
+
+        return Redirect::to('https://gorc-ka.am');
 
     }
 }
