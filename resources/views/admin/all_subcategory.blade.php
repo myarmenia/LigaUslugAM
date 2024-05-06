@@ -58,8 +58,8 @@
 
                     @foreach( $all_subcategory as $items)
                         <tr>
-                            {{-- {{dd($int)}} --}}
-                            <td>{{ $int++ }}</td>
+                            {{-- {{dd($i++)}} --}}
+                            <td>{{ ++$i }}</td>
                             <td>{!! $items->categories->category_name!!}</td>
                             <td>{!! $items->subcategory_name !!}</td>
                             <td>{!! $items->price !!}</td>
