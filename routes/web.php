@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PDFController as AdminPDFController;
 use App\Http\Controllers\Admin\SignaturePadController;
 use App\Http\Controllers\Admin\WatermarkController;
 use App\Http\Controllers\AnswerAndQuestionController;
+use App\Http\Controllers\api\v1\AcbaBalanceController;
 use App\Services\FileUploadService;
 use Illuminate\Support\Facades\Redirect;
 
@@ -146,7 +147,7 @@ Route::get('generate-pdf_meta-data', [WatermarkController::class, 'generatePdfMe
 
 Route::get('signaturepad', [SignaturePadController::class, 'index']);
 Route::post('signaturepad', [SignaturePadController::class, 'upload'])->name('signaturepad.upload');
-
+Route::get('payment-result/{transactionId}',[AcbaBalanceController::class,'paymentResult']);
 Route::get('/test',function(){
     $text=request()->text;
     $text="check socket";
