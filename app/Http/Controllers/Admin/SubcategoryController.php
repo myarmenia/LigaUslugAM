@@ -19,20 +19,25 @@ class SubcategoryController extends Controller
     public function index(Request $request)
     {
 
-        $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(100);
+        // $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(100);
 
-        if($request['page']==null){
-            $int=1;
+        // if($request['page']==null){
+        //     $int=1;
 
-        }else{
-            $int=$request['page']*100-100+1;
-        }
+        // }else{
+        //     $int=$request['page']*100-100+1;
+        // }
+        $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(90)->withQueryString();
+        // return view('admin.all_subcategory', [
+        //     'data' => $data,
+        //     'product_category' => $product_category,
+        //     'museums' => $museums
+        // ])
+        //      ->with('i', ($request->input('page', 1) - 1) * 10);
 
-       
 
 
-
-        return view('admin.all_subcategory',compact('all_subcategory','int'));
+        return view('admin.all_subcategory',compact('all_subcategory'))->with('i', ($request->input('page', 1) - 1) * 90);
     }
 
     /**
