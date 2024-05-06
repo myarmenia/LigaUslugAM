@@ -157,7 +157,9 @@ Route::prefix('/user')->group( function(){
         Route::get('/balance',[BalanceController::class,'index']);
         // writing route for geting request from tinkoff page and updating executor balance
         // ===========acba=================
-            Route::post('/increase-balance',[AcbaBalanceController::class,'store']);
+        Route::post('increase-balance',[AcbaBalanceController::class,'store']);
+        Route::get('payment-result/{transactionId}',[AcbaBalanceController::class,'paymentResult']);
+
 
 
 
@@ -222,6 +224,7 @@ Route::prefix('/user')->group( function(){
 
         // chenge status when disagree
         Route::get('/has-confict/{id}',[TaskController::class,'hasConflict']);
+
 
 
     });
