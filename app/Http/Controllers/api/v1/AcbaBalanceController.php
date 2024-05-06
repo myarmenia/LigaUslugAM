@@ -28,22 +28,9 @@ class AcbaBalanceController extends Controller
                 'executor_profile_id' => $executor->id,
                    'transaction_name' => "Increase balance",
             'transaction_description' => "Increase balance",
-                            'account' => $request->executor_account,
+                            'account' => $request->amount,
 
         ]);
-        // dd($transaction_api->id);
-
-        // $response = Http::withHeaders(['Content-Type' => 'application/json'])
-        //                     ->post('https://ipaytest.arca.am:8445/payment/rest/register.do', [
-
-        //                         'userName'=>'gorcka_api',
-        //                         'password' => 'Nokia6300',
-        //                         'amount' => $request->executor_account,
-        //                         'currency' => '051',
-        //                         'language'=> 'en',
-        //                         'orderNumber'=> $transaction_api->id,
-        //                         'returnUrl'=> 'https://gorc-ka.am/'
-        //                     ]);
         
                             $data=[
                                 'userName'=>'gorcka_api',
@@ -54,15 +41,29 @@ class AcbaBalanceController extends Controller
                                 'orderNumber'=> $transaction_api->id,
                                 'returnUrl'=> 'https://gorc-ka.am/'
                             ];
-                            $response = Http::withOptions([
-                                CURLOPT_CUSTOMREQUEST => 'POST', // Set the request method to POST
-                                CURLOPT_POSTFIELDS => json_encode($data), // Set the request body
-                                CURLOPT_HTTPHEADER => ['Content-Type: application/json'], // Set custom headers
-                            ])->get('https://ipaytest.arca.am:8445/payment/rest/register.do');
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+
+            CURLOPT_URL => 'https://ipaytest.arca.am:8445/payment/rest/register.do',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>  $data,
+            CURLOPT_HTTPHEADER => array( 'Cookie: PHPSESSID=pm3nbuec05dmb5n3pc8cfmse94' ),
+
+        ));
 
 
-            $responseBody = $response->body();
-            echo $responseBody;
+        $response = curl_exec($curl);
+
+echo $response;
+
 
     }
 }

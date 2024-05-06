@@ -153,7 +153,7 @@ Route::prefix('/user')->group( function(){
         // delete task
         Route::delete('/task/{id}/delete',[TaskController::class,'destroy']);
         // TRANSACTION increase-balance,balance
-        Route::post('/increase-balance',[BalanceController::class, 'increaseBalance']);
+        // Route::post('/increase-balance',[BalanceController::class, 'increaseBalance']);
         Route::get('/balance',[BalanceController::class,'index']);
         // writing route for geting request from tinkoff page and updating executor balance
         // ===========acba=================
