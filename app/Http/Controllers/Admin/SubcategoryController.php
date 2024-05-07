@@ -27,7 +27,7 @@ class SubcategoryController extends Controller
         // }else{
         //     $int=$request['page']*100-100+1;
         // }
-        $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(90)->withQueryString();
+        $all_subcategory = Subcategory::orderBy('category_id','asc')->paginate(110)->withQueryString();
         // return view('admin.all_subcategory', [
         //     'data' => $data,
         //     'product_category' => $product_category,
@@ -37,7 +37,7 @@ class SubcategoryController extends Controller
 
 
 
-        return view('admin.all_subcategory',compact('all_subcategory'))->with('i', ($request->input('page', 1) - 1) * 90);
+        return view('admin.all_subcategory',compact('all_subcategory'))->with('i', ($request->input('page', 1) - 1) * 110);
     }
 
     /**
