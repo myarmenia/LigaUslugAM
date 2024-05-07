@@ -62,7 +62,7 @@ class AcbaBalanceController extends Controller
         $transaction_api->save();
         // dd(777);
 
-        return Redirect::to('https://gorc-ka.am');
+        return Redirect::to('https://gorc-ka.am?status=ok');
 
     }
 }
