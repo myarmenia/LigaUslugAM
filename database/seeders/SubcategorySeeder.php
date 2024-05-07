@@ -1470,7 +1470,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>142,
-            'category_id'=>11,
+            'category_id'=>9,
             'subcategory_name'=>'Վեբ դիզայներ',
             'price'=>300,
             'status'=>'0',
@@ -1482,7 +1482,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>143,
-            'category_id'=>11,
+            'category_id'=>6,
             'subcategory_name'=>'Ինտերիերի դիզայներ',
             'price'=>500,
             'status'=>'0',
@@ -1494,7 +1494,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>144,
-            'category_id'=>11,
+            'category_id'=>9,
             'subcategory_name'=>'Գրաֆիկական դիզայներ',
             'price'=>400,
             'status'=>'0',
@@ -1506,7 +1506,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>145,
-            'category_id'=>11,
+            'category_id'=>9,
             'subcategory_name'=>'UX/UI դիզայներ',
             'price'=>400,
             'status'=>'0',
@@ -1518,7 +1518,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>146,
-            'category_id'=>11,
+            'category_id'=>9,
             'subcategory_name'=>'Փաթեթավորում և գովազդ',
             'price'=>400,
             'status'=>'0',
@@ -1530,7 +1530,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>147,
-            'category_id'=>11,
+            'category_id'=>9,
             'subcategory_name'=>'Լանդշաֆտային դիզայներ',
             'price'=>1000,
             'status'=>'0',
@@ -1542,7 +1542,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>148,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'Անձնական օգնական',
             'price'=>100,
             'status'=>'0',
@@ -1614,7 +1614,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>154,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'Իրավաբանական օգնություն',
             'price'=>100,
             'status'=>'0',
@@ -1626,7 +1626,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>155,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'Համաձայնագիր և լիազորագիր',
             'price'=>150,
             'status'=>'0',
@@ -1638,7 +1638,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>156,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'Դատական ​​փաստաթուղթ',
             'price'=>100,
             'status'=>'0',
@@ -1650,7 +1650,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>157,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'ՍՊԸ-ների և անհատ ձեռնարկատերերի կառավարում',
             'price'=>200,
             'status'=>'0',
@@ -1662,7 +1662,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>158,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'Իրավաբանական խորհրդատվություն',
             'price'=>100,
             'status'=>'0',
@@ -1674,7 +1674,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>159,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'Աշխատողների հավաքագրում',
             'price'=>150,
             'status'=>'0',
@@ -1698,7 +1698,7 @@ class SubcategorySeeder extends Seeder
 
             Subcategory::create( [
             'id'=>161,
-            'category_id'=>12,
+            'category_id'=>14,
             'subcategory_name'=>'Վարձել մասնագետ',
             'price'=>100,
             'status'=>'0',
