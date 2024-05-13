@@ -43,7 +43,7 @@ class AcbaBalanceController extends Controller
         'amount' => $request->executor_account,
         'currency' => '051',
         'language'=> 'en',
-        'orderNumber'=> $transaction_api->id,
+        'orderNumber'=> "G".$transaction_api->id,
         'returnUrl'=> url('').'/payment-result/'.$transaction_api->id
 
     ]);
@@ -61,6 +61,13 @@ class AcbaBalanceController extends Controller
         $transaction_api->status = "success";
         $transaction_api->save();
         // dd(777);
+        if( $transaction_api->status=="success"){
+            $executor_profile=ExecutorProfile::where('id',$transaction_api->executor_profile_id)->first();
+            $old_balance=$executor_profile->balance;
+            $new_balance=$old_balance+ $transaction_api->account;
+            $executor_profile->balance=$new_balance;
+            $executor_profile->save();
+        }
 
         return Redirect::to('https://gorc-ka.am?status=ok');
 
