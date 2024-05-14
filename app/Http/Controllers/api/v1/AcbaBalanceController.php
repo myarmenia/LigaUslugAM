@@ -40,10 +40,12 @@ class AcbaBalanceController extends Controller
     ])->asForm()->post('https://ipaytest.arca.am:8445/payment/rest/register.do', [
         'userName'=>'gorcka_api',
         'password' => 'Nokia6300',
-        'amount' => $request->executor_account,
+        // 'userName'=>'34558260_api',
+        // 'password' => 'Ah0545139',
+        'amount' => $request->executor_account*100,
         'currency' => '051',
         'language'=> 'en',
-        'orderNumber'=> "G".$transaction_api->id,
+        'orderNumber'=> "A".$transaction_api->id,
         'returnUrl'=> url('').'/payment-result/'.$transaction_api->id
 
     ]);
@@ -60,7 +62,7 @@ class AcbaBalanceController extends Controller
         $transaction_api->paymentId = $request['orderId'];
         $transaction_api->status = "success";
         $transaction_api->save();
-        // dd(777);
+
         if( $transaction_api->status=="success"){
             $executor_profile=ExecutorProfile::where('id',$transaction_api->executor_profile_id)->first();
             $old_balance=$executor_profile->balance;
