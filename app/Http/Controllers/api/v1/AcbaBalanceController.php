@@ -19,6 +19,10 @@ class AcbaBalanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+
+
     public function store(Request $request)
     {
 
@@ -37,11 +41,15 @@ class AcbaBalanceController extends Controller
 
     $response= Http::withOptions([
         'verify' => false,
-    ])->asForm()->post('https://ipaytest.arca.am:8445/payment/rest/register.do', [
-        'userName'=>'gorcka_api',
-        'password' => 'Nokia6300',
-        // 'userName'=>'34558260_api',
-        // 'password' => 'Ah0545139',
+    ])->asForm()->post(
+        
+        // 'https://ipaytest.arca.am:8445/payment/rest/register.do',
+        'https://ipay.arca.am/payment/rest/register.do',
+    [
+        // 'userName'=>'gorcka_api',
+        // 'password' => 'Nokia6300',
+        'userName'=>'34558260_api',
+        'password' => 'Ah0545139',
         'amount' => $request->executor_account*100,
         'currency' => '051',
         'language'=> 'en',
