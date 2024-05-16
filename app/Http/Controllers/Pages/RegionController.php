@@ -20,8 +20,8 @@ class RegionController extends Controller
         return response()->json(['message'=>$region]);
     }
     public function regionsAndRayons(){
-        // $region_and_rayons=Region::where('id','>',0)->with('rayons')->get();
-        $region_and_rayons=Region::where('id','>',0)->with('countries')->get();
+        $region_and_rayons=Region::where('id','>',0)->with('rayons')->get();
+        // $region_and_rayons=Region::where('id','>',0)->with('countries')->get();
         // dd($region_and_rayons);
         return response()->json(['message'=>$region_and_rayons]);
     }
