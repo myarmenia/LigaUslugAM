@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Rayon;
 use Illuminate\Http\Request;
 
 class LocalityController extends Controller
@@ -15,7 +16,9 @@ class LocalityController extends Controller
      */
     public function index(Request $request)
     {
-        $locality=Country::where('region_id',$request->region_id)->get();
+
+        // $locality=Country::where('region_id',$request->region_id)->get();
+        $locality=Rayon::where('region_id',$request->region_id)->get();
         return response()->json(['message'=>$locality]);
 
     }
