@@ -77,23 +77,40 @@ class AcbaBalanceController extends Controller
         ])->get('https://ipay.arca.am/payment/rest/getOrderStatusExtended.do', $params);
 
         $responseBody = $response->getBody()->getContents();
-        dd($responseBody);
-        // dd($transactionId);
-        // dd($request['orderId']);
+        $result=json_decode($responseBody);
+
         $transaction_api=TransactionApi::where('id',$transactionId)->first();
         $transaction_api->paymentId = $request['orderId'];
-        $transaction_api->status = "success";
-        $transaction_api->save();
+
+        if($result->errorCode==0){
+            if($result->paymentAmountInfo->paymentState=="DEPOSITED"){
+                $transaction_api->status = "success";
+            }else{
+                $transaction_api->status = "false";
+            }
+            $transaction_api->save();
+
+        }
+
+
+
 
         if( $transaction_api->status=="success"){
+
             $executor_profile=ExecutorProfile::where('id',$transaction_api->executor_profile_id)->first();
             $old_balance=$executor_profile->balance;
             $new_balance=$old_balance+ $transaction_api->account;
             $executor_profile->balance=$new_balance;
             $executor_profile->save();
         }
+        if( $transaction_api->status=="success"){
 
-        return Redirect::to('https://gorc-ka.am?status=ok');
+            return Redirect::to('https://gorc-ka.am?status=ok');
+        }else{
+
+            return Redirect::to('https://gorc-ka.am?status=false');
+        }
+
 
     }
 }
