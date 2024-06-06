@@ -42,14 +42,14 @@ class AcbaBalanceController extends Controller
     $response= Http::withOptions([
         'verify' => false,
     ])->asForm()->post(
-        
-        // 'https://ipaytest.arca.am:8445/payment/rest/register.do',
-        'https://ipay.arca.am/payment/rest/register.do',
+
+        'https://ipaytest.arca.am:8445/payment/rest/register.do',
+        // 'https://ipay.arca.am/payment/rest/register.do',
     [
-        // 'userName'=>'gorcka_api',
-        // 'password' => 'Nokia6300',
-        'userName'=>'34558260_api',
-        'password' => 'Ah0545139',
+        'userName'=>env('ACBA_TEST_USER_NAME'),
+        'password' => env('ACBA_TEST_PASSWORD'),
+        // 'userName'=>env('ACBA_REAL_USER_NAME'),
+        // 'password' => env('ACBA_REAL_PASSWORD'),
         'amount' => $request->executor_account*100,
         'currency' => '051',
         'language'=> 'en',
@@ -64,6 +64,20 @@ class AcbaBalanceController extends Controller
 
     }
     public function paymentResult(Request $request,$transactionId){
+
+        $params = [
+            'userName'=>env('ACBA_REAL_USER_NAME'),
+            'password' => env('ACBA_REAL_PASSWORD'),
+            'language'=> 'en',
+            'orderId'=> $request['orderId'],
+        ];
+
+        $response = Http::withOptions([
+            'verify' => false,
+        ])->get('https://ipay.arca.am/payment/rest/getOrderStatusExtended.do', $params);
+
+        $responseBody = $response->getBody()->getContents();
+        dd($responseBody);
         // dd($transactionId);
         // dd($request['orderId']);
         $transaction_api=TransactionApi::where('id',$transactionId)->first();

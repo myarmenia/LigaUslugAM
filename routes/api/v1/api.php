@@ -158,7 +158,7 @@ Route::prefix('/user')->group( function(){
         // writing route for geting request from tinkoff page and updating executor balance
         // ===========acba=================
         Route::post('increase-balance',[AcbaBalanceController::class,'store']);
-        Route::get('payment-result/{transactionId}',[AcbaBalanceController::class,'paymentResult']);
+
 
 
 
@@ -273,8 +273,9 @@ Route::prefix('/pages')->group(function(){
 
 
 });
-
+// ====
 
 Route::get('/tinkoff-transaction',[GetStatusTinkoffTransactionController::class,'fails']);
+Route::get('payment-result/{transactionId}',[AcbaBalanceController::class,'paymentResult']);
 
 
